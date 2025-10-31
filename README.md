@@ -22,7 +22,7 @@ Tarkoitus: tehdä toimiva peli Godotilla, joka sisältää toimivan liikkumisen,
 
 
 
-##Työkalut ja teknologia 
+## Työkalut ja teknologia 
 
 
 
