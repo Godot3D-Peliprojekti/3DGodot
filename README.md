@@ -18,7 +18,7 @@ Pelin idea: yksinpeli 3D first-person shooter -kauhupeli, sijoittuu kahteen kerr
 
 
 
-Tarkoitus: tehdä toimiva MVP Godotilla, joka sisältää toimivan liikkumisen, ampumisen, kaksi vihollistyyppiä, yhden bossin, esineiden poiminnan, avaimet ja yhden pelitason (talon). Mahdolliset laajennukset extra-sisällöksi. 
+Tarkoitus: tehdä toimiva peli Godotilla, joka sisältää toimivan liikkumisen, ampumisen, kaksi vihollistyyppiä, yhden bossin, esineiden poiminnan, avaimet ja yhden pelitason (talon). Mahdolliset laajennukset extra-sisällöksi. 
 
 
 
