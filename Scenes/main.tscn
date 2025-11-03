@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=3 uid="uid://d02x0mjpmab8"]
+
+[ext_resource type="Texture2D" uid="uid://b0mri6beontrk" path="res://Assets/white.svg" id="1_jjgbg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_bo1nx"]
+sky_material = SubResource("ProceduralSkyMaterial_jjgbg")
+
+[sub_resource type="Environment" id="Environment_8gbba"]
+background_mode = 2
+sky = SubResource("Sky_bo1nx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo1nx"]
+albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
+albedo_texture = ExtResource("1_jjgbg")
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8gbba")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, 0.0019054413, 0, 0.0063705444)
+use_collision = true
+material = SubResource("StandardMaterial3D_bo1nx")
+
+[node name="Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 1, 15, 8, 0)
+use_collision = true
+
+[node name="SpawnRoomRight" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-07, 0, 1, 0, 5, 0, -10, 0, -4.371139e-08, 5, 2.5, 95)
+use_collision = true
+
+[node name="SpawnRoomLeft" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-07, 0, 1, 0, 5, 0, -10, 0, -4.371139e-08, -5, 2.5, 95)
+use_collision = true
+
+[node name="FirstRoomWall" type="CSGBox3D" parent="."]
+transform = Transform3D(12, 0, 0, 0, 5, 0, 0, 0, 1, -8, 2.5, 80)
+use_collision = true
+
+[node name="SecondRoomWall" type="CSGBox3D" parent="."]
+transform = Transform3D(12, 0, 0, 0, 5, 0, 0, 0, 1, -8, 2.5, 60.490913)
+use_collision = true
+
+[node name="FirstRoomBack" type="CSGBox3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 1, -9.229, 2.5, 100)
+use_collision = true
+
+[node name="HallwayLeft" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.3113416e-06, 0, 1, 0, 5, 0, -30, 0, -4.371139e-08, -2, 2.5, 75)
+use_collision = true
+
+[node name="FirstRoomLeft" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.7484556e-06, 0, 1, 0, 5, 0, -40, 0, -4.371139e-08, -13.9225445, 2.5, 80)
+use_collision = true
+
+[node name="HallwayRight" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.3113416e-06, 0, 1, 0, 5, 0, -30, 0, -4.371139e-08, 2, 2.5, 75)
+use_collision = true
+
+[node name="BigRoomWall" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.3113416e-06, 0, 1, 0, 5, 0, -30, 0, -4.371139e-08, 21.549776, 2.5, 75)
+use_collision = true
+
+[node name="BigRoomWall2" type="CSGBox3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 5, 0, 0, 0, 1, 11.552912, 2.5, 89.99563)
+use_collision = true
+
+[node name="BigRoomWall3" type="CSGBox3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 5, 0, 0, 0, 1, 11.552912, 2.5, 60.13439)
+use_collision = true
+
+[node name="Hallway2Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(30, 0, 0, 0, 5, 0, 0, 0, 1, 12, 2.5, 55)
+use_collision = true
+
+[node name="Hallway3Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.7484556e-06, 0, 1, 0, 5, 0, -40, 0, -4.371139e-08, 20, 2.5, 34.98047)
+use_collision = true
+
+[node name="Hallway3Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.7484556e-06, 0, 1, 0, 5, 0, -40, 0, -4.371139e-08, 15, 2.5, 34.89821)
+use_collision = true
+
+[node name="BigRoomWall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-5.2453663e-07, 0, 1, 0, 5, 0, -12, 0, -4.371139e-08, 12, 2.5, 66)
+use_collision = true
+
+[node name="BigRoomWall8" type="CSGBox3D" parent="."]
+transform = Transform3D(-5.2453663e-07, 0, 1, 0, 5, 0, -12, 0, -4.371139e-08, 26.504332, 2.5, 60.390938)
+use_collision = true
+
+[node name="BigRoomWall5" type="CSGBox3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 1, 3, 2.5, 72)
+use_collision = true
+
+[node name="BigRoomWall6" type="CSGBox3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 1, 11, 2.5, 72)
+use_collision = true
+
+[node name="BigRoomWall7" type="CSGBox3D" parent="."]
+transform = Transform3D(-2.1855695e-07, 0, 1, 0, 5, 0, -5, 0, -4.371139e-08, -2.009674, 2.5, 57.627937)
+use_collision = true
+
+[node name="SpawnRoomBack" type="CSGBox3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 1, 0, 2.5, 100)
+use_collision = true
+
+[node name="SpawnRoomDoor" type="CSGBox3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 1, 0, 2.5, 90)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SpawnRoomDoor"]
+transform = Transform3D(0.19999999, 0, 0, 0, 0.59999996, 0, 0, 0, 1.5, 0, -0.29999998, 0.10632324)
+operation = 2
+
+[node name="CircleRoomOutside" type="CSGCylinder3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 5, 0, 0, 0, 20, -6.6997995, 0, 32)
+radius = 1.0
+sides = 64
+
+[node name="CircleRoomInside" type="CSGCylinder3D" parent="CircleRoomOutside"]
+operation = 2
+radius = 0.9
+sides = 64
