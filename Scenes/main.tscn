@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d02x0mjpmab8"]
+[gd_scene load_steps=11 format=3 uid="uid://d02x0mjpmab8"]
 
 [ext_resource type="Texture2D" uid="uid://b0mri6beontrk" path="res://Assets/white.svg" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="MeshLibrary" uid="uid://1p0cm0qonbw7" path="res://meshlib.tres" id="3_8gbba"]
 [ext_resource type="MeshLibrary" uid="uid://dvwqt0srp7cx2" path="res://meshlib2.tres" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dx7gxg0vf33sq" path="res://Scenes/dresser.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://ctvwwga704ntq" path="res://test.tscn" id="6_21xkr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -41,8 +43,11 @@ shadow_opacity = 0.8
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8gbba")
 
+[node name="Dresser2_StaticBody3D#test" parent="." instance=ExtResource("6_21xkr")]
+transform = Transform3D(-8.485141, 0, -2.914093e-07, 0, 6.9013767, 0, 7.417947e-07, 0, -3.3333335, 5.2318597, 0.12818551, -11.985535)
+
 [node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(199.87282, 0, 0, 0, 0.09993641, 0, 0, 0, 199.87282, 0.061, 0.9, 0.078)
+transform = Transform3D(199.87282, 0, 0, 0, 0.09993641, 0, 0, 0, 199.87282, 0.06069387, 0.87999856, 0.118901186)
 use_collision = true
 material = SubResource("StandardMaterial3D_bo1nx")
 
@@ -291,3 +296,18 @@ data = {
 [node name="GridMap2" type="GridMap" parent="."]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 mesh_library = ExtResource("4_jjvhh")
+
+[node name="Dresser" parent="." instance=ExtResource("5_kry3j")]
+transform = Transform3D(-0.29999998, 0, 2.6226832e-08, 0, 0.29999998, 0, -2.6226832e-08, 0, -0.29999998, 4.186876, 0.96154433, 95.52115)
+
+[node name="dresser" parent="Dresser" index="0"]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 1.0000002, 0)
+
+[node name="Dresser2" parent="." instance=ExtResource("5_kry3j")]
+transform = Transform3D(3.9340247e-08, 0, 0.29999998, 0, 0.29999998, 0, -0.29999998, 0, 3.9340247e-08, -8.727477, 0.96154433, 99.20023)
+
+[node name="dresser" parent="Dresser2" index="0"]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 1.0000002, 0)
+
+[editable path="Dresser"]
+[editable path="Dresser2"]
