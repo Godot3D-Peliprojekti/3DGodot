@@ -13,7 +13,6 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func _on_start_pressed() -> void:
 	#print("Start pressed")
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
