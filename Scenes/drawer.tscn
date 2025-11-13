@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr6swlawlj56"]
+
+[ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="1_y5fxu"]
+[ext_resource type="PackedScene" uid="uid://dx7gxg0vf33sq" path="res://Scenes/dresser.tscn" id="2_y5fxu"]
+
+[node name="CSGBox3D" type="CSGBox3D"]
+use_collision = true
+size = Vector3(6, 0.1, 6)
+
+[node name="dresser2" parent="." instance=ExtResource("2_y5fxu")]
+transform = Transform3D(-0.28, 0, 4.2278824e-08, 0, 0.28, 0, -4.2278824e-08, 0, -0.28, 2.2280486, 0.05000007, -1.144115)
+
+[node name="dresser3" parent="." instance=ExtResource("2_y5fxu")]
+transform = Transform3D(-0.28, 0, 4.2278824e-08, 0, 0.28, 0, -4.2278824e-08, 0, -0.28, 2.2280486, 0.05000007, 0.8911186)
+
+[node name="Player" parent="." instance=ExtResource("1_y5fxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3124384, 0.05000007, 0.09835167)
+
+[node name="Dresser" parent="." instance=ExtResource("2_y5fxu")]
+transform = Transform3D(-1.4861872e-08, 0, 0.34, 0, 0.34, 0, -0.34, 0, -1.4861872e-08, -1.0251112, 0.049999952, 1.062196)
