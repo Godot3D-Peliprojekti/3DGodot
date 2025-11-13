@@ -5,6 +5,7 @@ const RAY_LENGTH := 1.5
 @onready var prompt: Label = $Prompt
 
 func _physics_process(_delta: float) -> void:
+	#Getting the camera that is used in game
 	var cam := get_viewport().get_camera_3d()
 	if cam == null:
 		prompt.text = "No Camera3D found"
