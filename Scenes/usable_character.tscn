@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_exjn3"]
 radius = 0.22949219
-height = 1.7905273
+height = 1.8161621
 
 [node name="UsableCharacter" type="CharacterBody3D"]
 script = ExtResource("1_exjn3")
@@ -13,9 +13,9 @@ script = ExtResource("1_exjn3")
 [node name="Character" parent="." instance=ExtResource("1_uix3j")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8952637, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8824463, 0)
 shape = SubResource("CapsuleShape3D_exjn3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 4.5753548e-09, -8.7302965e-08, 0, 0.9986295, 0.05233596, 8.742278e-08, 0.05233596, -0.9986295, 0, 1.6066792, 0.24893749)
+transform = Transform3D(-1, 4.5753588e-09, -8.730298e-08, -1.6135525e-08, 0.9718131, 0.23575278, 8.5920824e-08, 0.23575278, -0.9718131, 0, 1.6, 0.5)
 current = true
