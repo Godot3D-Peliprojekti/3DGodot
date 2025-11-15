@@ -42,19 +42,6 @@ shadow_opacity = 0.8
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8gbba")
 
-[node name="Dresser2_StaticBody3D#test" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(-8.485141, 0, -2.914093e-07, 0, 6.9013767, 0, 7.417947e-07, 0, -3.3333335, 5.2318597, 0.12818551, -11.985535)
-script = null
-
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(199.87282, 0, 0, 0, 0.09993641, 0, 0, 0, 199.87282, 0.06069387, 0.87999856, 0.118901186)
 use_collision = true
