@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4vqa58no8x30"]
+
+[ext_resource type="Script" uid="uid://bf7h2y4spra7c" path="res://Scripts/usable_character.gd" id="1_exjn3"]
+[ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="1_uix3j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_exjn3"]
+radius = 0.22949219
+height = 1.7905273
+
+[node name="UsableCharacter" type="CharacterBody3D"]
+script = ExtResource("1_exjn3")
+
+[node name="Character" parent="." instance=ExtResource("1_uix3j")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8952637, 0)
+shape = SubResource("CapsuleShape3D_exjn3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 4.5753548e-09, -8.7302965e-08, 0, 0.9986295, 0.05233596, 8.742278e-08, 0.05233596, -0.9986295, 0, 1.6066792, 0.24893749)
+current = true
