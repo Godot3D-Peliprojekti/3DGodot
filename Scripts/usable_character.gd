@@ -71,7 +71,7 @@ func _physics_process(delta):
 	# ----------------------
 	if last_anim_time >= animation_cooldown:
 		if is_crouching:
-			anim_player.play("ManAnims/Armature_002|mixamo_com|Layer0")  # crouch idle
+			anim_player.play("ManAnims/Armature|mixamo_com|Layer0 (2)")  # crouch idle
 		else:
 			if not is_moving:
 				anim_player.play("ManAnims/Armature_004|mixamo_com|Layer0")  # idle
