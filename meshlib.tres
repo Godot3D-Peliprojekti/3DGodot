@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=8 format=3 uid="uid://1p0cm0qonbw7"]
+[gd_resource type="MeshLibrary" load_steps=9 format=3 uid="uid://1p0cm0qonbw7"]
 
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/wood_floor_diff_2k.png" id="1_8f2a5"]
 [ext_resource type="Texture2D" uid="uid://cjyju70dgstmi" path="res://Assets/wood_floor_nor_gl_2k.png" id="2_plxut"]
@@ -28,12 +28,15 @@ data = {
 [sub_resource type="ImageTexture" id="ImageTexture_n7oag"]
 image = SubResource("Image_8f2a5")
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jo043"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
 [resource]
 item/0/name = "MeshInstance3D"
 item/0/mesh = SubResource("PlaneMesh_8f2a5")
 item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/mesh_cast_shadow = 1
-item/0/shapes = []
+item/0/shapes = [SubResource("ConcavePolygonShape3D_jo043"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 item/0/preview = SubResource("ImageTexture_n7oag")
