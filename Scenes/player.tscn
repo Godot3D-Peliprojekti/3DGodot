@@ -27,3 +27,14 @@ grow_vertical = 2
 texture = ExtResource("3_6t5aa")
 
 [node name="UsableCharacter" parent="." instance=ExtResource("4_vgqql")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="flashlightPromt" type="Label" parent="CanvasLayer"]
+offset_left = 807.0
+offset_top = 413.0
+offset_right = 1123.0
+offset_bottom = 485.0
+text = "Press E to toggle flashlight"
+horizontal_alignment = 1
+vertical_alignment = 1

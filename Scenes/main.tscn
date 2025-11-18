@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=16 format=3 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Texture2D" uid="uid://b0mri6beontrk" path="res://Assets/white.svg" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="2_bo1nx"]
@@ -7,42 +7,33 @@
 [ext_resource type="PackedScene" uid="uid://dx7gxg0vf33sq" path="res://Scenes/dresser.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://o3mod6cu4tft" path="res://Scenes/door_model.tscn" id="6_21xkr"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="7_6bp64"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_bo1nx"]
-sky_material = SubResource("ProceduralSkyMaterial_jjgbg")
-
-[sub_resource type="Environment" id="Environment_8gbba"]
-sky = SubResource("Sky_bo1nx")
-ambient_light_source = 2
-ambient_light_color = Color(1, 0.8857951, 0.7819642, 1)
-ambient_light_energy = 0.5
-tonemap_mode = 2
-ssao_enabled = true
-ssil_enabled = true
-glow_enabled = true
-adjustment_enabled = true
-adjustment_brightness = 0.8
-adjustment_contrast = 0.8
-adjustment_saturation = 0.8
+[ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="8_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://brgj2dvrpyyfp" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_ao_2k.png" id="9_6iyac"]
+[ext_resource type="Texture2D" uid="uid://ce6grmgu75xqy" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_nor_gl_2k.png" id="10_fdnlq"]
+[ext_resource type="Texture2D" uid="uid://bys48jv6o38n1" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_rough_2k.png" id="11_jkdf5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo1nx"]
 albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
 albedo_texture = ExtResource("1_jjgbg")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bp64"]
+albedo_texture = ExtResource("8_d1ilt")
+metallic = 0.2
+roughness_texture = ExtResource("11_jkdf5")
+normal_enabled = true
+normal_texture = ExtResource("10_fdnlq")
+ao_enabled = true
+ao_texture = ExtResource("9_6iyac")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_344ge"]
+material = SubResource("StandardMaterial3D_6bp64")
+size = Vector3(60, 0.1, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6bp64"]
+data = PackedVector3Array(-30, 0.049999997, 50, 30, 0.049999997, 50, -30, -0.049999997, 50, 30, 0.049999997, 50, 30, -0.049999997, 50, -30, -0.049999997, 50, 30, 0.049999997, -50, -30, 0.049999997, -50, 30, -0.049999997, -50, -30, 0.049999997, -50, -30, -0.049999997, -50, 30, -0.049999997, -50, 30, 0.049999997, 50, 30, 0.049999997, -50, 30, -0.049999997, 50, 30, 0.049999997, -50, 30, -0.049999997, -50, 30, -0.049999997, 50, -30, 0.049999997, -50, -30, 0.049999997, 50, -30, -0.049999997, -50, -30, 0.049999997, 50, -30, -0.049999997, 50, -30, -0.049999997, -50, 30, 0.049999997, 50, -30, 0.049999997, 50, 30, 0.049999997, -50, -30, 0.049999997, 50, -30, 0.049999997, -50, 30, 0.049999997, -50, -30, -0.049999997, 50, 30, -0.049999997, 50, -30, -0.049999997, -50, 30, -0.049999997, 50, 30, -0.049999997, -50, -30, -0.049999997, -50)
+
 [node name="Main" type="Node3D"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 34.477814, 43.54561)
-light_energy = 1.2
-shadow_enabled = true
-shadow_opacity = 0.8
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_8gbba")
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(199.87282, 0, 0, 0, 0.09993641, 0, 0, 0, 199.87282, -0.5799316, 0.7147831, 0.24593824)
@@ -378,6 +369,15 @@ script = null
 
 [node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleBack" index="0"]
 script = null
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0053606, 0, 0, 0, 1.0053606, 0, 0, 0, 1.0053606, 6, 4.5, 55)
+mesh = SubResource("BoxMesh_344ge")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ceiling"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6bp64")
 
 [editable path="Dresser"]
 [editable path="Dresser2"]
