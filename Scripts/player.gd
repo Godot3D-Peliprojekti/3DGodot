@@ -17,29 +17,26 @@ var prompt_active = true  # true kun ohje näkyy
 @onready var spotlight = $UsableCharacter/Camera3D/SpotLight3D
 var flashlight_on = false
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-@onready var movement_script = $UsableCharacter   # ← haetaan is_crouching tästä
-
 # HUD elements
 @onready var hud_weapon_bat = $CanvasLayer/Control/Baseball_Bat
 @onready var hud_weapon_knife = $CanvasLayer/Control/Knife
 @onready var hud_weapon_gun = $CanvasLayer/Control/Gun
 @onready var hud_ammo_current = $CanvasLayer/Control/Ammo_Current
 @onready var hud_ammo_reserve = $CanvasLayer/Control/Ammo_Reserve
+@onready var hud_health_label = $CanvasLayer/Control/Health_Label
+@onready var hud_health_bar = $CanvasLayer/Control/Health_Bar
 
 const HUD_WEAPON_ACTIVE = 1.0
 const HUD_WEAPON_UNACTIVE = 0.1
 const HUD_AMMO_RESERVE = 0.5
 const GUN_MAGAZINE_SIZE = 8
+const HEALTH_MAX = 100
+const HEALTH_MIN = 0
 
 var selected_weapon = ""
 var ammo_current = 0
 var ammo_reserve = 0
-
-var rotation_y = 0.0
-var camera_pitch = 0.0
+var health = HEALTH_MAX
 
 func hud_weapon_deactivate_all():
 	hud_weapon_bat.modulate.a = HUD_WEAPON_UNACTIVE
@@ -62,10 +59,15 @@ func hud_weapon_activate(name: String):
 func update_ammo_label():
 	hud_ammo_current.text = str(ammo_current)
 	hud_ammo_reserve.text = "/ " + str(ammo_reserve)
+	
+func update_health_label():
+	hud_health_label.text = str(health)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hud_weapon_deactivate_all()
+	update_ammo_label()
+	update_health_label()
 	
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -108,6 +110,22 @@ func _input(event):
 		ammo_reserve += 1
 		update_ammo_label()
 
+	# Debug for health
+	elif event.is_action("debug_health_add"):
+		if health < HEALTH_MAX:
+			health += 1
+			update_health_label()
+	elif event.is_action_pressed("debug_health_add_2"):
+		health = min(HEALTH_MAX, health + 20)
+		update_health_label()
+	elif event.is_action("debug_health_sub"):
+			if health > HEALTH_MIN:
+				health -= 1
+				update_health_label()
+	elif event.is_action_pressed("debug_health_sub_2"):
+		health = max(HEALTH_MIN, health - 20)
+		update_health_label()
+
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotation_y -= event.relative.x * mouse_sensitivity
@@ -133,3 +151,9 @@ func _process(delta):
 		spotlight.visible = false  # estetään taskulamppu promptin aikana
 	else:
 		spotlight.visible = flashlight_on and not movement_script.is_crouching
+
+	# Update health bar scale and color
+	var scale = health / 100.0
+	hud_health_bar.scale.x = scale
+	hud_health_bar.modulate.r = -scale + 1
+	hud_health_bar.modulate.g = scale
