@@ -164,6 +164,6 @@ func _process(delta):
 
 	# Update health bar scale and color
 	var scale = health / 100.0
-	hud_health_bar.scale.x = scale
+	hud_health_bar.scale.x = lerp(hud_health_bar.scale.x, scale, 10.0 * delta)
 	hud_health_bar.modulate.r = -scale + 1
 	hud_health_bar.modulate.g = scale
