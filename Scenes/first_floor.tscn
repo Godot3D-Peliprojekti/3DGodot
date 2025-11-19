@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c88arb2t8ca75"]
 
-[ext_resource type="MeshLibrary" uid="uid://1p0cm0qonbw7" path="res://meshlib.tres" id="1_wrjpk"]
+[ext_resource type="MeshLibrary" uid="uid://1p0cm0qonbw7" path="res://Assets/meshlib.tres" id="1_wrjpk"]
 
 [node name="First_Floor" type="Node3D"]
 

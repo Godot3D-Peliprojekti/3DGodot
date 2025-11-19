@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=6 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dti2vteh4ce7o" path="res://Assets/dot (1).png" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://b4vqa58no8x30" path="res://Scenes/usable_character.tscn" id="4_vgqql"]
+[ext_resource type="PackedScene" uid="uid://bukosogqgkwwj" path="res://Scenes/baseball_bat.tscn" id="5_fkybt"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_v0iea")
@@ -27,3 +28,8 @@ grow_vertical = 2
 texture = ExtResource("3_6t5aa")
 
 [node name="UsableCharacter" parent="." instance=ExtResource("4_vgqql")]
+
+[node name="BaseballBat" parent="UsableCharacter/Camera3D" index="0" instance=ExtResource("5_fkybt")]
+transform = Transform3D(-1, -1.6135525e-08, 8.5920824e-08, 4.5753583e-09, 0.97181296, 0.23575275, -8.730297e-08, 0.23575275, -0.97181296, 1.124402, -0.86018574, 0.4046895)
+
+[editable path="UsableCharacter"]

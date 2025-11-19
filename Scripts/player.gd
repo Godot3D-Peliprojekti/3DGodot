@@ -39,3 +39,4 @@ func _process(delta):
 		target_height,
 		camera_smooth * delta
 	)
+	
