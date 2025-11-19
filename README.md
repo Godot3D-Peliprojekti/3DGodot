@@ -42,5 +42,13 @@ UI-suunnittelu: 2D-pohja tehty Figmalla
 
 
 
-3D-sisältö: Blender (vain jos aikaa riittää, esim. kartta tai yksinkertaiset objektit) 
+3D-sisältö: Blender (Yksinkertaiset objektit, Aseet, Ovet, Lipastot, (Animaatiot)) 
+
+
+
+Character ja Animaatiot: Mixamo (About license: https://community.adobe.com/t5/mixamo-discussions/mixamo-faq-licensing-royalties-ownership-eula-and-tos/td-p/13234775)
+
+
+
+Materiaalit Lattia, seinät, katto: Polyhaven (CC0 license)
 
