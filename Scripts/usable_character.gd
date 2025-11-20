@@ -48,8 +48,23 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0
 
-	# Animaatiot
-	_update_animation(input_vec, is_crouching, is_running)
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		anim_player.play("ManAnims/knife_slash")
+
+	# --- Animaatiot ---
+	if last_anim_time >= animation_cooldown:
+		if anim_player.current_animation != "ManAnims/knife_slash":
+			if is_crouching:
+				anim_player.play("ManAnims/Armature|mixamo_com|Layer0 (2)")  # crouch idle
+			else:
+				if not is_moving:
+					anim_player.play("ManAnims/Armature_004|mixamo_com|Layer0")  # idle
+				elif is_running:
+					anim_player.play("ManAnims/Armature_006|mixamo_com|Layer0")  # run
+				else:
+					anim_player.play("ManAnims/knife_walk")  # walk
+
+		last_anim_time = 0.0
 
 	move_and_slide()
 
