@@ -135,15 +135,21 @@ func _unhandled_input(event):
 		camera.rotation.x = camera_pitch
 
 func _process(delta):
-	# Kamera laskeutuu kyykkyä varten
 	var target_height = camera_height_stand
-	#var target_forward_offset = 0.0 
+	var target_z = 0.5
+	
 	if movement_script.is_crouching:
 		target_height = camera_height_crouch
-
+		target_z = 0.7
+	
 	camera.transform.origin.y = lerp(
 		camera.transform.origin.y,
 		target_height,
+		camera_smooth * delta
+	)
+	camera.transform.origin.z = lerp(
+		camera.transform.origin.z,
+		target_z,
 		camera_smooth * delta
 	)
 	if prompt_active:
