@@ -19,3 +19,12 @@ shape = SubResource("CapsuleShape3D_exjn3")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 4.5753588e-09, -8.730298e-08, -1.6135525e-08, 0.9718131, 0.23575278, 8.5920824e-08, 0.23575278, -0.9718131, 0, 1.7, 0.5124977)
 current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9702956, 0.24192187, 0, -0.24192187, 0.9702956, 0, 0, 0)
+light_color = Color(1, 0.91904116, 0.8448446, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.2
+shadow_opacity = 0.8
+spot_range = 10.0

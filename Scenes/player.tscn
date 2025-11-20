@@ -1,35 +1,184 @@
-[gd_scene load_steps=6 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=13 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://dti2vteh4ce7o" path="res://Assets/dot (1).png" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://dvvbppbwoj674" path="res://Assets/HUD/baseball_bat.png" id="3_3smsa"]
+[ext_resource type="Texture2D" uid="uid://bwu8u0sbrkkp7" path="res://Assets/HUD/knife.png" id="4_8erm5"]
+[ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
 [ext_resource type="PackedScene" uid="uid://b4vqa58no8x30" path="res://Scenes/usable_character.tscn" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
 [ext_resource type="PackedScene" uid="uid://bukosogqgkwwj" path="res://Scenes/baseball_bat.tscn" id="5_fkybt"]
+[ext_resource type="Texture2D" uid="uid://btoaeu8apldf" path="res://Assets/HUD/hp.png" id="6_8erm5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3smsa"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_8erm5"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_f1ek2"]
+font_size = 52
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_v0iea")
 
-[node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
-collide_with_areas = true
-collide_with_bodies = true
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Crosshair" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_6t5aa")
+texture = ExtResource("4_fkybt")
+stretch_mode = 2
+
+[node name="Baseball_Bat" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -221.0
+offset_top = -512.0
+offset_right = 35.0
+offset_bottom = -256.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("3_3smsa")
+
+[node name="Knife" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -221.0
+offset_top = -337.99994
+offset_right = 35.0
+offset_bottom = -81.99994
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("4_8erm5")
+
+[node name="Gun" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -221.0
+offset_top = -186.0
+offset_right = 35.0
+offset_bottom = 70.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.67, 0.67)
+texture = ExtResource("5_f1ek2")
+
+[node name="Ammo_Current" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -546.0
+offset_top = -139.0
+offset_right = -376.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_3smsa")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Ammo_Reserve" type="Label" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0.1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -139.0
+offset_right = -186.0
+offset_bottom = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "/ 0"
+label_settings = SubResource("LabelSettings_8erm5")
+vertical_alignment = 1
+
+[node name="Health_Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_left = 424.0
+offset_top = 9.0
+offset_right = 594.0
+offset_bottom = 99.0
+text = "100"
+label_settings = SubResource("LabelSettings_f1ek2")
+vertical_alignment = 1
+
+[node name="Health_Bar_BG" type="TextureRect" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0.1)
+layout_mode = 1
+offset_left = 47.0
+offset_top = 38.0
+offset_right = 410.0
+offset_bottom = 74.0
+texture = ExtResource("6_8erm5")
+
+[node name="Health_Bar" type="TextureRect" parent="CanvasLayer/Control"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 1
+offset_left = 47.0
+offset_top = 38.0
+offset_right = 410.0
+offset_bottom = 74.0
+texture = ExtResource("6_8erm5")
+
+[node name="flashlightPromt" type="Label" parent="CanvasLayer"]
+offset_left = 807.0
+offset_top = 413.0
+offset_right = 1123.0
+offset_bottom = 485.0
+text = "Press E to toggle flashlight"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
+collide_with_areas = true
+collide_with_bodies = true
 
 [node name="UsableCharacter" parent="." instance=ExtResource("4_vgqql")]
 
 [node name="BaseballBat" parent="UsableCharacter/Camera3D" index="0" instance=ExtResource("5_fkybt")]
-transform = Transform3D(-1, -1.6135525e-08, 8.5920824e-08, 4.5753583e-09, 0.97181296, 0.23575275, -8.730297e-08, 0.23575275, -0.97181296, 1.124402, -0.86018574, 0.4046895)
+transform = Transform3D(-0.065, -2.0078246e-09, 9.538077e-09, 2.9739794e-10, 0.063167825, 0.015323924, -9.742581e-09, 0.015323924, -0.063167825, 0.42118943, -0.92178786, -0.56069136)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [editable path="UsableCharacter"]
