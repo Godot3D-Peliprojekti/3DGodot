@@ -8,8 +8,11 @@ extends CharacterBody3D
 @onready var animation_tree = $Character/AnimationTree
 @export_category("Animations")
 @export var animation_blend_easing: float = 10.0
+var lower_idle_blend: float = 0.0
 var lower_walk_x_blend: float = 0.0
 var lower_walk_z_blend: float = 0.0
+var lower_crouch_x_blend: float = 0.0
+var lower_crouch_z_blend: float = 0.0
 
 # Camera
 @onready var camera = $Camera3D
@@ -158,11 +161,19 @@ func _process(delta: float) -> void:
 	elif is_crouching:
 		speed *= crouch_multiplier
 
+	lower_idle_blend = lerp(lower_idle_blend, float(is_crouching), animation_blend_easing * delta)
 	lower_walk_x_blend = lerp(lower_walk_x_blend, -input_vector.y, animation_blend_easing * delta)
 	lower_walk_z_blend = lerp(lower_walk_z_blend, -input_vector.x, animation_blend_easing * delta)
+	lower_crouch_x_blend = lerp(lower_crouch_x_blend, -input_vector.y * float(is_crouching), animation_blend_easing * delta)
+	lower_crouch_z_blend = lerp(lower_crouch_z_blend, -input_vector.x * float(is_crouching), animation_blend_easing * delta)
 
+	# print("x ", lower_walk_x_blend, ", z ", lower_walk_z_blend)
+	# print("x ", lower_crouch_x_blend, ", z ", lower_crouch_z_blend)
+	animation_tree["parameters/Lower_Idle_Blend/blend_amount"] = lower_idle_blend
 	animation_tree["parameters/Lower_Walk_X_Blend/blend_amount"] = lower_walk_x_blend
 	animation_tree["parameters/Lower_Walk_Z_Blend/blend_amount"] = lower_walk_z_blend
+	animation_tree["parameters/Lower_Crouch_X_Blend/blend_amount"] = lower_crouch_x_blend
+	animation_tree["parameters/Lower_Crouch_Z_Blend/blend_amount"] = lower_crouch_z_blend
 
 	if 1:
 		# Debug for ammo
