@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var run_speed = 5.0
 @export var crouch_speed = 1.0
 
+@export var animation_cooldown := 0.1
 @export var blend_speed := 0.15   # animaatioiden pehmeys
 
 @onready var character = $Character
@@ -11,6 +12,7 @@ extends CharacterBody3D
 
 var is_crouching := false
 var current_anim := ""
+var last_anim_time = 0.0
 
 func _physics_process(delta):
 
