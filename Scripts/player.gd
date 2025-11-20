@@ -116,7 +116,7 @@ func _process(delta: float) -> void:
 		is_crouching = !is_crouching
 
 	is_running = false
-	if Input.is_action_pressed("sprint") and not is_crouching:
+	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
@@ -136,6 +136,7 @@ func _process(delta: float) -> void:
 	hud_health_bar.scale.x = lerp(hud_health_bar.scale.x, s, 10.0 * delta)
 	hud_health_bar.modulate.r = -s + 1
 	hud_health_bar.modulate.g = s
+
 
 	if 1:
 		# Debug for ammo
