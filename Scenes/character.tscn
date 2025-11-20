@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://ddyidyxnkh54k"]
+[gd_scene load_steps=37 format=4 uid="uid://ddyidyxnkh54k"]
 
 [ext_resource type="Texture2D" uid="uid://ccy24eki24kj2" path="res://Models/Man/Man_Ch31_1001_Diffuse.png" id="1_ejsiy"]
 [ext_resource type="Texture2D" uid="uid://b052o5088j0wr" path="res://Models/Man/Man_Ch31_1001_Glossiness.png" id="2_2mse5"]
@@ -826,8 +826,29 @@ _data = {
 &"RESET": SubResource("Animation_2mse5")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7iw6i"]
+animation = &"Animations/Lower_Crouch_Back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_le1tg"]
+animation = &"Animations/Lower_Crouch_Forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dm6ib"]
+animation = &"Animations/Lower_Crouch_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2daya"]
+animation = &"Animations/Lower_Crouch_Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mvyft"]
+animation = &"Animations/Lower_Crouch_Right"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_dm6ib"]
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_q5mnj"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a5ess"]
 animation = &"Animations/Lower_Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_q5mnj"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kq7hj"]
 animation = &"Animations/Lower_Walk_Back"
@@ -846,23 +867,39 @@ animation = &"Animations/Lower_Walk_Right"
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_wbia7"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a5ess"]
-graph_offset = Vector2(-1014.576, -104.25338)
-nodes/output/position = Vector2(266.66666, 80)
+graph_offset = Vector2(-792.88226, -69.27407)
+nodes/output/position = Vector2(1440, 106.666664)
 nodes/Lower_Walk_Forward/node = SubResource("AnimationNodeAnimation_reotu")
-nodes/Lower_Walk_Forward/position = Vector2(-1173.3334, 426.66666)
+nodes/Lower_Walk_Forward/position = Vector2(-1120, 426.66666)
 nodes/Lower_Idle/node = SubResource("AnimationNodeAnimation_a5ess")
-nodes/Lower_Idle/position = Vector2(-1413.3334, 53.333332)
+nodes/Lower_Idle/position = Vector2(-1706.6666, 213.33333)
 nodes/Lower_Walk_Z_Blend/node = SubResource("AnimationNodeBlend3_wbia7")
-nodes/Lower_Walk_Z_Blend/position = Vector2(-266.66666, 53.333332)
+nodes/Lower_Walk_Z_Blend/position = Vector2(-213.33333, 53.333332)
 nodes/Lower_Walk_X_Blend/node = SubResource("AnimationNodeBlend3_a5ess")
-nodes/Lower_Walk_X_Blend/position = Vector2(-826.6667, 53.333332)
+nodes/Lower_Walk_X_Blend/position = Vector2(-773.3333, 53.333332)
 nodes/Lower_Walk_Right/node = SubResource("AnimationNodeAnimation_wbia7")
-nodes/Lower_Walk_Right/position = Vector2(-613.3333, 240)
+nodes/Lower_Walk_Right/position = Vector2(-560, 240)
 nodes/Lower_Walk_Left/node = SubResource("AnimationNodeAnimation_l1rcp")
-nodes/Lower_Walk_Left/position = Vector2(-613.3333, 426.66666)
+nodes/Lower_Walk_Left/position = Vector2(-560, 426.66666)
 nodes/Lower_Walk_Back/node = SubResource("AnimationNodeAnimation_kq7hj")
-nodes/Lower_Walk_Back/position = Vector2(-1173.3334, 240)
-node_connections = [&"output", 0, &"Lower_Walk_Z_Blend", &"Lower_Walk_Z_Blend", 0, &"Lower_Walk_Right", &"Lower_Walk_Z_Blend", 1, &"Lower_Walk_X_Blend", &"Lower_Walk_Z_Blend", 2, &"Lower_Walk_Left", &"Lower_Walk_X_Blend", 0, &"Lower_Walk_Back", &"Lower_Walk_X_Blend", 1, &"Lower_Idle", &"Lower_Walk_X_Blend", 2, &"Lower_Walk_Forward"]
+nodes/Lower_Walk_Back/position = Vector2(-1120, 240)
+nodes/Lower_Crouch_X_Blend/node = SubResource("AnimationNodeBlend3_dm6ib")
+nodes/Lower_Crouch_X_Blend/position = Vector2(453.33334, 53.333332)
+nodes/Lower_Crouch_Z_Blend/node = SubResource("AnimationNodeBlend3_q5mnj")
+nodes/Lower_Crouch_Z_Blend/position = Vector2(1066.6666, 53.333332)
+nodes/Lower_Crouch_Forward/node = SubResource("AnimationNodeAnimation_le1tg")
+nodes/Lower_Crouch_Forward/position = Vector2(80, 426.66666)
+nodes/Lower_Crouch_Back/node = SubResource("AnimationNodeAnimation_7iw6i")
+nodes/Lower_Crouch_Back/position = Vector2(80, 240)
+nodes/Lower_Crouch_Left/node = SubResource("AnimationNodeAnimation_2daya")
+nodes/Lower_Crouch_Left/position = Vector2(693.3333, 426.66666)
+nodes/Lower_Crouch_Right/node = SubResource("AnimationNodeAnimation_mvyft")
+nodes/Lower_Crouch_Right/position = Vector2(693.3333, 240)
+nodes/Lower_Idle_Blend/node = SubResource("AnimationNodeBlend2_q5mnj")
+nodes/Lower_Idle_Blend/position = Vector2(-1386.6666, 53.333332)
+nodes/Lower_Crouch_Idle/node = SubResource("AnimationNodeAnimation_dm6ib")
+nodes/Lower_Crouch_Idle/position = Vector2(-1760, 400)
+node_connections = [&"output", 0, &"Lower_Crouch_Z_Blend", &"Lower_Walk_Z_Blend", 0, &"Lower_Walk_Right", &"Lower_Walk_Z_Blend", 1, &"Lower_Walk_X_Blend", &"Lower_Walk_Z_Blend", 2, &"Lower_Walk_Left", &"Lower_Walk_X_Blend", 0, &"Lower_Walk_Back", &"Lower_Walk_X_Blend", 1, &"Lower_Idle_Blend", &"Lower_Walk_X_Blend", 2, &"Lower_Walk_Forward", &"Lower_Crouch_X_Blend", 0, &"Lower_Crouch_Back", &"Lower_Crouch_X_Blend", 1, &"Lower_Walk_Z_Blend", &"Lower_Crouch_X_Blend", 2, &"Lower_Crouch_Forward", &"Lower_Crouch_Z_Blend", 0, &"Lower_Crouch_Right", &"Lower_Crouch_Z_Blend", 1, &"Lower_Crouch_X_Blend", &"Lower_Crouch_Z_Blend", 2, &"Lower_Crouch_Left", &"Lower_Idle_Blend", 0, &"Lower_Idle", &"Lower_Idle_Blend", 1, &"Lower_Crouch_Idle"]
 
 [node name="Character" type="Node3D"]
 
@@ -875,7 +912,7 @@ bones/0/name = "mixamorig9_Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.1090126, -95.704185)
 bones/0/enabled = true
-bones/0/position = Vector3(-1.188463, 3.2546868, -93.28478)
+bones/0/position = Vector3(-0.7278844, 2.0113275, -93.08731)
 bones/0/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "mixamorig9_Spine"
@@ -1880,6 +1917,7 @@ skin = SubResource("Skin_7iw6i")
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 transform = Transform3D(0.79476845, -0.43499765, 0.42322508, 0.05650013, 0.7473433, 0.66203123, -0.6042765, -0.5022492, 0.6185424, -25.049006, -31.634258, -139.72046)
 =======
 <<<<<<< HEAD
@@ -1903,6 +1941,9 @@ transform = Transform3D(0.08541352, -0.9938496, 0.07043143, 0.9912792, 0.0776448
 =======
 transform = Transform3D(0.08541352, -0.9938496, 0.07043143, 0.9912792, 0.07764489, -0.10649062, 0.100367285, 0.07891306, 0.9918157, -70.676414, -2.097238, -139.59645)
 >>>>>>> b67149a (add walk animations)
+=======
+transform = Transform3D(0.08541352, -0.9938496, 0.07043143, 0.9912792, 0.07764489, -0.10649062, 0.100367285, 0.07891306, 0.9918157, -70.215836, -3.3405976, -139.39897)
+>>>>>>> 97b4552 (add crouching animations)
 bone_name = "mixamorig9_RightHand"
 bone_idx = 34
 
@@ -1922,3 +1963,6 @@ tree_root = SubResource("AnimationNodeBlendTree_a5ess")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Lower_Walk_Z_Blend/blend_amount = 0.0
 parameters/Lower_Walk_X_Blend/blend_amount = 0.0
+parameters/Lower_Crouch_X_Blend/blend_amount = 0.0
+parameters/Lower_Crouch_Z_Blend/blend_amount = 0.0
+parameters/Lower_Idle_Blend/blend_amount = 0.0
