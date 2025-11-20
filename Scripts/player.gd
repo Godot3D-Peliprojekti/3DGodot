@@ -38,15 +38,15 @@ var ammo_current = 0
 var ammo_reserve = 0
 var health = HEALTH_MAX
 
-func hud_weapon_deactivate_all():
+func weapon_deactivate_all():
 	hud_weapon_bat.modulate.a = HUD_WEAPON_UNACTIVE
 	hud_weapon_knife.modulate.a = HUD_WEAPON_UNACTIVE
 	hud_weapon_gun.modulate.a = HUD_WEAPON_UNACTIVE
 	hud_ammo_current.modulate.a = HUD_WEAPON_UNACTIVE
 	hud_ammo_reserve.modulate.a = HUD_WEAPON_UNACTIVE
 	
-func hud_weapon_activate(name: String):
-	match name:
+func weapon_activate(weapon_name: String):
+	match weapon_name:
 		"bat":
 			hud_weapon_bat.modulate.a = HUD_WEAPON_ACTIVE
 		"knife":
@@ -65,7 +65,7 @@ func update_health_label():
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	hud_weapon_deactivate_all()
+	weapon_deactivate_all()
 	update_ammo_label()
 	update_health_label()
 	
@@ -85,7 +85,7 @@ func _input(event):
 			flashlight_on = !flashlight_on
 
 	elif event.is_action_pressed("weapon_bat") or event.is_action_pressed("weapon_knife") or event.is_action_pressed("weapon_gun"):
-		hud_weapon_deactivate_all()
+		weapon_deactivate_all()
 		var selected = ""
 		if event.is_action_pressed("weapon_bat") and selected_weapon != "bat":
 			selected = "bat"
@@ -93,7 +93,7 @@ func _input(event):
 			selected = "knife"
 		elif event.is_action_pressed("weapon_gun") and selected_weapon != "gun":
 			selected = "gun"
-		hud_weapon_activate(selected)
+		weapon_activate(selected)
 		selected_weapon = selected
 
 	# Debug for ammo
@@ -163,7 +163,7 @@ func _process(delta):
 		spotlight.visible = flashlight_on and not movement_script.is_crouching
 
 	# Update health bar scale and color
-	var scale = health / 100.0
-	hud_health_bar.scale.x = lerp(hud_health_bar.scale.x, scale, 10.0 * delta)
-	hud_health_bar.modulate.r = -scale + 1
-	hud_health_bar.modulate.g = scale
+	var s = health / 100.0
+	hud_health_bar.scale.x = lerp(hud_health_bar.scale.x, s, 10.0 * delta)
+	hud_health_bar.modulate.r = -s + 1
+	hud_health_bar.modulate.g = s
