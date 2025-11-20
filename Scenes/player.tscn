@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=13 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dvvbppbwoj674" path="res://Assets/HUD/baseball_bat.png" id="3_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bwu8u0sbrkkp7" path="res://Assets/HUD/knife.png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
-[ext_resource type="PackedScene" uid="uid://b4vqa58no8x30" path="res://Scenes/usable_character.tscn" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
-[ext_resource type="PackedScene" uid="uid://bukosogqgkwwj" path="res://Scenes/baseball_bat.tscn" id="5_fkybt"]
 [ext_resource type="Texture2D" uid="uid://btoaeu8apldf" path="res://Assets/HUD/hp.png" id="6_8erm5"]
+[ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3smsa"]
 font_size = 64
@@ -19,8 +18,14 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_f1ek2"]
 font_size = 52
 
-[node name="Player" type="Node3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tx1dd"]
+radius = 0.3095703
+height = 1.8033166
+
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_v0iea")
+camera_pitch_min = -80.0
+camera_pitch_max = 80.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -161,7 +166,7 @@ offset_right = 410.0
 offset_bottom = 74.0
 texture = ExtResource("6_8erm5")
 
-[node name="flashlightPromt" type="Label" parent="CanvasLayer"]
+[node name="Flashlight_Prompt_Label" type="Label" parent="CanvasLayer"]
 offset_left = 807.0
 offset_top = 413.0
 offset_right = 1123.0
@@ -171,14 +176,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
+visible = false
 collide_with_areas = true
 collide_with_bodies = true
 
-[node name="UsableCharacter" parent="." instance=ExtResource("4_vgqql")]
-
-[node name="BaseballBat" parent="UsableCharacter/Camera3D" index="0" instance=ExtResource("5_fkybt")]
-transform = Transform3D(-0.065, -2.0078246e-09, 9.538077e-09, 2.9739794e-10, 0.063167825, 0.015323924, -9.742581e-09, 0.015323924, -0.063167825, 0.42118943, -0.92178786, -0.56069136)
-
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
-[editable path="UsableCharacter"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9002911, 0.037)
+shape = SubResource("CapsuleShape3D_tx1dd")
+
+[node name="Character" parent="." instance=ExtResource("9_f1ek2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 0, 0.971961, 0.23514213, 1.7484555e-07, -0.23514213, 0.971961, 0, 1.7, 2)
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9702956, 0.24192187, 0, -0.24192187, 0.9702956, 0, 0, 0)
+light_color = Color(1, 0.91904116, 0.8448446, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.2
+shadow_opacity = 0.8
+spot_range = 10.0
