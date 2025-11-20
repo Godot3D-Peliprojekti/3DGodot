@@ -4,6 +4,14 @@ extends CharacterBody3D
 @export var gravity = 9.8
 @export var mouse_sensitivity = 0.003
 
+# Animations
+@onready var animation_tree = $Character/AnimationTree
+@export_category("Animations")
+@export var animation_blend_easing: float = 10.0
+var lower_walk_x_blend: float = 0.0
+var lower_walk_z_blend: float = 0.0
+
+# Camera
 @onready var camera = $Camera3D
 @export_category("Camera")
 @export var camera_pitch_min: float = -40.0
@@ -29,13 +37,17 @@ var show_flashlight_prompt = true
 @export var hud_color_selected_secondary: Color = Color(1.0, 1.0, 1.0, 0.5)
 @export var hud_color_unselected: Color = Color(1.0, 1.0, 1.0, 0.1)
 
+# Player
 @export_category("Player")
 @export var default_speed: float = 3.0
+var speed: float
 @export var run_multiplier: float = 1.67
 @export var crouch_multiplier: float = 0.33
 @export var health_max: int = 100
 @export var health_min: int = 0
 @export var weapon_magazine_size: int = 8
+var input_vector: Vector2
+var direction: Vector3
 
 @onready var collider = $CollisionShape3D
 @export_category("Crouching")
@@ -47,7 +59,6 @@ var show_flashlight_prompt = true
 
 var is_running: bool = false
 var is_crouching: bool = false
-var is_grounded: bool = false
 
 var ammo_current: int = 0
 var ammo_reserve: int = 0
@@ -137,6 +148,21 @@ func _process(delta: float) -> void:
 	hud_health_bar.modulate.r = -s + 1
 	hud_health_bar.modulate.g = s
 
+	# Update animations
+	input_vector = Input.get_vector("left", "right", "forward", "back")
+	direction = (camera.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
+
+	speed = default_speed
+	if is_running:
+		speed *= run_multiplier
+	elif is_crouching:
+		speed *= crouch_multiplier
+
+	lower_walk_x_blend = lerp(lower_walk_x_blend, -input_vector.y, animation_blend_easing * delta)
+	lower_walk_z_blend = lerp(lower_walk_z_blend, -input_vector.x, animation_blend_easing * delta)
+
+	animation_tree["parameters/Lower_Walk_X_Blend/blend_amount"] = lower_walk_x_blend
+	animation_tree["parameters/Lower_Walk_Z_Blend/blend_amount"] = lower_walk_z_blend
 
 	if 1:
 		# Debug for ammo
@@ -175,15 +201,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 
 	# Apply movement
-	var speed = default_speed
-	if is_running:
-		speed *= run_multiplier
-	elif is_crouching:
-		speed *= crouch_multiplier
-
-	var input_vector = Input.get_vector("left", "right", "forward", "back")
-	var direction = (camera.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
-
 	if input_vector.length() > 0.0:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed

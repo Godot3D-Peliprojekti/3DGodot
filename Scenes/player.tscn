@@ -24,6 +24,7 @@ height = 1.8033166
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_v0iea")
+animation_blend_easing = 5.0
 camera_pitch_min = -80.0
 camera_pitch_max = 80.0
 
