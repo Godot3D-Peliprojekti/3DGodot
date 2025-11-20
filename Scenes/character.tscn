@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b052o5088j0wr" path="res://Models/Man/Man_Ch31_1001_Glossiness.png" id="2_2mse5"]
 [ext_resource type="Texture2D" uid="uid://bha0ml4fcqgnb" path="res://Models/Man/Man_Ch31_1001_Normal.png" id="3_reotu"]
 [ext_resource type="Texture2D" uid="uid://wx86pf7em2ac" path="res://Models/Man/Man_Ch31_1002_Diffuse.png" id="4_a5ess"]
+[ext_resource type="PackedScene" uid="uid://bukosogqgkwwj" path="res://Scenes/baseball_bat.tscn" id="5_2mse5"]
 [ext_resource type="AnimationLibrary" uid="uid://b3sv0pd01hnxi" path="res://Models/ManAnims.res" id="5_wbia7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wikpc"]
@@ -878,6 +879,15 @@ skin = SubResource("Skin_7iw6i")
 [node name="Ch31_Sweater" type="MeshInstance3D" parent="Armature/Skeleton3D"]
 mesh = SubResource("ArrayMesh_q5mnj")
 skin = SubResource("Skin_7iw6i")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
+transform = Transform3D(-0.033636317, -0.19532499, 0.9801613, 0.93526036, 0.339607, 0.09977198, -0.3523578, 0.9200623, 0.17125677, -29.415676, -19.036346, -93.933945)
+bone_name = "mixamorig9_RightHand"
+bone_idx = 34
+
+[node name="BaseballBat" parent="Armature/Skeleton3D/BoneAttachment3D" instance=ExtResource("5_2mse5")]
+transform = Transform3D(4.58, 0, 0, 0, 4.58, 0, 0, 0, 4.58, 0, 0, 0)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

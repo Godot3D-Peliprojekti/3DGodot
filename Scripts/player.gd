@@ -135,6 +135,7 @@ func _unhandled_input(event):
 		camera.rotation.x = camera_pitch
 
 func _process(delta):
+	# Kamera laskeutuu kyykkyä varten
 	var target_height = camera_height_stand
 	var target_z = 0.5
 	
@@ -147,6 +148,10 @@ func _process(delta):
 		target_height,
 		camera_smooth * delta
 	)
+
+	# SpotLight näkyvyys: näkyy vain jos flashlight_on ja ei kyykky
+	if prompt_active:
+		spotlight.visible = false  # estetään taskulamppu promptin aikana
 	camera.transform.origin.z = lerp(
 		camera.transform.origin.z,
 		target_z,

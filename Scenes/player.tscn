@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
 [ext_resource type="PackedScene" uid="uid://b4vqa58no8x30" path="res://Scenes/usable_character.tscn" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://bukosogqgkwwj" path="res://Scenes/baseball_bat.tscn" id="5_fkybt"]
 [ext_resource type="Texture2D" uid="uid://btoaeu8apldf" path="res://Assets/HUD/hp.png" id="6_8erm5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3smsa"]
@@ -175,4 +176,9 @@ collide_with_bodies = true
 
 [node name="UsableCharacter" parent="." instance=ExtResource("4_vgqql")]
 
+[node name="BaseballBat" parent="UsableCharacter/Camera3D" index="0" instance=ExtResource("5_fkybt")]
+transform = Transform3D(-0.065, -2.0078246e-09, 9.538077e-09, 2.9739794e-10, 0.063167825, 0.015323924, -9.742581e-09, 0.015323924, -0.063167825, 0.42118943, -0.92178786, -0.56069136)
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[editable path="UsableCharacter"]
