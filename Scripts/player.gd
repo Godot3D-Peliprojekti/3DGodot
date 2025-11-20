@@ -13,6 +13,8 @@ var lower_walk_x_blend: float = 0.0
 var lower_walk_z_blend: float = 0.0
 var lower_crouch_x_blend: float = 0.0
 var lower_crouch_z_blend: float = 0.0
+var lower_run_forward_blend: float = 0.0
+var lower_run_z_blend: float = 0.0
 
 # Camera
 @onready var camera = $Camera3D
@@ -50,7 +52,6 @@ var speed: float
 @export var health_min: int = 0
 @export var weapon_magazine_size: int = 8
 var input_vector: Vector2
-var direction: Vector3
 
 @onready var collider = $CollisionShape3D
 @export_category("Crouching")
@@ -153,7 +154,6 @@ func _process(delta: float) -> void:
 
 	# Update animations
 	input_vector = Input.get_vector("left", "right", "forward", "back")
-	direction = (camera.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
 
 	speed = default_speed
 	if is_running:
@@ -166,14 +166,20 @@ func _process(delta: float) -> void:
 	lower_walk_z_blend = lerp(lower_walk_z_blend, -input_vector.x, animation_blend_easing * delta)
 	lower_crouch_x_blend = lerp(lower_crouch_x_blend, -input_vector.y * float(is_crouching), animation_blend_easing * delta)
 	lower_crouch_z_blend = lerp(lower_crouch_z_blend, -input_vector.x * float(is_crouching), animation_blend_easing * delta)
+	lower_run_forward_blend = lerp(lower_run_forward_blend, -input_vector.y * float(is_running), animation_blend_easing * delta)
+	lower_run_z_blend = lerp(lower_run_z_blend, -input_vector.x * float(is_running), animation_blend_easing * delta)
 
 	# print("x ", lower_walk_x_blend, ", z ", lower_walk_z_blend)
 	# print("x ", lower_crouch_x_blend, ", z ", lower_crouch_z_blend)
+	# print("forward ", lower_run_forward_blend, ", z ", lower_run_z_blend)
+
 	animation_tree["parameters/Lower_Idle_Blend/blend_amount"] = lower_idle_blend
 	animation_tree["parameters/Lower_Walk_X_Blend/blend_amount"] = lower_walk_x_blend
 	animation_tree["parameters/Lower_Walk_Z_Blend/blend_amount"] = lower_walk_z_blend
 	animation_tree["parameters/Lower_Crouch_X_Blend/blend_amount"] = lower_crouch_x_blend
 	animation_tree["parameters/Lower_Crouch_Z_Blend/blend_amount"] = lower_crouch_z_blend
+	animation_tree["parameters/Lower_Run_Forward_Blend/blend_amount"] = lower_run_forward_blend
+	animation_tree["parameters/Lower_Run_Z_Blend/blend_amount"] = lower_run_z_blend
 
 	if 1:
 		# Debug for ammo
@@ -212,6 +218,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 
 	# Apply movement
+	var direction = (camera.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
+
 	if input_vector.length() > 0.0:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
