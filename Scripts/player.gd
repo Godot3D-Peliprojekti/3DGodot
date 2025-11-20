@@ -6,14 +6,14 @@ extends Node3D
 @export var camera_height_stand = 1.7
 @export var camera_height_crouch = 1.0
 @export var camera_smooth = 6.0
-@onready var movement_script = $UsableCharacter  # käytetään is_crouching
+@onready var movement_script = $UsableCharacter
 var rotation_y = 0.0
 var camera_pitch = 0.0
 
 @onready var prompt_label = $CanvasLayer/flashlightPromt
-var prompt_active = true  # true kun ohje näkyy
+var prompt_active = true
 
-# --- Taskulamppu ---
+# Taskulamppu
 @onready var spotlight = $UsableCharacter/Camera3D/SpotLight3D
 var flashlight_on = false
 
@@ -137,9 +137,12 @@ func _unhandled_input(event):
 func _process(delta):
 	# Kamera laskeutuu kyykkyä varten
 	var target_height = camera_height_stand
+	var target_z = 0.5
+	
 	if movement_script.is_crouching:
 		target_height = camera_height_crouch
-
+		target_z = 0.7
+	
 	camera.transform.origin.y = lerp(
 		camera.transform.origin.y,
 		target_height,
@@ -149,6 +152,13 @@ func _process(delta):
 	# SpotLight näkyvyys: näkyy vain jos flashlight_on ja ei kyykky
 	if prompt_active:
 		spotlight.visible = false  # estetään taskulamppu promptin aikana
+	camera.transform.origin.z = lerp(
+		camera.transform.origin.z,
+		target_z,
+		camera_smooth * delta
+	)
+	if prompt_active:
+		spotlight.visible = false
 	else:
 		spotlight.visible = flashlight_on and not movement_script.is_crouching
 
