@@ -25,7 +25,7 @@ var lower_run_z_blend: float = 0.0
 # Taskulamppu
 @onready var flashlight = $Camera3D/SpotLight3D
 var show_flashlight = false
-@onready var flashlight_prompt_label = $CanvasLayer/Flashlight_Prompt_Label
+@onready var flashlight_prompt_label = $CanvasLayer/Control/Flashlight_Prompt_Label
 var show_flashlight_prompt = true
 
 # HUD elements
