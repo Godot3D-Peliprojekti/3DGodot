@@ -1,16 +1,30 @@
-[gd_scene load_steps=16 format=3 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=19 format=3 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Texture2D" uid="uid://b0mri6beontrk" path="res://Assets/white.svg" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="MeshLibrary" uid="uid://1p0cm0qonbw7" path="res://meshlib.tres" id="3_8gbba"]
 [ext_resource type="MeshLibrary" uid="uid://dvwqt0srp7cx2" path="res://meshlib2.tres" id="4_jjvhh"]
-[ext_resource type="PackedScene" path="res://Scenes/dresser.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://dx7gxg0vf33sq" path="res://Scenes/dresser.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://o3mod6cu4tft" path="res://Scenes/door_model.tscn" id="6_21xkr"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="7_6bp64"]
 [ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="8_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://brgj2dvrpyyfp" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_ao_2k.png" id="9_6iyac"]
 [ext_resource type="Texture2D" uid="uid://ce6grmgu75xqy" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_nor_gl_2k.png" id="10_fdnlq"]
 [ext_resource type="Texture2D" uid="uid://bys48jv6o38n1" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_rough_2k.png" id="11_jkdf5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d1ilt"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(1.277395, 1.269645, 1.2606452, 1)
+ground_horizon_color = Color(1.277395, 1.269645, 1.2606452, 1)
+energy_multiplier = 0.6
+
+[sub_resource type="Sky" id="Sky_6iyac"]
+sky_material = SubResource("ProceduralSkyMaterial_d1ilt")
+
+[sub_resource type="Environment" id="Environment_fdnlq"]
+background_mode = 2
+sky = SubResource("Sky_6iyac")
+ssao_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo1nx"]
 albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
@@ -34,6 +48,15 @@ size = Vector3(60, 0.1, 100)
 data = PackedVector3Array(-30, 0.049999997, 50, 30, 0.049999997, 50, -30, -0.049999997, 50, 30, 0.049999997, 50, 30, -0.049999997, 50, -30, -0.049999997, 50, 30, 0.049999997, -50, -30, 0.049999997, -50, 30, -0.049999997, -50, -30, 0.049999997, -50, -30, -0.049999997, -50, 30, -0.049999997, -50, 30, 0.049999997, 50, 30, 0.049999997, -50, 30, -0.049999997, 50, 30, 0.049999997, -50, 30, -0.049999997, -50, 30, -0.049999997, 50, -30, 0.049999997, -50, -30, 0.049999997, 50, -30, -0.049999997, -50, -30, 0.049999997, 50, -30, -0.049999997, 50, -30, -0.049999997, -50, 30, 0.049999997, 50, -30, 0.049999997, 50, 30, 0.049999997, -50, -30, 0.049999997, 50, -30, 0.049999997, -50, 30, 0.049999997, -50, -30, -0.049999997, 50, 30, -0.049999997, 50, -30, -0.049999997, -50, 30, -0.049999997, 50, 30, -0.049999997, -50, -30, -0.049999997, -50)
 
 [node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fdnlq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+light_energy = 0.8
+shadow_enabled = true
+directional_shadow_max_distance = 1000.0
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(199.87282, 0, 0, 0, 0.09993641, 0, 0, 0, 199.87282, -0.5799316, 0.7147831, 0.24593824)
