@@ -190,8 +190,6 @@ visible = false
 collide_with_areas = true
 collide_with_bodies = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9002911, 0.037)
 shape = SubResource("CapsuleShape3D_tx1dd")
