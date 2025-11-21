@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c88arb2t8ca75"]
 
-[ext_resource type="MeshLibrary" uid="uid://1p0cm0qonbw7" path="res://meshlib.tres" id="1_wrjpk"]
+[ext_resource type="MeshLibrary" uid="uid://1p0cm0qonbw7" path="res://Assets/FloorMaterials/meshlib.tres" id="1_wrjpk"]
 [ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="2_h2c1m"]
 [ext_resource type="Texture2D" uid="uid://brgj2dvrpyyfp" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_ao_2k.png" id="3_wnvbw"]
 [ext_resource type="Texture2D" uid="uid://ce6grmgu75xqy" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_nor_gl_2k.png" id="4_33l0l"]

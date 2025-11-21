@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=4 uid="uid://dx7gxg0vf33sq"]
 
-[ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/dresser_texture.png" id="1_t1abr"]
+[ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/ChestMaterials/dresser_texture.png" id="1_t1abr"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="2_0j27c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vw638"]

@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://dsueb88jnaogf"]
+
+[ext_resource type="Texture2D" uid="uid://bbnojlbslaaqh" path="res://Assets/WallMaterials/Seinä 1/textures/red_bricks_04_diff_2k.png" id="1_xwiek"]
+[ext_resource type="Texture2D" uid="uid://bscp7mr1eao3a" path="res://Assets/WallMaterials/Seinä 1/textures/red_bricks_04_arm_2k.png" id="2_ckffn"]
+[ext_resource type="Texture2D" uid="uid://drbw1a8smv0fd" path="res://Assets/WallMaterials/Seinä 1/textures/red_bricks_04_nor_gl_2k.png" id="3_lp668"]
+[ext_resource type="Texture2D" uid="uid://pintd3j546mo" path="res://Assets/WallMaterials/Seinä 1/textures/red_bricks_04_rough_2k.png" id="4_fp0yh"]
+
+[resource]
+albedo_texture = ExtResource("1_xwiek")
+roughness_texture = ExtResource("4_fp0yh")
+normal_enabled = true
+normal_texture = ExtResource("3_lp668")
+ao_enabled = true
+ao_texture = ExtResource("2_ckffn")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true

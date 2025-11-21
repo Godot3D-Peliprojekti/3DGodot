@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b60pnhjjd30h"]
 
-[ext_resource type="Texture2D" uid="uid://clnl6ucm686fk" path="res://Assets/wood_cabinet_worn_long_diff_1k.png" id="1_2j681"]
-[ext_resource type="Texture2D" uid="uid://dx1f33rxem7uk" path="res://Assets/wood_cabinet_worn_long_rough_1k.png" id="2_3cwhq"]
+[ext_resource type="Texture2D" uid="uid://clnl6ucm686fk" path="res://Assets/ChestMaterials/wood_cabinet_worn_long_diff_1k.png" id="1_2j681"]
+[ext_resource type="Texture2D" uid="uid://dx1f33rxem7uk" path="res://Assets/ChestMaterials/wood_cabinet_worn_long_rough_1k.png" id="2_3cwhq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbc6c"]
 albedo_color = Color(0.73300546, 0.7330054, 0.7330054, 1)

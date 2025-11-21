@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://o3mod6cu4tft"]
 
-[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/wood_floor_diff_2k.png" id="1_4x7hj"]
+[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/wood_floor_diff_2k.png" id="1_4x7hj"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="1_cuut6"]
 
 [sub_resource type="StandardMaterial3D" id="3"]
