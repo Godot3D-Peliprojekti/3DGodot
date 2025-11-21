@@ -6,6 +6,7 @@ class_name Interactable
 @export var animation_player: AnimationPlayer
 @export var open_animation_name := ""  
 @export var close_animation_name := ""
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $"../../../AudioStreamPlayer3D"
 
 var is_open := false
 	
