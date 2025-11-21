@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var mouse_sensitivity = 0.003
 
 # Animations
-@onready var animation_tree = $Character/AnimationTree
+@onready var animation_tree = $Head/Character/AnimationTree
 @export_category("Animations")
 @export var animation_blend_easing: float = 10.0
 var lower_idle_blend: float = 0.0
@@ -17,13 +17,13 @@ var lower_run_forward_blend: float = 0.0
 var lower_run_z_blend: float = 0.0
 
 # Camera
-@onready var camera = $Camera3D
+@onready var camera = $Head/Camera3D
 @export_category("Camera")
 @export var camera_pitch_min: float = -40.0
 @export var camera_pitch_max: float = 60.0
 
 # Taskulamppu
-@onready var flashlight = $Camera3D/SpotLight3D
+@onready var flashlight = $Head/Camera3D/SpotLight3D
 var show_flashlight = false
 @onready var flashlight_prompt_label = $CanvasLayer/Control/Flashlight_Prompt_Label
 var show_flashlight_prompt = true
@@ -44,6 +44,7 @@ var show_flashlight_prompt = true
 
 # Player
 @export_category("Player")
+@onready var head = $Head
 @export var default_speed: float = 3.0
 var speed: float
 @export var run_multiplier: float = 1.67
@@ -53,13 +54,16 @@ var speed: float
 @export var weapon_magazine_size: int = 8
 var input_vector: Vector2
 
+# Crouching
 @onready var collider = $CollisionShape3D
 @export_category("Crouching")
 @export var crouching_easing = 6.0
-@export var crouching_ratio: float = 0.6
-@export var camera_height = 1.7
-@export var collider_height: float = 1.7
-@export var collider_position: float = 0.85
+@export var camera_height_standing = 0.0
+@export var camera_height_crouching: float = -0.3
+@export var collider_height_standing: float = 1.7
+@export var collider_height_crouching: float = 1.0
+@export var collider_position_standing: float = 0.85
+@export var collider_position_crouching: float = 0.5
 
 var is_running: bool = false
 var is_crouching: bool = false
@@ -105,7 +109,7 @@ func _ready() -> void:
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * mouse_sensitivity)
+		head.rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(camera_pitch_min), deg_to_rad(camera_pitch_max))
 
@@ -218,7 +222,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 
 	# Apply movement
-	var direction = (camera.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
+	var direction = (head.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
 
 	if input_vector.length() > 0.0:
 		velocity.x = direction.x * speed
@@ -228,13 +232,13 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, 20 * delta)
 
 	# Apply crouching
-	var camera_height_target = camera_height
-	var collider_height_target = collider_height
-	var collider_position_target = collider_position
+	var camera_height_target = camera_height_standing
+	var collider_height_target = collider_height_standing
+	var collider_position_target = collider_position_standing
 	if is_crouching:
-		camera_height_target *= crouching_ratio
-		collider_height_target *= crouching_ratio
-		collider_position_target *= crouching_ratio
+		camera_height_target = camera_height_crouching
+		collider_height_target = collider_height_crouching
+		collider_position_target = collider_position_crouching
 
 	camera.position.y = lerp(camera.position.y, camera_height_target, crouching_easing * delta)
 	collider.shape.height  = lerp(collider.shape.height , collider_height_target, crouching_easing * delta)
