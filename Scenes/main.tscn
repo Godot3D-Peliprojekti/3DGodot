@@ -87,7 +87,7 @@ transform = Transform3D(10, 0, 0, 0, 5, 0, 0, 0, 1, -9.229, 2.5, 100)
 use_collision = true
 
 [node name="HallwayLeft" type="CSGBox3D" parent="."]
-transform = Transform3D(-1.3113416e-06, 0, 1, 0, 5, 0, -30, 0, -4.371139e-08, -2, 2.5, 75)
+transform = Transform3D(-1.3113416e-06, 0, 1, 0, 5, 0, -30, 0, -4.371139e-08, -1.9938557, 2.5, 74.998024)
 use_collision = true
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="HallwayLeft"]
@@ -329,10 +329,13 @@ close_animation_name = "DoorClose"
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel/Door" index="1"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
 [node name="StaticBody3D" parent="DoorModel/Door/DoorHandleFront" index="0"]
 script = null
+
+[node name="DoorHandleBack" parent="DoorModel/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.450565e-09, 0, 1, 0, -7.450565e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
 
 [node name="StaticBody3D" parent="DoorModel/Door/DoorHandleBack" index="0"]
 script = null
@@ -353,16 +356,22 @@ close_animation_name = "DoorClose"
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel2/Door" index="1"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
 [node name="StaticBody3D" parent="DoorModel2/Door/DoorHandleFront" index="0"]
 script = null
+
+[node name="DoorHandleBack" parent="DoorModel2/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.450565e-09, 0, 1, 0, -7.450565e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
 
 [node name="StaticBody3D" parent="DoorModel2/Door/DoorHandleBack" index="0"]
 script = null
 
 [node name="DoorModel3" parent="." instance=ExtResource("6_21xkr")]
 transform = Transform3D(-1.7881393e-07, 0, -0.605, 0, 0.605, 0, 0.605, 0, -1.7881393e-07, -2.4645102, 0.585, 78.19538)
+
+[node name="DoorFrame" parent="DoorModel3" index="0"]
+transform = Transform3D(1, 0, 2.842171e-14, 0, 1, 0, -2.842171e-14, 0, 1, 0.00035095215, 2.14816, 0.001871109)
 
 [node name="Door" parent="DoorModel3" index="1"]
 transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
@@ -377,13 +386,19 @@ close_animation_name = "DoorClose"
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel3/Door" index="1"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
 [node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleFront" index="0"]
 script = null
 
+[node name="DoorHandleBack" parent="DoorModel3/Door" index="2"]
+transform = Transform3D(1, 0, 7.4505504e-09, 0, 0.9999999, 0, -7.4505504e-09, 0, 1, 1.7889862, 0.286, 0.02481389)
+
 [node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleBack" index="0"]
 script = null
+
+[node name="CollisionShape3D" parent="DoorModel3/Door/DoorHandleBack/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, -2.842171e-14, 0, 1, 0, 2.842171e-14, 0, 1, 0, 0, -0.03291607)
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.0053606, 0, 0, 0, 1.0053606, 0, 0, 0, 1.0053606, 6, 4.5, 55)
