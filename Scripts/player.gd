@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var animation_tree = $Head/Character/AnimationTree
 @export_category("Animations")
 @export var animation_blend_easing: float = 10.0
+
 var lower_idle_blend: float = 0.0
 var lower_walk_x_blend: float = 0.0
 var lower_walk_z_blend: float = 0.0
@@ -15,6 +16,11 @@ var lower_crouch_x_blend: float = 0.0
 var lower_crouch_z_blend: float = 0.0
 var lower_run_forward_blend: float = 0.0
 var lower_run_z_blend: float = 0.0
+
+var upper_idle_blend: float = 0.0
+var upper_walk_blend: float = 0.0
+var upper_crouch_blend: float = 0.0
+var upper_run_blend: float = 0.0
 
 # Camera
 @onready var camera = $Head/Camera3D
@@ -184,6 +190,18 @@ func _process(delta: float) -> void:
 	animation_tree["parameters/Lower_Crouch_Z_Blend/blend_amount"] = lower_crouch_z_blend
 	animation_tree["parameters/Lower_Run_Forward_Blend/blend_amount"] = lower_run_forward_blend
 	animation_tree["parameters/Lower_Run_Z_Blend/blend_amount"] = lower_run_z_blend
+
+	upper_idle_blend = lerp(upper_idle_blend, float(is_crouching), animation_blend_easing * delta)
+	upper_walk_blend = lerp(upper_walk_blend, input_vector.length(), animation_blend_easing * delta)
+	upper_crouch_blend = lerp(upper_crouch_blend, input_vector.length() * float(is_crouching), animation_blend_easing * delta)
+	upper_run_blend = lerp(upper_run_blend, input_vector.length() * float(is_running), animation_blend_easing * delta)
+
+	# print("upper_walk_blend ", upper_walk_blend, ", upper_crouch_blend ", upper_crouch_blend, ", upper_run_blend ", upper_run_blend)
+
+	animation_tree["parameters/Upper_Idle_Blend/blend_amount"] = upper_idle_blend
+	animation_tree["parameters/Upper_Walk_Blend/blend_amount"] = upper_walk_blend
+	animation_tree["parameters/Upper_Crouch_Blend/blend_amount"] = upper_crouch_blend
+	animation_tree["parameters/Upper_Run_Blend/blend_amount"] = upper_run_blend
 
 	if 1:
 		# Debug for ammo

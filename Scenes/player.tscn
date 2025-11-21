@@ -198,7 +198,7 @@ shape = SubResource("CapsuleShape3D_tx1dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 0, 0.971961, 0.23514213, 1.7484555e-07, -0.23514213, 0.971961, 0, 0, 0.92894936)
+transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 0, 0.971961, 0.23514213, 1.7484555e-07, -0.23514213, 0.971961, 0, 0, -0.17561954)
 current = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
