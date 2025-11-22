@@ -24,10 +24,11 @@ height = 1.8033166
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_v0iea")
-animation_blend_easing = 5.0
+animation_blend_easing = 4.0
 camera_pitch_min = -60.0
 camera_pitch_max = 40.0
-camera_height_standing = 0.2
+camera_distance_from_head = Vector3(0, -0.1, -0.2)
+camera_bobbing_multiplier = 1.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -197,8 +198,12 @@ shape = SubResource("CapsuleShape3D_tx1dd")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
+[node name="Character" parent="Head" instance=ExtResource("9_f1ek2")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0)
+
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 0, 0.971961, 0.23514213, 1.7484555e-07, -0.23514213, 0.971961, 0, 0, -0.17561954)
+transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 0, 0.971961, 0.23514213, 1.7484555e-07, -0.23514213, 0.971961, 0, 0.020413518, -0.21876124)
+rotation_order = 5
 current = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D"]
@@ -209,6 +214,3 @@ shadow_enabled = true
 shadow_bias = 0.2
 shadow_opacity = 0.8
 spot_range = 10.0
-
-[node name="Character" parent="Head" instance=ExtResource("9_f1ek2")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1.6, 0)
