@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=4 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=22 format=4 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Texture2D" uid="uid://b0mri6beontrk" path="res://Assets/white.svg" id="1_jjgbg"]
+[ext_resource type="Material" uid="uid://dsueb88jnaogf" path="res://Assets/WallMaterials/redbricks.tres" id="2_6iyac"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="2_bo1nx"]
 [ext_resource type="MeshLibrary" uid="uid://dvwqt0srp7cx2" path="res://Assets/FloorMaterials/meshlib2.tres" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://dx7gxg0vf33sq" path="res://Scenes/dresser.tscn" id="5_kry3j"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="8_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://brgj2dvrpyyfp" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_ao_2k.png" id="9_6iyac"]
 [ext_resource type="Texture2D" uid="uid://ce6grmgu75xqy" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_nor_gl_2k.png" id="10_fdnlq"]
+[ext_resource type="Material" uid="uid://d10bt611f1vwk" path="res://Assets/WallMaterials/Seinä 4/ToiletWalls.tres" id="11_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://bys48jv6o38n1" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_rough_2k.png" id="11_jkdf5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d1ilt"]
@@ -82,12 +84,24 @@ use_collision = true
 radius = 1.0
 height = 1.0
 sides = 64
+material = ExtResource("2_6iyac")
 
 [node name="CircleRoomInside" type="CSGCylinder3D" parent="CircleRoomOutside"]
 operation = 2
-radius = 0.95
+radius = 0.99
 height = 1.0
 sides = 64
+material = ExtResource("2_6iyac")
+
+[node name="DoorHole" type="CSGBox3D" parent="CircleRoomOutside"]
+transform = Transform3D(0.083333336, 0, 0, 0, 0.125, 0, 0, 0, 0.083333336, 0, -0.33638602, 0.97300005)
+operation = 2
+size = Vector3(1.4, 2.6, 0.7)
+
+[node name="DoorHole2" type="CSGBox3D" parent="CircleRoomOutside"]
+transform = Transform3D(-3.6426158e-09, 0, 0.083333336, 0, 0.125, 0, -0.083333336, 0, -3.6426158e-09, 0.9734898, -0.33596528, 0)
+operation = 2
+size = Vector3(1.4, 2.6, 0.7)
 
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.149296, 95.84156)
@@ -112,7 +126,7 @@ transform = Transform3D(3.019916e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, 3.019916e-08, 
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0, 1.0000002, 0)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_21xkr")]
-transform = Transform3D(0.605, 0, -1.4424324e-07, 0, 0.605, 0, 1.4424324e-07, 0, 0.605, -0.06, 0.585, 93.53418)
+transform = Transform3D(0.605, 0, -1.4424324e-07, 0, 0.605, 0, 1.4424324e-07, 0, 0.605, 0, 0, 93)
 
 [node name="Door" parent="DoorModel" index="1"]
 transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
@@ -208,7 +222,7 @@ script = null
 script = null
 
 [node name="DoorModel3" parent="." instance=ExtResource("6_21xkr")]
-transform = Transform3D(-1.7881393e-07, 0, -0.605, 0, 0.605, 0, 0.605, 0, -1.7881393e-07, -6.693675, 0.585, 78.19538)
+transform = Transform3D(-1.7881393e-07, 0, -0.605, 0, 0.605, 0, 0.605, 0, -1.7881393e-07, -6.694, 0, 78.195)
 
 [node name="Door" parent="DoorModel3" index="1"]
 transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
@@ -256,7 +270,7 @@ script = null
 script = null
 
 [node name="DoorModel6" parent="." instance=ExtResource("6_21xkr")]
-transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0.056651115, 0.585, 70.620445)
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 0.5, 0, 66.40935)
 
 [node name="Door" parent="DoorModel6" index="1"]
 transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
@@ -304,7 +318,7 @@ script = null
 script = null
 
 [node name="DoorModel8" parent="." instance=ExtResource("6_21xkr")]
-transform = Transform3D(-2.644539e-08, 0, 0.605, 0, 0.605, 0, -0.605, 0, -2.644539e-08, 15.853875, 0.585, 62.7703)
+transform = Transform3D(-2.644539e-08, 0, 0.605, 0, 0.605, 0, -0.605, 0, -2.644539e-08, 16.5, 0, 64)
 
 [node name="Door" parent="DoorModel8" index="1"]
 transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
@@ -412,6 +426,11 @@ size = Vector3(5, 4, 0.1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.46848, 2, 67.91362)
 size = Vector3(5, 4, 0.2)
 
+[node name="5X4_ulko2" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.5, 2, 72.5)
+size = Vector3(5, 4, 0.2)
+material = ExtResource("11_d1ilt")
+
 [node name="2X4_sisä2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.532, 2, 77)
 size = Vector3(2, 4, 0.1)
@@ -429,12 +448,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 93)
 size = Vector3(4, 4, 0.1)
 
 [node name="4X4_sisä4" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 2, 68)
-size = Vector3(4, 4, 0.1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 2, 68.2)
+size = Vector3(3.6, 4, 0.1)
 
 [node name="4X4_sisä5" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 2, 68)
-size = Vector3(4, 4, 0.1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 2, 68.2)
+size = Vector3(3.6, 4, 0.1)
 
 [node name="4X4_sisä2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5, 2, 75)
@@ -483,6 +502,11 @@ size = Vector3(8, 4, 0.1)
 [node name="8X4_sisä20" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, 2, 66)
 size = Vector3(8, 4, 0.1)
+
+[node name="DoorHole3" type="CSGBox3D" parent="8X4_sisä20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.70000005, 3.8146973e-06)
+operation = 2
+size = Vector3(1.4, 2.6, 0.2)
 
 [node name="8X4_sisä22" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, 2, 58)
@@ -560,6 +584,13 @@ size = Vector3(8, 4, 0.1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 70.05)
 size = Vector3(8, 4, 0.1)
 
+[node name="ArchWay" type="CSGCylinder3D" parent="8X4_sisä12"]
+transform = Transform3D(1.2, 0, 0, 0, -4.371139e-08, -2.5, 0, 1, -1.09278474e-07, -2, -1.5, 0)
+operation = 2
+radius = 1.1
+height = 0.2
+sides = 64
+
 [node name="8X4_sisä13" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 2, 70.05)
 size = Vector3(8, 4, 0.1)
@@ -587,6 +618,11 @@ size = Vector3(8, 4, 0.1)
 [node name="8X4_sisä2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 93)
 size = Vector3(8, 4, 0.1)
+
+[node name="DoorHole2" type="CSGBox3D" parent="8X4_sisä2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.70000005, 0)
+operation = 2
+size = Vector3(1.4, 2.6, 0.2)
 
 [node name="8X4_ulko" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.46848, 2, 67.91362)
@@ -624,6 +660,21 @@ size = Vector3(8, 4, 0.2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.46848, 2, 67.91362)
 size = Vector3(6, 4, 0.2)
 
+[node name="6X4_ulko4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 70)
+size = Vector3(6, 4, 0.2)
+material = ExtResource("11_d1ilt")
+
+[node name="6X4_ulko5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 75)
+size = Vector3(6, 4, 0.2)
+material = ExtResource("11_d1ilt")
+
+[node name="6X4_ulko3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.5, 2, 63)
+size = Vector3(6, 4, 0.2)
+material = ExtResource("11_d1ilt")
+
 [node name="6X4_ulko2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.5, 2, 83)
 size = Vector3(6, 4, 0.2)
@@ -641,12 +692,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, 79.95)
 size = Vector3(4, 4, 0.2)
 
 [node name="4X4_ulko4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, 65)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, 66)
 size = Vector3(4, 4, 0.2)
+material = ExtResource("11_d1ilt")
 
 [node name="4X4_ulko5" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, 61)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, 60)
 size = Vector3(4, 4, 0.2)
+material = ExtResource("11_d1ilt")
 
 [node name="4X4_ulko7" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 2, 48)
@@ -654,10 +707,6 @@ size = Vector3(4, 4, 0.2)
 
 [node name="4X4_ulko8" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.4, 2, 50)
-size = Vector3(4, 4, 0.2)
-
-[node name="4X4_ulko9" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.4, 2, 63)
 size = Vector3(4, 4, 0.2)
 
 [node name="4X4_ulko6" type="CSGBox3D" parent="."]
@@ -675,7 +724,7 @@ size = Vector3(3, 4, 0.2)
 [node name="YmpyrähuoneVälikerros" type="CSGCylinder3D" parent="."]
 transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0.5, 4, 54.5)
 use_collision = true
-radius = 1.0
+radius = 0.99
 height = 0.2
 sides = 64
 
@@ -689,7 +738,7 @@ sides = 64
 [node name="YmpyrähuoneKatto" type="CSGCylinder3D" parent="."]
 transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 12, 0.5, 8, 54.5)
 use_collision = true
-radius = 1.0
+radius = 0.99
 height = 0.2
 sides = 64
 
