@@ -27,7 +27,7 @@ var upper_run_blend: float = 0.0
 @export_category("Camera")
 @export var camera_pitch_min: float = -40.0
 @export var camera_pitch_max: float = 60.0
-@export var camera_distance_from_head: Vector3 = Vector3.ZERO
+@export var camera_offset: Vector3 = Vector3(0.0, 0.0, -0.15)
 @export var camera_bobbing_multiplier: float = 1.0
 @onready var skeleton = $Head/Character/Armature/Skeleton3D
 var bone_index: int
@@ -216,7 +216,11 @@ func _process(delta: float) -> void:
 	camera.global_position = bone_global_position
 	camera.position.x *= camera_bobbing_multiplier
 	camera.position.y *= camera_bobbing_multiplier
-	camera.position += camera_distance_from_head
+	camera.position += camera_offset
+
+	# Block the camera from clipping the walls
+	collider.global_position.x = camera.global_position.x
+	collider.global_position.z = camera.global_position.z
 
 	if 1:
 		# Debug for ammo

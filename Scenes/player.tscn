@@ -27,7 +27,6 @@ script = ExtResource("1_v0iea")
 animation_blend_easing = 4.0
 camera_pitch_min = -60.0
 camera_pitch_max = 40.0
-camera_distance_from_head = Vector3(0, -0.1, -0.2)
 camera_bobbing_multiplier = 1.2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -199,10 +198,10 @@ shape = SubResource("CapsuleShape3D_tx1dd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Character" parent="Head" instance=ExtResource("9_f1ek2")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 0, 0.971961, 0.23514213, 1.7484555e-07, -0.23514213, 0.971961, 0, 0.020413518, -0.21876124)
+transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)
 rotation_order = 5
 current = true
 
