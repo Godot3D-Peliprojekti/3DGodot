@@ -27,6 +27,10 @@ var upper_run_blend: float = 0.0
 @export_category("Camera")
 @export var camera_pitch_min: float = -40.0
 @export var camera_pitch_max: float = 60.0
+@export var camera_distance_from_head: Vector3 = Vector3.ZERO
+@export var camera_bobbing_multiplier: float = 1.0
+@onready var skeleton = $Head/Character/Armature/Skeleton3D
+var bone_index: int
 
 # Taskulamppu
 @onready var flashlight = $Head/Camera3D/SpotLight3D
@@ -108,6 +112,8 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	health = health_max
+	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
+	assert(bone_index != -1)
 
 	weapon_deactivate_all()
 	update_ammo_label()
@@ -185,7 +191,7 @@ func _process(delta: float) -> void:
 
 	animation_tree["parameters/Lower_Idle_Blend/blend_amount"] = lower_idle_blend
 	animation_tree["parameters/Lower_Walk_X_Blend/blend_amount"] = lower_walk_x_blend
-	animation_tree["parameters/Lower_Walk_Z_Blend/blend_amount"] = lower_walk_z_blend
+	animation_tree["parameters/Lower_Walk_Z_Blend/blend_amount"] = clamp(lower_walk_z_blend, -0.5, 0.5)
 	animation_tree["parameters/Lower_Crouch_X_Blend/blend_amount"] = lower_crouch_x_blend
 	animation_tree["parameters/Lower_Crouch_Z_Blend/blend_amount"] = lower_crouch_z_blend
 	animation_tree["parameters/Lower_Run_Forward_Blend/blend_amount"] = lower_run_forward_blend
@@ -202,6 +208,15 @@ func _process(delta: float) -> void:
 	animation_tree["parameters/Upper_Walk_Blend/blend_amount"] = upper_walk_blend
 	animation_tree["parameters/Upper_Crouch_Blend/blend_amount"] = upper_crouch_blend
 	animation_tree["parameters/Upper_Run_Blend/blend_amount"] = upper_run_blend
+
+	# Set camera position
+	var bone_local_transform = skeleton.get_bone_global_pose(bone_index)
+	var bone_global_position = skeleton.to_global(bone_local_transform.origin)
+
+	camera.global_position = bone_global_position
+	camera.position.x *= camera_bobbing_multiplier
+	camera.position.y *= camera_bobbing_multiplier
+	camera.position += camera_distance_from_head
 
 	if 1:
 		# Debug for ammo
@@ -250,15 +265,12 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, 20 * delta)
 
 	# Apply crouching
-	var camera_height_target = camera_height_standing
 	var collider_height_target = collider_height_standing
 	var collider_position_target = collider_position_standing
 	if is_crouching:
-		camera_height_target = camera_height_crouching
 		collider_height_target = collider_height_crouching
 		collider_position_target = collider_position_crouching
 
-	camera.position.y = lerp(camera.position.y, camera_height_target, crouching_easing * delta)
 	collider.shape.height  = lerp(collider.shape.height , collider_height_target, crouching_easing * delta)
 	collider.position.y = lerp(collider.position.y , collider_position_target, crouching_easing * delta)
 
