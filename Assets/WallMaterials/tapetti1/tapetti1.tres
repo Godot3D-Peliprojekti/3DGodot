@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://bilty1me72ct7"]
+
+[ext_resource type="Texture2D" uid="uid://ve3irrps8n0b" path="res://Assets/WallMaterials/tapetti1/textures/decrepit_wallpaper_diff_2k.png" id="1_ppbgc"]
+[ext_resource type="Texture2D" uid="uid://hx84tv2u0dd" path="res://Assets/WallMaterials/tapetti1/textures/decrepit_wallpaper_ao_2k.png" id="2_aiqea"]
+[ext_resource type="Texture2D" uid="uid://cs64yeitpjeiw" path="res://Assets/WallMaterials/tapetti1/textures/decrepit_wallpaper_disp_2k.png" id="3_qqmus"]
+[ext_resource type="Texture2D" uid="uid://cfu4geuorknlr" path="res://Assets/WallMaterials/tapetti1/textures/decrepit_wallpaper_nor_gl_2k.png" id="4_a7skh"]
+[ext_resource type="Texture2D" uid="uid://dr2eajsftfam4" path="res://Assets/WallMaterials/tapetti1/textures/decrepit_wallpaper_rough_2k.png" id="5_t3c5q"]
+
+[resource]
+albedo_texture = ExtResource("1_ppbgc")
+roughness_texture = ExtResource("5_t3c5q")
+normal_enabled = true
+normal_texture = ExtResource("4_a7skh")
+ao_enabled = true
+ao_texture = ExtResource("2_aiqea")
+heightmap_texture = ExtResource("3_qqmus")
+uv1_scale = Vector3(0.12, 0.12, 0.12)
+uv1_triplanar = true

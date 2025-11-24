@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvdsfh2im7mfh" path="res://Assets/WallMaterials/Seinä 2/textures/rosewood_veneer1_rough_2k.png" id="3_11a2j"]
 
 [resource]
+albedo_color = Color(0.7204674, 0.7204675, 0.7204674, 1)
 albedo_texture = ExtResource("1_iuvi6")
 metallic = 0.1
 metallic_specular = 0.1
@@ -16,4 +17,3 @@ normal_texture = ExtResource("2_qp5p6")
 ao_enabled = true
 ao_light_affect = 0.05
 ao_texture = ExtResource("2_11a2j")
-uv1_triplanar = true

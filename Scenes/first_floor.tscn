@@ -248,7 +248,7 @@ data = {
 }
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.2803435, 0, 0, 0, 1.2803435, 0, 0, 0, 1.2803435, -5, 4.5, -45)
+transform = Transform3D(1.2803435, 0, 0, 0, 1.2803435, 0, 0, 0, 1.2803435, -5, 26.678026, -45)
 mesh = SubResource("BoxMesh_wrjpk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ceiling"]

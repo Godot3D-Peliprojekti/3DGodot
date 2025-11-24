@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://b1bpfir3561v3"]
+
+[ext_resource type="Texture2D" uid="uid://b0yyg7mus4pup" path="res://Assets/WallMaterials/Seinä 3/textures/beige_wall_001_diff_2k.png" id="1_fc7pt"]
+[ext_resource type="Texture2D" uid="uid://bihadfgn5jxc6" path="res://Assets/WallMaterials/Seinä 3/textures/beige_wall_001_nor_gl_2k.png" id="2_2l6k3"]
+[ext_resource type="Texture2D" uid="uid://bndefbbbf3sv1" path="res://Assets/WallMaterials/Seinä 3/textures/beige_wall_001_rough_2k.png" id="3_r3n4y"]
+
+[resource]
+albedo_texture = ExtResource("1_fc7pt")
+roughness_texture = ExtResource("3_r3n4y")
+emission_enabled = true
+normal_enabled = true
+normal_texture = ExtResource("2_2l6k3")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true

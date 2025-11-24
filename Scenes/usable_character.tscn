@@ -9,6 +9,7 @@ height = 1.824707
 
 [node name="UsableCharacter" type="CharacterBody3D"]
 script = ExtResource("1_exjn3")
+run_speed = 10.0
 
 [node name="Character" parent="." instance=ExtResource("1_uix3j")]
 

@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://cn3r0q8q28cth"]
+
+[ext_resource type="Texture2D" uid="uid://clg4lfc2ohyve" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_diff_2k.png" id="1_my7lq"]
+[ext_resource type="Texture2D" uid="uid://dl256xaep23pn" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_ao_2k.png" id="2_6wob2"]
+[ext_resource type="Texture2D" uid="uid://cey75i0sho43t" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_nor_gl_2k.png" id="3_ytaqv"]
+[ext_resource type="Texture2D" uid="uid://dn45s3ex5ny7b" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_rough_2k.png" id="4_l585w"]
+
+[resource]
+albedo_color = Color(0.7792914, 0.7792914, 0.7792913, 1)
+albedo_texture = ExtResource("1_my7lq")
+metallic_specular = 0.0
+roughness = 0.0
+roughness_texture = ExtResource("4_l585w")
+normal_enabled = true
+normal_scale = 16.0
+normal_texture = ExtResource("3_ytaqv")
+ao_enabled = true
+ao_texture = ExtResource("2_6wob2")
+uv1_triplanar = true

@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://ugan1ngbyluq"]
+
+[ext_resource type="Texture2D" uid="uid://cjqiw6xadewii" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_diff_2k.png" id="1_eh7th"]
+[ext_resource type="Texture2D" uid="uid://cwwcumohwctsr" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_ao_2k.png" id="2_vy5b4"]
+[ext_resource type="Texture2D" uid="uid://8uld13pe8jmq" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_nor_gl_2k.png" id="3_yxuyk"]
+[ext_resource type="Texture2D" uid="uid://4jxbe5j0f58h" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_rough_2k.png" id="4_ku1rf"]
+
+[resource]
+albedo_color = Color(0.71212965, 0.7121293, 0.71212935, 1)
+albedo_texture = ExtResource("1_eh7th")
+roughness_texture = ExtResource("4_ku1rf")
+normal_enabled = true
+normal_texture = ExtResource("3_yxuyk")
+ao_enabled = true
+ao_texture = ExtResource("2_vy5b4")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
