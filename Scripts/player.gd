@@ -68,8 +68,6 @@ var input_vector: Vector2
 @onready var collider = $CollisionShape3D
 @export_category("Crouching")
 @export var crouching_easing = 6.0
-@export var camera_height_standing = 0.0
-@export var camera_height_crouching: float = -0.3
 @export var collider_height_standing: float = 1.7
 @export var collider_height_crouching: float = 1.0
 @export var collider_position_standing: float = 0.85
