@@ -22,6 +22,8 @@ var upper_walk_blend: float = 0.0
 var upper_crouch_blend: float = 0.0
 var upper_run_blend: float = 0.0
 
+var upper_weapon_bat_idle_blend: float = 0.0
+
 # Camera
 @onready var camera = $Head/Camera3D
 @export_category("Camera")
@@ -63,6 +65,9 @@ var speed: float
 @export var health_min: int = 0
 @export var weapon_magazine_size: int = 8
 var input_vector: Vector2
+
+# Weapons
+@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
 
 # Crouching
 @onready var collider = $CollisionShape3D
@@ -175,6 +180,7 @@ func _process(delta: float) -> void:
 	elif is_crouching:
 		speed *= crouch_multiplier
 
+	# Lower animations
 	lower_idle_blend = lerp(lower_idle_blend, float(is_crouching), animation_blend_easing * delta)
 	lower_walk_x_blend = lerp(lower_walk_x_blend, -input_vector.y, animation_blend_easing * delta)
 	lower_walk_z_blend = lerp(lower_walk_z_blend, -input_vector.x, animation_blend_easing * delta)
@@ -182,10 +188,6 @@ func _process(delta: float) -> void:
 	lower_crouch_z_blend = lerp(lower_crouch_z_blend, -input_vector.x * float(is_crouching), animation_blend_easing * delta)
 	lower_run_forward_blend = lerp(lower_run_forward_blend, -input_vector.y * float(is_running), animation_blend_easing * delta)
 	lower_run_z_blend = lerp(lower_run_z_blend, -input_vector.x * float(is_running), animation_blend_easing * delta)
-
-	# print("x ", lower_walk_x_blend, ", z ", lower_walk_z_blend)
-	# print("x ", lower_crouch_x_blend, ", z ", lower_crouch_z_blend)
-	# print("forward ", lower_run_forward_blend, ", z ", lower_run_z_blend)
 
 	animation_tree["parameters/Lower_Idle_Blend/blend_amount"] = lower_idle_blend
 	animation_tree["parameters/Lower_Walk_X_Blend/blend_amount"] = lower_walk_x_blend
@@ -195,17 +197,25 @@ func _process(delta: float) -> void:
 	animation_tree["parameters/Lower_Run_Forward_Blend/blend_amount"] = lower_run_forward_blend
 	animation_tree["parameters/Lower_Run_Z_Blend/blend_amount"] = lower_run_z_blend
 
+	# Upper animations
 	upper_idle_blend = lerp(upper_idle_blend, float(is_crouching), animation_blend_easing * delta)
 	upper_walk_blend = lerp(upper_walk_blend, input_vector.length(), animation_blend_easing * delta)
 	upper_crouch_blend = lerp(upper_crouch_blend, input_vector.length() * float(is_crouching), animation_blend_easing * delta)
 	upper_run_blend = lerp(upper_run_blend, input_vector.length() * float(is_running), animation_blend_easing * delta)
 
-	# print("upper_walk_blend ", upper_walk_blend, ", upper_crouch_blend ", upper_crouch_blend, ", upper_run_blend ", upper_run_blend)
-
 	animation_tree["parameters/Upper_Idle_Blend/blend_amount"] = upper_idle_blend
 	animation_tree["parameters/Upper_Walk_Blend/blend_amount"] = upper_walk_blend
 	animation_tree["parameters/Upper_Crouch_Blend/blend_amount"] = upper_crouch_blend
 	animation_tree["parameters/Upper_Run_Blend/blend_amount"] = upper_run_blend
+
+	# Weapon animations
+	if Input.is_action_pressed("attack") and selected_weapon == "bat" and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
+			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+
+	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), animation_blend_easing * delta)
+
+	animation_tree["parameters/Upper_Weapon_Bat_Idle_Blend/blend_amount"] = upper_weapon_bat_idle_blend
+	weapon_bat.visible = upper_weapon_bat_idle_blend > 0.5
 
 	# Set camera position
 	var bone_local_transform = skeleton.get_bone_global_pose(bone_index)
