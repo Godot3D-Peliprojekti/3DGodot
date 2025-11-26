@@ -1,7 +1,9 @@
-[gd_scene load_steps=27 format=4 uid="uid://dx7gxg0vf33sq"]
+[gd_scene load_steps=29 format=4 uid="uid://dx7gxg0vf33sq"]
 
 [ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/dresser_texture.png" id="1_t1abr"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="2_0j27c"]
+[ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/drawer_open.mp3" id="3_kqt5w"]
+[ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/drawer_close.mp3" id="4_kqt5w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vw638"]
 resource_name = "Material"
@@ -196,6 +198,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(-3.5592628, 1.1, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer_open:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer_close:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_kqt5w"]
 resource_name = "drawer_1_close"
@@ -211,9 +237,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-2.1596699, 3.1, 0), Vector3(-3.5592628, 3.1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer_close:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_0j27c"]
 resource_name = "drawer_1_open"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -225,6 +264,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-3.5592628, 3.1, 0), Vector3(-2.1596699, 3.1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer_open:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_1wqnd"]
@@ -241,9 +292,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-2.16, 2.1, 0), Vector3(-3.5592628, 2.1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer_close:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nwdvu"]
 resource_name = "drawer_2_open"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -255,6 +319,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-3.5592628, 2.1, 0), Vector3(-2.16, 2.1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer_open:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ivden"]
@@ -271,6 +347,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(-2.16, 1.1, 0), Vector3(-3.5592628, 1.1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer_close:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_qxkfv"]
 resource_name = "drawer_3_open"
@@ -285,6 +373,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-3.5592628, 1.1, 0), Vector3(-2.16, 1.1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer_open:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bbnek"]
@@ -372,3 +472,15 @@ shape = SubResource("ConcavePolygonShape3D_t1abr")
 libraries = {
 &"": SubResource("AnimationLibrary_bbnek")
 }
+
+[node name="AudioStreamPlayer_open" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_kqt5w")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="AudioStreamPlayer_close" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_kqt5w")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0

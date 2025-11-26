@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8tt7quhsmume"]
+[gd_scene load_steps=6 format=3 uid="uid://bukosogqgkwwj"]
 
 [ext_resource type="PackedScene" uid="uid://c4d4g37vhjr0b" path="res://Assets/baseball_bat.blend" id="1_pt6l3"]
-[ext_resource type="Script" path="res://Scripts/baseball_bat.gd" id="2_0fuc7"]
+[ext_resource type="Script" uid="uid://ch7vp547mqcq4" path="res://Scripts/baseball_bat.gd" id="2_0fuc7"]
 
 [sub_resource type="Animation" id="Animation_0fuc7"]
 length = 0.001
