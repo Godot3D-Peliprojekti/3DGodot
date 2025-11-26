@@ -1,0 +1,320 @@
+[gd_scene load_steps=57 format=3 uid="uid://5al8vvm5p4qy"]
+
+[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="1_s46ej"]
+[ext_resource type="Texture2D" uid="uid://cjyju70dgstmi" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_nor_gl_2k.png" id="2_5x6sx"]
+[ext_resource type="Texture2D" uid="uid://cmwd6nxwha8mb" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_rough_2k.png" id="3_gnuh5"]
+[ext_resource type="Texture2D" uid="uid://clg4lfc2ohyve" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_diff_2k.png" id="4_2l3ha"]
+[ext_resource type="Texture2D" uid="uid://bmknxfhmb3clx" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_arm_2k.png" id="5_o88wm"]
+[ext_resource type="Texture2D" uid="uid://dqn3h40aoyx52" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_disp_2k.png" id="6_ij1f6"]
+[ext_resource type="Texture2D" uid="uid://cey75i0sho43t" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_nor_gl_2k.png" id="7_nf3i1"]
+[ext_resource type="Texture2D" uid="uid://dn45s3ex5ny7b" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_rough_2k.png" id="8_84rct"]
+[ext_resource type="Texture2D" uid="uid://cjqiw6xadewii" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_diff_2k.png" id="9_squ5c"]
+[ext_resource type="Texture2D" uid="uid://cwwcumohwctsr" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_ao_2k.png" id="10_xod8c"]
+[ext_resource type="Texture2D" uid="uid://8uld13pe8jmq" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_nor_gl_2k.png" id="11_uxmwh"]
+[ext_resource type="Texture2D" uid="uid://4jxbe5j0f58h" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_rough_2k.png" id="12_xmo5d"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gfbqy"]
+size = Vector2(1, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_or1p8"]
+load_path = "res://.godot/imported/brown_floor_tiles_diff_2k.png-f30a3b23f4782f7aeb55e0218ebc6551.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pvojf"]
+load_path = "res://.godot/imported/brown_floor_tiles_ao_2k.png-5a4116ae31770ea53d18fa901ccc98f2.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5gxhd"]
+load_path = "res://.godot/imported/brown_floor_tiles_nor_gl_2k.png-25d04edd3eb9c6052f10714b67af8d83.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ba1rl"]
+load_path = "res://.godot/imported/brown_floor_tiles_rough_2k.png-69a50d6b972bd12a8112cc8b496626e0.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyi8c"]
+albedo_texture = SubResource("CompressedTexture2D_or1p8")
+roughness_texture = SubResource("CompressedTexture2D_ba1rl")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_5gxhd")
+ao_enabled = true
+ao_light_affect = 0.1
+ao_texture = SubResource("CompressedTexture2D_pvojf")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hjf4k"]
+data = PackedVector3Array(0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, -0.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_or1p8"]
+size = Vector2(1, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xx722"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j3o1f"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_655nt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_onfeq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvojf"]
+albedo_texture = SubResource("CompressedTexture2D_xx722")
+metallic = 0.2
+metallic_specular = 0.1
+roughness_texture = SubResource("CompressedTexture2D_onfeq")
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_655nt")
+ao_enabled = true
+ao_texture = SubResource("CompressedTexture2D_j3o1f")
+uv1_scale = Vector3(0.6, 0.6, 0.6)
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5gxhd"]
+data = PackedVector3Array(0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, -0.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5gxhd"]
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ba1rl"]
+albedo_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+albedo_texture = ExtResource("1_s46ej")
+metallic = 0.05
+metallic_specular = 0.05
+roughness = 0.8
+roughness_texture = ExtResource("3_gnuh5")
+normal_enabled = true
+normal_texture = ExtResource("2_5x6sx")
+ao_enabled = true
+ao_light_affect = 0.2
+uv1_scale = Vector3(0.8, 0.8, 0.8)
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w0cjq"]
+data = PackedVector3Array(1.5, 0, 1.5, -1.5, 0, 1.5, 1.5, 0, -1.5, -1.5, 0, 1.5, -1.5, 0, -1.5, 1.5, 0, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g08gq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mqc54"]
+load_path = "res://.godot/imported/diagonal_parquet_diff_2k.png-1ee1dff5aafa3b346aa065568056cfac.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4kk0b"]
+load_path = "res://.godot/imported/diagonal_parquet_ao_2k.png-98f851f3f4dfcb2b107fbc669562d6af.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0dktu"]
+load_path = "res://.godot/imported/diagonal_parquet_nor_gl_2k.png-0b934e2c11e47d6967f9b71c7ed6a3c0.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g08gq"]
+load_path = "res://.godot/imported/diagonal_parquet_rough_2k.png-f9f2acc787f02f5536e406df814dab8f.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqmb4"]
+albedo_texture = SubResource("CompressedTexture2D_mqc54")
+metallic_specular = 0.05
+roughness_texture = SubResource("CompressedTexture2D_g08gq")
+normal_enabled = true
+normal_scale = 5.0
+normal_texture = SubResource("CompressedTexture2D_0dktu")
+ao_enabled = true
+ao_texture = SubResource("CompressedTexture2D_4kk0b")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ba1rl"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_snjq0"]
+size = Vector2(3, 3)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kqmb4"]
+load_path = "res://.godot/imported/marble_01_diff_2k.png-214a666cca8392abad7acbb99402e24b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_snjq0"]
+load_path = "res://.godot/imported/marble_01_ao_2k.png-8ae3b7f74cdf250217aac8bdac67e450.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qdbet"]
+load_path = "res://.godot/imported/marble_01_disp_2k.png-38baa3136ff7f47a44c3971904a912ac.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1v3kj"]
+load_path = "res://.godot/imported/marble_01_nor_gl_2k.png-5f3e69e9f63167a30b6459d4252be473.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iubsu"]
+load_path = "res://.godot/imported/marble_01_rough_2k.png-04312d4105e7e710fd550b91f2734770.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdbet"]
+albedo_texture = SubResource("CompressedTexture2D_kqmb4")
+metallic = 0.2
+metallic_specular = 0.05
+roughness = 0.7
+roughness_texture = SubResource("CompressedTexture2D_iubsu")
+normal_enabled = true
+normal_scale = 6.5
+normal_texture = SubResource("CompressedTexture2D_1v3kj")
+ao_enabled = true
+ao_light_affect = 0.2
+ao_texture = SubResource("CompressedTexture2D_snjq0")
+heightmap_enabled = true
+heightmap_texture = SubResource("CompressedTexture2D_qdbet")
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kqmb4"]
+data = PackedVector3Array(1.5, 0, 1.5, -1.5, 0, 1.5, 1.5, 0, -1.5, -1.5, 0, 1.5, -1.5, 0, -1.5, 1.5, 0, -1.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_52hg3"]
+size = Vector2(3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owavj"]
+albedo_texture = ExtResource("4_2l3ha")
+metallic_specular = 0.2
+roughness_texture = ExtResource("8_84rct")
+normal_enabled = true
+normal_scale = 7.0
+normal_texture = ExtResource("7_nf3i1")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("5_o88wm")
+heightmap_enabled = true
+heightmap_scale = 8.0
+heightmap_texture = ExtResource("6_ij1f6")
+uv1_scale = Vector3(0.43, 0.43, 0.43)
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_snjq0"]
+data = PackedVector3Array(1.5, 0, 1.5, -1.5, 0, 1.5, 1.5, 0, -1.5, -1.5, 0, 1.5, -1.5, 0, -1.5, 1.5, 0, -1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snjq0"]
+albedo_color = Color(0.78431374, 0.78431374, 0.78431374, 1)
+albedo_texture = ExtResource("1_s46ej")
+metallic = 0.05
+metallic_specular = 0.05
+roughness = 0.8
+roughness_texture = ExtResource("3_gnuh5")
+normal_enabled = true
+normal_texture = ExtResource("2_5x6sx")
+ao_enabled = true
+ao_light_affect = 0.2
+uv1_scale = Vector3(0.8, 0.8, 0.8)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qdbet"]
+material = SubResource("StandardMaterial3D_snjq0")
+size = Vector2(1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1v3kj"]
+data = PackedVector3Array(0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, -0.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xx722"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3o1f"]
+albedo_texture = ExtResource("4_2l3ha")
+metallic_specular = 0.0
+roughness_texture = ExtResource("8_84rct")
+normal_enabled = true
+normal_scale = 8.0
+normal_texture = ExtResource("7_nf3i1")
+heightmap_enabled = true
+heightmap_texture = ExtResource("6_ij1f6")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xx722"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ses3y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52hg3"]
+albedo_texture = ExtResource("9_squ5c")
+metallic_specular = 0.1
+roughness_texture = ExtResource("12_xmo5d")
+normal_enabled = true
+normal_scale = 5.0
+normal_texture = ExtResource("11_uxmwh")
+ao_enabled = true
+ao_light_affect = 0.2
+ao_texture = ExtResource("10_xod8c")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qdbet"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="meshlibfloor" type="Node3D"]
+
+[node name="floor1" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_gfbqy")
+surface_material_override/0 = SubResource("StandardMaterial3D_vyi8c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor1/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_hjf4k")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.301284, 0, 0)
+mesh = SubResource("PlaneMesh_or1p8")
+surface_material_override/0 = SubResource("StandardMaterial3D_pvojf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5gxhd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0921965, 0, 0)
+mesh = SubResource("PlaneMesh_5gxhd")
+surface_material_override/0 = SubResource("StandardMaterial3D_ba1rl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_w0cjq")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.0837178)
+mesh = SubResource("PlaneMesh_g08gq")
+surface_material_override/0 = SubResource("StandardMaterial3D_kqmb4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ba1rl")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0067567825, 2.3841858e-07, 4.9969635)
+mesh = SubResource("PlaneMesh_snjq0")
+surface_material_override/0 = SubResource("StandardMaterial3D_qdbet")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_kqmb4")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3842058, 0, 4.5264153)
+mesh = SubResource("PlaneMesh_52hg3")
+surface_material_override/0 = SubResource("StandardMaterial3D_owavj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_snjq0")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.068147, -0.013739109, -2.4590402)
+mesh = SubResource("PlaneMesh_qdbet")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D6/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1v3kj")
+
+[node name="woodenfloor1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7620773, 0, 0)
+mesh = SubResource("PlaneMesh_xx722")
+surface_material_override/0 = SubResource("StandardMaterial3D_j3o1f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="woodenfloor1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="woodenfloor1/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_xx722")
+
+[node name="betonilattia" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1807606, 0, -2.793612)
+mesh = SubResource("PlaneMesh_ses3y")
+surface_material_override/0 = SubResource("StandardMaterial3D_52hg3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="betonilattia"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="betonilattia/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_qdbet")

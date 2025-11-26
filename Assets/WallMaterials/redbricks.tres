@@ -17,5 +17,5 @@ normal_texture = ExtResource("3_lp668")
 ao_enabled = true
 ao_light_affect = 0.2
 ao_texture = ExtResource("2_ckffn")
-uv1_scale = Vector3(1.5, 1.5, 1.5)
+uv1_scale = Vector3(1.6, 1.6, 1.6)
 uv1_triplanar = true

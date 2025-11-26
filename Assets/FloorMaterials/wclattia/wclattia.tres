@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bn5iufybdub6x" path="res://Assets/FloorMaterials/wclattia/textures/concrete_pavers_02_rough_2k.png" id="4_o8lug"]
 
 [resource]
-albedo_color = Color(0.35860604, 0.34817007, 0.31341082, 1)
+albedo_color = Color(0.5449745, 0.5449742, 0.5449743, 1)
 albedo_texture = ExtResource("1_yr6k7")
 albedo_texture_msdf = true
 metallic = 0.2
