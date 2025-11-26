@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dg5dfw45d87ir"]
+
+[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/wood_floor_diff_2k.png" id="1_jo043"]
+[ext_resource type="Texture2D" uid="uid://cjyju70dgstmi" path="res://Assets/wood_floor_nor_gl_2k.png" id="2_pcong"]
+[ext_resource type="Texture2D" uid="uid://cmwd6nxwha8mb" path="res://Assets/wood_floor_rough_2k.png" id="3_qob4b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbc6c"]
+albedo_color = Color(0.73300546, 0.7330054, 0.7330054, 1)
+albedo_texture = ExtResource("1_jo043")
+metallic = 0.69
+roughness = 0.76
+roughness_texture = ExtResource("3_qob4b")
+normal_enabled = true
+normal_texture = ExtResource("2_pcong")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o8uuo"]
+material = SubResource("StandardMaterial3D_jbc6c")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jo043"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Mesh library" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036181718, 0.0028009415, 0.10668111)
+mesh = SubResource("PlaneMesh_o8uuo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jo043")

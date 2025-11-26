@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bskwnx55qx2ag"]
+
+[ext_resource type="Script" uid="uid://wfic2lf3urtv" path="res://Scripts/enemy_1.gd" id="1_0a874"]
+[ext_resource type="PackedScene" uid="uid://cr2x8kikrlp68" path="res://Assets/cac-1763990790242.gltf" id="1_jwqgc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwqgc"]
+radius = 0.82958984
+height = 2.7182617
+
+[node name="enemy1" type="CharacterBody3D"]
+script = ExtResource("1_0a874")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.39, 0, 0, 0, 0.39, 0, 0, 0, 0.30602956, 0.016667768, -0.0023723617, 0.75987554)
+shape = SubResource("CapsuleShape3D_jwqgc")
+
+[node name="whiteClown" parent="." instance=ExtResource("1_jwqgc")]
+transform = Transform3D(0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0.09488499)

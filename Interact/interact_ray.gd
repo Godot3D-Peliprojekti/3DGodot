@@ -30,7 +30,7 @@ func _physics_process(_delta: float) -> void:
 	#Set a col variable that stores the colliding object
 		var col := get_collider()
 		if col is Interactable:
-			prompt.text = col.prompt_message
+			prompt.text = col.prompt_message + col.name
 	#If interact_action key [F] is pressed, interact function declared in Interactable.gd is used to interact with the colliding object
 			if Input.is_action_just_pressed("interact_action"):
 				col.interact(owner)
