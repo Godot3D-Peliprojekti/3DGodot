@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bki8mve08li5d"]
+
+[ext_resource type="Texture2D" uid="uid://dxgatiecmvcgg" path="res://Assets/WallMaterials/seinä 7/textures/concrete_layers_diff_2k.png" id="1_ye70j"]
+[ext_resource type="Texture2D" uid="uid://g3uatd0cf6iy" path="res://Assets/WallMaterials/seinä 7/textures/concrete_layers_ao_2k.png" id="2_8x205"]
+[ext_resource type="Texture2D" uid="uid://tjuymxutsg3v" path="res://Assets/WallMaterials/seinä 7/textures/concrete_layers_nor_gl_2k.png" id="3_yprr1"]
+[ext_resource type="Texture2D" uid="uid://xdjexk380rfx" path="res://Assets/WallMaterials/seinä 7/textures/concrete_layers_rough_2k.png" id="4_owm3r"]
+
+[resource]
+albedo_texture = ExtResource("1_ye70j")
+roughness_texture = ExtResource("4_owm3r")
+normal_enabled = true
+normal_texture = ExtResource("3_yprr1")
+ao_enabled = true
+ao_texture = ExtResource("2_8x205")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true

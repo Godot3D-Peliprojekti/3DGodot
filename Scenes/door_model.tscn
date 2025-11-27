@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=4 uid="uid://o3mod6cu4tft"]
 
-[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/wood_floor_diff_2k.png" id="1_4x7hj"]
+[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="1_4x7hj"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="1_cuut6"]
 [ext_resource type="AudioStream" uid="uid://bqwmvux1tu1q" path="res://Audio/door_open.mp3" id="3_s12oq"]
 [ext_resource type="AudioStream" uid="uid://rvxpc16jcrng" path="res://Audio/door_close.mp3" id="4_76awr"]
