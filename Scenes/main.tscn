@@ -414,7 +414,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.789, 0.28
 script = null
 
 [node name="DoorHandleBack" parent="DoorModel3/Door" index="2"]
-transform = Transform3D(1, 0, 7.4505215e-09, 0, 0.9999999, 0, -7.4505215e-09, 0, 1, 1.7889862, 0.286, 0.02481389)
+transform = Transform3D(1, 0, 7.450521e-09, 0, 0.9999999, 0, -7.450521e-09, 0, 1, 1.7889862, 0.286, 0.02481389)
 
 [node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleBack" index="0"]
 script = null
