@@ -23,6 +23,11 @@ var upper_crouch_blend: float = 0.0
 var upper_run_blend: float = 0.0
 
 var upper_weapon_bat_idle_blend: float = 0.0
+var upper_weapon_knife_idle_blend: float = 0.0
+
+# Weapons
+@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
+@onready var weapon_knife = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Knife
 
 # Camera
 @onready var camera = $Head/Camera3D
@@ -65,9 +70,6 @@ var speed: float
 @export var health_min: int = 0
 @export var weapon_magazine_size: int = 8
 var input_vector: Vector2
-
-# Weapons
-@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
 
 # Crouching
 @onready var collider = $CollisionShape3D
@@ -209,13 +211,19 @@ func _process(delta: float) -> void:
 	animation_tree["parameters/Upper_Run_Blend/blend_amount"] = upper_run_blend
 
 	# Weapon animations
-	if Input.is_action_pressed("attack") and selected_weapon == "bat" and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
+	if Input.is_action_pressed("attack"):
+		if selected_weapon == "bat" and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+		elif selected_weapon == "knife" and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
+			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), animation_blend_easing * delta)
+	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), animation_blend_easing * delta)
 
 	animation_tree["parameters/Upper_Weapon_Bat_Idle_Blend/blend_amount"] = upper_weapon_bat_idle_blend
+	animation_tree["parameters/Upper_Weapon_Knife_Idle_Blend/blend_amount"] = upper_weapon_knife_idle_blend
 	weapon_bat.visible = upper_weapon_bat_idle_blend > 0.5
+	weapon_knife.visible = upper_weapon_knife_idle_blend > 0.5
 
 	# Set camera position
 	var bone_local_transform = skeleton.get_bone_global_pose(bone_index)
