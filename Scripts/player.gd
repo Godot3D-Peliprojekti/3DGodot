@@ -239,8 +239,8 @@ func _process(delta: float) -> void:
 		ammo_current += ammo
 		update_ammo_label()
 
-	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), animation_blend_easing * delta)
-	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), animation_blend_easing * delta)
+	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), 2.0 * animation_blend_easing * delta)
+	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), 2.0 * animation_blend_easing * delta)
 	var target = -1.0 + float(selected_weapon == "gun") + (float(Input.is_action_pressed("attack2")) * float(selected_weapon == "gun"))
 	upper_weapon_gun_idle_aim_blend = lerp(upper_weapon_gun_idle_aim_blend, target, 2.0 * animation_blend_easing * delta)
 	upper_weapon_gun_attack_add = lerp(upper_weapon_gun_attack_add, 0.0, animation_blend_easing * delta)
