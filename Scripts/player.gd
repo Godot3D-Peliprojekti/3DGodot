@@ -225,10 +225,19 @@ func _process(delta: float) -> void:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 	weapon_gun_muzzle_flash.visible = false;
-	if Input.is_action_just_pressed("attack") and selected_weapon == "gun":
+	if Input.is_action_just_pressed("attack") and selected_weapon == "gun" and ammo_current > 0:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
+
+		ammo_current -= 1
+		update_ammo_label()
+
+	if Input.is_action_just_pressed("reload"):
+		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
+		ammo_reserve -= ammo
+		ammo_current += ammo
+		update_ammo_label()
 
 	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), animation_blend_easing * delta)
 	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), animation_blend_easing * delta)
@@ -245,7 +254,10 @@ func _process(delta: float) -> void:
 	weapon_knife.visible = upper_weapon_knife_idle_blend > 0.5
 	weapon_gun.visible = upper_weapon_gun_idle_aim_blend > 0.5 || upper_weapon_gun_idle_aim_blend > -0.5
 
-	weapon_gun_slide_offset = lerp(weapon_gun_slide_offset, -1.5, animation_blend_easing * delta)
+	if ammo_current > 0:
+		weapon_gun_slide_offset = lerp(weapon_gun_slide_offset, -1.5, animation_blend_easing * delta)
+	else:
+		weapon_gun_slide_offset = -3
 	weapon_gun_slide.position.z = weapon_gun_slide_offset
 
 	# Set camera position
@@ -263,16 +275,7 @@ func _process(delta: float) -> void:
 
 	if 1:
 		# Debug for ammo
-		if Input.is_action_just_pressed("debug_ammo_use"):
-			if ammo_current > 0:
-				ammo_current -= 1
-				update_ammo_label()
-		elif Input.is_action_just_pressed("debug_ammo_reload"):
-			var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
-			ammo_reserve -= ammo
-			ammo_current += ammo
-			update_ammo_label()
-		elif Input.is_action_just_pressed("debug_ammo_add"):
+		if Input.is_action_just_pressed("debug_ammo_add"):
 			ammo_reserve += 1
 			update_ammo_label()
 
