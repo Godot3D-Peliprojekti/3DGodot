@@ -24,10 +24,17 @@ var upper_run_blend: float = 0.0
 
 var upper_weapon_bat_idle_blend: float = 0.0
 var upper_weapon_knife_idle_blend: float = 0.0
+var upper_weapon_gun_idle_aim_blend: float = 0.0
+var upper_weapon_gun_attack_add: float = 0.0
 
 # Weapons
 @onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
 @onready var weapon_knife = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Knife
+@onready var weapon_gun = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun
+
+@onready var weapon_gun_slide = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Slide
+@onready var weapon_gun_muzzle_flash = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Muzzle_Flash
+var weapon_gun_slide_offset: float = 0.0
 
 # Camera
 @onready var camera = $Head/Camera3D
@@ -217,13 +224,29 @@ func _process(delta: float) -> void:
 		elif selected_weapon == "knife" and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
+	weapon_gun_muzzle_flash.visible = false;
+	if Input.is_action_just_pressed("attack") and selected_weapon == "gun":
+		upper_weapon_gun_attack_add = 1.0
+		weapon_gun_slide_offset = -4
+		weapon_gun_muzzle_flash.visible = true;
+
 	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), animation_blend_easing * delta)
 	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), animation_blend_easing * delta)
+	var target = -1.0 + float(selected_weapon == "gun") + (float(Input.is_action_pressed("attack2")) * float(selected_weapon == "gun"))
+	upper_weapon_gun_idle_aim_blend = lerp(upper_weapon_gun_idle_aim_blend, target, 2.0 * animation_blend_easing * delta)
+	upper_weapon_gun_attack_add = lerp(upper_weapon_gun_attack_add, 0.0, animation_blend_easing * delta)
 
 	animation_tree["parameters/Upper_Weapon_Bat_Idle_Blend/blend_amount"] = upper_weapon_bat_idle_blend
 	animation_tree["parameters/Upper_Weapon_Knife_Idle_Blend/blend_amount"] = upper_weapon_knife_idle_blend
+	animation_tree["parameters/Upper_Weapon_Gun_Idle_Aim_Blend/blend_amount"] = upper_weapon_gun_idle_aim_blend
+	animation_tree["parameters/Upper_Weapon_Gun_Attack_Add/add_amount"] = upper_weapon_gun_attack_add
+
 	weapon_bat.visible = upper_weapon_bat_idle_blend > 0.5
 	weapon_knife.visible = upper_weapon_knife_idle_blend > 0.5
+	weapon_gun.visible = upper_weapon_gun_idle_aim_blend > 0.5 || upper_weapon_gun_idle_aim_blend > -0.5
+
+	weapon_gun_slide_offset = lerp(weapon_gun_slide_offset, -1.5, animation_blend_easing * delta)
+	weapon_gun_slide.position.z = weapon_gun_slide_offset
 
 	# Set camera position
 	var bone_local_transform = skeleton.get_bone_global_pose(bone_index)
