@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://o3mod6cu4tft"]
+[gd_scene load_steps=21 format=4 uid="uid://o3mod6cu4tft"]
 
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="1_4x7hj"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="1_cuut6"]
+[ext_resource type="AudioStream" uid="uid://bqwmvux1tu1q" path="res://Audio/door_open.mp3" id="3_s12oq"]
+[ext_resource type="AudioStream" uid="uid://rvxpc16jcrng" path="res://Audio/door_close.mp3" id="4_76awr"]
 
 [sub_resource type="StandardMaterial3D" id="3"]
 vertex_color_use_as_albedo = true
@@ -90,7 +92,6 @@ data = PackedVector3Array(-0.0647, -0.0268, -0.0504, -0.0435, 0, -0.0504, -0.07,
 [sub_resource type="Animation" id="15"]
 resource_name = "DoorClose"
 length = 1.5
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -130,20 +131,19 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/path = NodePath("AudioStreamPlayer3D2:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 2,
-"values": [false, true]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="12"]
 resource_name = "DoorOpen"
 length = 2.0
-capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -171,26 +171,38 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/2/path = NodePath("Door/DoorHandleFront:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 2,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Door/DoorHandleFront:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.7853982), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.23333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.26),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-25.0]
 }
 
 [sub_resource type="Animation" id="Animation_4x7hj"]
@@ -219,6 +231,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer3D2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s12oq"]
 _data = {
@@ -245,7 +281,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00194, 0.16165376, 0.035502
 shape = SubResource("9")
 
 [node name="DoorHandleFront" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0665395)
 mesh = SubResource("6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorHandleFront"]
@@ -255,7 +291,7 @@ script = ExtResource("1_cuut6")
 shape = SubResource("ConcavePolygonShape3D_ctwgr")
 
 [node name="DoorHandleBack" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, 0.286339, 0.00295193)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0029519275)
 mesh = SubResource("8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorHandleBack"]
@@ -271,7 +307,13 @@ libraries = {
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27651, 0)
+stream = ExtResource("3_s12oq")
+volume_db = -25.0
 
 [node name="Label" type="Label" parent="."]
 visible = false
 text = "Press 'LeftMouseButton' to open and close door"
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_76awr")
+volume_db = -25.0

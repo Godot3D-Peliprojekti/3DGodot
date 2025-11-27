@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=53 format=4 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Material" uid="uid://bhydtovl1k8ly" path="res://Assets/FloorMaterials/wclattia/wclattia.tres" id="1_b3802"]
 [ext_resource type="Material" uid="uid://dsueb88jnaogf" path="res://Assets/WallMaterials/redbricks.tres" id="2_6iyac"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dn45s3ex5ny7b" path="res://Assets/WallMaterials/seinä 6/textures/wood_floor_worn_rough_2k.png" id="24_6vcvc"]
 [ext_resource type="MeshLibrary" uid="uid://btgw1cak0erhc" path="res://Assets/FloorMaterials/meshlibcellar.tres" id="25_cbgmd"]
 [ext_resource type="Texture2D" uid="uid://cjyju70dgstmi" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_nor_gl_2k.png" id="28_6vcvc"]
+[ext_resource type="PackedScene" uid="uid://dvxraa0yn1qci" path="res://Scenes/enemy_1.tscn" id="29_6vcvc"]
 [ext_resource type="Texture2D" uid="uid://cmwd6nxwha8mb" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_rough_2k.png" id="29_7k868"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ueoa1"]
@@ -242,10 +243,13 @@ close_animation_name = "DoorClose"
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel/Door" index="1"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
 [node name="StaticBody3D" parent="DoorModel/Door/DoorHandleFront" index="0"]
 script = null
+
+[node name="DoorHandleBack" parent="DoorModel/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
 
 [node name="StaticBody3D" parent="DoorModel/Door/DoorHandleBack" index="0"]
 script = null
@@ -372,16 +376,22 @@ close_animation_name = "DoorClose"
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel2/Door" index="1"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
 [node name="StaticBody3D" parent="DoorModel2/Door/DoorHandleFront" index="0"]
 script = null
+
+[node name="DoorHandleBack" parent="DoorModel2/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
 
 [node name="StaticBody3D" parent="DoorModel2/Door/DoorHandleBack" index="0"]
 script = null
 
 [node name="DoorModel3" parent="." instance=ExtResource("6_21xkr")]
 transform = Transform3D(-1.7881393e-07, 0, -0.605, 0, 0.605, 0, 0.605, 0, -1.7881393e-07, -1.5, 0.5, 81)
+
+[node name="DoorFrame" parent="DoorModel3" index="0"]
+transform = Transform3D(1, 0, 2.842171e-14, 0, 1, 0, -2.842171e-14, 0, 1, 0.00035095215, 2.14816, 0.001871109)
 
 [node name="Door" parent="DoorModel3" index="1"]
 transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
@@ -398,10 +408,13 @@ close_animation_name = "DoorClose"
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel3/Door" index="1"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
 [node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleFront" index="0"]
 script = null
+
+[node name="DoorHandleBack" parent="DoorModel3/Door" index="2"]
+transform = Transform3D(1, 0, 7.4505215e-09, 0, 0.9999999, 0, -7.4505215e-09, 0, 1, 1.7889862, 0.286, 0.02481389)
 
 [node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleBack" index="0"]
 script = null
@@ -2476,6 +2489,14 @@ transform = Transform3D(1, 0, 0, 0, 0.8660253, -0.49999997, 0, 0.49999997, 0.866
 use_collision = true
 size = Vector3(3, 0.1, 10)
 
+[node name="enemy1" parent="." node_paths=PackedStringArray("player") instance=ExtResource("29_6vcvc")]
+transform = Transform3D(1.9, 0, 0, 0, 1.9, 0, 0, 0, 1.9, 0, 1.4567418, 88.80658)
+player = NodePath("../Player")
+
+[node name="enemy1_setup" parent="enemy1" index="1"]
+transform = Transform3D(-0.005, 0, -7.5497897e-10, 0, 0.005, 0, 7.5497897e-10, 0, -0.005, 0, 0, 0)
+
+[editable path="Player"]
 [editable path="Dresser"]
 [editable path="Dresser2"]
 [editable path="DoorModel"]
@@ -2490,3 +2511,5 @@ size = Vector3(3, 0.1, 10)
 [editable path="DoorModel7"]
 [editable path="DoorModel8"]
 [editable path="DoorModel9"]
+[editable path="enemy1"]
+[editable path="enemy1/enemy1_setup"]
