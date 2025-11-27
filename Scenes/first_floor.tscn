@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c88arb2t8ca75"]
+[gd_scene load_steps=33 format=3 uid="uid://c88arb2t8ca75"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm85rwd2lpc7k" path="res://Assets/FloorMaterials/meshlib1stfloorfinal.tres" id="1_fqnud"]
 [ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="2_h2c1m"]
@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://8uld13pe8jmq" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_nor_gl_2k.png" id="15_0r6jf"]
 [ext_resource type="Texture2D" uid="uid://4jxbe5j0f58h" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_rough_2k.png" id="16_5pbs8"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="20_pchnt"]
+[ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="21_pccs8"]
+[ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="22_rmeu3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2c1m"]
 sky_top_color = Color(0.84860665, 0.87682384, 0.9134774, 1)
@@ -84,6 +86,9 @@ ao_light_affect = 0.2
 ao_texture = ExtResource("14_ca5ck")
 uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkusl"]
+albedo_texture = ExtResource("21_pccs8")
 
 [node name="First_Floor" type="Node3D"]
 
@@ -797,9 +802,36 @@ material = SubResource("StandardMaterial3D_pchnt")
 [node name="Player" parent="." instance=ExtResource("20_pchnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 8.299324)
 
+[node name="DoorModel8" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(-2.644539e-08, 0, 0.605, 0, 0.605, 0, -0.605, 0, -2.644539e-08, 13.379197, 0.5, -2.6070824)
+
+[node name="Door" parent="DoorModel8" index="1"]
+transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_jkusl")
+surface_material_override/0 = null
+
+[node name="StaticBody" parent="DoorModel8/Door" index="0" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("22_rmeu3")
+animation_player = NodePath("../../AnimationPlayer")
+open_animation_name = "DoorOpen"
+close_animation_name = "DoorClose"
+
+[node name="CollisionShape" parent="DoorModel8/Door/StaticBody" index="0"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
+
+[node name="DoorHandleFront" parent="DoorModel8/Door" index="1"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+
+[node name="StaticBody3D" parent="DoorModel8/Door/DoorHandleFront" index="0"]
+script = null
+
+[node name="StaticBody3D" parent="DoorModel8/Door/DoorHandleBack" index="0"]
+script = null
+
 [editable path="DoorModel"]
 [editable path="DoorModel6"]
 [editable path="DoorModel4"]
 [editable path="DoorModel5"]
 [editable path="DoorModel3"]
 [editable path="DoorModel2"]
+[editable path="DoorModel8"]
