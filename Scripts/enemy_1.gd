@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const SPEED: float = 1.5
 const GRAVITY: float = 30.0
-const STOP_DISTANCE: float = 0.8   
+const STOP_DISTANCE: float = 2.0  
 
 @export var player: Node3D
 @onready var animation_player: AnimationPlayer = $enemy1_setup/AnimationPlayer
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 			move_dir = to_player / distance
 			# Play only when the animation is not playing
 			#if animation_player.current_animation != "ZombieWalk" or not animation_player.is_playing():
-			animation_player.play("ZombieRunning")
+			animation_player.play("ZombieWalk")
 			look_at(global_transform.origin + move_dir, Vector3.UP)
 		else:
 			animation_player.queue("ZombieNeckBite")
