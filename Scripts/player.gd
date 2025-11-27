@@ -91,7 +91,7 @@ var is_running: bool = false
 var is_crouching: bool = false
 
 var ammo_current: int = 0
-var ammo_reserve: int = 0
+var ammo_reserve: int = 999
 var health: int = 0
 var selected_weapon: String = ""
 
@@ -275,7 +275,7 @@ func _process(delta: float) -> void:
 
 	if 1:
 		# Debug for ammo
-		if Input.is_action_just_pressed("debug_ammo_add"):
+		if Input.is_action_pressed("debug_ammo_add"):
 			ammo_reserve += 1
 			update_ammo_label()
 
