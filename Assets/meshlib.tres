@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=9 format=3 uid="uid://1p0cm0qonbw7"]
+[gd_resource type="MeshLibrary" load_steps=9 format=3 uid="uid://bfolhawbveq4i"]
 
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/wood_floor_diff_2k.png" id="1_8f2a5"]
 [ext_resource type="Texture2D" uid="uid://cjyju70dgstmi" path="res://Assets/wood_floor_nor_gl_2k.png" id="2_plxut"]
