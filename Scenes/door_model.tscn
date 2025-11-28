@@ -45,7 +45,7 @@ _surfaces = [{
 albedo_texture = ExtResource("1_4x7hj")
 
 [sub_resource type="BoxShape3D" id="9"]
-size = Vector3(2.0005, 3.7638698, 0.0689802)
+size = Vector3(2.0005, 4.072853, 0.0689802)
 
 [sub_resource type="StandardMaterial3D" id="5"]
 vertex_color_use_as_albedo = true
@@ -289,6 +289,7 @@ script = ExtResource("1_cuut6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door/DoorHandleFront/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ctwgr")
+disabled = true
 
 [node name="DoorHandleBack" type="MeshInstance3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0029519275)
@@ -299,6 +300,7 @@ script = ExtResource("1_cuut6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door/DoorHandleBack/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_cuut6")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
