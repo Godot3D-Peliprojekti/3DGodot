@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c88arb2t8ca75"]
+[gd_scene load_steps=34 format=3 uid="uid://c88arb2t8ca75"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm85rwd2lpc7k" path="res://Assets/FloorMaterials/meshlib1stfloorfinal.tres" id="1_fqnud"]
 [ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="2_h2c1m"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="20_pchnt"]
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="21_pccs8"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="22_rmeu3"]
+[ext_resource type="Script" uid="uid://cbf28uwoadakp" path="res://Scripts/dummydoor.gd" id="23_rmeu3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2c1m"]
 sky_top_color = Color(0.84860665, 0.87682384, 0.9134774, 1)
@@ -87,7 +88,7 @@ ao_texture = ExtResource("14_ca5ck")
 uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv1_triplanar = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkusl"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pccs8"]
 albedo_texture = ExtResource("21_pccs8")
 
 [node name="First_Floor" type="Node3D"]
@@ -114,18 +115,13 @@ data = {
 }
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.2803435, 0, 0, 0, 1.2803435, 0, 0, 0, 1.2803435, -8, 4, -15)
+transform = Transform3D(1.2803435, 0, 0, 0, 1.2803435, 0, 0, 0, 1.2803435, -8, 3.95, -15)
 mesh = SubResource("BoxMesh_wrjpk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ceiling"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ceiling/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5pbs8")
-
-[node name="8x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.06863, 2, 0)
-use_collision = true
-size = Vector3(8, 4, 0.1)
 
 [node name="8x4sisä2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, -0.9)
@@ -173,11 +169,6 @@ transform = Transform3D(-0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, -0.
 material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(7, 4, 0.1)
-
-[node name="8x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.06863, 2, -3)
-use_collision = true
-size = Vector3(8, 4, 0.2)
 
 [node name="10x4ulko2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371138e-08, 0, 0.9999998, 0, 1, 0, -0.9999998, 0, -4.371138e-08, -12.025154, 2, -20)
@@ -270,7 +261,7 @@ use_collision = true
 size = Vector3(7, 4, 0.2)
 
 [node name="DoorHole" type="CSGBox3D" parent="8x4ulko7"]
-transform = Transform3D(1, 0, -2.695955e-14, 0, 1, 0, 2.695955e-14, 0, 1, 2.8, -0.63, 0)
+transform = Transform3D(1, 0, -2.695955e-14, 0, 1, 0, 2.695955e-14, 0, 1, 2.7999997, -0.60874975, 0)
 operation = 2
 size = Vector3(1.4, 2.6, 0.25)
 
@@ -304,11 +295,6 @@ material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(7.963745, 4, 0.2)
 
-[node name="7x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.06863, 2, -3)
-use_collision = true
-size = Vector3(7, 4, 0.2)
-
 [node name="7x4ulko3" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 22.5, 2, -3.5)
 material_override = ExtResource("8_pchnt")
@@ -321,11 +307,6 @@ material_override = ExtResource("8_pchnt")
 use_collision = true
 size = Vector3(7, 4, 0.2)
 
-[node name="7x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.06863, 2, 0)
-use_collision = true
-size = Vector3(7, 4, 0.1)
-
 [node name="7x4sisä2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.8, 2, -3.5)
 material_override = ExtResource("6_5pbs8")
@@ -336,11 +317,6 @@ size = Vector3(7, 4, 0.1)
 transform = Transform3D(1, 0, 4.569558e-08, 0, 1, 0, -4.569558e-08, 0, 1, -1.8, -0.62, -0.037)
 operation = 2
 size = Vector3(1.4, 2.6, 0.25)
-
-[node name="6x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.06863, 2, 0)
-use_collision = true
-size = Vector3(6, 4, 0.1)
 
 [node name="6x4sisä2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 2, -10.85)
@@ -359,11 +335,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.9
 material_override = ExtResource("6_ca5ck")
 use_collision = true
 size = Vector3(3, 4, 0.1)
-
-[node name="6x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.06863, 2, -3)
-use_collision = true
-size = Vector3(6, 4, 0.2)
 
 [node name="6x4ulko6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 10.95)
@@ -405,11 +376,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.883857, 2, 6)
 material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(6, 4, 0.2)
-
-[node name="5x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.06863, 2, 0)
-use_collision = true
-size = Vector3(5, 4, 0.1)
 
 [node name="5x4sisä6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.45, 2, 0.05)
@@ -470,11 +436,6 @@ material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(5, 4, 0.1)
 
-[node name="5x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.06863, 2, -3)
-use_collision = true
-size = Vector3(5, 4, 0.2)
-
 [node name="5x4ulko5" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 7.05, 2, 8.5)
 material_override = ExtResource("6_fqnud")
@@ -487,11 +448,6 @@ material_override = ExtResource("6_fqnud")
 use_collision = true
 size = Vector3(5, 4, 0.2)
 
-[node name="4x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.068634, 2, 0)
-use_collision = true
-size = Vector3(4, 4, 0.1)
-
 [node name="4x4sisä3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, -11)
 material_override = ExtResource("8_pchnt")
@@ -503,11 +459,6 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 16.387012, 
 material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(4.1259766, 4, 0.1)
-
-[node name="4x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.068634, 2, -3)
-use_collision = true
-size = Vector3(4, 4, 0.2)
 
 [node name="4x4ulko5" type="CSGBox3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 14, 2, -8.1)
@@ -544,11 +495,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 6)
 material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(4, 4, 0.2)
-
-[node name="3x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.068634, 2, 0)
-use_collision = true
-size = Vector3(3, 4, 0.1)
 
 [node name="3x4sisä11" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.95, 2, 4.555)
@@ -639,11 +585,6 @@ material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(3, 4, 0.1)
 
-[node name="3x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.068634, 2, -3)
-use_collision = true
-size = Vector3(3, 4, 0.2)
-
 [node name="3x4sisä5" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 2, 1.6)
 material_override = ExtResource("6_5pbs8")
@@ -668,6 +609,11 @@ material_override = ExtResource("6_5pbs8")
 use_collision = true
 size = Vector3(4, 4, 0.2)
 
+[node name="DoorHole2" type="CSGBox3D" parent="3x4ulko2"]
+transform = Transform3D(1, 0, -2.695955e-14, 0, 1, 0, 2.695955e-14, 0, 1, -0.14057493, -0.60874975, -0.015683174)
+operation = 2
+size = Vector3(1.4, 2.6, 0.25)
+
 [node name="3x4ulko3" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 17, 2, 4.5)
 material_override = ExtResource("6_5pbs8")
@@ -678,16 +624,6 @@ size = Vector3(3, 4, 0.2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
 operation = 2
 size = Vector3(1.4, 2.6, 0.25)
-
-[node name="2x4sisä" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.068634, 2, 0)
-use_collision = true
-size = Vector3(2, 4, 0.1)
-
-[node name="2x4ulko" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.068634, 2, -3)
-use_collision = true
-size = Vector3(2, 4, 0.2)
 
 [node name="2x4ulko2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -12, 2, -4)
@@ -757,24 +693,6 @@ radius = 1.8
 height = 4.0
 sides = 64
 
-[node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -20.740213, 0.5649775, 0)
-
-[node name="DoorModel6" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(-2.644539e-08, 0, 0.605, 0, 0.605, 0, -0.605, 0, -2.644539e-08, 15.759393, 0.1, -1.6949449)
-
-[node name="DoorModel4" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(-2.644539e-08, 0, 0.605, 0, 0.605, 0, -0.605, 0, -2.644539e-08, -7.989, 0.1, -2.493)
-
-[node name="DoorModel5" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -10.441521, 0.1, -15.859029)
-
-[node name="DoorModel3" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 17, 0.105, 4.5)
-
-[node name="DoorModel2" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 10.214275, 0.1, 6)
-
 [node name="wclattia1" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.023, 0.052, -2.432)
 use_collision = true
@@ -800,38 +718,186 @@ size = Vector3(32, 0.1, 28)
 material = SubResource("StandardMaterial3D_pchnt")
 
 [node name="Player" parent="." instance=ExtResource("20_pchnt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 8.299324)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.788381)
 
-[node name="DoorModel8" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(-2.644539e-08, 0, 0.605, 0, 0.605, 0, -0.605, 0, -2.644539e-08, 13.379197, 0.5, -2.6070824)
+[node name="Control" parent="Player/CanvasLayer" index="0"]
+metadata/_edit_use_anchors_ = true
 
-[node name="Door" parent="DoorModel8" index="1"]
-transform = Transform3D(0.99999964, 0, 0, 0, 1, 0, 0, 0, 0.99999964, -1.00194, 2.04937, -0.106581)
-material_override = SubResource("StandardMaterial3D_jkusl")
+[node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
+
+[node name="Door" parent="DoorModel" index="1"]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_pccs8")
 surface_material_override/0 = null
 
-[node name="StaticBody" parent="DoorModel8/Door" index="0" node_paths=PackedStringArray("animation_player")]
+[node name="StaticBody" parent="DoorModel/Door" index="0" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("22_rmeu3")
 animation_player = NodePath("../../AnimationPlayer")
 open_animation_name = "DoorOpen"
 close_animation_name = "DoorClose"
 
-[node name="CollisionShape" parent="DoorModel8/Door/StaticBody" index="0"]
+[node name="CollisionShape" parent="DoorModel/Door/StaticBody" index="0"]
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
-[node name="DoorHandleFront" parent="DoorModel8/Door" index="1"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 1.78923, 0.286339, 0.0665395)
+[node name="DoorHandleFront" parent="DoorModel/Door" index="1"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
 
-[node name="StaticBody3D" parent="DoorModel8/Door/DoorHandleFront" index="0"]
+[node name="StaticBody3D" parent="DoorModel/Door/DoorHandleFront" index="0"]
 script = null
 
-[node name="StaticBody3D" parent="DoorModel8/Door/DoorHandleBack" index="0"]
+[node name="DoorHandleBack" parent="DoorModel/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
+
+[node name="StaticBody3D" parent="DoorModel/Door/DoorHandleBack" index="0"]
 script = null
 
+[node name="DummyDoor" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 1.8451266, 0.1, 13.943386)
+
+[node name="Door" parent="DummyDoor" index="1"]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_pccs8")
+surface_material_override/0 = null
+
+[node name="StaticBody" parent="DummyDoor/Door" index="0"]
+script = ExtResource("23_rmeu3")
+
+[node name="CollisionShape" parent="DummyDoor/Door/StaticBody" index="0"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
+
+[node name="DoorHandleFront" parent="DummyDoor/Door" index="1"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
+
+[node name="StaticBody3D" parent="DummyDoor/Door/DoorHandleFront" index="0"]
+script = null
+
+[node name="DoorHandleBack" parent="DummyDoor/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
+
+[node name="StaticBody3D" parent="DummyDoor/Door/DoorHandleBack" index="0"]
+script = null
+
+[node name="DoorModel5" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -10.468793, 0.1, -15.841486)
+
+[node name="Door" parent="DoorModel5" index="1"]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_pccs8")
+surface_material_override/0 = null
+
+[node name="StaticBody" parent="DoorModel5/Door" index="0" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("22_rmeu3")
+animation_player = NodePath("../../AnimationPlayer")
+open_animation_name = "DoorOpen"
+close_animation_name = "DoorClose"
+
+[node name="CollisionShape" parent="DoorModel5/Door/StaticBody" index="0"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
+
+[node name="DoorHandleFront" parent="DoorModel5/Door" index="1"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
+
+[node name="StaticBody3D" parent="DoorModel5/Door/DoorHandleFront" index="0"]
+script = null
+
+[node name="DoorHandleBack" parent="DoorModel5/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
+
+[node name="StaticBody3D" parent="DoorModel5/Door/DoorHandleBack" index="0"]
+script = null
+
+[node name="DoorModel2" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.605, 0, 0.605, 0, -2.644539e-08, 17, 0.1, 4.5)
+
+[node name="Door" parent="DoorModel2" index="1"]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_pccs8")
+surface_material_override/0 = null
+
+[node name="StaticBody" parent="DoorModel2/Door" index="0" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("22_rmeu3")
+animation_player = NodePath("../../AnimationPlayer")
+open_animation_name = "DoorOpen"
+close_animation_name = "DoorClose"
+
+[node name="CollisionShape" parent="DoorModel2/Door/StaticBody" index="0"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
+
+[node name="DoorHandleFront" parent="DoorModel2/Door" index="1"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
+
+[node name="StaticBody3D" parent="DoorModel2/Door/DoorHandleFront" index="0"]
+script = null
+
+[node name="DoorHandleBack" parent="DoorModel2/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
+
+[node name="StaticBody3D" parent="DoorModel2/Door/DoorHandleBack" index="0"]
+script = null
+
+[node name="DoorModel4" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.605, 0, 0.605, 0, -2.644539e-08, -8.050896, 0.1, -2.5166745)
+
+[node name="Door" parent="DoorModel4" index="1"]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_pccs8")
+surface_material_override/0 = null
+
+[node name="StaticBody" parent="DoorModel4/Door" index="0" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("22_rmeu3")
+animation_player = NodePath("../../AnimationPlayer")
+open_animation_name = "DoorOpen"
+close_animation_name = "DoorClose"
+
+[node name="CollisionShape" parent="DoorModel4/Door/StaticBody" index="0"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
+
+[node name="DoorHandleFront" parent="DoorModel4/Door" index="1"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
+
+[node name="StaticBody3D" parent="DoorModel4/Door/DoorHandleFront" index="0"]
+script = null
+
+[node name="DoorHandleBack" parent="DoorModel4/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
+
+[node name="StaticBody3D" parent="DoorModel4/Door/DoorHandleBack" index="0"]
+script = null
+
+[node name="DoorModel3" parent="." instance=ExtResource("6_33l0l")]
+transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.605, 0, 0.605, 0, -2.644539e-08, 15.8, 0.1, -1.6985822)
+
+[node name="Door" parent="DoorModel3" index="1"]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
+material_override = SubResource("StandardMaterial3D_pccs8")
+surface_material_override/0 = null
+
+[node name="StaticBody" parent="DoorModel3/Door" index="0" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("22_rmeu3")
+animation_player = NodePath("../../AnimationPlayer")
+open_animation_name = "DoorOpen"
+close_animation_name = "DoorClose"
+
+[node name="CollisionShape" parent="DoorModel3/Door/StaticBody" index="0"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
+
+[node name="DoorHandleFront" parent="DoorModel3/Door" index="1"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
+
+[node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleFront" index="0"]
+script = null
+
+[node name="DoorHandleBack" parent="DoorModel3/Door" index="2"]
+transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
+
+[node name="StaticBody3D" parent="DoorModel3/Door/DoorHandleBack" index="0"]
+script = null
+
+[editable path="Player"]
 [editable path="DoorModel"]
-[editable path="DoorModel6"]
-[editable path="DoorModel4"]
+[editable path="DummyDoor"]
 [editable path="DoorModel5"]
-[editable path="DoorModel3"]
 [editable path="DoorModel2"]
-[editable path="DoorModel8"]
+[editable path="DoorModel4"]
+[editable path="DoorModel3"]
