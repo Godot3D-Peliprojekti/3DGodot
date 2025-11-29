@@ -10,6 +10,7 @@ extends CharacterBody3D
 @export var animation_blend_easing: float = 10.0
 
 var has_key_1: bool = false
+var has_key_2: bool = false
 
 var lower_idle_blend: float = 0.0
 var lower_walk_x_blend: float = 0.0
@@ -179,7 +180,8 @@ func _process(delta: float) -> void:
 	#Add debug key for testing
 	if Input.is_action_just_pressed("debug_key"):
 		has_key_1 = true
-		print("Key given")
+		has_key_2 = true
+		print("Keys given")
 
 	# Update health bar scale and color
 	var s = float(health) / health_max

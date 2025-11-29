@@ -41,14 +41,13 @@ albedo_texture = ExtResource("7_1w6v2")
 albedo_texture = ExtResource("7_1w6v2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1aky"]
-albedo_color = Color(0.73300546, 0.7330054, 0.7330054, 1)
 albedo_texture = ExtResource("8_d1ilt")
-albedo_texture_msdf = true
 metallic_specular = 0.0
 roughness_texture = ExtResource("11_jkdf5")
 normal_enabled = true
 normal_texture = ExtResource("10_fdnlq")
-uv1_scale = Vector3(5, 5, 5)
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_344ge"]
 material = SubResource("StandardMaterial3D_o1aky")
@@ -1838,7 +1837,7 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_kltya")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, -1, 2.6226832e-07, 0, -8.742278e-08, -3, 0, 3.9, 95.84)
+transform = Transform3D(4, 0, 0, 0, -1, 2.6226832e-07, 0, -8.742278e-08, -3, 0.075143814, 3.85, 96.080574)
 mesh = SubResource("PlaneMesh_6vcvc")
 surface_material_override/0 = ExtResource("19_fevyy")
 

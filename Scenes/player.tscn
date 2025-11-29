@@ -208,6 +208,14 @@ offset_top = 350.0
 offset_right = 673.0
 offset_bottom = 380.0
 
+[node name="ExitAndWin_prompt" type="Label" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 0
+offset_left = 423.0
+offset_top = 281.0
+offset_right = 723.0
+offset_bottom = 311.0
+
 [node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
 visible = false
 collide_with_areas = true
