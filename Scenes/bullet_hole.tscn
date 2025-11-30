@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://vepnenbpdlns"]
+
+[ext_resource type="Texture2D" uid="uid://cheev5kor4ck8" path="res://Assets/bullet_hole.png" id="1_wlbyj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_s3f3j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guucc"]
+transparency = 1
+albedo_color = Color(0.27752772, 0.27752772, 0.27752772, 1)
+albedo_texture = ExtResource("1_wlbyj")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.2, 0, -3.019916e-08, 0, 0.2, 0, 3.019916e-08, 0, -0.2, 0, 0, -0.02)
+mesh = SubResource("QuadMesh_s3f3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_guucc")

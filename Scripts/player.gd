@@ -99,6 +99,9 @@ var ammo_reserve: int = 999
 var health: int = 0
 var selected_weapon: String = ""
 
+@onready var raycast = $Head/Camera3D/RayCast3D
+@onready var bullet_hole_decal = preload("res://Scenes/bullet_hole.tscn")
+
 func weapon_deactivate_all() -> void:
 	hud_weapon_bat.modulate = hud_color_unselected
 	hud_weapon_knife.modulate = hud_color_unselected
@@ -242,6 +245,13 @@ func _process(delta: float) -> void:
 
 		ammo_current -= 1
 		update_ammo_label()
+
+		if raycast.get_collider().collision_layer == 1:
+			var decal = bullet_hole_decal.instantiate()
+			raycast.get_collider().add_child(decal)
+			decal.global_transform.origin = raycast.get_collision_point()
+			decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
+			decal.rotation.z = randf() * 360.0
 
 	if Input.is_action_just_pressed("reload"):
 		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
