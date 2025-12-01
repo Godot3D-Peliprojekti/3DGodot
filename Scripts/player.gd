@@ -93,6 +93,7 @@ var input_vector: Vector2
 
 var is_running: bool = false
 var is_crouching: bool = false
+var is_reloading: bool = false
 
 var ammo_current: int = 0
 var ammo_reserve: int = 999
@@ -100,7 +101,18 @@ var health: int = 0
 var selected_weapon: String = ""
 
 @onready var raycast = $Head/Camera3D/RayCast3D
-@onready var bullet_hole_decal = preload("res://Scenes/bullet_hole.tscn")
+@onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
+
+func stop_reloading(success: bool) -> void:
+	if success:
+		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
+		ammo_reserve -= ammo
+		ammo_current += ammo
+		update_ammo_label()
+	else:
+		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+
+	is_reloading = false
 
 func weapon_deactivate_all() -> void:
 	hud_weapon_bat.modulate = hud_color_unselected
@@ -181,6 +193,9 @@ func _process(delta: float) -> void:
 		weapon_activate(selected)
 		selected_weapon = selected
 
+		if is_reloading:
+			stop_reloading(false)
+
 	#Add debug key for testing
 	if Input.is_action_just_pressed("debug_key"):
 		has_key_1 = true
@@ -238,7 +253,7 @@ func _process(delta: float) -> void:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 	weapon_gun_muzzle_flash.visible = false;
-	if Input.is_action_just_pressed("attack") and selected_weapon == "gun" and ammo_current > 0:
+	if Input.is_action_just_pressed("attack") and selected_weapon == "gun" and ammo_current > 0 and not is_reloading:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
@@ -247,17 +262,18 @@ func _process(delta: float) -> void:
 		update_ammo_label()
 
 		if raycast.get_collider().collision_layer == 1:
-			var decal = bullet_hole_decal.instantiate()
+			var decal = bullet_hole_decal_scene.instantiate()
 			raycast.get_collider().add_child(decal)
 			decal.global_transform.origin = raycast.get_collision_point()
 			decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
 			decal.rotation.z = randf() * 360.0
 
-	if Input.is_action_just_pressed("reload"):
-		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
-		ammo_reserve -= ammo
-		ammo_current += ammo
-		update_ammo_label()
+	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
+		stop_reloading(true)
+
+	if selected_weapon == "gun" and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+		is_reloading = true
+		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), 2.0 * animation_blend_easing * delta)
 	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), 2.0 * animation_blend_easing * delta)
