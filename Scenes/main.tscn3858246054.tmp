@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=60 format=4 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Material" uid="uid://bhydtovl1k8ly" path="res://Assets/FloorMaterials/wclattia/wclattia.tres" id="1_b3802"]
 [ext_resource type="Material" uid="uid://dsueb88jnaogf" path="res://Assets/WallMaterials/redbricks.tres" id="2_6iyac"]
@@ -8,8 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="7_1w6v2"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="7_6bp64"]
 [ext_resource type="Texture2D" uid="uid://b3hugrblcr4t5" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_diff_2k.png" id="8_d1ilt"]
-[ext_resource type="Script" uid="uid://c3lmquj7e2ko4" path="res://Scripts/ExitDoor.gd" id="9_7k868"]
-[ext_resource type="PackedScene" uid="uid://c88arb2t8ca75" path="res://Scenes/first_floor.tscn" id="10_7k868"]
+[ext_resource type="Script" uid="uid://dfxru2w4gfr8y" path="res://Scripts/door_model.gd" id="9_6vcvc"]
 [ext_resource type="Texture2D" uid="uid://ce6grmgu75xqy" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_nor_gl_2k.png" id="10_fdnlq"]
 [ext_resource type="Material" uid="uid://d10bt611f1vwk" path="res://Assets/WallMaterials/Seinä 4/ToiletWalls.tres" id="11_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://bys48jv6o38n1" path="res://Assets/CeilingMaterial/textures/painted_plaster_wall_rough_2k.png" id="11_jkdf5"]
@@ -41,13 +40,14 @@ albedo_texture = ExtResource("7_1w6v2")
 albedo_texture = ExtResource("7_1w6v2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1aky"]
+albedo_color = Color(0.73300546, 0.7330054, 0.7330054, 1)
 albedo_texture = ExtResource("8_d1ilt")
+albedo_texture_msdf = true
 metallic_specular = 0.0
 roughness_texture = ExtResource("11_jkdf5")
 normal_enabled = true
 normal_texture = ExtResource("10_fdnlq")
-uv1_scale = Vector3(0.3, 0.3, 0.3)
-uv1_triplanar = true
+uv1_scale = Vector3(5, 5, 5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_344ge"]
 material = SubResource("StandardMaterial3D_o1aky")
@@ -245,6 +245,12 @@ use_collision = true
 size = Vector3(6.2026367, 0.1, 5)
 material = ExtResource("1_b3802")
 
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, -9.228516, 0, 55.71289)
+material_override = ExtResource("15_cbgmd")
+use_collision = true
+size = Vector3(0.6333008, 1, 0.4428711)
+
 [node name="CircleRoomOutside" type="CSGCylinder3D" parent="."]
 transform = Transform3D(12, 0, 0, 0, 8, 0, 0, 0, 12, 0.5, 4, 54.5)
 use_collision = true
@@ -272,39 +278,6 @@ size = Vector3(0.84865415, 2.6119752, 0.7)
 
 [node name="Player" parent="." instance=ExtResource("2_bo1nx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8161972, 1.149296, 97.8931)
-
-[node name="Control" parent="Player/CanvasLayer" index="0"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Crosshair" parent="Player/CanvasLayer/Control" index="0"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Baseball_Bat" parent="Player/CanvasLayer/Control" index="1"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Knife" parent="Player/CanvasLayer/Control" index="2"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Gun" parent="Player/CanvasLayer/Control" index="3"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Ammo_Current" parent="Player/CanvasLayer/Control" index="4"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Ammo_Reserve" parent="Player/CanvasLayer/Control" index="5"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Health_Label" parent="Player/CanvasLayer/Control" index="6"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Health_Bar_BG" parent="Player/CanvasLayer/Control" index="7"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Health_Bar" parent="Player/CanvasLayer/Control" index="8"]
-metadata/_edit_use_anchors_ = true
-
-[node name="Flashlight_Prompt_Label" parent="Player/CanvasLayer/Control" index="9"]
-metadata/_edit_use_anchors_ = true
 
 [node name="Dresser" parent="." instance=ExtResource("5_kry3j")]
 transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 3.449, 0.51, 97.97948)
@@ -342,7 +315,7 @@ open_animation_name = "DoorOpen"
 close_animation_name = "DoorClose"
 
 [node name="CollisionShape" parent="DoorModel/Door/StaticBody" index="0"]
-transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, -0.009828806, 0.035476685)
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
 
 [node name="DoorHandleFront" parent="DoorModel/Door" index="1"]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
@@ -474,15 +447,18 @@ script = null
 
 [node name="ExitDoor" parent="." instance=ExtResource("6_21xkr")]
 transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, 14.993658, 4.0345607, 31.004707)
+script = ExtResource("9_6vcvc")
 
 [node name="Door" parent="ExitDoor" index="1"]
 transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
 material_override = SubResource("StandardMaterial3D_ueoa1")
 surface_material_override/0 = null
 
-[node name="StaticBody" parent="ExitDoor/Door" index="0"]
-script = ExtResource("9_7k868")
-target_scene = ExtResource("10_7k868")
+[node name="StaticBody" parent="ExitDoor/Door" index="0" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("7_6bp64")
+animation_player = NodePath("../../AnimationPlayer")
+open_animation_name = "DoorOpen"
+close_animation_name = "DoorClose"
 
 [node name="CollisionShape" parent="ExitDoor/Door/StaticBody" index="0"]
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
@@ -808,6 +784,12 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 2
 material_override = ExtResource("15_cbgmd")
 use_collision = true
 size = Vector3(3.6, 4, 0.1)
+
+[node name="4X4_sisä2" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5, 2, 75)
+material_override = ExtResource("15_cbgmd")
+use_collision = true
+size = Vector3(4, 4, 0.1)
 
 [node name="4X4_sisä3" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.95, 2, 75)
@@ -1791,17 +1773,6 @@ player = NodePath("../Player")
 [node name="enemy1_setup" parent="enemy1" index="1"]
 transform = Transform3D(-0.005, 0, -7.5497897e-10, 0, 0.005, 0, 7.5497897e-10, 0, -0.005, 0, 0, 0)
 
-[node name="4X4_sisä2" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1.0000001, 0, 1, 0, -1.0000001, 0, -4.371139e-08, 1.499876, 2, 75)
-material_override = ExtResource("15_cbgmd")
-use_collision = true
-size = Vector3(4, 4, 0.1)
-
-[node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(200.00009, 0, 0, 0, 0.1, 0, 0, 0, 200.00009, -9.228886, 0.14754295, 55.712547)
-material_override = ExtResource("15_cbgmd")
-use_collision = true
-size = Vector3(2, 1, 2)
 [node name="Skeleton3D" parent="enemy1/enemy1_setup/Node" index="0"]
 bones/0/position = Vector3(-14.857807, 16.757607, -113.324455)
 bones/0/rotation = Quaternion(0.71361667, 0.4082865, 0.05576572, -0.5665188)
@@ -1869,12 +1840,9 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_kltya")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(4, 0, 0, 0, -1, 2.6226832e-07, 0, -8.742278e-08, -3, 0.075143814, 3.85, 96.080574)
+transform = Transform3D(4, 0, 0, 0, -1, 2.6226832e-07, 0, -8.742278e-08, -3, 0, 3.9, 95.84)
 mesh = SubResource("PlaneMesh_6vcvc")
 surface_material_override/0 = ExtResource("19_fevyy")
-
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.882309, 4.3885064, 31.63718)
 
 [editable path="Player"]
 [editable path="Dresser"]
