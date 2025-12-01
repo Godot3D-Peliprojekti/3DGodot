@@ -261,6 +261,10 @@ func _process(delta: float) -> void:
 		ammo_current -= 1
 		update_ammo_label()
 
+		# Add some inaccuracy when moving
+		raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
+		raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
+
 		if raycast.get_collider().collision_layer == 1:
 			var decal = bullet_hole_decal_scene.instantiate()
 			raycast.get_collider().add_child(decal)
