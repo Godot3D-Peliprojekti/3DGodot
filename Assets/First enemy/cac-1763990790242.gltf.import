@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cr2x8kikrlp68"
-path="res://.godot/imported/cac-1763990790242.gltf-ca948701905a8b2332cfc90816cd1287.scn"
+path="res://.godot/imported/cac-1763990790242.gltf-c96ec25831e972b5a5caaea1adc2da38.scn"
 
 [deps]
 
-source_file="res://Assets/cac-1763990790242.gltf"
-dest_files=["res://.godot/imported/cac-1763990790242.gltf-ca948701905a8b2332cfc90816cd1287.scn"]
+source_file="res://Assets/First enemy/cac-1763990790242.gltf"
+dest_files=["res://.godot/imported/cac-1763990790242.gltf-c96ec25831e972b5a5caaea1adc2da38.scn"]
 
 [params]
 
