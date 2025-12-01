@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cbg8cujuop6ic"]
 
-[ext_resource type="PackedScene" uid="uid://cr2x8kikrlp68" path="res://Assets/cac-1763990790242.gltf" id="1_mmn3c"]
+[ext_resource type="PackedScene" uid="uid://cr2x8kikrlp68" path="res://Assets/First enemy/cac-1763990790242.gltf" id="1_mmn3c"]
 
 [node name="Enemy" instance=ExtResource("1_mmn3c")]
 

@@ -14,16 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://4jxbe5j0f58h" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_rough_2k.png" id="12_nfdqc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_or1p8"]
-load_path = "res://.godot/imported/brown_floor_tiles_diff_2k.png-f30a3b23f4782f7aeb55e0218ebc6551.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pvojf"]
-load_path = "res://.godot/imported/brown_floor_tiles_ao_2k.png-5a4116ae31770ea53d18fa901ccc98f2.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5gxhd"]
-load_path = "res://.godot/imported/brown_floor_tiles_nor_gl_2k.png-25d04edd3eb9c6052f10714b67af8d83.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ba1rl"]
-load_path = "res://.godot/imported/brown_floor_tiles_rough_2k.png-69a50d6b972bd12a8112cc8b496626e0.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyi8c"]
 albedo_texture = SubResource("CompressedTexture2D_or1p8")
@@ -126,16 +122,12 @@ image = SubResource("Image_r2bte")
 data = PackedVector3Array(1.5, 0, 1.5, -1.5, 0, 1.5, 1.5, 0, -1.5, -1.5, 0, 1.5, -1.5, 0, -1.5, 1.5, 0, -1.5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mqc54"]
-load_path = "res://.godot/imported/diagonal_parquet_diff_2k.png-1ee1dff5aafa3b346aa065568056cfac.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4kk0b"]
-load_path = "res://.godot/imported/diagonal_parquet_ao_2k.png-98f851f3f4dfcb2b107fbc669562d6af.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0dktu"]
-load_path = "res://.godot/imported/diagonal_parquet_nor_gl_2k.png-0b934e2c11e47d6967f9b71c7ed6a3c0.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g08gq"]
-load_path = "res://.godot/imported/diagonal_parquet_rough_2k.png-f9f2acc787f02f5536e406df814dab8f.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kqmb4"]
 albedo_texture = SubResource("CompressedTexture2D_mqc54")
@@ -168,19 +160,14 @@ image = SubResource("Image_qu1yn")
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kqmb4"]
-load_path = "res://.godot/imported/marble_01_diff_2k.png-214a666cca8392abad7acbb99402e24b.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_snjq0"]
-load_path = "res://.godot/imported/marble_01_ao_2k.png-8ae3b7f74cdf250217aac8bdac67e450.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qdbet"]
-load_path = "res://.godot/imported/marble_01_disp_2k.png-38baa3136ff7f47a44c3971904a912ac.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1v3kj"]
-load_path = "res://.godot/imported/marble_01_nor_gl_2k.png-5f3e69e9f63167a30b6459d4252be473.s3tc.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iubsu"]
-load_path = "res://.godot/imported/marble_01_rough_2k.png-04312d4105e7e710fd550b91f2734770.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdbet"]
 albedo_texture = SubResource("CompressedTexture2D_kqmb4")
