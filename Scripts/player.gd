@@ -5,6 +5,13 @@ class_name Player
 @export var gravity = 9.8
 @export var mouse_sensitivity = 0.003
 
+enum Weapon {
+	NONE,
+	BAT,
+	KNIFE,
+	GUN,
+}
+
 # Animations
 @onready var animation_tree = $Head/Character/AnimationTree
 @export_category("Animations")
@@ -98,7 +105,7 @@ var is_reloading: bool = false
 var ammo_current: int = 0
 var ammo_reserve: int = 999
 var health: int = 0
-var selected_weapon: String = ""
+var selected_weapon: int = Weapon.NONE
 
 @onready var raycast = $Head/Camera3D/RayCast3D
 @onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
@@ -121,13 +128,15 @@ func weapon_deactivate_all() -> void:
 	hud_ammo_current.modulate = hud_color_unselected
 	hud_ammo_reserve.modulate = hud_color_unselected
 
-func weapon_activate(weapon: String) -> void:
+func weapon_activate(weapon: int) -> void:
+	selected_weapon = weapon
+
 	match weapon:
-		"bat":
+		Weapon.BAT:
 			hud_weapon_bat.modulate = hud_color_selected
-		"knife":
+		Weapon.KNIFE:
 			hud_weapon_knife.modulate = hud_color_selected
-		"gun":
+		Weapon.GUN:
 			hud_weapon_gun.modulate = hud_color_selected
 			hud_ammo_current.modulate = hud_color_selected
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
@@ -183,15 +192,16 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
-		var selected = ""
-		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != "bat":
-			selected = "bat"
-		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != "knife":
-			selected = "knife"
-		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != "gun":
-			selected = "gun"
+
+		var selected = Weapon.NONE
+		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT:
+			selected = Weapon.BAT
+		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE:
+			selected = Weapon.KNIFE
+		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN:
+			selected = Weapon.GUN
+
 		weapon_activate(selected)
-		selected_weapon = selected
 
 		if is_reloading:
 			stop_reloading(false)
@@ -247,13 +257,13 @@ func _process(delta: float) -> void:
 
 	# Weapon animations
 	if Input.is_action_pressed("attack"):
-		if selected_weapon == "bat" and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
+		if selected_weapon == Weapon.BAT and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-		elif selected_weapon == "knife" and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
+		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 	weapon_gun_muzzle_flash.visible = false;
-	if Input.is_action_just_pressed("attack") and selected_weapon == "gun" and ammo_current > 0 and not is_reloading:
+	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
@@ -264,13 +274,13 @@ func _process(delta: float) -> void:
 	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
 		stop_reloading(true)
 
-	if selected_weapon == "gun" and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
 		is_reloading = true
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
-	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), 2.0 * animation_blend_easing * delta)
-	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), 2.0 * animation_blend_easing * delta)
-	var target = -1.0 + float(selected_weapon == "gun") + (float(Input.is_action_pressed("attack2")) * float(selected_weapon == "gun"))
+	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == Weapon.BAT), 2.0 * animation_blend_easing * delta)
+	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == Weapon.KNIFE), 2.0 * animation_blend_easing * delta)
+	var target = -1.0 + float(selected_weapon == Weapon.GUN) + (float(Input.is_action_pressed("attack2")) * float(selected_weapon == Weapon.GUN))
 	upper_weapon_gun_idle_aim_blend = lerp(upper_weapon_gun_idle_aim_blend, target, 2.0 * animation_blend_easing * delta)
 	upper_weapon_gun_attack_add = lerp(upper_weapon_gun_attack_add, 0.0, animation_blend_easing * delta)
 
@@ -353,14 +363,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
 		raycast.rotation = Vector3.ZERO
 
-		if selected_weapon == "gun":
+		if selected_weapon == Weapon.GUN:
 			# Add some inaccuracy when moving
 			raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
 			raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
 
 		match raycast.get_collider().collision_layer:
 			1: # Wall
-				if selected_weapon == "gun" and ammo_current > 0 and not is_reloading:
+				if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
 					var decal = bullet_hole_decal_scene.instantiate()
 					raycast.get_collider().add_child(decal)
 					decal.global_transform.origin = raycast.get_collision_point()
@@ -368,7 +378,7 @@ func _physics_process(delta: float) -> void:
 					decal.rotation.z = randf() * 360.0
 
 			4: # Enemy
-				if selected_weapon == "gun" and ammo_current > 0 and not is_reloading:
+				if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
 					raycast.get_collider().hit(20)
 
 	move_and_slide()
