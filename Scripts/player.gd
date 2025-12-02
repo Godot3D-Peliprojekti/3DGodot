@@ -5,12 +5,33 @@ class_name Player
 @export var gravity = 9.8
 @export var mouse_sensitivity = 0.003
 
+# Weapons
 enum Weapon {
 	NONE,
 	BAT,
 	KNIFE,
 	GUN,
 }
+
+@export var weapon_damage: Dictionary[int, int] = {
+	Weapon.BAT: 30,
+	Weapon.KNIFE: 20,
+	Weapon.GUN: 40
+}
+
+@export var weapon_distance_max: Dictionary[int, int] = {
+	Weapon.BAT: 3,
+	Weapon.KNIFE: 2,
+	Weapon.GUN: 100
+}
+
+@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
+@onready var weapon_knife = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Knife
+@onready var weapon_gun = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun
+
+@onready var weapon_gun_slide = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Slide
+@onready var weapon_gun_muzzle_flash = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Muzzle_Flash
+var weapon_gun_slide_offset: float = 0.0
 
 # Animations
 @onready var animation_tree = $Head/Character/AnimationTree
@@ -37,15 +58,6 @@ var upper_weapon_bat_idle_blend: float = 0.0
 var upper_weapon_knife_idle_blend: float = 0.0
 var upper_weapon_gun_idle_aim_blend: float = 0.0
 var upper_weapon_gun_attack_add: float = 0.0
-
-# Weapons
-@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
-@onready var weapon_knife = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Knife
-@onready var weapon_gun = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun
-
-@onready var weapon_gun_slide = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Slide
-@onready var weapon_gun_muzzle_flash = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Muzzle_Flash
-var weapon_gun_slide_offset: float = 0.0
 
 # Camera
 @onready var camera = $Head/Camera3D
@@ -360,13 +372,15 @@ func _physics_process(delta: float) -> void:
 	collider.position.y = lerp(collider.position.y , collider_position_target, crouching_easing * delta)
 
 	# Handle attacking
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and selected_weapon != Weapon.NONE:
 		raycast.rotation = Vector3.ZERO
 
 		if selected_weapon == Weapon.GUN:
 			# Add some inaccuracy when moving
 			raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
 			raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
+
+		# print((raycast.get_collider().global_position - global_position).length())
 
 		match raycast.get_collider().collision_layer:
 			1: # Wall
@@ -378,7 +392,11 @@ func _physics_process(delta: float) -> void:
 					decal.rotation.z = randf() * 360.0
 
 			4: # Enemy
-				if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
-					raycast.get_collider().hit(20)
+				if (raycast.get_collider().global_position - global_position).length() < weapon_distance_max[selected_weapon]:
+					if selected_weapon == Weapon.GUN:
+						if ammo_current > 0 and not is_reloading:
+							raycast.get_collider().hit(weapon_damage[selected_weapon])
+					else:
+						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()
