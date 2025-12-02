@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwqgc"]
 radius = 0.40478516
-height = 2.2019043
+height = 2.4451904
 
 [node name="enemy1" type="CharacterBody3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

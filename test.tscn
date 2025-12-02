@@ -13,6 +13,44 @@ navigation_mesh = SubResource("NavigationMesh_8uh7m")
 
 [node name="Main" parent="NavigationRegion3D" instance=ExtResource("1_37kl0")]
 
+[node name="Baseball_Bat" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="1"]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Knife" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="2"]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Gun" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="3"]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Ammo_Current" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="4"]
+offset_left = -170.0
+offset_top = -90.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Ammo_Reserve" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="5"]
+offset_left = -170.0
+offset_top = -96.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Flashlight_Prompt_Label" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="9"]
+offset_top = -11.5
+offset_bottom = 11.5
+
+[node name="DoorLocked_prompt" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="10"]
+offset_top = -16.0
+offset_bottom = 16.0
+
 [editable path="NavigationRegion3D/Main"]
 [editable path="NavigationRegion3D/Main/Player"]
 [editable path="NavigationRegion3D/Main/Dresser"]
