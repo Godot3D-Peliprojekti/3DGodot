@@ -261,17 +261,6 @@ func _process(delta: float) -> void:
 		ammo_current -= 1
 		update_ammo_label()
 
-		# Add some inaccuracy when moving
-		raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
-		raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
-
-		if raycast.get_collider().collision_layer == 1:
-			var decal = bullet_hole_decal_scene.instantiate()
-			raycast.get_collider().add_child(decal)
-			decal.global_transform.origin = raycast.get_collision_point()
-			decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
-			decal.rotation.z = randf() * 360.0
-
 	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
 		stop_reloading(true)
 
@@ -359,5 +348,27 @@ func _physics_process(delta: float) -> void:
 
 	collider.shape.height  = lerp(collider.shape.height , collider_height_target, crouching_easing * delta)
 	collider.position.y = lerp(collider.position.y , collider_position_target, crouching_easing * delta)
+
+	# Handle attacking
+	if Input.is_action_just_pressed("attack"):
+		raycast.rotation = Vector3.ZERO
+
+		if selected_weapon == "gun":
+			# Add some inaccuracy when moving
+			raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
+			raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
+
+		match raycast.get_collider().collision_layer:
+			1: # Wall
+				if selected_weapon == "gun" and ammo_current > 0 and not is_reloading:
+					var decal = bullet_hole_decal_scene.instantiate()
+					raycast.get_collider().add_child(decal)
+					decal.global_transform.origin = raycast.get_collision_point()
+					decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
+					decal.rotation.z = randf() * 360.0
+
+			4: # Enemy
+				if selected_weapon == "gun" and ammo_current > 0 and not is_reloading:
+					raycast.get_collider().hit(20)
 
 	move_and_slide()
