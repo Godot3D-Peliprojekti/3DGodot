@@ -4,16 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://cbg8cujuop6ic" path="res://Scenes/enemy1_setup.tscn" id="3_lssre"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwqgc"]
-radius = 0.40478516
-height = 2.2019043
+radius = 0.6513672
+height = 2.4974976
 
 [node name="enemy1" type="CharacterBody3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-collision_layer = 2
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_0a874")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.40000004, 0, 0, 0, 0.40000004, 0, 0, 0, 0.40000004, -0.020298379, -0.09924813, -0.09597134)
+transform = Transform3D(0.40000004, 0, 0, 0, 0.40000004, 0, 0, 0, 0.40000004, -0.020298379, -0.040129468, 0.009885021)
 shape = SubResource("CapsuleShape3D_jwqgc")
 
 [node name="enemy1_setup" parent="." instance=ExtResource("3_lssre")]

@@ -7,8 +7,25 @@ const STOP_DISTANCE: float = 1.3 	# Distance to player when it stops and bites
 @export var player: Node3D
 @onready var animation_player: AnimationPlayer = $enemy1_setup/AnimationPlayer
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
+@onready var collision_shape = $CollisionShape3D
+
+var health: int = 100
+var is_dead: bool = false
+
+func hit(damage: int) -> void:
+	health -= damage
+
+	if health <= 0 and not is_dead:
+		is_dead = true
+		animation_player.play("ZombieDeath")
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		if collision_shape:
+			collision_shape.queue_free()
+		return
+	# print(health)
+
 	# Gravity
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
