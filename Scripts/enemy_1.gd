@@ -21,6 +21,8 @@ var walk_blend: float
 
 var health: int = 100
 var is_dead: bool = false
+@onready var health_bar = $Health_Bar
+@onready var progress_bar = $SubViewport/ProgressBar
 
 func hit(damage: int) -> void:
 	health -= damage
@@ -33,6 +35,16 @@ func hit(damage: int) -> void:
 func _process(delta: float) -> void:
 	walk_blend = lerp(walk_blend, clamp(velocity.length(), 0.0, 1.0), animation_blend_easing * delta)
 	animation_tree["parameters/Walk_Blend/blend_amount"] = walk_blend
+
+	health_bar.look_at(player.global_position)
+	health_bar.global_rotation.x = 180.0 # This needs to be flipped for some reason
+	health_bar.global_rotation.z = 0.0
+
+	progress_bar.value = lerp(progress_bar.value, float(health), 10.0 * delta)
+	var s = float(health) / 100.0
+	health_bar.modulate.r = -s + 1
+	health_bar.modulate.g = s
+
 	death_blend = lerp(death_blend, float(is_dead), animation_blend_easing * delta)
 	animation_tree["parameters/Death_Blend/blend_amount"] = death_blend
 
@@ -40,6 +52,8 @@ var time_player_in_view: float = 0.0	# The time of player in enemy's view
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		if animation_tree["parameters/Death_Blend/blend_amount"] > 0.9999:
+			health_bar.visible = false
 		if collision_shape:
 			collision_shape.queue_free()
 		return
