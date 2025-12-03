@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvxraa0yn1qci"]
+[gd_scene load_steps=8 format=3 uid="uid://dvxraa0yn1qci"]
 
 [ext_resource type="Script" uid="uid://wfic2lf3urtv" path="res://Scripts/enemy_1.gd" id="1_0a874"]
 [ext_resource type="PackedScene" uid="uid://cbg8cujuop6ic" path="res://Scenes/enemy1_setup.tscn" id="3_lssre"]
@@ -12,6 +12,11 @@ bg_color = Color(1, 1, 1, 0.101960786)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lssre"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0a874"]
+font_size = 22
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0a874"]
 viewport_path = NodePath("SubViewport")
@@ -30,29 +35,29 @@ shape = SubResource("CapsuleShape3D_jwqgc")
 transform = Transform3D(-0.005, 0, -4.3711387e-10, 0, 0.005, 0, 4.3711387e-10, 0, -0.005, 0, 0, 0)
 
 [node name="Skeleton3D" parent="enemy1_setup/Node" index="0"]
-bones/0/position = Vector3(33.835907, 101.853745, 3.9391732)
-bones/0/rotation = Quaternion(0.024263572, -0.19486985, -0.08199355, 0.97709477)
-bones/1/rotation = Quaternion(0.07050734, 0.027237136, -0.038670182, 0.9963892)
-bones/2/rotation = Quaternion(0.114652105, 0.06270287, -0.07935428, 0.98824406)
-bones/3/rotation = Quaternion(0.10601131, 0.06255968, -0.08110647, 0.98907524)
-bones/4/rotation = Quaternion(0.1447915, 0.022368724, 0.010344268, 0.9891553)
-bones/5/rotation = Quaternion(-0.15470722, 0.09221621, 0.07146811, 0.9810476)
-bones/9/rotation = Quaternion(-0.39377075, -0.58461154, 0.4513336, -0.5472403)
-bones/10/rotation = Quaternion(0.06753762, -0.3871178, 0.6494645, 0.6509796)
-bones/11/rotation = Quaternion(-1.4901163e-07, 2.9802326e-08, 0.12621872, 0.9920025)
-bones/12/rotation = Quaternion(0.010926151, -0.07060969, 0.0598069, 0.9956496)
-bones/33/rotation = Quaternion(-0.36865854, 0.59865814, -0.57980394, -0.41173637)
-bones/34/rotation = Quaternion(0.19816941, 0.23318826, -0.8171568, 0.48847416)
-bones/35/rotation = Quaternion(-1.4156103e-07, 1.3411045e-07, -0.14979865, 0.9887166)
-bones/36/rotation = Quaternion(0.08554847, -0.01633255, -0.1269812, 0.98807424)
-bones/57/rotation = Quaternion(0.09338593, 0.33480895, 0.934323, -0.07888372)
-bones/58/rotation = Quaternion(-0.54565454, -0.0629105, 0.066649035, 0.83298343)
-bones/59/rotation = Quaternion(0.68430513, -0.1300999, 0.008298335, 0.71744806)
-bones/60/rotation = Quaternion(0.28333828, 7.376076e-07, -8.5728254e-07, 0.9590201)
-bones/62/rotation = Quaternion(-0.10424133, 0.060340535, 0.99178135, 0.043158855)
-bones/63/rotation = Quaternion(-0.39113143, 0.09911693, -0.04916292, 0.9136602)
-bones/64/rotation = Quaternion(0.5779722, 0.19969074, -0.18938719, 0.7682475)
-bones/65/rotation = Quaternion(0.35201052, -1.5384292e-07, 8.41916e-07, 0.9359961)
+bones/0/position = Vector3(21.699348, 94.47273, 9.326719)
+bones/0/rotation = Quaternion(0.015182342, -0.26814488, -0.029393427, 0.9628104)
+bones/1/rotation = Quaternion(0.08928634, 0.00890608, -0.04024919, 0.9951526)
+bones/2/rotation = Quaternion(0.15395138, 0.014143338, -0.038317516, 0.9872339)
+bones/3/rotation = Quaternion(0.14717244, 0.013732463, -0.035897955, 0.98836386)
+bones/4/rotation = Quaternion(0.04874863, 0.03310391, -0.01762564, 0.9981068)
+bones/5/rotation = Quaternion(-0.37855262, 0.16573758, -0.063408755, 0.90840983)
+bones/9/rotation = Quaternion(-0.39325252, -0.5885487, 0.519281, -0.4788633)
+bones/10/rotation = Quaternion(-0.036472324, -0.50957423, 0.57317346, 0.6406841)
+bones/11/rotation = Quaternion(-2.9802326e-08, 3.7252907e-08, 0.16646232, 0.98604786)
+bones/12/rotation = Quaternion(-0.05223377, -0.056275927, 0.06553493, 0.9948919)
+bones/33/rotation = Quaternion(-0.3433043, 0.6105779, -0.5945546, -0.394768)
+bones/34/rotation = Quaternion(-0.12296332, 0.26156455, -0.8415531, 0.4563469)
+bones/35/rotation = Quaternion(-2.3096806e-07, 4.4703494e-08, -0.27115017, 0.96253705)
+bones/36/rotation = Quaternion(-0.009276174, 0.006270581, -0.16905046, 0.98554385)
+bones/57/rotation = Quaternion(0.106806025, 0.4924301, 0.8416778, -0.19412304)
+bones/58/rotation = Quaternion(-0.52756643, -0.07099999, 0.0623219, 0.8442445)
+bones/59/rotation = Quaternion(0.47791162, -0.13564819, -0.042394593, 0.8668349)
+bones/60/rotation = Quaternion(0.34799355, 6.817282e-07, -8.000062e-07, 0.937497)
+bones/62/rotation = Quaternion(-0.061263874, 0.21649519, 0.9625279, 0.1513827)
+bones/63/rotation = Quaternion(-0.5179467, -0.021652171, -0.039484095, 0.85422677)
+bones/64/rotation = Quaternion(0.715207, 0.08748809, 0.14682671, 0.6776922)
+bones/65/rotation = Quaternion(0.27686447, 6.7986555e-08, 5.550683e-07, 0.96090907)
 
 [node name="AnimationPlayer" parent="enemy1_setup" index="1"]
 speed_scale = 2.0
@@ -62,7 +67,14 @@ speed_scale = 2.0
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(192, 32)
 
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Control"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
 offset_right = 192.0
 offset_bottom = 32.0
 size_flags_horizontal = 4
@@ -72,9 +84,18 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_lssre")
 value = 50.0
 show_percentage = false
 
+[node name="Label" type="Label" parent="SubViewport/Control"]
+layout_mode = 1
+offset_right = 192.0
+offset_bottom = 32.0
+text = "100"
+label_settings = SubResource("LabelSettings_0a874")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Health_Bar" type="Sprite3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.1, 0, 0, 0, 0.2, 0, 0.50769585, 0)
-modulate = Color(0, 0, 0, 1)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.50769585, 0)
+flip_h = true
 texture = SubResource("ViewportTexture_0a874")
 
 [editable path="enemy1_setup"]

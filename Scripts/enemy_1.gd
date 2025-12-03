@@ -22,10 +22,11 @@ var walk_blend: float
 var health: int = 100
 var is_dead: bool = false
 @onready var health_bar = $Health_Bar
-@onready var progress_bar = $SubViewport/ProgressBar
+@onready var progress_bar = $SubViewport/Control/ProgressBar
+@onready var health_label = $SubViewport/Control/Label
 
 func hit(damage: int) -> void:
-	health -= damage
+	health = max(health - damage, 0)
 
 	if health <= 0 and not is_dead:
 		is_dead = true
@@ -37,13 +38,16 @@ func _process(delta: float) -> void:
 	animation_tree["parameters/Walk_Blend/blend_amount"] = walk_blend
 
 	health_bar.look_at(player.global_position)
-	health_bar.global_rotation.x = 180.0 # This needs to be flipped for some reason
+	health_bar.global_rotation.x = 0.0
 	health_bar.global_rotation.z = 0.0
 
 	progress_bar.value = lerp(progress_bar.value, float(health), 10.0 * delta)
+	health_label.text = str(health)
+
 	var s = float(health) / 100.0
-	health_bar.modulate.r = -s + 1
-	health_bar.modulate.g = s
+	progress_bar.modulate.r = -s + 1
+	progress_bar.modulate.g = s
+	print(progress_bar.modulate)
 
 	death_blend = lerp(death_blend, float(is_dead), animation_blend_easing * delta)
 	animation_tree["parameters/Death_Blend/blend_amount"] = death_blend
