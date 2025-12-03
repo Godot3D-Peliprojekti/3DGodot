@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const SPEED: float = 1.5
 const GRAVITY: float = 30.0
-const STOP_DISTANCE: float = 1.3 	# Distance to player when it stops and bites
+const STOP_DISTANCE: float = 1.5 	# Distance to player when it stops and bites
 
 @export var player: Node3D
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		to_next.y = 0
 
 		var distance_to_player := (player.global_transform.origin - global_transform.origin).length()
+		# print(distance_to_player)
 
 		# Straight direction towards the player
 		var to_player := player.global_transform.origin - global_transform.origin
@@ -81,7 +82,9 @@ func _physics_process(delta: float) -> void:
 			move_dir = Vector3.ZERO
 			look_at(global_transform.origin + dir_to_player, Vector3.UP)
 
-			animation_tree["parameters/Bite_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			if not animation_tree["parameters/Bite_OneShot/active"]:
+				animation_tree["parameters/Bite_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+				player.hit(10)
 
 		# Set the moving speed
 		velocity.x = move_dir.x * SPEED

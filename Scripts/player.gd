@@ -122,6 +122,10 @@ var selected_weapon: int = Weapon.NONE
 @onready var raycast = $Head/Camera3D/RayCast3D
 @onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
 
+func hit(damage: int) -> void:
+	health = max(health - damage, health_min)
+	update_health_label()
+
 func stop_reloading(success: bool) -> void:
 	if success:
 		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
