@@ -1,8 +1,37 @@
 extends CharacterBody3D
+class_name Player
 
 # TODO: Move to game controller
 @export var gravity = 9.8
 @export var mouse_sensitivity = 0.003
+
+# Weapons
+enum Weapon {
+	NONE,
+	BAT,
+	KNIFE,
+	GUN,
+}
+
+@export var weapon_damage: Dictionary[int, int] = {
+	Weapon.BAT: 30,
+	Weapon.KNIFE: 20,
+	Weapon.GUN: 40
+}
+
+@export var weapon_distance_max: Dictionary[int, int] = {
+	Weapon.BAT: 3,
+	Weapon.KNIFE: 2,
+	Weapon.GUN: 100
+}
+
+@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
+@onready var weapon_knife = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Knife
+@onready var weapon_gun = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun
+
+@onready var weapon_gun_slide = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Slide
+@onready var weapon_gun_muzzle_flash = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Muzzle_Flash
+var weapon_gun_slide_offset: float = 0.0
 
 # Animations
 @onready var animation_tree = $Head/Character/AnimationTree
@@ -29,15 +58,6 @@ var upper_weapon_bat_idle_blend: float = 0.0
 var upper_weapon_knife_idle_blend: float = 0.0
 var upper_weapon_gun_idle_aim_blend: float = 0.0
 var upper_weapon_gun_attack_add: float = 0.0
-
-# Weapons
-@onready var weapon_bat = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Bat
-@onready var weapon_knife = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Knife
-@onready var weapon_gun = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun
-
-@onready var weapon_gun_slide = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Slide
-@onready var weapon_gun_muzzle_flash = $Head/Character/Armature/Skeleton3D/BoneAttachment3D/Gun/Muzzle_Flash
-var weapon_gun_slide_offset: float = 0.0
 
 # Camera
 @onready var camera = $Head/Camera3D
@@ -92,11 +112,30 @@ var input_vector: Vector2
 
 var is_running: bool = false
 var is_crouching: bool = false
+var is_reloading: bool = false
 
 var ammo_current: int = 0
 var ammo_reserve: int = 999
 var health: int = 0
-var selected_weapon: String = ""
+var selected_weapon: int = Weapon.NONE
+
+@onready var raycast = $Head/Camera3D/RayCast3D
+@onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
+
+func hit(damage: int) -> void:
+	health = max(health - damage, health_min)
+	update_health_label()
+
+func stop_reloading(success: bool) -> void:
+	if success:
+		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
+		ammo_reserve -= ammo
+		ammo_current += ammo
+		update_ammo_label()
+	else:
+		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+
+	is_reloading = false
 
 var stun_time: float = 0.0	# Time of player in stun
 
@@ -107,13 +146,15 @@ func weapon_deactivate_all() -> void:
 	hud_ammo_current.modulate = hud_color_unselected
 	hud_ammo_reserve.modulate = hud_color_unselected
 
-func weapon_activate(weapon: String) -> void:
+func weapon_activate(weapon: int) -> void:
+	selected_weapon = weapon
+
 	match weapon:
-		"bat":
+		Weapon.BAT:
 			hud_weapon_bat.modulate = hud_color_selected
-		"knife":
+		Weapon.KNIFE:
 			hud_weapon_knife.modulate = hud_color_selected
-		"gun":
+		Weapon.GUN:
 			hud_weapon_gun.modulate = hud_color_selected
 			hud_ammo_current.modulate = hud_color_selected
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
@@ -169,15 +210,19 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
-		var selected = ""
-		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != "bat":
-			selected = "bat"
-		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != "knife":
-			selected = "knife"
-		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != "gun":
-			selected = "gun"
+
+		var selected = Weapon.NONE
+		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT:
+			selected = Weapon.BAT
+		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE:
+			selected = Weapon.KNIFE
+		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN:
+			selected = Weapon.GUN
+
 		weapon_activate(selected)
-		selected_weapon = selected
+
+		if is_reloading:
+			stop_reloading(false)
 
 	#Add debug key for testing
 	if Input.is_action_just_pressed("debug_key"):
@@ -230,13 +275,13 @@ func _process(delta: float) -> void:
 
 	# Weapon animations
 	if Input.is_action_pressed("attack"):
-		if selected_weapon == "bat" and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
+		if selected_weapon == Weapon.BAT and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-		elif selected_weapon == "knife" and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
+		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
 	weapon_gun_muzzle_flash.visible = false;
-	if Input.is_action_just_pressed("attack") and selected_weapon == "gun" and ammo_current > 0:
+	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
@@ -244,15 +289,16 @@ func _process(delta: float) -> void:
 		ammo_current -= 1
 		update_ammo_label()
 
-	if Input.is_action_just_pressed("reload"):
-		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
-		ammo_reserve -= ammo
-		ammo_current += ammo
-		update_ammo_label()
+	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
+		stop_reloading(true)
 
-	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == "bat"), 2.0 * animation_blend_easing * delta)
-	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == "knife"), 2.0 * animation_blend_easing * delta)
-	var target = -1.0 + float(selected_weapon == "gun") + (float(Input.is_action_pressed("attack2")) * float(selected_weapon == "gun"))
+	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+		is_reloading = true
+		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+
+	upper_weapon_bat_idle_blend = lerp(upper_weapon_bat_idle_blend, float(selected_weapon == Weapon.BAT), 2.0 * animation_blend_easing * delta)
+	upper_weapon_knife_idle_blend = lerp(upper_weapon_knife_idle_blend, float(selected_weapon == Weapon.KNIFE), 2.0 * animation_blend_easing * delta)
+	var target = -1.0 + float(selected_weapon == Weapon.GUN) + (float(Input.is_action_pressed("attack2")) * float(selected_weapon == Weapon.GUN))
 	upper_weapon_gun_idle_aim_blend = lerp(upper_weapon_gun_idle_aim_blend, target, 2.0 * animation_blend_easing * delta)
 	upper_weapon_gun_attack_add = lerp(upper_weapon_gun_attack_add, 0.0, animation_blend_easing * delta)
 
@@ -336,5 +382,33 @@ func _physics_process(delta: float) -> void:
 
 	collider.shape.height  = lerp(collider.shape.height , collider_height_target, crouching_easing * delta)
 	collider.position.y = lerp(collider.position.y , collider_position_target, crouching_easing * delta)
+
+	# Handle attacking
+	if Input.is_action_just_pressed("attack") and selected_weapon != Weapon.NONE:
+		raycast.rotation = Vector3.ZERO
+
+		if selected_weapon == Weapon.GUN:
+			# Add some inaccuracy when moving
+			raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
+			raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
+
+		# print((raycast.get_collider().global_position - global_position).length())
+
+		match raycast.get_collider().collision_layer:
+			1: # Wall
+				if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
+					var decal = bullet_hole_decal_scene.instantiate()
+					raycast.get_collider().add_child(decal)
+					decal.global_transform.origin = raycast.get_collision_point()
+					decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
+					decal.rotation.z = randf() * 360.0
+
+			4: # Enemy
+				if (raycast.get_collider().global_position - global_position).length() < weapon_distance_max[selected_weapon]:
+					if selected_weapon == Weapon.GUN:
+						if ammo_current > 0 and not is_reloading:
+							raycast.get_collider().hit(weapon_damage[selected_weapon])
+					else:
+						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()

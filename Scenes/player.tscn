@@ -23,6 +23,8 @@ radius = 0.3095703
 height = 1.8033166
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_v0iea")
 animation_blend_easing = 4.0
 camera_pitch_min = -60.0
@@ -244,3 +246,7 @@ shadow_enabled = true
 shadow_bias = 0.2
 shadow_opacity = 0.8
 spot_range = 10.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 5

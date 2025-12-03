@@ -51,6 +51,9 @@ func _physics_process(delta: float) -> void:
 			# If there is a path, use it
 			if use_nav:
 				move_dir = to_next.normalized()
+				if animation_player.current_animation != "Running0":
+					# 0.2 blend time to make the transition to run animation smoother
+					animation_player.play("Running0", 0.2)
 			# Else: just follow the player
 			else:
 				move_dir = dir_to_player
@@ -66,6 +69,7 @@ func _physics_process(delta: float) -> void:
 				# 0.1 blend time to make the transition to kick animaation smoother
 				animation_player.play("MmaKick0", 0.1)
 				player.stun_time = max(player.stun_time, 1.1)	# Stun the player
+				player.hit(30)
 
 			move_dir = Vector3.ZERO
 			look_at(global_transform.origin + dir_to_player, Vector3.UP)
