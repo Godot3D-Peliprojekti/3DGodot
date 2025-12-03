@@ -235,8 +235,8 @@ func _process(delta: float) -> void:
 		print("Keys given")
 
 	# Update health bar scale and color
+	hud_health_bar.value = lerp(hud_health_bar.value, float(health), 10.0 * delta)
 	var s = float(health) / health_max
-	hud_health_bar.scale.x = lerp(hud_health_bar.scale.x, s, 10.0 * delta)
 	hud_health_bar.modulate.r = -s + 1
 	hud_health_bar.modulate.g = s
 
