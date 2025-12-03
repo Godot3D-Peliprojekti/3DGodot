@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 # TODO: Move to game controller
 @export var gravity = 9.8
