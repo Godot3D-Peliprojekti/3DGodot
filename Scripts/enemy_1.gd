@@ -47,7 +47,6 @@ func _process(delta: float) -> void:
 	var s = float(health) / 100.0
 	progress_bar.modulate.r = -s + 1
 	progress_bar.modulate.g = s
-	print(progress_bar.modulate)
 
 	death_blend = lerp(death_blend, float(is_dead), animation_blend_easing * delta)
 	animation_tree["parameters/Death_Blend/blend_amount"] = death_blend

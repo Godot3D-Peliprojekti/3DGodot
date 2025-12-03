@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=15 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwu8u0sbrkkp7" path="res://Assets/HUD/knife.png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
+[ext_resource type="Texture2D" uid="uid://c4k1uxo6t48hy" path="res://Assets/HUD/vignette.png" id="6_8erm5"]
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/wood2.mp3" id="10_tx1dd"]
@@ -227,6 +228,16 @@ offset_left = 423.0
 offset_top = 281.0
 offset_right = 723.0
 offset_bottom = 311.0
+
+[node name="Vignette" type="TextureRect" parent="CanvasLayer/Control"]
+modulate = Color(1, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8erm5")
 
 [node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
 visible = false

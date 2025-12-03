@@ -126,9 +126,14 @@ var selected_weapon: int = Weapon.NONE
 @onready var raycast = $Head/Camera3D/RayCast3D
 @onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
 
+@onready var vignette = $CanvasLayer/Control/Vignette
+var vignette_target: float
+
 func hit(damage: int) -> void:
 	health = max(health - damage, health_min)
 	update_health_label()
+
+	vignette_target = 0.8
 
 func stop_reloading(success: bool) -> void:
 	if success:
@@ -192,6 +197,9 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
+	vignette.modulate.a = vignette_target
 
 	if Input.is_action_just_pressed("flashlight"):
 		# Ensimmäinen painallus: sulje prompt ja sytytä taskulamppu
