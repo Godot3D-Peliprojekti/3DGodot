@@ -70,3 +70,5 @@ offset_bottom = 16.0
 [editable path="NavigationRegion3D/Main/DoorModel6"]
 [editable path="NavigationRegion3D/Main/enemy1"]
 [editable path="NavigationRegion3D/Main/enemy1/enemy1_setup"]
+[editable path="NavigationRegion3D/Main/Enemy_2"]
+[editable path="NavigationRegion3D/Main/Enemy_2/Enemy_2_setup"]

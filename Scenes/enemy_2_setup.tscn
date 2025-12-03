@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bcnxafacrr6ip" path="res://Assets/SecondEnemy/cac-1764669709686.gltf" id="1_3n5ss"]
 
 [node name="Enemy2" instance=ExtResource("1_3n5ss")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Node" index="0"]
 bones/0/position = Vector3(-62.792286, 67.89589, -5.334008)

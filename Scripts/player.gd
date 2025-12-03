@@ -98,6 +98,8 @@ var ammo_reserve: int = 999
 var health: int = 0
 var selected_weapon: String = ""
 
+var stun_time: float = 0.0	# Time of player in stun
+
 func weapon_deactivate_all() -> void:
 	hud_weapon_bat.modulate = hud_color_unselected
 	hud_weapon_knife.modulate = hud_color_unselected
@@ -305,19 +307,25 @@ func _process(delta: float) -> void:
 			update_health_label()
 
 func _physics_process(delta: float) -> void:
+	# Update stun timer
+	if stun_time > 0.0:
+		stun_time -= delta
+		
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Apply movement
 	var direction = (head.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
-
-	if input_vector.length() > 0.0:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, 20 * delta)
-		velocity.z = move_toward(velocity.z, 0, 20 * delta)
+	
+	# Only allow movement if not stunned
+	if stun_time <= 0.0:
+		if input_vector.length() > 0.0:
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, 20 * delta)
+			velocity.z = move_toward(velocity.z, 0, 20 * delta)
 
 	# Apply crouching
 	var collider_height_target = collider_height_standing
