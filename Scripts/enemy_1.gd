@@ -24,6 +24,8 @@ var is_dead: bool = false
 @onready var health_bar = $Health_Bar
 @onready var progress_bar = $SubViewport/Control/ProgressBar
 @onready var health_label = $SubViewport/Control/Label
+@onready var health_indicator_label = $SubViewport2/Health_Indicator_Label
+@onready var health_indicator = $Health_Indicator
 
 func hit(damage: int) -> void:
 	health = max(health - damage, 0)
@@ -32,6 +34,10 @@ func hit(damage: int) -> void:
 		is_dead = true
 	else:
 		animation_tree["parameters/Hit_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+
+		health_indicator_label.text = "-" + str(damage)
+		health_indicator.position.y = 0.51
+		health_indicator.modulate.a = 1.0
 
 func _process(delta: float) -> void:
 	walk_blend = lerp(walk_blend, clamp(velocity.length(), 0.0, 1.0), animation_blend_easing * delta)
@@ -43,6 +49,14 @@ func _process(delta: float) -> void:
 
 	progress_bar.value = lerp(progress_bar.value, float(health), 10.0 * delta)
 	health_label.text = str(health)
+
+	health_indicator.look_at(player.global_position)
+	health_indicator.position.z = -0.1
+	health_indicator.global_rotation.x = 0.0
+	health_indicator.global_rotation.z = 0.0
+
+	health_indicator.position.y = lerp(health_indicator.position.y, 0.58, 2.0 * delta)
+	health_indicator.modulate.a = lerp(health_indicator.modulate.a, 0.0, 4.0 * delta)
 
 	var s = float(health) / 100.0
 	progress_bar.modulate.r = -s + 1

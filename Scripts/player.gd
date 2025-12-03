@@ -82,6 +82,7 @@ var show_flashlight_prompt = true
 @onready var hud_ammo_current = $CanvasLayer/Control/Ammo_Current
 @onready var hud_ammo_reserve = $CanvasLayer/Control/Ammo_Reserve
 @onready var hud_health_label = $CanvasLayer/Control/Health_Label
+@onready var hud_health_indicator_label = $CanvasLayer/Control/Health_Indicator_Label
 @onready var hud_health_bar = $CanvasLayer/Control/Health_Bar
 
 @export_category("HUD")
@@ -134,6 +135,10 @@ func hit(damage: int) -> void:
 	update_health_label()
 
 	vignette_target = 0.8
+
+	hud_health_indicator_label.text = "-" + str(damage)
+	hud_health_indicator_label.position.y = 33.0
+	hud_health_indicator_label.modulate.a = 1.0
 
 func stop_reloading(success: bool) -> void:
 	if success:
@@ -200,6 +205,9 @@ func _process(delta: float) -> void:
 
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
+
+	hud_health_indicator_label.position.y = lerp(hud_health_indicator_label.position.y, 73.0, 2.0 * delta)
+	hud_health_indicator_label.modulate.a = lerp(hud_health_indicator_label.modulate.a, 0.0, 4.0 * delta)
 
 	if Input.is_action_just_pressed("flashlight"):
 		# Ensimmäinen painallus: sulje prompt ja sytytä taskulamppu
