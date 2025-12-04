@@ -89,6 +89,10 @@ var show_flashlight_prompt = true
 @export var hud_color_selected_secondary: Color = Color(1.0, 1.0, 1.0, 0.5)
 @export var hud_color_unselected: Color = Color(1.0, 1.0, 1.0, 0.1)
 
+# Sound
+@onready var footstep_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+
+
 # Player
 @export_category("Player")
 @onready var head = $Head
@@ -136,6 +140,8 @@ func stop_reloading(success: bool) -> void:
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
 
 	is_reloading = false
+
+var stun_time: float = 0.0	# Time of player in stun
 
 func weapon_deactivate_all() -> void:
 	hud_weapon_bat.modulate = hud_color_unselected
@@ -351,19 +357,25 @@ func _process(delta: float) -> void:
 			update_health_label()
 
 func _physics_process(delta: float) -> void:
+	# Update stun timer
+	if stun_time > 0.0:
+		stun_time -= delta
+		
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Apply movement
 	var direction = (head.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
-
-	if input_vector.length() > 0.0:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, 20 * delta)
-		velocity.z = move_toward(velocity.z, 0, 20 * delta)
+	
+	# Only allow movement if not stunned
+	if stun_time <= 0.0:
+		if input_vector.length() > 0.0:
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, 20 * delta)
+			velocity.z = move_toward(velocity.z, 0, 20 * delta)
 
 	# Apply crouching
 	var collider_height_target = collider_height_standing
@@ -404,3 +416,9 @@ func _physics_process(delta: float) -> void:
 						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()
+func play_footstep() -> void:
+		if footstep_audio and not footstep_audio.playing and velocity.length() > 0.1:
+			footstep_audio.play()
+	
+	
+	

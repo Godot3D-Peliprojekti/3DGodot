@@ -13,11 +13,63 @@ navigation_mesh = SubResource("NavigationMesh_8uh7m")
 
 [node name="Main" parent="NavigationRegion3D" instance=ExtResource("1_37kl0")]
 
+[node name="GameManager" parent="NavigationRegion3D/Main" index="0" node_paths=PackedStringArray("drawers", "keys")]
+drawers = [null, NodePath("../Dresser2/drawer1"), NodePath("../Dresser3/drawer1")]
+keys = [null, NodePath("../Dresser2/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser3/drawer1/drawer1_mesh/Key1")]
+
+[node name="Baseball_Bat" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="1"]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Knife" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="2"]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Gun" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="3"]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Ammo_Current" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="4"]
+offset_left = -170.0
+offset_top = -90.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Ammo_Reserve" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="5"]
+offset_left = -170.0
+offset_top = -96.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Flashlight_Prompt_Label" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="9"]
+offset_top = -11.5
+offset_bottom = 11.5
+
+[node name="DoorLocked_prompt" parent="NavigationRegion3D/Main/Player/CanvasLayer/Control" index="10"]
+offset_top = -16.0
+offset_bottom = 16.0
+
+[node name="Skeleton3D" parent="NavigationRegion3D/Main/Player/Head/Character/Armature" index="0"]
+bones/0/position = Vector3(-1.1986183, 2.0841372, -92.98718)
+
+[node name="BoneAttachment3D" parent="NavigationRegion3D/Main/Player/Head/Character/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.61307, 0.70304465, -140.32771)
+
+[node name="Chest3" parent="NavigationRegion3D/Main" index="158"]
+transform = Transform3D(-0.4, 0, -3.4969112e-08, 0, 0.4, 0, 3.4969112e-08, 0, -0.4, 12.463884, 0.5433033, 86.932045)
+
+[node name="Sink_B" parent="NavigationRegion3D/Main" index="161"]
+transform = Transform3D(-2, 0, 3.019916e-07, 0, 2, 0, -3.019916e-07, 0, -2, -6.86906, 1.5328724, 74.89103)
+
 [editable path="NavigationRegion3D/Main"]
 [editable path="NavigationRegion3D/Main/Player"]
-[editable path="NavigationRegion3D/Main/Dresser"]
-[editable path="NavigationRegion3D/Main/Dresser2"]
-[editable path="NavigationRegion3D/Main/Dresser3"]
+[editable path="NavigationRegion3D/Main/Player/Head/Character"]
 [editable path="NavigationRegion3D/Main/DoorModel"]
 [editable path="NavigationRegion3D/Main/DoorModel4"]
 [editable path="NavigationRegion3D/Main/DoorModel8"]
@@ -32,3 +84,5 @@ navigation_mesh = SubResource("NavigationMesh_8uh7m")
 [editable path="NavigationRegion3D/Main/DoorModel6"]
 [editable path="NavigationRegion3D/Main/enemy1"]
 [editable path="NavigationRegion3D/Main/enemy1/enemy1_setup"]
+[editable path="NavigationRegion3D/Main/Toilet_Round_B"]
+[editable path="NavigationRegion3D/Main/Sink_B"]
