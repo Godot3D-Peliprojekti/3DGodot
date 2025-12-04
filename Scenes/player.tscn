@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/wood2.mp3" id="10_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://dt5vse2rp2gup" path="res://Audio/1911-reload-6248.mp3" id="11_gymyn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3smsa"]
 font_size = 64
@@ -297,9 +298,14 @@ spot_range = 10.0
 target_position = Vector3(0, 0, -100)
 collision_mask = 5
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer_movement" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamPlaylist_gymyn")
 volume_db = -36.953
 pitch_scale = 1.41
+
+[node name="AudioStreamPlayer_gun_reload" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_gymyn")
+
+[node name="AudioStreamPlayer_gunshot" type="AudioStreamPlayer3D" parent="."]
 
 [editable path="Head/Character"]
