@@ -1,12 +1,14 @@
-[gd_scene load_steps=95 format=4 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=97 format=4 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Material" uid="uid://bhydtovl1k8ly" path="res://Assets/FloorMaterials/wclattia/wclattia.tres" id="1_b3802"]
 [ext_resource type="Script" uid="uid://cfg2vet3dm6sg" path="res://Scripts/game_manager.gd" id="1_kltya"]
 [ext_resource type="Material" uid="uid://dsueb88jnaogf" path="res://Assets/WallMaterials/redbricks.tres" id="2_6iyac"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="2_bo1nx"]
+[ext_resource type="AudioStream" uid="uid://bj8ynw4i6no22" path="res://Audio/shot.mp3" id="5_536cc"]
 [ext_resource type="PackedScene" uid="uid://d3of1r1lrq6c2" path="res://Scenes/pcdesk.tscn" id="5_hdf80"]
 [ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/ChestMaterials/dresser_texture.png" id="5_r33sp"]
 [ext_resource type="PackedScene" uid="uid://o3mod6cu4tft" path="res://Scenes/door_model.tscn" id="6_21xkr"]
+[ext_resource type="AudioStream" uid="uid://c2xy1c14jp157" path="res://Audio/reload.mp3" id="6_aqgau"]
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="7_1w6v2"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="7_6bp64"]
 [ext_resource type="PackedScene" uid="uid://blxq10pfc12sp" path="res://Scenes/key_1.tscn" id="7_hdf80"]
@@ -716,10 +718,22 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.4688929, 1.9286947, -93.15465)
+bones/0/position = Vector3(-0.48761308, 1.8879453, -93.15565)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.88334, 0.5476022, -140.49518)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.90206, 0.5068526, -140.49619)
+
+[node name="AudioStreamPlayer3D" parent="Player/Head/Character" index="3"]
+stream = ExtResource("5_536cc")
+
+[node name="AudioStreamPlayer_gun_reload" parent="Player" index="5"]
+stream = ExtResource("6_aqgau")
+volume_db = -25.0
+
+[node name="AudioStreamPlayer_gunshot" parent="Player" index="6"]
+stream = ExtResource("5_536cc")
+attenuation_model = 1
+volume_db = -35.0
 
 [node name="Dresser" type="StaticBody3D" parent="."]
 transform = Transform3D(-0.4, 0, 6.039832e-08, 0, 0.4, 0, -6.039832e-08, 0, -0.4, 3.449, 0.51, 97.97948)

@@ -90,8 +90,11 @@ var show_flashlight_prompt = true
 @export var hud_color_selected_secondary: Color = Color(1.0, 1.0, 1.0, 0.5)
 @export var hud_color_unselected: Color = Color(1.0, 1.0, 1.0, 0.1)
 
-# Sound
-@onready var footstep_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+# Sounds
+@onready var audio_stream_player_movement: AudioStreamPlayer3D = $AudioStreamPlayer_movement
+@onready var audio_stream_player_gun_reload: AudioStreamPlayer3D = $AudioStreamPlayer_gun_reload
+@onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
+
 
 
 # Player
@@ -227,6 +230,10 @@ func _process(delta: float) -> void:
 	is_running = false
 	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
+	
+		
+		
+		
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
@@ -305,7 +312,9 @@ func _process(delta: float) -> void:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
-
+		
+		play_gunshot()
+		
 		ammo_current -= 1
 		update_ammo_label()
 
@@ -313,6 +322,7 @@ func _process(delta: float) -> void:
 		stop_reloading(true)
 
 	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+		play_gun_reload()
 		is_reloading = true
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
@@ -433,8 +443,17 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 func play_footstep() -> void:
-		if footstep_audio and not footstep_audio.playing and velocity.length() > 0.1:
-			footstep_audio.play()
+		if audio_stream_player_movement and velocity.length() > 0.1:
+			audio_stream_player_movement.play()
+			
+			
+func play_gun_reload() -> void:
+		audio_stream_player_gun_reload.play()
+		
+func play_gunshot() -> void:
+		audio_stream_player_gunshot.play()
+		
+
 	
 	
 	
