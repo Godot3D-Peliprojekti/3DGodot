@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3of1r1lrq6c2"]
+
+[ext_resource type="PackedScene" uid="uid://11vvuhxbkmpv" path="res://Assets/PSX Computer asset pack/glb/desk.glb" id="1_j5d2t"]
+[ext_resource type="PackedScene" uid="uid://d2wi18fcmwdj8" path="res://Assets/PSX Computer asset pack/glb/computer.glb" id="2_388jb"]
+[ext_resource type="PackedScene" uid="uid://b5j7t27rmvd1d" path="res://Assets/PSX Computer asset pack/glb/CrtMonitor.glb" id="3_ap3xy"]
+[ext_resource type="PackedScene" uid="uid://dgvvde4w68v0x" path="res://Assets/PSX Computer asset pack/glb/floppy35.glb" id="4_1nwrd"]
+[ext_resource type="PackedScene" uid="uid://3usbitoiv6s6" path="res://Assets/PSX Computer asset pack/glb/keyboard.glb" id="5_fqjer"]
+[ext_resource type="PackedScene" uid="uid://b5u1rn2f7oxsg" path="res://Assets/PSX Computer asset pack/glb/mouse.glb" id="6_4trh8"]
+[ext_resource type="PackedScene" uid="uid://dyjwl8714y6ak" path="res://Assets/PSX Computer asset pack/glb/speaker.glb" id="7_6jgys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5d2t"]
+
+[node name="PCdesk" type="Node3D"]
+
+[node name="desk" parent="." instance=ExtResource("1_j5d2t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49303937, 0, 0.32486868)
+
+[node name="computer" parent="." instance=ExtResource("2_388jb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.502, 0, 0.275)
+
+[node name="CrtMonitor2" parent="." instance=ExtResource("3_ap3xy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5189107, 0.754812, 0.11608881)
+
+[node name="floppy35" parent="." instance=ExtResource("4_1nwrd")]
+transform = Transform3D(0.8540051, 0, 0.52026457, 0, 1, 0, -0.52026457, 0, 0.8540051, 0.06687176, 0.7638575, 0.21387208)
+
+[node name="keyboard" parent="." instance=ExtResource("5_fqjer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5631616, 0.78579473, 0.6254008)
+
+[node name="mouse" parent="." instance=ExtResource("6_4trh8")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.058887, 0.7883949, 0.604465)
+
+[node name="speaker" parent="." instance=ExtResource("7_6jgys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.042, 0.75159, 0.252)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.79580915, 0, 0, 0, 1, 0, 0, 0, 1, 0.6754068, 0.3550415, 0.15197754)
+visible = false
+use_collision = true
+size = Vector3(2.4882202, 1.710083, 0.6960449)
+material = SubResource("StandardMaterial3D_j5d2t")

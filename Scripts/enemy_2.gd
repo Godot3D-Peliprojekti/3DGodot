@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 		var to_player := player.global_transform.origin - global_transform.origin
 		to_player.y = 0
 		var dir_to_player := to_player.normalized()
-		var forward := -global_transform.basis.z
 
 		# If the enemy has enough distance to the player
 		if distance_to_player > STOP_DISTANCE:

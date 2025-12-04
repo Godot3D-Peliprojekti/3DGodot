@@ -89,6 +89,10 @@ var show_flashlight_prompt = true
 @export var hud_color_selected_secondary: Color = Color(1.0, 1.0, 1.0, 0.5)
 @export var hud_color_unselected: Color = Color(1.0, 1.0, 1.0, 0.1)
 
+# Sound
+@onready var footstep_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+
+
 # Player
 @export_category("Player")
 @onready var head = $Head
@@ -412,3 +416,9 @@ func _physics_process(delta: float) -> void:
 						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()
+func play_footstep() -> void:
+		if footstep_audio and not footstep_audio.playing and velocity.length() > 0.1:
+			footstep_audio.play()
+	
+	
+	

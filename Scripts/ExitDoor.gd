@@ -13,7 +13,7 @@ var hud_label: Label = null
 func _ready():
 	# Etsi MessageLabel pelin nykyisestä scenestä
 	var scene_root = get_tree().get_current_scene()
-	hud_label = scene_root.get_node("Player/CanvasLayer/Control/DoorLocked_prompt")
+	#hud_label = scene_root.get_node("Player/CanvasLayer/Control/DoorLocked_prompt")
 	if hud_label:
 		hud_label.visible = false
 		hud_label.text = ""
