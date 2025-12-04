@@ -82,6 +82,7 @@ var show_flashlight_prompt = true
 @onready var hud_ammo_current = $CanvasLayer/Control/Ammo_Current
 @onready var hud_ammo_reserve = $CanvasLayer/Control/Ammo_Reserve
 @onready var hud_health_label = $CanvasLayer/Control/Health_Label
+@onready var hud_health_indicator_label = $CanvasLayer/Control/Health_Indicator_Label
 @onready var hud_health_bar = $CanvasLayer/Control/Health_Bar
 
 @export_category("HUD")
@@ -126,9 +127,18 @@ var selected_weapon: int = Weapon.NONE
 @onready var raycast = $Head/Camera3D/RayCast3D
 @onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
 
+@onready var vignette = $CanvasLayer/Control/Vignette
+var vignette_target: float
+
 func hit(damage: int) -> void:
 	health = max(health - damage, health_min)
 	update_health_label()
+
+	vignette_target = 0.8
+
+	hud_health_indicator_label.text = "-" + str(damage)
+	hud_health_indicator_label.position.y = 33.0
+	hud_health_indicator_label.modulate.a = 1.0
 
 func stop_reloading(success: bool) -> void:
 	if success:
@@ -193,6 +203,12 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
+	vignette.modulate.a = vignette_target
+
+	hud_health_indicator_label.position.y = lerp(hud_health_indicator_label.position.y, 73.0, 2.0 * delta)
+	hud_health_indicator_label.modulate.a = lerp(hud_health_indicator_label.modulate.a, 0.0, 4.0 * delta)
+
 	if Input.is_action_just_pressed("flashlight"):
 		# Ensimmäinen painallus: sulje prompt ja sytytä taskulamppu
 		if show_flashlight_prompt:
@@ -235,8 +251,8 @@ func _process(delta: float) -> void:
 		print("Keys given")
 
 	# Update health bar scale and color
+	hud_health_bar.value = lerp(hud_health_bar.value, float(health), 10.0 * delta)
 	var s = float(health) / health_max
-	hud_health_bar.scale.x = lerp(hud_health_bar.scale.x, s, 10.0 * delta)
 	hud_health_bar.modulate.r = -s + 1
 	hud_health_bar.modulate.g = s
 

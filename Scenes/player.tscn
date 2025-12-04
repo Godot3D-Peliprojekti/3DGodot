@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=15 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwu8u0sbrkkp7" path="res://Assets/HUD/knife.png" id="4_8erm5"]
 [ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
-[ext_resource type="Texture2D" uid="uid://btoaeu8apldf" path="res://Assets/HUD/hp.png" id="6_8erm5"]
+[ext_resource type="Texture2D" uid="uid://c4k1uxo6t48hy" path="res://Assets/HUD/vignette.png" id="6_8erm5"]
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/wood2.mp3" id="10_tx1dd"]
@@ -17,8 +17,16 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_8erm5"]
 font_size = 64
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8erm5"]
+bg_color = Color(1, 1, 1, 0.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1ek2"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_f1ek2"]
-font_size = 52
+font_size = 32
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tx1dd"]
 radius = 0.3095703
@@ -151,33 +159,39 @@ text = "/ 0"
 label_settings = SubResource("LabelSettings_8erm5")
 vertical_alignment = 1
 
+[node name="Health_Bar" type="ProgressBar" parent="CanvasLayer/Control"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+offset_left = 47.0
+offset_top = 38.0
+offset_right = 410.0
+offset_bottom = 74.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8erm5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f1ek2")
+show_percentage = false
+
 [node name="Health_Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
-offset_left = 424.0
-offset_top = 9.0
-offset_right = 594.0
-offset_bottom = 99.0
+offset_left = 49.0
+offset_top = 33.0
+offset_right = 412.0
+offset_bottom = 78.0
 text = "100"
 label_settings = SubResource("LabelSettings_f1ek2")
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Health_Bar_BG" type="TextureRect" parent="CanvasLayer/Control"]
-modulate = Color(1, 1, 1, 0.1)
+[node name="Health_Indicator_Label" type="Label" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-offset_left = 47.0
-offset_top = 38.0
-offset_right = 410.0
-offset_bottom = 74.0
-texture = ExtResource("6_8erm5")
-
-[node name="Health_Bar" type="TextureRect" parent="CanvasLayer/Control"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 1
-offset_left = 47.0
-offset_top = 38.0
-offset_right = 410.0
-offset_bottom = 74.0
-texture = ExtResource("6_8erm5")
+offset_left = 49.0
+offset_top = 33.0
+offset_right = 412.0
+offset_bottom = 78.0
+text = "-10"
+label_settings = SubResource("LabelSettings_f1ek2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Flashlight_Prompt_Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -226,6 +240,16 @@ offset_left = 423.0
 offset_top = 281.0
 offset_right = 723.0
 offset_bottom = 311.0
+
+[node name="Vignette" type="TextureRect" parent="CanvasLayer/Control"]
+modulate = Color(1, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8erm5")
 
 [node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
 visible = false

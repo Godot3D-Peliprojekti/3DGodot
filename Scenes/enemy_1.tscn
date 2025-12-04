@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvxraa0yn1qci"]
+[gd_scene load_steps=10 format=3 uid="uid://dvxraa0yn1qci"]
 
 [ext_resource type="Script" uid="uid://wfic2lf3urtv" path="res://Scripts/enemy_1.gd" id="1_0a874"]
 [ext_resource type="PackedScene" uid="uid://cbg8cujuop6ic" path="res://Scenes/enemy1_setup.tscn" id="3_lssre"]
@@ -6,6 +6,28 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwqgc"]
 radius = 0.40478516
 height = 2.4451904
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a874"]
+bg_color = Color(1, 1, 1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lssre"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0a874"]
+font_size = 22
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lssre"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0a874"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lssre"]
+viewport_path = NodePath("SubViewport2")
 
 [node name="enemy1" type="CharacterBody3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -21,60 +43,85 @@ shape = SubResource("CapsuleShape3D_jwqgc")
 transform = Transform3D(-0.005, 0, -4.3711387e-10, 0, 0.005, 0, 4.3711387e-10, 0, -0.005, 0, 0, 0)
 
 [node name="Skeleton3D" parent="enemy1_setup/Node" index="0"]
-bones/0/position = Vector3(-0.4999256, 105.958374, -3.419896)
-bones/0/rotation = Quaternion(0.03777611, 0.20147498, -0.004753947, 0.9787534)
-bones/1/rotation = Quaternion(0.04586822, -0.01936399, 0.0364206, 0.9980956)
-bones/2/rotation = Quaternion(0.07520386, -0.03083306, 0.05343379, 0.99525803)
-bones/3/rotation = Quaternion(0.06925997, -0.031808615, 0.05058862, 0.9958073)
-bones/4/rotation = Quaternion(0.10844991, -0.029968206, 0.018688262, 0.99347436)
-bones/5/rotation = Quaternion(-0.10025217, -0.07252415, -0.13337427, 0.98331124)
-bones/9/rotation = Quaternion(-0.4386576, -0.5474061, 0.38274294, -0.6011939)
-bones/10/rotation = Quaternion(0.10270241, -0.32801488, 0.6195503, 0.7057025)
-bones/11/rotation = Quaternion(-2.3841858e-07, -7.450581e-09, 0.19162579, 0.98146814)
-bones/12/rotation = Quaternion(0.03919921, -0.08160691, 0.056091104, 0.99431264)
-bones/13/rotation = Quaternion(0.19909719, 0.074047446, 0.20721862, 0.9549544)
-bones/14/rotation = Quaternion(0.04671461, 0.0171437, -0.0022663784, 0.99875855)
-bones/15/rotation = Quaternion(0.022751449, -0.1020572, -0.34057763, 0.9343841)
-bones/17/rotation = Quaternion(0.10990453, -0.08876508, 0.079552, 0.98676914)
-bones/18/rotation = Quaternion(0.17706427, -0.0031619787, -0.023796339, 0.98390657)
-bones/19/rotation = Quaternion(0.34167618, -0.0015065202, -0.045599844, 0.9387096)
-bones/21/rotation = Quaternion(0.0019049498, -0.008326939, 0.01992887, 0.999765)
-bones/22/rotation = Quaternion(0.45179597, -0.010356378, -0.0578278, 0.8901848)
-bones/23/rotation = Quaternion(0.15419585, -0.005471018, -0.020248443, 0.98781765)
-bones/25/rotation = Quaternion(-0.14991648, -0.0068666255, -0.1045762, 0.9831285)
-bones/26/rotation = Quaternion(0.21956557, -0.006727656, -0.029113892, 0.97514004)
-bones/27/rotation = Quaternion(0.31330594, -0.00327432, -0.0414366, 0.94874215)
-bones/29/rotation = Quaternion(-0.03452684, 0.03691676, -0.21587713, 0.97511137)
-bones/30/rotation = Quaternion(0.23124908, -0.0054326467, -0.03148864, 0.97236973)
-bones/31/rotation = Quaternion(0.45983744, -0.0025092314, -0.062061124, 0.8858282)
-bones/33/rotation = Quaternion(-0.36113405, 0.58849955, -0.6479127, -0.32165155)
-bones/34/rotation = Quaternion(-0.07547847, 0.20491797, -0.8325444, 0.5090987)
-bones/35/rotation = Quaternion(-1.899898e-07, -1.4901161e-08, -0.17812268, 0.9840083)
-bones/36/rotation = Quaternion(0.1681399, -0.08676686, 0.05067428, 0.98062867)
-bones/37/rotation = Quaternion(0.03510571, -0.05777259, -0.43054116, 0.9000357)
-bones/38/rotation = Quaternion(-0.032835975, 0.05835224, 0.39209193, 0.91748613)
-bones/39/rotation = Quaternion(-0.012292126, 0.009107475, -0.22188719, 0.97495234)
-bones/41/rotation = Quaternion(-0.18174061, -0.009013031, 0.030930296, 0.98281866)
-bones/42/rotation = Quaternion(0.37830973, 0.0030691684, 0.050277304, 0.9243077)
-bones/43/rotation = Quaternion(0.071315914, 0.001591023, 0.009538654, 0.9974069)
-bones/45/rotation = Quaternion(-0.12676345, 0.0030336683, 0.02710079, 0.991558)
-bones/46/rotation = Quaternion(0.49633187, 0.009749154, 0.06205413, 0.8658574)
-bones/47/rotation = Quaternion(0.37694865, 0.0051546935, 0.04927391, 0.9249082)
-bones/49/rotation = Quaternion(0.13444187, 0.011161254, 0.06875186, 0.9884706)
-bones/50/rotation = Quaternion(0.057484426, 0.006728015, 0.008322369, 0.9982891)
-bones/51/rotation = Quaternion(0.049026255, 0.0033991672, 0.0066252425, 0.99876976)
-bones/53/rotation = Quaternion(0.24955021, 0.017484063, 0.085639805, 0.9644091)
-bones/54/rotation = Quaternion(0.46589577, 0.0051885713, 0.06233518, 0.88262594)
-bones/55/rotation = Quaternion(0.36579153, 0.0026098592, 0.04939606, 0.9293814)
-bones/57/rotation = Quaternion(0.074067, 0.292443, 0.949405, -0.08729999)
-bones/58/rotation = Quaternion(-0.42875177, 0.07858872, 0.0047351904, 0.89998525)
-bones/59/rotation = Quaternion(0.60906184, 0.017664157, -0.090482526, 0.7877465)
-bones/60/rotation = Quaternion(0.34103915, 6.873161e-07, -7.7160087e-07, 0.9400492)
-bones/62/rotation = Quaternion(-0.06925934, 0.22051379, 0.97274864, 0.018355673)
-bones/63/rotation = Quaternion(-0.41761452, -0.008073479, 0.00865376, 0.9085472)
-bones/64/rotation = Quaternion(0.6828837, -0.0009029631, -0.003961851, 0.7305159)
-bones/65/rotation = Quaternion(0.27671552, 7.1246184e-08, 4.6938663e-07, 0.960952)
+bones/0/position = Vector3(31.416239, 101.75566, 3.798036)
+bones/0/rotation = Quaternion(0.022097293, -0.1302149, -0.08133734, 0.98789674)
+bones/1/rotation = Quaternion(0.06715547, 0.026226405, -0.032938875, 0.9968538)
+bones/2/rotation = Quaternion(0.10827923, 0.059055272, -0.07103946, 0.98981893)
+bones/3/rotation = Quaternion(0.09977748, 0.058688212, -0.07237444, 0.99063724)
+bones/4/rotation = Quaternion(0.14092319, 0.023106968, 0.0178099, 0.9895906)
+bones/5/rotation = Quaternion(-0.13465273, 0.08879147, 0.10268651, 0.9815499)
+bones/9/rotation = Quaternion(-0.3825862, -0.59117764, 0.4533745, -0.54643244)
+bones/10/rotation = Quaternion(0.0796707, -0.36894396, 0.6536135, 0.6559896)
+bones/11/rotation = Quaternion(-1.490117e-07, 7.450585e-09, 0.11790741, 0.9930247)
+bones/12/rotation = Quaternion(0.02723252, -0.074976034, 0.05820861, 0.9951124)
+bones/33/rotation = Quaternion(-0.3693413, 0.59825003, -0.5795539, -0.41206953)
+bones/34/rotation = Quaternion(0.16843778, 0.20707858, -0.80516165, 0.52958655)
+bones/35/rotation = Quaternion(-1.2665991e-07, 0, -0.15808654, 0.9874253)
+bones/36/rotation = Quaternion(0.08477245, 0.0018706399, -0.12197501, 0.98890465)
+bones/57/rotation = Quaternion(0.07813788, 0.3055383, 0.94615084, -0.07307178)
+bones/58/rotation = Quaternion(-0.54047734, -0.058563184, 0.078244336, 0.8356629)
+bones/59/rotation = Quaternion(0.7040835, -0.09601202, -0.022839446, 0.7032258)
+bones/60/rotation = Quaternion(0.2829422, 7.450584e-07, -8.8405835e-07, 0.9591371)
+bones/62/rotation = Quaternion(-0.108186975, 0.13657625, 0.9846948, -0.0043489267)
+bones/63/rotation = Quaternion(-0.5023097, 0.112719834, -0.045615006, 0.856095)
+bones/64/rotation = Quaternion(0.57638675, 0.21085268, -0.16213238, 0.77267885)
+bones/65/rotation = Quaternion(0.45560923, -2.1210877e-07, 1.1101367e-06, 0.89018)
+
+[node name="AnimationPlayer" parent="enemy1_setup" index="1"]
+speed_scale = 2.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(192, 32)
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Control"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+offset_right = 192.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_0a874")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lssre")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="SubViewport/Control"]
+layout_mode = 1
+offset_right = 192.0
+offset_bottom = 32.0
+text = "100"
+label_settings = SubResource("LabelSettings_0a874")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(192, 34)
+
+[node name="Health_Indicator_Label" type="Label" parent="SubViewport2"]
+offset_right = 192.0
+offset_bottom = 32.0
+text = "-10"
+label_settings = SubResource("LabelSettings_lssre")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health_Bar" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.50769585, 0)
+flip_h = true
+texture = SubResource("ViewportTexture_0a874")
+
+[node name="Health_Indicator" type="Sprite3D" parent="."]
+transform = Transform3D(0.20000002, 0, 0, 0, 0.20000002, 0, 0, 0, 0.20000002, 0, 0.51, 0)
+flip_h = true
+texture = SubResource("ViewportTexture_lssre")
 
 [editable path="enemy1_setup"]
