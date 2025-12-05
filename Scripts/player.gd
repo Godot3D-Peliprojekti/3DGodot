@@ -193,6 +193,7 @@ func _ready() -> void:
 	weapon_deactivate_all()
 	update_ammo_label()
 	update_health_label()
+	_setup_gunshot_reverb()
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseMotion:
@@ -221,7 +222,6 @@ func _process(delta: float) -> void:
 		show_flashlight = !show_flashlight
 
 	# SpotLight näkyvyys: näkyy vain jos show_flashlight ja ei kyykky
-	# flashlight.visible = show_flashlight and not movement_script.is_crouching
 	flashlight.visible = show_flashlight
 
 	if Input.is_action_just_pressed("crouch"):
@@ -442,6 +442,7 @@ func _physics_process(delta: float) -> void:
 						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()
+	
 func play_footstep() -> void:
 		if audio_stream_player_movement and velocity.length() > 0.1:
 			audio_stream_player_movement.play()
@@ -450,8 +451,44 @@ func play_footstep() -> void:
 func play_gun_reload() -> void:
 		audio_stream_player_gun_reload.play()
 		
+func _setup_gunshot_reverb() -> void:
+	# Create a new bus for gunshot
+	AudioServer.add_bus()
+	var bus_index := AudioServer.get_bus_count() - 1
+	AudioServer.set_bus_name(bus_index, "GunshotBus")
+
+	# Make the player's gunshot audiostreamplayer use that bus
+	audio_stream_player_gunshot.bus = "GunshotBus"
+
+	# Add reverb effect
+	var reverb := AudioEffectReverb.new()
+
+	# These values should reduce the echoing
+	reverb.room_size = 0.1
+	reverb.damping = 1.0
+	reverb.wet = 0.005
+	reverb.dry = 1.0
+	reverb.predelay_msec = 0.0
+
+	AudioServer.add_bus_effect(bus_index, reverb, 0)
+
+		
 func play_gunshot() -> void:
-		audio_stream_player_gunshot.play()
+	# Temporary sound player
+	var shot_player := AudioStreamPlayer3D.new()
+	shot_player.stream = audio_stream_player_gunshot.stream
+	shot_player.bus = audio_stream_player_gunshot.bus
+	shot_player.transform = audio_stream_player_gunshot.transform
+
+	# Add the shot_player as a child inside Player node
+	add_child(shot_player)
+
+	shot_player.play()
+
+	# When sound is played, delete the temporary player
+	shot_player.finished.connect(func():
+		shot_player.queue_free())
+
 		
 
 	

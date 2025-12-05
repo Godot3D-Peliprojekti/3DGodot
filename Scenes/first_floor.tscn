@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://c88arb2t8ca75"]
+[gd_scene load_steps=67 format=4 uid="uid://c88arb2t8ca75"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm85rwd2lpc7k" path="res://Assets/FloorMaterials/meshlib1stfloorfinal.tres" id="1_fqnud"]
 [ext_resource type="Script" uid="uid://b66mi5yxu7giq" path="res://Scripts/game_manager_2.gd" id="1_iwonc"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://8uld13pe8jmq" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_nor_gl_2k.png" id="15_0r6jf"]
 [ext_resource type="Texture2D" uid="uid://4jxbe5j0f58h" path="res://Assets/WallMaterials/seinä 8/textures/concrete_layers_02_rough_2k.png" id="16_5pbs8"]
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="20_pchnt"]
+[ext_resource type="AudioStream" uid="uid://c2xy1c14jp157" path="res://Audio/reload.mp3" id="21_bohrk"]
+[ext_resource type="AudioStream" uid="uid://bj8ynw4i6no22" path="res://Audio/shot.mp3" id="21_dbw8i"]
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="21_pccs8"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="22_rmeu3"]
 [ext_resource type="Script" uid="uid://cbf28uwoadakp" path="res://Scripts/dummydoor.gd" id="23_rmeu3"]
@@ -1127,10 +1129,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.5671474, 3.7143214, -93.34812)
+bones/0/position = Vector3(-1.2569946, 2.001609, -92.94901)
+bones/55/position = Vector3(8.926856, -5.8765154, 0.08162338)
+bones/56/position = Vector3(3.480026e-07, 41.070522, 5.38132e-06)
+bones/57/position = Vector3(1.6690283e-06, 37.689438, -3.583384e-07)
+bones/58/position = Vector3(-2.316364e-06, 19.417398, -3.6808824e-06)
+bones/59/position = Vector3(-1.0207278e-06, 7.9323807, 3.8743087e-07)
+bones/62/position = Vector3(9.23303e-07, 37.718353, 9.1976995e-07)
+bones/63/position = Vector3(5.619713e-07, 19.759895, -5.0860035e-07)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.9816, 2.3332286, -140.68866)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.67145, 0.62051654, -140.28955)
+
+[node name="AudioStreamPlayer_gun_reload" parent="Player" index="5"]
+stream = ExtResource("21_bohrk")
+volume_db = -25.0
+
+[node name="AudioStreamPlayer_gunshot" parent="Player" index="6"]
+stream = ExtResource("21_dbw8i")
+attenuation_model = 1
+volume_db = -35.0
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -1465,7 +1483,7 @@ transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1
 player = NodePath("../Player")
 
 [node name="Chest" parent="." instance=ExtResource("31_iwonc")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.743, 0, -0.246)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.743, 0.11, -0.246)
 
 [editable path="Player"]
 [editable path="Player/Head/Character"]
