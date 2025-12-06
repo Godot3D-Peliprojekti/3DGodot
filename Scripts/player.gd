@@ -3,7 +3,7 @@ class_name Player
 
 # TODO: Move to game controller
 @export var gravity = 9.8
-@export var mouse_sensitivity = 0.003
+@export var mouse_sensitivity: float = 0.003
 
 # Weapons
 enum Weapon {
@@ -69,13 +69,16 @@ var upper_weapon_gun_attack_add: float = 0.0
 @onready var skeleton = $Head/Character/Armature/Skeleton3D
 var bone_index: int
 
-# Taskulamppu
+# Flashlight
 @onready var flashlight = $Head/Camera3D/SpotLight3D
 var show_flashlight = false
 @onready var flashlight_prompt_label = $CanvasLayer/Control/Flashlight_Prompt_Label
 var show_flashlight_prompt = true
+var flashlight_prompt_timer: float = 0.0
+var flashlight_prompt_timeout: float = 2.0
 
 # HUD elements
+@onready var control: Control = $CanvasLayer/Control
 @onready var hud_weapon_bat = $CanvasLayer/Control/Baseball_Bat
 @onready var hud_weapon_knife = $CanvasLayer/Control/Knife
 @onready var hud_weapon_gun = $CanvasLayer/Control/Gun
@@ -91,6 +94,7 @@ var show_flashlight_prompt = true
 @export var hud_color_unselected: Color = Color(1.0, 1.0, 1.0, 0.1)
 
 # Sounds
+@onready var audio_stream_player: AudioStreamPlayer = $CanvasLayer/Pause_menu/AudioStreamPlayer
 @onready var audio_stream_player_movement: AudioStreamPlayer3D = $AudioStreamPlayer_movement
 @onready var audio_stream_player_gun_reload: AudioStreamPlayer3D = $AudioStreamPlayer_gun_reload
 @onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
@@ -132,6 +136,9 @@ var selected_weapon: int = Weapon.NONE
 
 @onready var vignette = $CanvasLayer/Control/Vignette
 var vignette_target: float
+
+# Pause menu
+@onready var pause_menu: Control = $CanvasLayer/Pause_menu
 
 func hit(damage: int) -> void:
 	health = max(health - damage, health_min)
@@ -184,7 +191,11 @@ func update_health_label() -> void:
 	hud_health_label.text = str(health)
 
 func _ready() -> void:
+	flashlight_prompt_timer = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pause_menu.visible = false
+	
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
@@ -196,16 +207,45 @@ func _ready() -> void:
 	_setup_gunshot_reverb()
 
 func _unhandled_input(event) -> void:
+
+	if event.is_action_pressed("ui_cancel"):
+		_toggle_pause()
+		return
+		
+	if get_tree().paused:
+		return
+		
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(camera_pitch_min), deg_to_rad(camera_pitch_max))
+		
+# Toggle pause menu
+func _toggle_pause() -> void:
+	var tree = get_tree()
+	tree.paused = not tree.paused
+	pause_menu.visible = tree.paused
+
+	if tree.paused:
+		if not audio_stream_player.playing:
+			audio_stream_player.play()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		control.visible = false
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		control.visible = true
+
 
 func _process(delta: float) -> void:
-	# TODO: Move to game controller
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# Hide flashlight prompt automatically after timeout
+	if show_flashlight_prompt:
+		flashlight_prompt_timer += delta
+		if flashlight_prompt_timer >= flashlight_prompt_timeout:
+			show_flashlight_prompt = false
+			flashlight_prompt_label.visible = false
+		
+	if get_tree().paused:
+		return
 
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
@@ -383,6 +423,11 @@ func _process(delta: float) -> void:
 			update_health_label()
 
 func _physics_process(delta: float) -> void:
+	
+	# Stop all physics if game is paused
+	if get_tree().paused:
+		return
+		
 	# Update stun timer
 	if stun_time > 0.0:
 		stun_time -= delta
@@ -488,9 +533,3 @@ func play_gunshot() -> void:
 	# When sound is played, delete the temporary player
 	shot_player.finished.connect(func():
 		shot_player.queue_free())
-
-		
-
-	
-	
-	

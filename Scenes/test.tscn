@@ -62,10 +62,10 @@ offset_top = -16.0
 offset_bottom = 16.0
 
 [node name="Skeleton3D" parent="NavigationRegion3D/Main/Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.1216763, 2.6814835, -93.22372)
+bones/0/position = Vector3(-0.15800995, 1.5185305, -93.061295)
 
 [node name="BoneAttachment3D" parent="NavigationRegion3D/Main/Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.536125, 1.300391, -140.56425)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.57246, 0.13743782, -140.40182)
 
 [node name="AudioStreamPlayer_gunshot" parent="NavigationRegion3D/Main/Player" index="6"]
 max_db = 1.5
@@ -84,6 +84,7 @@ transform = Transform3D(-2, 0, 3.019916e-07, 0, 2, 0, -3.019916e-07, 0, -2, -6.8
 
 [editable path="NavigationRegion3D/Main"]
 [editable path="NavigationRegion3D/Main/Player"]
+[editable path="NavigationRegion3D/Main/Player/CanvasLayer/Pause_menu"]
 [editable path="NavigationRegion3D/Main/Player/Head/Character"]
 [editable path="NavigationRegion3D/Main/DoorModel"]
 [editable path="NavigationRegion3D/Main/DoorModel4"]
