@@ -15,10 +15,7 @@ collision_mask = 3
 script = ExtResource("1_0a874")
 health_bar = NodePath("Health_Bar_3D")
 animation_tree = NodePath("enemy1_setup/AnimationTree")
-animation_walk_blend = "Walk_Blend"
-animation_death_blend = "Death_Blend"
-animation_hit_oneshot = "Hit_OneShot"
-animation_bite_oneshot = "Bite_OneShot"
+animation_speed = 0.75
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.40000004, 0, 0, 0, 0.40000004, 0, 0, 0, 0.40000004, -0.020298379, -0.09924813, -0.26317385)
