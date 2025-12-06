@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvxraa0yn1qci"]
 
-[ext_resource type="Script" uid="uid://wfic2lf3urtv" path="res://Scripts/enemy_1.gd" id="1_0a874"]
+[ext_resource type="Script" uid="uid://wfic2lf3urtv" path="res://Scripts/base_enemy.gd" id="1_0a874"]
 [ext_resource type="PackedScene" uid="uid://cbg8cujuop6ic" path="res://Scenes/enemy1_setup.tscn" id="3_lssre"]
 [ext_resource type="PackedScene" uid="uid://dp0me0kq4u5h5" path="res://Scenes/health_bar_3d.tscn" id="3_wlnc2"]
 
@@ -15,6 +15,10 @@ collision_mask = 3
 script = ExtResource("1_0a874")
 health_bar = NodePath("Health_Bar_3D")
 animation_tree = NodePath("enemy1_setup/AnimationTree")
+animation_walk_blend = "Walk_Blend"
+animation_death_blend = "Death_Blend"
+animation_hit_oneshot = "Hit_OneShot"
+animation_bite_oneshot = "Bite_OneShot"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.40000004, 0, 0, 0, 0.40000004, 0, 0, 0, 0.40000004, -0.020298379, -0.09924813, -0.26317385)
