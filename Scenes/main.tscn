@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=4 uid="uid://ip2wgnhl5jro"]
+[gd_scene load_steps=98 format=4 uid="uid://ip2wgnhl5jro"]
 
 [ext_resource type="Material" uid="uid://bhydtovl1k8ly" path="res://Assets/FloorMaterials/wclattia/wclattia.tres" id="1_b3802"]
 [ext_resource type="Script" uid="uid://cfg2vet3dm6sg" path="res://Scripts/game_manager.gd" id="1_kltya"]
@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://c788lud8fksb5" path="res://Scenes/chest.tscn" id="31_hpc6h"]
 [ext_resource type="PackedScene" uid="uid://dpe36aw0xd6an" path="res://Scenes/toilet_round_b.tscn" id="37_k2e45"]
 [ext_resource type="PackedScene" uid="uid://cxxa2driaewv1" path="res://Scenes/sink_b.tscn" id="38_536cc"]
+[ext_resource type="PackedScene" uid="uid://dhajfn4djep5a" path="res://Scenes/pause_menu.tscn" id="41_8cuat"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vw638"]
 resource_name = "Material"
@@ -688,6 +689,7 @@ size = Vector3(0.84865415, 2.6119752, 0.7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8161972, 1.149296, 97.8931)
 
 [node name="Control" parent="Player/CanvasLayer" index="0"]
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Crosshair" parent="Player/CanvasLayer/Control" index="0"]
@@ -717,14 +719,53 @@ metadata/_edit_use_anchors_ = true
 [node name="Flashlight_Prompt_Label" parent="Player/CanvasLayer/Control" index="9"]
 metadata/_edit_use_anchors_ = true
 
+[node name="Pause_menu" parent="Player/CanvasLayer" index="1" instance=ExtResource("41_8cuat")]
+visible = false
+
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.48761308, 1.8879453, -93.15565)
+bones/0/position = Vector3(-1.1438451, 2.6570442, -93.20721)
+bones/8/position = Vector3(-12.76952, 8.727562, 0.85893345)
+bones/9/position = Vector3(-1.0735916e-06, 27.398184, -1.462185e-05)
+bones/13/position = Vector3(-0.028794441, 3.2459002, 1.1642544e-05)
+bones/14/position = Vector3(0.68179667, 2.4556904, 2.8014201e-06)
+bones/16/position = Vector3(0.017796496, 3.4028, 1.5822352e-05)
+bones/18/position = Vector3(-0.006698996, 2.7435987, 2.259876e-05)
+bones/19/position = Vector3(-1.0944096, 10.003398, -0.17450464)
+bones/20/position = Vector3(0.018907093, 3.4668956, -1.1812205e-05)
+bones/22/position = Vector3(-0.004106477, 2.9271867, 3.7659483e-06)
+bones/23/position = Vector3(1.1504005, 10.185289, -0.23170905)
+bones/26/position = Vector3(0.016694874, 2.2951987, -2.416072e-05)
+bones/28/position = Vector3(0.0021135374, 2.5700955, -8.4900275e-06)
+bones/30/position = Vector3(0.012398493, 1.8158911, 4.490663e-06)
+bones/32/position = Vector3(4.047639, 14.126103, -0.5832846)
+bones/34/position = Vector3(4.5189227e-06, 21.326998, 9.696026e-06)
+bones/35/position = Vector3(2.9668794, 3.065494, 1.3387129)
+bones/36/position = Vector3(0.623997, 3.5220869, -1.7045159e-07)
+bones/37/position = Vector3(-0.17730153, 3.359694, 1.8038976e-05)
+bones/38/position = Vector3(-0.44670665, 2.7945008, 4.768368e-06)
+bones/39/position = Vector3(4.0492473, 9.8025255, 0.11535582)
+bones/40/position = Vector3(-0.017500287, 3.2763066, -6.147651e-06)
+bones/41/position = Vector3(0.008597651, 3.0842078, 1.0933381e-06)
+bones/43/position = Vector3(1.6030954, 10.116263, -0.32961994)
+bones/44/position = Vector3(-0.01170055, 3.5343099, 1.5377791e-06)
+bones/46/position = Vector3(-0.0007073749, 2.859702, -1.12688795e-05)
+bones/47/position = Vector3(-0.5591191, 10.11013, -0.22580291)
+bones/51/position = Vector3(-2.8260748, 8.7656355, -0.013391614)
+bones/52/position = Vector3(-0.011214491, 2.7890077, -6.1142564e-06)
+bones/54/position = Vector3(-0.00039589778, 2.094802, 8.670439e-06)
+bones/55/position = Vector3(8.926856, -5.8765154, 0.08162338)
+bones/56/position = Vector3(3.480026e-07, 41.070522, 5.38132e-06)
+bones/57/position = Vector3(1.6690283e-06, 37.689438, -3.583384e-07)
+bones/58/position = Vector3(-2.316364e-06, 19.417398, -3.6808824e-06)
+bones/59/position = Vector3(-1.0207278e-06, 7.9323807, 3.8743087e-07)
+bones/62/position = Vector3(9.23303e-07, 37.718353, 9.1976995e-07)
+bones/63/position = Vector3(5.619713e-07, 19.759895, -5.0860035e-07)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.90206, 0.5068526, -140.49619)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.5583, 1.2759516, -140.54774)
 
-[node name="AudioStreamPlayer3D" parent="Player/Head/Character" index="3"]
-stream = ExtResource("5_536cc")
+[node name="AudioStreamPlayer_movement" parent="Player" index="4"]
+volume_db = -30.0
 
 [node name="AudioStreamPlayer_gun_reload" parent="Player" index="5"]
 stream = ExtResource("6_aqgau")
@@ -2530,6 +2571,7 @@ transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, -9.1
 transform = Transform3D(-2, 0, 3.019916e-07, 0, 2, 0, -3.019916e-07, 0, -2, -6.86906, 1.2721808, 74.89103)
 
 [editable path="Player"]
+[editable path="Player/CanvasLayer/Pause_menu"]
 [editable path="Player/Head/Character"]
 [editable path="DoorModel"]
 [editable path="DoorModel4"]
