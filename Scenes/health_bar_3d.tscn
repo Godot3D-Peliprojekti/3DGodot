@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp0me0kq4u5h5"]
+
+[ext_resource type="Script" path="res://Scripts/health_bar_3d.gd" id="1_cf2cn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifqs7"]
+bg_color = Color(1, 1, 1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t64h5"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0jnqr"]
+font_size = 22
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pejq7"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sxqey"]
+viewport_path = NodePath("Health_Bar_SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4rb3v"]
+viewport_path = NodePath("Health_Indicator_SubViewport")
+
+[node name="Health_Bar_3D" type="Node3D"]
+script = ExtResource("1_cf2cn")
+
+[node name="Health_Bar_SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(192, 32)
+
+[node name="Control" type="Control" parent="Health_Bar_SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Health_Bar_SubViewport/Control"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+offset_right = 192.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_ifqs7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_t64h5")
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Health_Bar_SubViewport/Control"]
+layout_mode = 1
+offset_right = 192.0
+offset_bottom = 32.0
+text = "100"
+label_settings = SubResource("LabelSettings_0jnqr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health_Indicator_SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(192, 34)
+
+[node name="Label" type="Label" parent="Health_Indicator_SubViewport"]
+offset_right = 192.0
+offset_bottom = 32.0
+text = "-10"
+label_settings = SubResource("LabelSettings_pejq7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health_Bar" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+flip_h = true
+texture = SubResource("ViewportTexture_sxqey")
+
+[node name="Health_Indicator" type="Sprite3D" parent="."]
+transform = Transform3D(0.20000002, 0, 0, 0, 0.20000002, 0, 0, 0, 0.20000002, 0, 0, 0)
+flip_h = true
+texture = SubResource("ViewportTexture_4rb3v")
