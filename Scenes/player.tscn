@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=22 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://c4k1uxo6t48hy" path="res://Assets/HUD/vignette.png" id="6_8erm5"]
+[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="7_7dp3o"]
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/wood2.mp3" id="10_tx1dd"]
@@ -255,6 +256,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_8erm5")
 
+[node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("7_7dp3o")]
+
 [node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
 visible = false
 collide_with_areas = true
@@ -271,10 +274,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.8773945, 2.5292678, -93.1857)
+bones/0/position = Vector3(-1.0535241, 2.8353102, -93.23803)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.29185, 1.1481752, -140.52623)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.46797, 1.4542177, -140.57857)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)
