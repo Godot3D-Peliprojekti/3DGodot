@@ -45,6 +45,11 @@ func hit(damage: int) -> void:
 		health_bar._hit(damage)
 
 func _process(delta: float) -> void:
+	animation_speed = animation_speed_default
+	if animation_tree["parameters/"+animation_hit_oneshot+"/active"] and not death_blend > 0.0:
+		animation_speed = animation_speed_hit
+	elif walk_blend > 0.0:
+		animation_speed = animation_speed_walk
 	animation_tree["parameters/TimeScale/scale"] = animation_speed
 
 	walk_blend = lerp(walk_blend, clamp(velocity.length(), 0.0, 1.0), animation_blend_easing * delta)
@@ -63,15 +68,10 @@ func _physics_process(delta: float) -> void:
 		if collision_shape:
 			collision_shape.queue_free()
 		return
-	# print(health)
 
-	animation_speed = animation_speed_default
-	if animation_tree["parameters/"+animation_hit_oneshot+"/active"]:
-		animation_speed = animation_speed_hit
+	if animation_speed == animation_speed_hit:
 		velocity = Vector3.ZERO
 		return
-	if animation_tree["parameters/"+animation_walk_blend+"/blend_amount"] > 0.0:
-		animation_speed = animation_speed_walk
 
 	# Gravity
 	if not is_on_floor():
