@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c62ulfolots0o"
-path.s3tc="res://.godot/imported/Gadgets.png-d1bd7c28ce805df40b8eb40a84e55634.s3tc.ctex"
+path.s3tc="res://.godot/imported/Gadgets.png-2b29ecc650d95d96d6c97c2272d8e6d1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/Gadgets.png"
-dest_files=["res://.godot/imported/Gadgets.png-d1bd7c28ce805df40b8eb40a84e55634.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Gadgets.png"
+dest_files=["res://.godot/imported/Gadgets.png-2b29ecc650d95d96d6c97c2272d8e6d1.s3tc.ctex"]
 
 [params]
 

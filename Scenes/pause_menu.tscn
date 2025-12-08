@@ -1,0 +1,250 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhajfn4djep5a"]
+
+[ext_resource type="Script" uid="uid://ccn4mmok11dfv" path="res://Scripts/pause_menu.gd" id="1_vmyb1"]
+[ext_resource type="Texture2D" uid="uid://b58f447ynago0" path="res://Assets/MenuScreen/godot-pic.png" id="2_myy0f"]
+[ext_resource type="Script" uid="uid://c5onlem3dyy5t" path="res://Scripts/volume_slider.gd" id="3_sjs17"]
+[ext_resource type="Script" uid="uid://pd8sm2i7w7ia" path="res://Scripts/fullscreen_control.gd" id="4_u8tnp"]
+[ext_resource type="AudioStream" uid="uid://cmiss1sti2nlr" path="res://Audio/dark-ambient-background-music-shadows-of-the-silent-forest-244008.mp3" id="5_stj27"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_48xlc"]
+texture = ExtResource("2_myy0f")
+modulate_color = Color(0.38170323, 0.38170326, 0.38170305, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erv1k"]
+draw_center = false
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 10
+shadow_offset = Vector2(1.63, 1.68)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28flt"]
+draw_center = false
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 10
+shadow_offset = Vector2(1.63, 1.68)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28flt"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_48xlc"]
+grow_end = -5.0
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1ehe0"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[node name="Pause_menu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.98815084, 1)
+script = ExtResource("1_vmyb1")
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 30.107178
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_48xlc")
+
+[node name="MainButtons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -255.52777
+offset_top = -165.0
+offset_right = 255.52777
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Button_continue" type="Button" parent="MainButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
+theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/h_separation = 4
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+text = "Continue"
+
+[node name="Button_options" type="Button" parent="MainButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
+theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_pressed_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+text = "Options"
+
+[node name="Button_exit" type="Button" parent="MainButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
+theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_pressed_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+text = "Exit game"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.63608
+offset_top = -306.75
+offset_right = 364.3639
+offset_bottom = -216.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 65
+text = "Ei tästä hengissä selviä"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -449.83008
+offset_top = -244.5
+offset_right = 449.83008
+offset_bottom = 274.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Options"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 81.5
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_options_back" type="Button" parent="Options/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.60208
+offset_top = 339.5
+offset_right = 219.60205
+offset_bottom = 460.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
+theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_pressed_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+text = "Back"
+
+[node name="VolumeSlider" type="HSlider" parent="Options/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.920105
+offset_top = 55.75
+offset_right = 217.32556
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_48xlc")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_1ehe0")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_1ehe0")
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("3_sjs17")
+bus_name = "Master"
+
+[node name="Fullscreen_control" type="CheckButton" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.33508
+offset_top = -44.75
+offset_right = 202.33508
+offset_bottom = 34.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Fullscreen"
+script = ExtResource("4_u8tnp")
+
+[node name="Label_volume" type="Label" parent="Options"]
+layout_mode = 0
+offset_left = 249.83551
+offset_top = 107.5
+offset_right = 430.98193
+offset_bottom = 175.5
+scale = Vector2(1.0047758, 1)
+theme_override_font_sizes/font_size = 25
+text = "Volume"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_stj27")
+volume_db = -25.0
+
+[connection signal="pressed" from="MainButtons/Button_continue" to="." method="_on_button_continue_pressed"]
+[connection signal="pressed" from="MainButtons/Button_options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainButtons/Button_exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Options/Label/Button_options_back" to="." method="_on_back_options_pressed"]
+[connection signal="toggled" from="Options/Fullscreen_control" to="Options/Fullscreen_control" method="_on_toggled"]

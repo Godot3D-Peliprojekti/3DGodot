@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkin0ynx52ojc"
-path.s3tc="res://.godot/imported/Ceiling_Fan_02.png-4fcd0b3a99acbb0c59dcaf98ee21b994.s3tc.ctex"
+path.s3tc="res://.godot/imported/Ceiling_Fan_02.png-60def3b97c43f3d8824467695988419b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/Ceiling_Fan_02.png"
-dest_files=["res://.godot/imported/Ceiling_Fan_02.png-4fcd0b3a99acbb0c59dcaf98ee21b994.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Ceiling_Fan_02.png"
+dest_files=["res://.godot/imported/Ceiling_Fan_02.png-60def3b97c43f3d8824467695988419b.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://u65rucjgujmi"
-path.s3tc="res://.godot/imported/bed_02.png-1184e55c99c3bc419393e388e75252d9.s3tc.ctex"
+path.s3tc="res://.godot/imported/bed_02.png-6729832446a12e14164a23acb96fba01.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/bed_02.png"
-dest_files=["res://.godot/imported/bed_02.png-1184e55c99c3bc419393e388e75252d9.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/bed_02.png"
+dest_files=["res://.godot/imported/bed_02.png-6729832446a12e14164a23acb96fba01.s3tc.ctex"]
 
 [params]
 

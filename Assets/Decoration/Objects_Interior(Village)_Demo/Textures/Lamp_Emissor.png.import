@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgohomonxb6rd"
-path.s3tc="res://.godot/imported/Lamp_Emissor.png-f3e8be2f3c30c9a14212e80787b8554e.s3tc.ctex"
+path.s3tc="res://.godot/imported/Lamp_Emissor.png-f84965db1e2c1b334e95abd2a99add74.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/Lamp_Emissor.png"
-dest_files=["res://.godot/imported/Lamp_Emissor.png-f3e8be2f3c30c9a14212e80787b8554e.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Lamp_Emissor.png"
+dest_files=["res://.godot/imported/Lamp_Emissor.png-f84965db1e2c1b334e95abd2a99add74.s3tc.ctex"]
 
 [params]
 
