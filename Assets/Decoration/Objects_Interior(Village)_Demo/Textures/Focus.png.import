@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://srcsl5ph6n5y"
-path.s3tc="res://.godot/imported/Focus.png-798659022b18ed7d4582ddb1c730d306.s3tc.ctex"
+path.s3tc="res://.godot/imported/Focus.png-25a54e996ec9d45842254e3b158a61d7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/Focus.png"
-dest_files=["res://.godot/imported/Focus.png-798659022b18ed7d4582ddb1c730d306.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Focus.png"
+dest_files=["res://.godot/imported/Focus.png-25a54e996ec9d45842254e3b158a61d7.s3tc.ctex"]
 
 [params]
 
