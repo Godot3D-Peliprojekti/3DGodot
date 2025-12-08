@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://c88arb2t8ca75"]
+[gd_scene load_steps=81 format=4 uid="uid://c88arb2t8ca75"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm85rwd2lpc7k" path="res://Assets/FloorMaterials/meshlib1stfloorfinal.tres" id="1_fqnud"]
 [ext_resource type="Script" uid="uid://b66mi5yxu7giq" path="res://Scripts/game_manager_2.gd" id="1_iwonc"]
@@ -32,7 +32,21 @@
 [ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/drawer_open.mp3" id="29_dbw8i"]
 [ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/drawer_close.mp3" id="30_bohrk"]
 [ext_resource type="PackedScene" uid="uid://c788lud8fksb5" path="res://Scenes/chest.tscn" id="31_iwonc"]
-[ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/Enemy_2.tscn" id="32_dbw8i"]
+[ext_resource type="Texture2D" uid="uid://mptftfu0mb1p" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase.png" id="32_ctf0g"]
+[ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/enemy_2.tscn" id="32_dbw8i"]
+[ext_resource type="Texture2D" uid="uid://7tn11b8pq8gd" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase_01.png" id="33_xx7av"]
+[ext_resource type="Texture2D" uid="uid://d1hxdys673qut" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase_02.png" id="34_ik1c7"]
+[ext_resource type="Texture2D" uid="uid://doo4e6gye30mw" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Armchair_03.png" id="35_0ddlf"]
+[ext_resource type="Texture2D" uid="uid://brmbrxgicsfl8" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Armchair_04.png" id="36_xl6us"]
+[ext_resource type="Texture2D" uid="uid://xckfgap4y72m" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Chair.png" id="37_3o1fw"]
+[ext_resource type="Texture2D" uid="uid://c6qu3lvbiqej5" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Ceiling_Fan.png" id="38_0v8ij"]
+[ext_resource type="Texture2D" uid="uid://rf05acysq0c2" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Paintings.jpg" id="39_lx42a"]
+[ext_resource type="Texture2D" uid="uid://c62ulfolots0o" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Gadgets.png" id="40_r6qpj"]
+[ext_resource type="Texture2D" uid="uid://c5qbeikqf55dd" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Books.png" id="41_5kfql"]
+[ext_resource type="Texture2D" uid="uid://c71qtc4h2s8bj" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Alarm_clock.png" id="42_by5ps"]
+[ext_resource type="Texture2D" uid="uid://3d082lhe1ti7" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Trash_can.png" id="43_sd3s5"]
+[ext_resource type="Texture2D" uid="uid://b15tuubvqqnog" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Box_Pizza.png" id="44_7fhmx"]
+[ext_resource type="Texture2D" uid="uid://duhsorkkve3h3" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Plates.png" id="45_ge5gi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2c1m"]
 sky_top_color = Color(0.84860665, 0.87682384, 0.9134774, 1)
@@ -1478,7 +1492,247 @@ volume_db = -25.0
 unit_size = 5.0
 max_db = 2.0
 
-[node name="Enemy_2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+[node name="Dresser4" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.38, 0, -3.3220655e-08, 0, 0.38, 0, 3.3220655e-08, 0, -0.38, 8.17693, 0.10694268, -29.01158)
+
+[node name="dresser" type="MeshInstance3D" parent="Dresser4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("ArrayMesh_qddgo")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07369995, 1.7149353, 0.12991333)
+shape = SubResource("BoxShape3D_t1abr")
+disabled = true
+
+[node name="drawer3" type="StaticBody3D" parent="Dresser4"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Dresser4/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 1.1, 0)
+shape = SubResource("ConcavePolygonShape3D_eye0t")
+
+[node name="drawer3_mesh" type="MeshInstance3D" parent="Dresser4/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 1.1, 0)
+layers = 3
+mesh = SubResource("ArrayMesh_gooxu")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser4/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16, 1.1, 0)
+shape = SubResource("ConcavePolygonShape3D_kqt5w")
+
+[node name="drawer1" type="StaticBody3D" parent="Dresser4" node_paths=PackedStringArray("key", "animation_player")]
+script = ExtResource("22_rmeu3")
+key = NodePath("drawer1_mesh/Key1")
+animation_player = NodePath("../AnimationPlayer")
+open_animation_name = "drawer_1_open"
+close_animation_name = "drawer_1_close"
+
+[node name="drawer1_mesh" type="MeshInstance3D" parent="Dresser4/drawer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
+mesh = SubResource("ArrayMesh_vv5ju")
+skeleton = NodePath("")
+
+[node name="Key1" parent="Dresser4/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
+transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser4/drawer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
+shape = SubResource("ConcavePolygonShape3D_nwdvu")
+
+[node name="drawer2" type="StaticBody3D" parent="Dresser4"]
+
+[node name="drawer2_mesh" type="MeshInstance3D" parent="Dresser4/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+mesh = SubResource("ArrayMesh_6f0hd")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser4/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+shape = SubResource("ConcavePolygonShape3D_1wqnd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Dresser4/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+shape = SubResource("ConcavePolygonShape3D_t1abr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dresser4"]
+libraries = {
+&"": SubResource("AnimationLibrary_bbnek")
+}
+
+[node name="AudioStreamPlayer_open" type="AudioStreamPlayer3D" parent="Dresser4"]
+stream = ExtResource("29_dbw8i")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="AudioStreamPlayer_close" type="AudioStreamPlayer3D" parent="Dresser4"]
+stream = ExtResource("30_bohrk")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="Dresser5" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.38, 0, -3.3220655e-08, 0, 0.38, 0, 3.3220655e-08, 0, -0.38, 8.17693, 0.10694268, -27.035322)
+
+[node name="dresser" type="MeshInstance3D" parent="Dresser5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("ArrayMesh_qddgo")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07369995, 1.7149353, 0.12991333)
+shape = SubResource("BoxShape3D_t1abr")
+disabled = true
+
+[node name="drawer3" type="StaticBody3D" parent="Dresser5"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Dresser5/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 1.1, 0)
+shape = SubResource("ConcavePolygonShape3D_eye0t")
+
+[node name="drawer3_mesh" type="MeshInstance3D" parent="Dresser5/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 1.1, 0)
+layers = 3
+mesh = SubResource("ArrayMesh_gooxu")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser5/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16, 1.1, 0)
+shape = SubResource("ConcavePolygonShape3D_kqt5w")
+
+[node name="drawer1" type="StaticBody3D" parent="Dresser5" node_paths=PackedStringArray("key", "animation_player")]
+script = ExtResource("22_rmeu3")
+key = NodePath("drawer1_mesh/Key1")
+animation_player = NodePath("../AnimationPlayer")
+open_animation_name = "drawer_1_open"
+close_animation_name = "drawer_1_close"
+
+[node name="drawer1_mesh" type="MeshInstance3D" parent="Dresser5/drawer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
+mesh = SubResource("ArrayMesh_vv5ju")
+skeleton = NodePath("")
+
+[node name="Key1" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
+transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser5/drawer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
+shape = SubResource("ConcavePolygonShape3D_nwdvu")
+
+[node name="drawer2" type="StaticBody3D" parent="Dresser5"]
+
+[node name="drawer2_mesh" type="MeshInstance3D" parent="Dresser5/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+mesh = SubResource("ArrayMesh_6f0hd")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser5/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+shape = SubResource("ConcavePolygonShape3D_1wqnd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Dresser5/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+shape = SubResource("ConcavePolygonShape3D_t1abr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dresser5"]
+libraries = {
+&"": SubResource("AnimationLibrary_bbnek")
+}
+
+[node name="AudioStreamPlayer_open" type="AudioStreamPlayer3D" parent="Dresser5"]
+stream = ExtResource("29_dbw8i")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="AudioStreamPlayer_close" type="AudioStreamPlayer3D" parent="Dresser5"]
+stream = ExtResource("30_bohrk")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="Dresser3" type="StaticBody3D" parent="."]
+transform = Transform3D(4.5314548e-09, 0, -0.38, 0, 0.38, 0, 0.38, 0, 4.5314548e-09, 16.877308, 0.10694268, -6.399536)
+
+[node name="dresser" type="MeshInstance3D" parent="Dresser3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("ArrayMesh_qddgo")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07369995, 1.7149353, 0.12991333)
+shape = SubResource("BoxShape3D_t1abr")
+disabled = true
+
+[node name="drawer3" type="StaticBody3D" parent="Dresser3"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Dresser3/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 1.1, 0)
+shape = SubResource("ConcavePolygonShape3D_eye0t")
+
+[node name="drawer3_mesh" type="MeshInstance3D" parent="Dresser3/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 1.1, 0)
+layers = 3
+mesh = SubResource("ArrayMesh_gooxu")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser3/drawer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16, 1.1, 0)
+shape = SubResource("ConcavePolygonShape3D_kqt5w")
+
+[node name="drawer1" type="StaticBody3D" parent="Dresser3" node_paths=PackedStringArray("key", "animation_player")]
+script = ExtResource("22_rmeu3")
+key = NodePath("drawer1_mesh/Key1")
+animation_player = NodePath("../AnimationPlayer")
+open_animation_name = "drawer_1_open"
+close_animation_name = "drawer_1_close"
+
+[node name="drawer1_mesh" type="MeshInstance3D" parent="Dresser3/drawer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
+mesh = SubResource("ArrayMesh_vv5ju")
+skeleton = NodePath("")
+
+[node name="Key1" parent="Dresser3/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
+transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser3/drawer1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
+shape = SubResource("ConcavePolygonShape3D_nwdvu")
+
+[node name="drawer2" type="StaticBody3D" parent="Dresser3"]
+
+[node name="drawer2_mesh" type="MeshInstance3D" parent="Dresser3/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+mesh = SubResource("ArrayMesh_6f0hd")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser3/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+shape = SubResource("ConcavePolygonShape3D_1wqnd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Dresser3/drawer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 2.1, 0)
+shape = SubResource("ConcavePolygonShape3D_t1abr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dresser3"]
+libraries = {
+&"": SubResource("AnimationLibrary_bbnek")
+}
+
+[node name="AudioStreamPlayer_open" type="AudioStreamPlayer3D" parent="Dresser3"]
+stream = ExtResource("29_dbw8i")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="AudioStreamPlayer_close" type="AudioStreamPlayer3D" parent="Dresser3"]
+stream = ExtResource("30_bohrk")
+volume_db = -25.0
+unit_size = 5.0
+max_db = 2.0
+
+[node name="enemy_2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -9.304617, 1.032595, -24.866156)
 player = NodePath("../Player")
 

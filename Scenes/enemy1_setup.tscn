@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cbg8cujuop6ic"]
+[gd_scene load_steps=17 format=3 uid="uid://cbg8cujuop6ic"]
 
 [ext_resource type="PackedScene" uid="uid://cr2x8kikrlp68" path="res://Assets/FirstEnemy/cac-1763990790242.gltf" id="1_mmn3c"]
 
@@ -44,6 +44,8 @@ fadeout_curve = SubResource("Curve_mq3tf")
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4rvby"]
 animation = &"ZombieIdle"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mmn3c"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0uacy"]
 animation = &"ZombieWalk"
 use_custom_timeline = true
@@ -55,8 +57,8 @@ loop_mode = 1
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0uacy"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jdaou"]
-graph_offset = Vector2(-1065.4476, -144.49353)
-nodes/output/position = Vector2(933.3333, 106.666664)
+graph_offset = Vector2(45.219074, -160.49353)
+nodes/output/position = Vector2(1066.6666, 53.333332)
 nodes/Walk/node = SubResource("AnimationNodeAnimation_0uacy")
 nodes/Walk/position = Vector2(-920, 240)
 nodes/Death/node = SubResource("AnimationNodeAnimation_mq3tf")
@@ -67,15 +69,17 @@ nodes/Hit_OneShot/node = SubResource("AnimationNodeOneShot_4rvby")
 nodes/Hit_OneShot/position = Vector2(-260, -40)
 nodes/Death_Blend/node = SubResource("AnimationNodeBlend2_mmn3c")
 nodes/Death_Blend/position = Vector2(586.6667, -26.666666)
-nodes/Bite/node = SubResource("AnimationNodeAnimation_mmn3c")
-nodes/Bite/position = Vector2(-80, 133.33333)
-nodes/Bite_OneShot/node = SubResource("AnimationNodeOneShot_0uacy")
-nodes/Bite_OneShot/position = Vector2(133.33333, -26.666666)
+nodes/Attack/node = SubResource("AnimationNodeAnimation_mmn3c")
+nodes/Attack/position = Vector2(-80, 133.33333)
+nodes/Attack_OneShot/node = SubResource("AnimationNodeOneShot_0uacy")
+nodes/Attack_OneShot/position = Vector2(133.33333, -26.666666)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_4rvby")
 nodes/Idle/position = Vector2(-1080, 160)
 nodes/Walk_Blend/node = SubResource("AnimationNodeBlend2_0uacy")
 nodes/Walk_Blend/position = Vector2(-740, 0)
-node_connections = [&"output", 0, &"Death_Blend", &"Hit_OneShot", 0, &"Walk_Blend", &"Hit_OneShot", 1, &"Hit", &"Death_Blend", 0, &"Bite_OneShot", &"Death_Blend", 1, &"Death", &"Bite_OneShot", 0, &"Hit_OneShot", &"Bite_OneShot", 1, &"Bite", &"Walk_Blend", 0, &"Idle", &"Walk_Blend", 1, &"Walk"]
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_mmn3c")
+nodes/TimeScale/position = Vector2(880, 26.666666)
+node_connections = [&"output", 0, &"TimeScale", &"Hit_OneShot", 0, &"Walk_Blend", &"Hit_OneShot", 1, &"Hit", &"Death_Blend", 0, &"Attack_OneShot", &"Death_Blend", 1, &"Death", &"Attack_OneShot", 0, &"Hit_OneShot", &"Attack_OneShot", 1, &"Attack", &"Walk_Blend", 0, &"Idle", &"Walk_Blend", 1, &"Walk", &"TimeScale", 0, &"Death_Blend"]
 
 [node name="Enemy" instance=ExtResource("1_mmn3c")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -145,7 +149,8 @@ parameters/Hit_OneShot/active = false
 parameters/Hit_OneShot/internal_active = false
 parameters/Hit_OneShot/request = 0
 parameters/Death_Blend/blend_amount = 0.0
-parameters/Bite_OneShot/active = false
-parameters/Bite_OneShot/internal_active = false
-parameters/Bite_OneShot/request = 0
+parameters/Attack_OneShot/active = false
+parameters/Attack_OneShot/internal_active = false
+parameters/Attack_OneShot/request = 0
 parameters/Walk_Blend/blend_amount = 0.0
+parameters/TimeScale/scale = 1.0
