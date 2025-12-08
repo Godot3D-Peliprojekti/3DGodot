@@ -33,7 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/drawer_close.mp3" id="30_bohrk"]
 [ext_resource type="PackedScene" uid="uid://c788lud8fksb5" path="res://Scenes/chest.tscn" id="31_iwonc"]
 [ext_resource type="Texture2D" uid="uid://mptftfu0mb1p" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase.png" id="32_ctf0g"]
-[ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/Enemy_2.tscn" id="32_dbw8i"]
+[ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/enemy_2.tscn" id="32_dbw8i"]
 [ext_resource type="Texture2D" uid="uid://7tn11b8pq8gd" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase_01.png" id="33_xx7av"]
 [ext_resource type="Texture2D" uid="uid://d1hxdys673qut" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase_02.png" id="34_ik1c7"]
 [ext_resource type="Texture2D" uid="uid://doo4e6gye30mw" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Armchair_03.png" id="35_0ddlf"]
@@ -6009,7 +6009,7 @@ volume_db = -25.0
 unit_size = 5.0
 max_db = 2.0
 
-[node name="Enemy_2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+[node name="enemy_2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -9.304617, 1.032595, -24.866156)
 player = NodePath("../Player")
 
