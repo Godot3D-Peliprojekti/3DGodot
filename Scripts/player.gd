@@ -3,7 +3,7 @@ class_name Player
 
 # TODO: Move to game controller
 @export var gravity = 9.8
-@export var mouse_sensitivity = 0.003
+@export var mouse_sensitivity: float = 0.003
 
 # Weapons
 enum Weapon {
@@ -69,13 +69,16 @@ var upper_weapon_gun_attack_add: float = 0.0
 @onready var skeleton = $Head/Character/Armature/Skeleton3D
 var bone_index: int
 
-# Taskulamppu
+# Flashlight
 @onready var flashlight = $Head/Camera3D/SpotLight3D
 var show_flashlight = false
 @onready var flashlight_prompt_label = $CanvasLayer/Control/Flashlight_Prompt_Label
 var show_flashlight_prompt = true
+var flashlight_prompt_timer: float = 0.0
+var flashlight_prompt_timeout: float = 2.0
 
 # HUD elements
+@onready var control: Control = $CanvasLayer/Control
 @onready var hud_weapon_bat = $CanvasLayer/Control/Baseball_Bat
 @onready var hud_weapon_knife = $CanvasLayer/Control/Knife
 @onready var hud_weapon_gun = $CanvasLayer/Control/Gun
@@ -90,8 +93,13 @@ var show_flashlight_prompt = true
 @export var hud_color_selected_secondary: Color = Color(1.0, 1.0, 1.0, 0.5)
 @export var hud_color_unselected: Color = Color(1.0, 1.0, 1.0, 0.1)
 
-# Sound
-@onready var footstep_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+# Sounds
+@onready var audio_stream_player: AudioStreamPlayer = $CanvasLayer/Pause_menu/AudioStreamPlayer
+@onready var audio_stream_player_movement: AudioStreamPlayer3D = $AudioStreamPlayer_movement
+@onready var audio_stream_player_gun_reload: AudioStreamPlayer3D = $AudioStreamPlayer_gun_reload
+@onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
+@onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
+
 
 
 # Player
@@ -129,6 +137,9 @@ var selected_weapon: int = Weapon.NONE
 
 @onready var vignette = $CanvasLayer/Control/Vignette
 var vignette_target: float
+
+# Pause menu
+@onready var pause_menu: Control = $CanvasLayer/Pause_menu
 
 func hit(damage: int) -> void:
 	health = max(health - damage, health_min)
@@ -181,7 +192,11 @@ func update_health_label() -> void:
 	hud_health_label.text = str(health)
 
 func _ready() -> void:
+	flashlight_prompt_timer = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pause_menu.visible = false
+	
+	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
@@ -190,18 +205,48 @@ func _ready() -> void:
 	weapon_deactivate_all()
 	update_ammo_label()
 	update_health_label()
+	_setup_gunshot_reverb()
 
 func _unhandled_input(event) -> void:
+
+	if event.is_action_pressed("ui_cancel"):
+		_toggle_pause()
+		return
+		
+	if get_tree().paused:
+		return
+		
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(camera_pitch_min), deg_to_rad(camera_pitch_max))
+		
+# Toggle pause menu
+func _toggle_pause() -> void:
+	var tree = get_tree()
+	tree.paused = not tree.paused
+	pause_menu.visible = tree.paused
+
+	if tree.paused:
+		if not audio_stream_player.playing:
+			audio_stream_player.play()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		control.visible = false
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		control.visible = true
+
 
 func _process(delta: float) -> void:
-	# TODO: Move to game controller
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# Hide flashlight prompt automatically after timeout
+	if show_flashlight_prompt:
+		flashlight_prompt_timer += delta
+		if flashlight_prompt_timer >= flashlight_prompt_timeout:
+			show_flashlight_prompt = false
+			flashlight_prompt_label.visible = false
+		
+	if get_tree().paused:
+		return
 
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
@@ -218,7 +263,6 @@ func _process(delta: float) -> void:
 		show_flashlight = !show_flashlight
 
 	# SpotLight näkyvyys: näkyy vain jos show_flashlight ja ei kyykky
-	# flashlight.visible = show_flashlight and not movement_script.is_crouching
 	flashlight.visible = show_flashlight
 
 	if Input.is_action_just_pressed("crouch"):
@@ -227,6 +271,10 @@ func _process(delta: float) -> void:
 	is_running = false
 	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
+	
+		
+		
+		
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
@@ -297,6 +345,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("attack"):
 		if selected_weapon == Weapon.BAT and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			play_swing()
 		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
@@ -305,7 +354,9 @@ func _process(delta: float) -> void:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
-
+		
+		play_gunshot()
+		
 		ammo_current -= 1
 		update_ammo_label()
 
@@ -313,6 +364,7 @@ func _process(delta: float) -> void:
 		stop_reloading(true)
 
 	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+		play_gun_reload()
 		is_reloading = true
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
@@ -373,6 +425,11 @@ func _process(delta: float) -> void:
 			update_health_label()
 
 func _physics_process(delta: float) -> void:
+	
+	# Stop all physics if game is paused
+	if get_tree().paused:
+		return
+		
 	# Update stun timer
 	if stun_time > 0.0:
 		stun_time -= delta
@@ -432,9 +489,53 @@ func _physics_process(delta: float) -> void:
 						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()
+	
 func play_footstep() -> void:
-		if footstep_audio and not footstep_audio.playing and velocity.length() > 0.1:
-			footstep_audio.play()
-	
-	
-	
+		if audio_stream_player_movement and velocity.length() > 0.1:
+			audio_stream_player_movement.play()
+			
+			
+func play_gun_reload() -> void:
+		audio_stream_player_gun_reload.play()
+		
+func _setup_gunshot_reverb() -> void:
+	# Create a new bus for gunshot
+	AudioServer.add_bus()
+	var bus_index := AudioServer.get_bus_count() - 1
+	AudioServer.set_bus_name(bus_index, "GunshotBus")
+
+	# Make the player's gunshot audiostreamplayer use that bus
+	audio_stream_player_gunshot.bus = "GunshotBus"
+
+	# Add reverb effect
+	var reverb := AudioEffectReverb.new()
+
+	# These values should reduce the echoing
+	reverb.room_size = 0.1
+	reverb.damping = 1.0
+	reverb.wet = 0.005
+	reverb.dry = 1.0
+	reverb.predelay_msec = 0.0
+
+	AudioServer.add_bus_effect(bus_index, reverb, 0)
+
+		
+func play_gunshot() -> void:
+	# Temporary sound player
+	var shot_player := AudioStreamPlayer3D.new()
+	shot_player.stream = audio_stream_player_gunshot.stream
+	shot_player.bus = audio_stream_player_gunshot.bus
+	shot_player.transform = audio_stream_player_gunshot.transform
+
+	# Add the shot_player as a child inside Player node
+	add_child(shot_player)
+
+	shot_player.play()
+
+	# When sound is played, delete the temporary player
+	shot_player.finished.connect(func():
+		shot_player.queue_free())
+		
+func play_swing() -> void:
+	if not audio_stream_player_swing.playing:
+		audio_stream_player_swing.play()

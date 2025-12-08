@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="3DGodot"
-run/main_scene="uid://ip2wgnhl5jro"
+run/main_scene="uid://pbo3u58l0wsq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=300
-config/icon="res://icon.svg"
+config/icon="res://Assets/MenuScreen/icon.svg"
 
 [display]
 
