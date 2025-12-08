@@ -21,11 +21,6 @@ const GRAVITY: float = 9.8
 var animation_speed: float = animation_speed_default
 @export var animation_blend_easing: float = 10.0
 
-@export var animation_walk_blend: String = "Walk_Blend"
-@export var animation_death_blend: String = "Death_Blend"
-@export var animation_attack_oneshot: String = "Attack_OneShot"
-@export var animation_hit_oneshot: String = "Hit_OneShot"
-
 var death_blend: float
 var walk_blend: float
 
@@ -40,30 +35,30 @@ func hit(damage: int) -> void:
 	if health <= 0 and not is_dead:
 		is_dead = true
 	else:
-		animation_tree["parameters/"+animation_attack_oneshot+"/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
-		animation_tree["parameters/"+animation_hit_oneshot+"/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+		animation_tree["parameters/Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
+		animation_tree["parameters/Hit_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		health_bar._hit(damage)
 
 func _process(delta: float) -> void:
 	animation_speed = animation_speed_default
-	if animation_tree["parameters/"+animation_hit_oneshot+"/active"] and not death_blend > 0.0:
+	if animation_tree["parameters/Hit_OneShot/active"] and not death_blend > 0.0:
 		animation_speed = animation_speed_hit
 	elif walk_blend > 0.0:
 		animation_speed = animation_speed_walk
 	animation_tree["parameters/TimeScale/scale"] = animation_speed
 
 	walk_blend = lerp(walk_blend, clamp(velocity.length(), 0.0, 1.0), animation_blend_easing * delta)
-	animation_tree["parameters/"+animation_walk_blend+"/blend_amount"] = walk_blend
+	animation_tree["parameters/Walk_Blend/blend_amount"] = walk_blend
 
 	health_bar.health = health
 	health_bar._look_at(player.global_position)
 
 	death_blend = lerp(death_blend, float(is_dead), animation_blend_easing * delta)
-	animation_tree["parameters/"+animation_death_blend+"/blend_amount"] = death_blend
+	animation_tree["parameters/Death_Blend/blend_amount"] = death_blend
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
-		if animation_tree["parameters/"+animation_death_blend+"/blend_amount"] > 0.9999:
+		if animation_tree["parameters/Death_Blend/blend_amount"] > 0.9999:
 			health_bar.visible = false
 		if collision_shape:
 			collision_shape.queue_free()
@@ -116,14 +111,14 @@ func _physics_process(delta: float) -> void:
 			look_at(global_transform.origin + move_dir, Vector3.UP)
 
 			# Stop biting the air
-			if animation_tree["parameters/"+animation_attack_oneshot+"/active"]:
-				animation_tree["parameters/"+animation_attack_oneshot+"/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
+			if animation_tree["parameters/Attack_OneShot/active"]:
+				animation_tree["parameters/Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
 		else:
 			move_dir = Vector3.ZERO
 			look_at(global_transform.origin + dir_to_player, Vector3.UP)
 
-			if not animation_tree["parameters/"+animation_attack_oneshot+"/active"]:
-				animation_tree["parameters/"+animation_attack_oneshot+"/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			if not animation_tree["parameters/Attack_OneShot/active"]:
+				animation_tree["parameters/Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 				player.stun_time = max(player.stun_time, 1.5)	# Stun the player
 				player.hit(10)
 
