@@ -47,9 +47,9 @@
 [ext_resource type="Texture2D" uid="uid://duhsorkkve3h3" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Plates.png" id="45_ge5gi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ctf0g"]
-sky_top_color = Color(0.5890956, 0.5890956, 0.5890956, 1)
-sky_horizon_color = Color(0.8322829, 0.824533, 0.8155329, 1)
-ground_horizon_color = Color(0.8322829, 0.824533, 0.8155329, 1)
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.19414508, 0.18639508, 0.17739508, 1)
+ground_horizon_color = Color(0.19414508, 0.18639508, 0.17739508, 1)
 energy_multiplier = 0.1
 
 [sub_resource type="Sky" id="Sky_xx7av"]
@@ -61,7 +61,7 @@ sky = SubResource("Sky_xx7av")
 ssao_enabled = true
 ssil_enabled = true
 fog_enabled = true
-fog_light_energy = 0.4
+fog_light_color = Color(0.50885665, 0.54417044, 0.59910434, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52wxh"]
 albedo_color = Color(0.41960785, 0.6, 0.6, 1)
@@ -5417,10 +5417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.2548998, 1.4582338, -93.009445)
+bones/0/position = Vector3(-0.5705762, 1.9710788, -93.160645)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.66935, 0.077141285, -140.34998)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.98502, 0.5899863, -140.50117)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -6280,6 +6280,9 @@ surface_material_override/1 = SubResource("StandardMaterial3D_iwonc")
 [node name="OmniLight3D" type="OmniLight3D" parent="Ceiling light"]
 light_color = Color(0.9999996, 0.8765346, 0.74426055, 1)
 light_energy = 0.8
+shadow_enabled = true
+shadow_opacity = 0.3
+shadow_blur = 5.0
 omni_range = 10.0
 
 [node name="Sofa B2" type="MeshInstance3D" parent="."]
@@ -6470,16 +6473,6 @@ transform = Transform3D(25, 0, 0, 0, -1.0927847e-06, 25, 0, -25, -1.0927847e-06,
 mesh = SubResource("ArrayMesh_hqwhg")
 skeleton = NodePath("")
 
-[node name="Wall Light2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.3113416e-06, -30, -1.3113416e-06, 0, -1.3113416e-06, 30, -30, 1.3113416e-06, 5.732056e-14, 0.147, 2.6, 2.232)
-mesh = SubResource("ArrayMesh_lla56")
-skeleton = NodePath("")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Wall Light2"]
-light_color = Color(1, 0.8712822, 0.6663423, 1)
-light_energy = 0.6
-omni_range = 4.0
-
 [node name="Wall Light3" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.5774642e-07, 30, 1.3113416e-06, 0, -1.3113416e-06, 30, 30, -3.5774642e-07, -1.5637592e-14, 16.793, 3.1, 4.521)
 mesh = SubResource("ArrayMesh_lla56")
@@ -6488,6 +6481,9 @@ skeleton = NodePath("")
 [node name="OmniLight3D" type="OmniLight3D" parent="Wall Light3"]
 light_color = Color(1, 0.8712822, 0.6663423, 1)
 light_energy = 0.6
+shadow_enabled = true
+shadow_opacity = 0.3
+shadow_blur = 5.0
 omni_range = 6.0
 
 [node name="Wall Light4" type="MeshInstance3D" parent="."]
@@ -6498,6 +6494,9 @@ skeleton = NodePath("")
 [node name="OmniLight3D" type="OmniLight3D" parent="Wall Light4"]
 light_color = Color(1, 0.8712822, 0.6663423, 1)
 light_energy = 0.6
+shadow_enabled = true
+shadow_opacity = 0.3
+shadow_blur = 5.0
 omni_range = 4.0
 
 [node name="Wall Light5" type="MeshInstance3D" parent="."]
@@ -6508,6 +6507,9 @@ skeleton = NodePath("")
 [node name="OmniLight3D" type="OmniLight3D" parent="Wall Light5"]
 light_color = Color(1, 0.8712822, 0.6663423, 1)
 light_energy = 0.6
+shadow_enabled = true
+shadow_opacity = 0.3
+shadow_blur = 5.0
 omni_range = 4.0
 
 [node name="Wall Light6" type="MeshInstance3D" parent="."]
@@ -6518,6 +6520,9 @@ skeleton = NodePath("")
 [node name="OmniLight3D" type="OmniLight3D" parent="Wall Light6"]
 light_color = Color(1, 0.8712822, 0.6663423, 1)
 light_energy = 0.7
+shadow_enabled = true
+shadow_opacity = 0.3
+shadow_blur = 5.0
 omni_range = 8.0
 
 [node name="Window A7" type="MeshInstance3D" parent="."]
