@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwieoowexdnbx"
-path.s3tc="res://.godot/imported/Can.png-54a7460be405f2c8db76598387786792.s3tc.ctex"
+path.s3tc="res://.godot/imported/Can.png-6a39c3fec2b12f99fac2dd26e49bcbdc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/Can.png"
-dest_files=["res://.godot/imported/Can.png-54a7460be405f2c8db76598387786792.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Can.png"
+dest_files=["res://.godot/imported/Can.png-6a39c3fec2b12f99fac2dd26e49bcbdc.s3tc.ctex"]
 
 [params]
 

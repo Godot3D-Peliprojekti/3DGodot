@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mptftfu0mb1p"
-path.s3tc="res://.godot/imported/Bookcase.png-7504cc1780700148802c2418e8b05d90.s3tc.ctex"
+path.s3tc="res://.godot/imported/Bookcase.png-0027aa9f46d1209532225d8a8043fc1f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/textures/Bookcase.png"
-dest_files=["res://.godot/imported/Bookcase.png-7504cc1780700148802c2418e8b05d90.s3tc.ctex"]
+source_file="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase.png"
+dest_files=["res://.godot/imported/Bookcase.png-0027aa9f46d1209532225d8a8043fc1f.s3tc.ctex"]
 
 [params]
 
