@@ -12,3 +12,7 @@ func play_gun_reload() -> void:
 func play_gunshot() -> void:
 	if owner and owner.has_method("play_gunshot"):
 		owner.play_gunshot()
+
+func play_swing() -> void:
+	if owner and owner.has_method("play_swing"):
+		owner.play_swing()
