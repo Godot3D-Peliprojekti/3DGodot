@@ -98,6 +98,7 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_movement: AudioStreamPlayer3D = $AudioStreamPlayer_movement
 @onready var audio_stream_player_gun_reload: AudioStreamPlayer3D = $AudioStreamPlayer_gun_reload
 @onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
+@onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
 
 
 
@@ -344,6 +345,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("attack"):
 		if selected_weapon == Weapon.BAT and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			play_swing()
 		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 
@@ -533,3 +535,7 @@ func play_gunshot() -> void:
 	# When sound is played, delete the temporary player
 	shot_player.finished.connect(func():
 		shot_player.queue_free())
+		
+func play_swing() -> void:
+	if not audio_stream_player_swing.playing:
+		audio_stream_player_swing.play()

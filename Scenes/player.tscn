@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=21 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/wood2.mp3" id="10_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://bkl1o4qdiwhwt" path="res://Audio/swing.mp3" id="11_gymyn"]
+[ext_resource type="AudioStream" uid="uid://c2xy1c14jp157" path="res://Audio/reload.mp3" id="11_pu2lt"]
+[ext_resource type="AudioStream" uid="uid://bj8ynw4i6no22" path="res://Audio/shot.mp3" id="12_ukyrk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3smsa"]
 font_size = 64
@@ -268,46 +271,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(0, 2.1090126, -95.704185)
-bones/8/position = Vector3(-1.847744e-06, 14.454562, -1.758337e-05)
-bones/9/position = Vector3(1.4305115e-06, 27.39817, -1.6123056e-05)
-bones/13/position = Vector3(-0.028795958, 3.2459116, 2.2172928e-05)
-bones/14/position = Vector3(0.68180704, 2.4556468, -1.2993813e-05)
-bones/16/position = Vector3(0.01782155, 3.4027555, 7.033348e-06)
-bones/18/position = Vector3(-0.0066998005, 2.7435863, -1.1742115e-05)
-bones/19/position = Vector3(-1.0944446, 10.003369, -0.17452519)
-bones/20/position = Vector3(0.018854618, 3.4668775, -2.0727515e-05)
-bones/22/position = Vector3(-0.0040593147, 2.927172, 2.2776425e-05)
-bones/23/position = Vector3(1.1503813, 10.185297, -0.23173097)
-bones/26/position = Vector3(0.016685247, 2.2952101, 3.7521124e-05)
-bones/28/position = Vector3(0.0021073818, 2.5700634, 1.6212463e-05)
-bones/30/position = Vector3(0.012378216, 1.815947, 2.7060509e-05)
-bones/32/position = Vector3(-1.3113022e-06, 14.454557, -3.33488e-05)
-bones/34/position = Vector3(1.4305115e-06, 21.326958, -3.993511e-06)
-bones/35/position = Vector3(2.9669049, 3.0655212, 1.338771)
-bones/36/position = Vector3(0.6240188, 3.5221412, 4.7683716e-06)
-bones/37/position = Vector3(-0.17727757, 3.3597016, -3.182888e-05)
-bones/38/position = Vector3(-0.44674373, 2.7944717, 1.4901161e-05)
-bones/39/position = Vector3(3.6056, 9.873831, 0.1320321)
-bones/40/position = Vector3(-0.017495036, 3.2763097, -2.2187829e-05)
-bones/41/position = Vector3(0.008559346, 3.084219, 1.347065e-05)
-bones/43/position = Vector3(1.00538, 10.212288, -0.3071283)
-bones/44/position = Vector3(-0.0117121935, 3.5342903, 1.2144446e-05)
-bones/46/position = Vector3(-0.0007123947, 2.8596752, -1.2725592e-05)
-bones/47/position = Vector3(-1.1856542, 10.210824, -0.20227802)
-bones/51/position = Vector3(-3.4253106, 8.861891, 0.009164631)
-bones/52/position = Vector3(-0.011162862, 2.789026, -2.9206276e-05)
-bones/54/position = Vector3(-0.00042423606, 2.0947971, -2.0980835e-05)
-bones/55/position = Vector3(8.926856, -5.876503, 0.08162366)
-bones/56/position = Vector3(2.7846545e-07, 41.070522, 2.0426523e-07)
-bones/57/position = Vector3(-1.6223639e-06, 37.689438, 2.9150397e-07)
-bones/58/position = Vector3(6.556511e-07, 19.417402, -5.9604645e-07)
-bones/59/position = Vector3(6.966293e-07, 7.932381, -8.940697e-08)
-bones/62/position = Vector3(1.0095537e-06, 37.718357, 3.17581e-07)
-bones/63/position = Vector3(-1.4901161e-08, 19.759895, 7.748604e-07)
+bones/0/position = Vector3(-0.8773945, 2.5292678, -93.1857)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.48793, -3.2429104, -142.01585)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.29185, 1.1481752, -140.52623)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)
@@ -333,7 +300,14 @@ volume_db = -36.953
 pitch_scale = 1.41
 
 [node name="AudioStreamPlayer_gun_reload" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_pu2lt")
+volume_db = -30.0
 
 [node name="AudioStreamPlayer_gunshot" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_ukyrk")
+
+[node name="AudioStreamPlayer_swing" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_gymyn")
+volume_db = -20.0
 
 [editable path="Head/Character"]
