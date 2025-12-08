@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=18 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -267,7 +267,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.5962558, 2.1098602, -93.16887)
+bones/0/position = Vector3(-1.560042, 3.7581713, -93.35343)
 bones/55/position = Vector3(8.926856, -5.8765154, 0.08162338)
 bones/56/position = Vector3(3.480026e-07, 41.070522, 5.38132e-06)
 bones/57/position = Vector3(1.6690283e-06, 37.689438, -3.583384e-07)
@@ -277,7 +277,7 @@ bones/62/position = Vector3(9.23303e-07, 37.718353, 9.1976995e-07)
 bones/63/position = Vector3(5.619713e-07, 19.759895, -5.0860035e-07)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.010704, 0.72876763, -140.5094)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.974495, 2.3770785, -140.69397)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)

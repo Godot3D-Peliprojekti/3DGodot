@@ -397,6 +397,7 @@ _data = {
 }
 
 [node name="Dresser" type="StaticBody3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="dresser" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -437,7 +438,7 @@ mesh = SubResource("ArrayMesh_vv5ju")
 skeleton = NodePath("")
 
 [node name="Key1" parent="drawer1/drawer1_mesh" instance=ExtResource("5_nwdvu")]
-transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
+transform = Transform3D(0.99999994, 1.7320509, -7.5710346e-08, 0, -8.742278e-08, -2, -1.7320509, 0.99999994, -4.3711385e-08, 3.8402257, -0.8459554, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1425483, 2.424517, 0.059753418)
