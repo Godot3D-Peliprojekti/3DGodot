@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://chrhya6b6ljf" path="res://Assets/HUD/crosshair.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://c4k1uxo6t48hy" path="res://Assets/HUD/vignette.png" id="6_8erm5"]
-[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="7_7dp3o"]
+[ext_resource type="PackedScene" uid="uid://dhajfn4djep5a" path="res://Scenes/pause_menu.tscn" id="7_7dp3o"]
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/wood2.mp3" id="10_tx1dd"]
@@ -274,10 +274,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.0535241, 2.8353102, -93.23803)
+bones/0/position = Vector3(-0.48651072, 1.8923689, -93.156425)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.46797, 1.4542177, -140.57857)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.90096, 0.51127625, -140.49696)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)

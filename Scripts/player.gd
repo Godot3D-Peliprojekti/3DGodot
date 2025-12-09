@@ -111,7 +111,7 @@ var speed: float
 @export var crouch_multiplier: float = 0.33
 @export var health_max: int = 100
 @export var health_min: int = 0
-@export var weapon_magazine_size: int = 8
+@export var weapon_magazine_size: int = 0
 var input_vector: Vector2
 
 # Crouching
@@ -128,7 +128,7 @@ var is_crouching: bool = false
 var is_reloading: bool = false
 
 var ammo_current: int = 0
-var ammo_reserve: int = 999
+var ammo_reserve: int = 0
 var health: int = 0
 var selected_weapon: int = Weapon.NONE
 
@@ -183,6 +183,24 @@ func weapon_activate(weapon: int) -> void:
 			hud_weapon_gun.modulate = hud_color_selected
 			hud_ammo_current.modulate = hud_color_selected
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
+			
+func weapon_hud_hide() -> void:
+	hud_weapon_bat.visible = false 
+	hud_weapon_knife.visible = false
+	hud_weapon_gun.visible = false
+	hud_ammo_current.visible = false
+	hud_ammo_reserve.visible = false
+	
+func weapon_pickup(id: String):
+	match id:
+		"bat":
+			hud_weapon_bat.visible = true
+		"knife":
+			hud_weapon_knife.visible = true
+		"gun":
+			hud_weapon_gun.visible = true
+			
+	weapon_activate(selected_weapon)
 
 func update_ammo_label() -> void:
 	hud_ammo_current.text = str(ammo_current)
@@ -201,7 +219,8 @@ func _ready() -> void:
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
 	assert(bone_index != -1)
-
+	
+	weapon_hud_hide()
 	weapon_deactivate_all()
 	update_ammo_label()
 	update_health_label()
@@ -278,13 +297,15 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
+		#weapon_available()
+		
 
 		var selected = Weapon.NONE
-		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT:
+		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT and hud_weapon_bat.visible:
 			selected = Weapon.BAT
-		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE:
+		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE and hud_weapon_knife.visible:
 			selected = Weapon.KNIFE
-		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN:
+		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN: #and hud_weapon_knife.visible
 			selected = Weapon.GUN
 
 		weapon_activate(selected)

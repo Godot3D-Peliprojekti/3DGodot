@@ -7,6 +7,7 @@ transparency = 1
 albedo_color = Color(1, 1, 1, 0.18400002)
 
 [node name="m1911" instance=ExtResource("1_vk1bi")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="Muzzle_Flash" type="Node3D" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44872952, 0)

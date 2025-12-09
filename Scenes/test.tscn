@@ -13,3 +13,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25868988, -1.5258789e-05, -
 navigation_mesh = SubResource("NavigationMesh_8uh7m")
 
 [node name="Main" parent="NavigationRegion3D" instance=ExtResource("1_lc1oi")]
+
+[node name="Skeleton3D" parent="NavigationRegion3D/Main/Player/Head/Character/Armature" index="0"]
+bones/0/position = Vector3(-0.49704587, 2.0169826, -93.17773)
+
+[node name="BoneAttachment3D" parent="NavigationRegion3D/Main/Player/Head/Character/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.9115, 0.63589, -140.51826)
+
+[editable path="NavigationRegion3D/Main"]
+[editable path="NavigationRegion3D/Main/Player"]
+[editable path="NavigationRegion3D/Main/Player/Head/Character"]
+[editable path="NavigationRegion3D/Main/DoorModel"]
+[editable path="NavigationRegion3D/Main/DoorModel4"]
+[editable path="NavigationRegion3D/Main/DoorModel8"]
+[editable path="NavigationRegion3D/Main/DoorModel10"]
+[editable path="NavigationRegion3D/Main/DoorModel11"]
+[editable path="NavigationRegion3D/Main/ExitDoor"]
+[editable path="NavigationRegion3D/Main/DoorModel2"]
+[editable path="NavigationRegion3D/Main/DoorModel5"]
+[editable path="NavigationRegion3D/Main/DoorModel7"]
+[editable path="NavigationRegion3D/Main/DoorModel3"]
+[editable path="NavigationRegion3D/Main/DoorModel9"]
+[editable path="NavigationRegion3D/Main/DoorModel6"]
