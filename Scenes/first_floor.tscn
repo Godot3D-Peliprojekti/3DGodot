@@ -31,7 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/drawer_close.mp3" id="30_bohrk"]
 [ext_resource type="PackedScene" uid="uid://c788lud8fksb5" path="res://Scenes/chest.tscn" id="31_iwonc"]
 [ext_resource type="Texture2D" uid="uid://mptftfu0mb1p" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase.png" id="32_ctf0g"]
-[ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/Enemy_2.tscn" id="32_dbw8i"]
+[ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/enemy_2.tscn" id="32_dbw8i"]
 [ext_resource type="Texture2D" uid="uid://7tn11b8pq8gd" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase_01.png" id="33_xx7av"]
 [ext_resource type="Texture2D" uid="uid://d1hxdys673qut" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase_02.png" id="34_ik1c7"]
 [ext_resource type="Texture2D" uid="uid://doo4e6gye30mw" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Armchair_03.png" id="35_0ddlf"]
@@ -4791,8 +4791,8 @@ environment = SubResource("Environment_ik1c7")
 
 [node name="GameManager2" type="Node3D" parent="." node_paths=PackedStringArray("drawers", "keys")]
 script = ExtResource("1_iwonc")
-drawers = [NodePath("../Dresser/drawer1"), NodePath("../Dresser2/drawer1")]
-keys = [NodePath("../Dresser/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser2/drawer1/drawer1_mesh/Key1")]
+drawers = [NodePath("../Dresser/drawer1"), NodePath("../Dresser2/drawer1"), NodePath("../Dresser4/drawer1"), NodePath("../Dresser5/drawer1"), NodePath("../Dresser3/drawer1")]
+keys = [NodePath("../Dresser/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser2/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser4/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser5/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser3/drawer1/drawer1_mesh/Key1")]
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, -34.525806, 0.023284912, -32.44792)
@@ -5417,10 +5417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.5705762, 1.9710788, -93.160645)
+bones/0/position = Vector3(-1.0894331, 2.7085261, -93.24581)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.98502, 0.5899863, -140.50117)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.50388, 1.3274336, -140.58635)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
