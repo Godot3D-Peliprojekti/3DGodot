@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnss4qheub6fu"]
+
+[ext_resource type="PackedScene" uid="uid://dk6k8kkt36006" path="res://Assets/WeaponMaterials/m1911.blend" id="1_j1qo2"]
+[ext_resource type="Script" uid="uid://bfbrsg6d1op2s" path="res://Scripts/weapons.gd" id="1_v21tj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v21tj"]
+size = Vector3(1.9956055, 6.0569, 9.6203)
+
+[node name="Pistol" type="StaticBody3D"]
+script = ExtResource("1_v21tj")
+weapon_id = "gun"
+prompt_message = "Press F to pick up"
+
+[node name="m1911" parent="." instance=ExtResource("1_j1qo2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4299127, 0, -0.6647079)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5781734, 1.7900314, 1.4717712)
+shape = SubResource("BoxShape3D_v21tj")

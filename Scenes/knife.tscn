@@ -10,7 +10,7 @@ size = Vector3(16.797363, 3.0600586, 2.8692932)
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_k4pir")
 weapon_id = "knife"
-prompt_message = "Press F to pickup"
+prompt_message = "Press F to pick up"
 
 [node name="Knife" parent="." instance=ExtResource("1_rq4os")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7313112, 1.1920929e-07, -1.2619171)

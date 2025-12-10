@@ -177,12 +177,18 @@ func weapon_activate(weapon: int) -> void:
 	match weapon:
 		Weapon.BAT:
 			hud_weapon_bat.modulate = hud_color_selected
+			hud_ammo_current.visible = false
+			hud_ammo_reserve.visible = false
 		Weapon.KNIFE:
 			hud_weapon_knife.modulate = hud_color_selected
+			hud_ammo_current.visible = false
+			hud_ammo_reserve.visible = false
 		Weapon.GUN:
 			hud_weapon_gun.modulate = hud_color_selected
 			hud_ammo_current.modulate = hud_color_selected
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
+			hud_ammo_current.visible = true
+			hud_ammo_reserve.visible = true
 			
 func weapon_hud_hide() -> void:
 	hud_weapon_bat.visible = false 
@@ -305,7 +311,7 @@ func _process(delta: float) -> void:
 			selected = Weapon.BAT
 		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE and hud_weapon_knife.visible:
 			selected = Weapon.KNIFE
-		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN: #and hud_weapon_knife.visible
+		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN and hud_weapon_gun.visible:
 			selected = Weapon.GUN
 
 		weapon_activate(selected)

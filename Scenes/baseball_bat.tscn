@@ -47,7 +47,7 @@ size = Vector3(2.9068298, 23.66504, 36.982376)
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_0fuc7")
 weapon_id = "bat"
-prompt_message = "Press F to pickup"
+prompt_message = "Press F to pick up"
 
 [node name="baseball_bat" parent="." instance=ExtResource("1_pt6l3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73203206, 0, 0.9462004)
