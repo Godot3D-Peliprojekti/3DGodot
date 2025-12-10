@@ -100,8 +100,6 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
 @onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
 
-
-
 # Player
 @export_category("Player")
 @onready var head = $Head
@@ -131,6 +129,8 @@ var ammo_current: int = 0
 var ammo_reserve: int = 5
 var health: int = 0
 var selected_weapon: int = Weapon.NONE
+var should_perform_attack: bool = false
+var delay_before_attack: float = 0.0
 
 @onready var raycast = $Head/Camera3D/RayCast3D
 @onready var bullet_hole_decal_scene = preload("res://Scenes/bullet_hole.tscn")
@@ -173,6 +173,8 @@ func weapon_deactivate_all() -> void:
 
 func weapon_activate(weapon: int) -> void:
 	selected_weapon = weapon
+	should_perform_attack = false
+	delay_before_attack = 0.0
 
 	match weapon:
 		Weapon.BAT:
@@ -222,7 +224,7 @@ func _ready() -> void:
 	flashlight_prompt_timer = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pause_menu.visible = false
-	
+
 	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	health = health_max
@@ -236,19 +238,18 @@ func _ready() -> void:
 	_setup_gunshot_reverb()
 
 func _unhandled_input(event) -> void:
-
 	if event.is_action_pressed("ui_cancel"):
 		_toggle_pause()
 		return
-		
+
 	if get_tree().paused:
 		return
-		
+
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(camera_pitch_min), deg_to_rad(camera_pitch_max))
-		
+
 # Toggle pause menu
 func _toggle_pause() -> void:
 	var tree = get_tree()
@@ -272,7 +273,7 @@ func _process(delta: float) -> void:
 		if flashlight_prompt_timer >= flashlight_prompt_timeout:
 			show_flashlight_prompt = false
 			flashlight_prompt_label.visible = false
-		
+
 	if get_tree().paused:
 		return
 
@@ -299,10 +300,6 @@ func _process(delta: float) -> void:
 	is_running = false
 	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
-	
-		
-		
-		
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
@@ -374,20 +371,22 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("attack"):
 		if selected_weapon == Weapon.BAT and not animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Bat_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			should_perform_attack = true
 			play_swing()
 		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			should_perform_attack = true
 
 	weapon_gun_muzzle_flash.visible = false;
 	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
-		
+
 		play_gunshot()
-		
 		ammo_current -= 1
 		update_ammo_label()
+		should_perform_attack = true
 
 	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
 		stop_reloading(true)
@@ -454,22 +453,22 @@ func _process(delta: float) -> void:
 			update_health_label()
 
 func _physics_process(delta: float) -> void:
-	
+
 	# Stop all physics if game is paused
 	if get_tree().paused:
 		return
-		
+
 	# Update stun timer
 	if stun_time > 0.0:
 		stun_time -= delta
-		
+
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
 	# Apply movement
 	var direction = (head.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
-	
+
 	# Only allow movement if not stunned
 	if stun_time <= 0.0:
 		if input_vector.length() > 0.0:
@@ -490,43 +489,46 @@ func _physics_process(delta: float) -> void:
 	collider.position.y = lerp(collider.position.y , collider_position_target, crouching_easing * delta)
 
 	# Handle attacking
-	if Input.is_action_just_pressed("attack") and selected_weapon != Weapon.NONE:
+	if Input.is_action_pressed("attack") and selected_weapon != Weapon.NONE and should_perform_attack:
 		raycast.rotation = Vector3.ZERO
 
+		# Add some inaccuracy when moving
 		if selected_weapon == Weapon.GUN:
-			# Add some inaccuracy when moving
 			raycast.rotation.x = (randf() - 0.5) * velocity.length() / 10.0
 			raycast.rotation.y = (randf() - 0.5) * velocity.length() / 10.0
 
-		# print((raycast.get_collider().global_position - global_position).length())
+		if selected_weapon != Weapon.GUN and delay_before_attack < 30 * delta:
+			delay_before_attack += delta
+		else:
+			should_perform_attack = false
+			delay_before_attack = 0.0
 
-		match raycast.get_collider().collision_layer:
-			1: # Wall
-				if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
-					var decal = bullet_hole_decal_scene.instantiate()
-					raycast.get_collider().add_child(decal)
-					decal.global_transform.origin = raycast.get_collision_point()
-					decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
-					decal.rotation.z = randf() * 360.0
+			match raycast.get_collider().collision_layer:
+				1: # Wall
+					if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
+						var decal = bullet_hole_decal_scene.instantiate()
+						raycast.get_collider().add_child(decal)
+						decal.global_transform.origin = raycast.get_collision_point()
+						decal.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
+						decal.rotation.z = randf() * 360.0
 
-			4: # Enemy
-				if (raycast.get_collider().global_position - global_position).length() < weapon_distance_max[selected_weapon]:
-					if selected_weapon == Weapon.GUN:
-						if ammo_current > 0 and not is_reloading:
+				4: # Enemy
+					if (raycast.get_collider().global_position - global_position).length() < weapon_distance_max[selected_weapon]:
+						if selected_weapon == Weapon.GUN:
+							if ammo_current > 0 and not is_reloading:
+								raycast.get_collider().hit(weapon_damage[selected_weapon])
+						else:
 							raycast.get_collider().hit(weapon_damage[selected_weapon])
-					else:
-						raycast.get_collider().hit(weapon_damage[selected_weapon])
 
 	move_and_slide()
-	
+
 func play_footstep() -> void:
-		if audio_stream_player_movement and velocity.length() > 0.1:
-			audio_stream_player_movement.play()
-			
-			
+	if audio_stream_player_movement and velocity.length() > 0.1:
+		audio_stream_player_movement.play()
+
 func play_gun_reload() -> void:
-		audio_stream_player_gun_reload.play()
-		
+	audio_stream_player_gun_reload.play()
+
 func _setup_gunshot_reverb() -> void:
 	# Create a new bus for gunshot
 	AudioServer.add_bus()
@@ -548,7 +550,6 @@ func _setup_gunshot_reverb() -> void:
 
 	AudioServer.add_bus_effect(bus_index, reverb, 0)
 
-		
 func play_gunshot() -> void:
 	# Temporary sound player
 	var shot_player := AudioStreamPlayer3D.new()
@@ -564,7 +565,7 @@ func play_gunshot() -> void:
 	# When sound is played, delete the temporary player
 	shot_player.finished.connect(func():
 		shot_player.queue_free())
-		
+
 func play_swing() -> void:
 	if not audio_stream_player_swing.playing:
 		audio_stream_player_swing.play()
