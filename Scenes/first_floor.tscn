@@ -23,8 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="20_pchnt"]
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="21_pccs8"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="22_rmeu3"]
-[ext_resource type="Script" uid="uid://cbf28uwoadakp" path="res://Scripts/dummydoor.gd" id="23_rmeu3"]
-[ext_resource type="Script" uid="uid://c4uo4p0a2msiu" path="res://Scripts/ExitAndWinDoor.gd" id="24_jkusl"]
 [ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/ChestMaterials/dresser_texture.png" id="27_gvm4b"]
 [ext_resource type="PackedScene" uid="uid://blxq10pfc12sp" path="res://Scenes/key_1.tscn" id="28_iwonc"]
 [ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/drawer_open.mp3" id="29_dbw8i"]
@@ -44,7 +42,9 @@
 [ext_resource type="Texture2D" uid="uid://c71qtc4h2s8bj" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Alarm_clock.png" id="42_by5ps"]
 [ext_resource type="Texture2D" uid="uid://3d082lhe1ti7" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Trash_can.png" id="43_sd3s5"]
 [ext_resource type="Texture2D" uid="uid://b15tuubvqqnog" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Box_Pizza.png" id="44_7fhmx"]
+[ext_resource type="PackedScene" uid="uid://sdkx2l48g2na" path="res://Scenes/winning_door.tscn" id="45_ctf0g"]
 [ext_resource type="Texture2D" uid="uid://duhsorkkve3h3" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Plates.png" id="45_ge5gi"]
+[ext_resource type="PackedScene" uid="uid://b2onjh2x82hfe" path="res://Scenes/door_lock.tscn" id="46_xx7av"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ctf0g"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -5417,10 +5417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.0894331, 2.7085261, -93.24581)
+bones/0/position = Vector3(-1.0172637, 2.5953658, -93.11673)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.50388, 1.3274336, -140.58635)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.43172, 1.2142732, -140.45726)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -5451,32 +5451,6 @@ transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0,
 [node name="StaticBody3D" parent="DoorModel/Door/DoorHandleBack" index="0"]
 script = null
 
-[node name="DummyDoor" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 1.8451266, 0.1, 13.943386)
-
-[node name="Door" parent="DummyDoor" index="1"]
-transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
-material_override = SubResource("StandardMaterial3D_pccs8")
-surface_material_override/0 = null
-
-[node name="StaticBody" parent="DummyDoor/Door" index="0"]
-script = ExtResource("23_rmeu3")
-
-[node name="CollisionShape" parent="DummyDoor/Door/StaticBody" index="0"]
-transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
-
-[node name="DoorHandleFront" parent="DummyDoor/Door" index="1"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
-
-[node name="StaticBody3D" parent="DummyDoor/Door/DoorHandleFront" index="0"]
-script = null
-
-[node name="DoorHandleBack" parent="DummyDoor/Door" index="2"]
-transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
-
-[node name="StaticBody3D" parent="DummyDoor/Door/DoorHandleBack" index="0"]
-script = null
-
 [node name="DoorModel5" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -10.468793, 0.1, -15.841486)
 
@@ -5504,32 +5478,6 @@ script = null
 transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
 
 [node name="StaticBody3D" parent="DoorModel5/Door/DoorHandleBack" index="0"]
-script = null
-
-[node name="ExitDoorFinal" parent="." instance=ExtResource("6_33l0l")]
-transform = Transform3D(-2.644539e-08, 0, -0.605, 0, 0.605, 0, 0.605, 0, -2.644539e-08, 17, 0.1, 4.5)
-
-[node name="Door" parent="ExitDoorFinal" index="1"]
-transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, -1.00194, 2.04937, -0.106581)
-material_override = SubResource("StandardMaterial3D_pccs8")
-surface_material_override/0 = null
-
-[node name="StaticBody" parent="ExitDoorFinal/Door" index="0"]
-script = ExtResource("24_jkusl")
-
-[node name="CollisionShape" parent="ExitDoorFinal/Door/StaticBody" index="0"]
-transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 1.0018921, 0.14466286, 0.035502434)
-
-[node name="DoorHandleFront" parent="ExitDoorFinal/Door" index="1"]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 1.789, 0.286, 0.04)
-
-[node name="StaticBody3D" parent="ExitDoorFinal/Door/DoorHandleFront" index="0"]
-script = null
-
-[node name="DoorHandleBack" parent="ExitDoorFinal/Door" index="2"]
-transform = Transform3D(1.0000001, 0, 7.4505624e-09, 0, 1, 0, -7.4505624e-09, 0, 1.0000001, 1.789, 0.286, 0.025)
-
-[node name="StaticBody3D" parent="ExitDoorFinal/Door/DoorHandleBack" index="0"]
 script = null
 
 [node name="DoorModel4" parent="." instance=ExtResource("6_33l0l")]
@@ -6732,11 +6680,23 @@ transform = Transform3D(-3.1427714e-08, 0, 0.8, 0, 0.78714675, 0, -0.7189823, 0,
 mesh = SubResource("ArrayMesh_ctf0g")
 surface_material_override/0 = SubResource("StandardMaterial3D_ik1c7")
 
+[node name="DoorLock2" parent="." instance=ExtResource("46_xx7av")]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 1.852, 0.105, 13.995)
+
+[node name="Door" parent="DoorLock2/DoorModel" index="1"]
+surface_material_override/0 = null
+
+[node name="Winning_door" parent="." instance=ExtResource("45_ctf0g")]
+transform = Transform3D(-2.7101061e-08, 0, 0.62, 0, 0.62, 0, -0.62, 0, -2.7101061e-08, 16.931, 0.105, 4.485)
+
+[node name="Door" parent="Winning_door" index="1"]
+surface_material_override/0 = null
+
 [editable path="Player"]
 [editable path="Player/Head/Character"]
 [editable path="DoorModel"]
-[editable path="DummyDoor"]
 [editable path="DoorModel5"]
-[editable path="ExitDoorFinal"]
 [editable path="DoorModel4"]
 [editable path="DoorModel3"]
+[editable path="DoorLock2"]
+[editable path="Winning_door"]

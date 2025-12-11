@@ -281,7 +281,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00194, 0.16165376, 0.035502
 shape = SubResource("9")
 
 [node name="DoorHandleFront" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0665395)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.789, 0.286, 0.067)
 mesh = SubResource("6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorHandleFront"]
@@ -292,7 +292,7 @@ shape = SubResource("ConcavePolygonShape3D_ctwgr")
 disabled = true
 
 [node name="DoorHandleBack" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0029519275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.789, 0.286, 0.003)
 mesh = SubResource("8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorHandleBack"]

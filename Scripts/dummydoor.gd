@@ -2,6 +2,8 @@ extends Interactable
 class_name DummyDoor
 
 @export var locked_message := "You can't go back!"
+@onready var dummy_door_prompt: Label = $"../../../../Player/CanvasLayer/Control/DummyDoor_prompt"
+
 
 const MESSAGE_TIME := 1.5
 var message_timer := 0.0
@@ -9,9 +11,8 @@ var show_message := false
 var hud_label: Label = null
 
 func _ready():
-	# Hae Label CanvasLayerista
-	var scene_root = get_tree().get_current_scene()
-	hud_label = scene_root.get_node("Player/CanvasLayer/Control/DummyDoor_prompt")
+	# Get label from canvaslayer
+	hud_label = dummy_door_prompt
 	if hud_label:
 		hud_label.visible = false
 		hud_label.text = ""

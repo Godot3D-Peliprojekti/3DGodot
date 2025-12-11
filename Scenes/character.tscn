@@ -1076,6 +1076,7 @@ nodes/Upper_Weapon_Gun_Reload/position = Vector2(4613.3335, -453.33334)
 node_connections = [&"output", 0, &"Add2", &"Lower_Walk_Z_Blend", 0, &"Lower_Walk_Right", &"Lower_Walk_Z_Blend", 1, &"Lower_Walk_X_Blend", &"Lower_Walk_Z_Blend", 2, &"Lower_Walk_Left", &"Lower_Walk_X_Blend", 0, &"Lower_Walk_Back", &"Lower_Walk_X_Blend", 1, &"Lower_Idle_Blend", &"Lower_Walk_X_Blend", 2, &"Lower_Walk_Forward", &"Lower_Crouch_X_Blend", 0, &"Lower_Crouch_Back", &"Lower_Crouch_X_Blend", 1, &"Lower_Walk_Z_Blend", &"Lower_Crouch_X_Blend", 2, &"Lower_Crouch_Forward", &"Lower_Crouch_Z_Blend", 0, &"Lower_Crouch_Right", &"Lower_Crouch_Z_Blend", 1, &"Lower_Crouch_X_Blend", &"Lower_Crouch_Z_Blend", 2, &"Lower_Crouch_Left", &"Lower_Idle_Blend", 0, &"Lower_Idle", &"Lower_Idle_Blend", 1, &"Lower_Crouch_Idle", &"Lower_Run_Forward_Blend", 0, &"Lower_Crouch_Z_Blend", &"Lower_Run_Forward_Blend", 1, &"Lower_Run_Forward", &"Lower_Run_Z_Blend", 0, &"Lower_Run_Right", &"Lower_Run_Z_Blend", 1, &"Lower_Run_Forward_Blend", &"Lower_Run_Z_Blend", 2, &"Lower_Run_Left", &"Upper_Walk_Blend", 0, &"Upper_Idle_Blend", &"Upper_Walk_Blend", 1, &"Upper_Walk_Forward", &"Upper_Crouch_Blend", 0, &"Upper_Walk_Blend", &"Upper_Crouch_Blend", 1, &"Upper_Crouch_Forward", &"Upper_Run_Blend", 0, &"Upper_Crouch_Blend", &"Upper_Run_Blend", 1, &"Upper_Run_Forward", &"Add2", 0, &"Upper_Weapon_Gun_Reload_OneShot", &"Add2", 1, &"Lower_Run_Z_Blend", &"Upper_Idle_Blend", 0, &"Upper_Idle", &"Upper_Idle_Blend", 1, &"Upper_Crouch_Idle", &"Upper_Weapon_Bat_Idle_Blend", 0, &"Upper_Run_Blend", &"Upper_Weapon_Bat_Idle_Blend", 1, &"Upper_Weapon_Bat_Idle", &"Upper_Weapon_Bat_Attack_OneShot", 0, &"Upper_Weapon_Bat_Idle_Blend", &"Upper_Weapon_Bat_Attack_OneShot", 1, &"Upper_Weapon_Bat_Attack", &"Upper_Weapon_Knife_Idle_Blend", 0, &"Upper_Weapon_Bat_Attack_OneShot", &"Upper_Weapon_Knife_Idle_Blend", 1, &"Upper_Weapon_Knife_Idle", &"Upper_Weapon_Knife_Attack_OneShot", 0, &"Upper_Weapon_Knife_Idle_Blend", &"Upper_Weapon_Knife_Attack_OneShot", 1, &"Upper_Weapon_Knife_Attack", &"Upper_Weapon_Gun_Idle_Aim_Blend", 0, &"Upper_Weapon_Knife_Attack_OneShot", &"Upper_Weapon_Gun_Idle_Aim_Blend", 1, &"Upper_Weapon_Gun_Idle", &"Upper_Weapon_Gun_Idle_Aim_Blend", 2, &"Upper_Weapon_Gun_Aim", &"Upper_Weapon_Gun_Attack_Add", 0, &"Upper_Weapon_Gun_Idle_Aim_Blend", &"Upper_Weapon_Gun_Attack_Add", 1, &"Upper_Weapon_Gun_Attack", &"Upper_Weapon_Gun_Reload_OneShot", 0, &"Upper_Weapon_Gun_Attack_Add", &"Upper_Weapon_Gun_Reload_OneShot", 1, &"Upper_Weapon_Gun_Reload"]
 
 [node name="Character" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_7iw6i")
 
 [node name="Armature" type="Node3D" parent="."]
@@ -1087,7 +1088,7 @@ bones/0/name = "mixamorig9_Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.1090126, -95.704185)
 bones/0/enabled = true
-bones/0/position = Vector3(-0.77865034, 2.3299046, -93.19225)
+bones/0/position = Vector3(-1.1790116, 3.2401454, -93.28367)
 bones/0/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "mixamorig9_Spine"
@@ -1568,7 +1569,7 @@ mesh = SubResource("ArrayMesh_q5mnj")
 skin = SubResource("Skin_7iw6i")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.1931, 0.948812, -140.53279)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.59346, 1.8590527, -140.6242)
 bone_name = "mixamorig9_RightHand"
 bone_idx = 34
 

@@ -3,6 +3,10 @@ class_name ExitAndWinDoor
 
 @export var required_key := 2
 @export var locked_message := "Door is locked"
+
+@onready var door_locked_prompt: Label = $"../../../Player/CanvasLayer/Control/DoorLocked_prompt"
+@onready var exit_and_win_prompt: Label = $"../../../Player/CanvasLayer/Control/ExitAndWin_prompt"
+
 const MESSAGE_TIME := 2.0
 
 var locked_label: Label = null
@@ -15,16 +19,16 @@ var show_message := false
 func _ready():
 	var scene_root = get_tree().current_scene
 
-	locked_label = scene_root.get_node("Player/CanvasLayer/Control/DoorLocked_prompt")
+	locked_label = door_locked_prompt
 	if locked_label:
 		locked_label.visible = false
 		locked_label.text = ""
 
-	win_label = scene_root.get_node("Player/CanvasLayer/Control/ExitAndWin_prompt")
+	win_label = exit_and_win_prompt
 	if win_label:
 		win_label.visible = false
 		win_label.text = ""
-		# Aseta process_mode, jotta _process toimii myös pausessa
+	
 		win_label.process_mode = Node.PROCESS_MODE_ALWAYS
 		process_mode = Node.PROCESS_MODE_ALWAYS
 		set_process(true)
