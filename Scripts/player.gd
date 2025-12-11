@@ -458,19 +458,19 @@ func _physics_process(delta: float) -> void:
 	if get_tree().paused:
 		return
 
-	# Update stun timer
-	if stun_time > 0.0:
-		stun_time -= delta
-
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	# Apply movement
-	var direction = (head.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
+	# Update stun timer
+	if stun_time > 0.0:
+		stun_time -= delta
 
-	# Only allow movement if not stunned
-	if stun_time <= 0.0:
+		# Only allow movement if not stunned
+		velocity = Vector3.ZERO
+	else:
+		# Apply movement
+		var direction = (head.transform.basis * transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
 		if input_vector.length() > 0.0:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
