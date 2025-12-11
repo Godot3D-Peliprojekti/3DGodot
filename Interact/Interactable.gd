@@ -7,6 +7,7 @@ class_name Interactable
 @export var open_animation_name := ""
 @export var close_animation_name := ""
 
+
 var is_open := false
 
 func interact(_body):

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn1fgwt6evh8a"]
+
+[ext_resource type="PackedScene" uid="uid://cjym71yp8ccne" path="res://Assets/Ammo.glb" id="1_ayjuv"]
+[ext_resource type="Script" uid="uid://bfbrsg6d1op2s" path="res://Scripts/weapons.gd" id="1_g63aq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g63aq"]
+size = Vector3(4.6453094, 1.2313232, 1.8868103)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+script = ExtResource("1_g63aq")
+weapon_id = "pistol_ammo"
+prompt_message = "Press F to pick up"
+
+[node name="Ammo" parent="." instance=ExtResource("1_ayjuv")]
+transform = Transform3D(-0.7059581, 0.70825356, -3.0958745e-08, 0, -4.371139e-08, -1, -0.70825356, -0.7059581, 3.085841e-08, 1.3907804, 0, 0)
+
+[node name="Ammo2" parent="." instance=ExtResource("1_ayjuv")]
+transform = Transform3D(0.7946478, -0.60707074, 2.6535904e-08, 0, -4.371139e-08, -1, 0.60707074, 0.7946478, -3.473516e-08, -1.3856343, 0, 0)
+
+[node name="Ammo3" parent="." instance=ExtResource("1_ayjuv")]
+transform = Transform3D(0.8946616, 0.4467444, -1.9527818e-08, 0, -4.371139e-08, -1, -0.4467444, 0.8946616, -3.91069e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006706238, 0.11566162, 0.064437866)
+shape = SubResource("BoxShape3D_g63aq")

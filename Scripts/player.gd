@@ -128,7 +128,7 @@ var is_crouching: bool = false
 var is_reloading: bool = false
 
 var ammo_current: int = 0
-var ammo_reserve: int = 999
+var ammo_reserve: int = 5
 var health: int = 0
 var selected_weapon: int = Weapon.NONE
 
@@ -177,12 +177,39 @@ func weapon_activate(weapon: int) -> void:
 	match weapon:
 		Weapon.BAT:
 			hud_weapon_bat.modulate = hud_color_selected
+			hud_ammo_current.visible = false
+			hud_ammo_reserve.visible = false
 		Weapon.KNIFE:
 			hud_weapon_knife.modulate = hud_color_selected
+			hud_ammo_current.visible = false
+			hud_ammo_reserve.visible = false
 		Weapon.GUN:
 			hud_weapon_gun.modulate = hud_color_selected
 			hud_ammo_current.modulate = hud_color_selected
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
+			hud_ammo_current.visible = true
+			hud_ammo_reserve.visible = true
+			
+func weapon_hud_hide() -> void:
+	hud_weapon_bat.visible = false 
+	hud_weapon_knife.visible = false
+	hud_weapon_gun.visible = false
+	hud_ammo_current.visible = false
+	hud_ammo_reserve.visible = false
+	
+func weapon_pickup(id: String):
+	match id:
+		"bat":
+			hud_weapon_bat.visible = true
+		"knife":
+			hud_weapon_knife.visible = true
+		"gun":
+			hud_weapon_gun.visible = true
+		"pistol_ammo":
+			ammo_reserve += 8
+			update_ammo_label()
+			
+	weapon_activate(selected_weapon)
 
 func update_ammo_label() -> void:
 	hud_ammo_current.text = str(ammo_current)
@@ -201,7 +228,8 @@ func _ready() -> void:
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
 	assert(bone_index != -1)
-
+	
+	weapon_hud_hide()
 	weapon_deactivate_all()
 	update_ammo_label()
 	update_health_label()
@@ -278,13 +306,14 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
+		
 
 		var selected = Weapon.NONE
-		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT:
+		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT and hud_weapon_bat.visible:
 			selected = Weapon.BAT
-		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE:
+		elif Input.is_action_just_pressed("weapon_knife") and selected_weapon != Weapon.KNIFE and hud_weapon_knife.visible:
 			selected = Weapon.KNIFE
-		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN:
+		elif Input.is_action_just_pressed("weapon_gun") and selected_weapon != Weapon.GUN and hud_weapon_gun.visible:
 			selected = Weapon.GUN
 
 		weapon_activate(selected)
@@ -363,7 +392,7 @@ func _process(delta: float) -> void:
 	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
 		stop_reloading(true)
 
-	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size and ammo_reserve > 0:
 		play_gun_reload()
 		is_reloading = true
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
