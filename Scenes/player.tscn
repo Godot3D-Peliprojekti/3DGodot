@@ -211,6 +211,7 @@ offset_right = 158.0
 offset_bottom = -51.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 16
 text = "Press E to toggle flashlight"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -274,10 +275,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.48651072, 1.8923689, -93.156425)
+bones/0/position = Vector3(-1.1933123, 2.1243346, -92.996826)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.90096, 0.51127625, -140.49696)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.607765, 0.743242, -140.33736)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)

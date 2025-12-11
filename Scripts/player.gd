@@ -111,7 +111,7 @@ var speed: float
 @export var crouch_multiplier: float = 0.33
 @export var health_max: int = 100
 @export var health_min: int = 0
-@export var weapon_magazine_size: int = 0
+@export var weapon_magazine_size: int = 8
 var input_vector: Vector2
 
 # Crouching
@@ -128,7 +128,7 @@ var is_crouching: bool = false
 var is_reloading: bool = false
 
 var ammo_current: int = 0
-var ammo_reserve: int = 0
+var ammo_reserve: int = 5
 var health: int = 0
 var selected_weapon: int = Weapon.NONE
 
@@ -205,6 +205,9 @@ func weapon_pickup(id: String):
 			hud_weapon_knife.visible = true
 		"gun":
 			hud_weapon_gun.visible = true
+		"pistol_ammo":
+			ammo_reserve += 8
+			update_ammo_label()
 			
 	weapon_activate(selected_weapon)
 
@@ -303,7 +306,6 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
-		#weapon_available()
 		
 
 		var selected = Weapon.NONE
@@ -390,7 +392,7 @@ func _process(delta: float) -> void:
 	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
 		stop_reloading(true)
 
-	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size:
+	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size and ammo_reserve > 0:
 		play_gun_reload()
 		is_reloading = true
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
