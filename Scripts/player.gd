@@ -284,16 +284,17 @@ func _process(delta: float) -> void:
 	hud_health_indicator_label.modulate.a = lerp(hud_health_indicator_label.modulate.a, 0.0, 4.0 * delta)
 
 	if Input.is_action_just_pressed("flashlight"):
-		# Ensimmäinen painallus: sulje prompt ja sytytä taskulamppu
+		# Allow the flashlight to turn on or off only when flashlight click audio is not playing
 		if not audio_stream_player_flashlight.playing:
 			audio_stream_player_flashlight.play()
+			# Close the flashlight prompt if flashlight is on
 			if show_flashlight_prompt:
 				show_flashlight_prompt = false
 				flashlight_prompt_label.visible = false
-			# Muuten vaihdetaan taskulamppu normaalisti
+			# Otherwise just turn the flashlight on
 			show_flashlight = !show_flashlight
 
-	# SpotLight näkyvyys: näkyy vain jos show_flashlight ja ei kyykky
+	# Flashlight is visible when show_flashlight is true and player is not crouching
 	flashlight.visible = show_flashlight
 
 	if Input.is_action_just_pressed("crouch"):
@@ -304,9 +305,6 @@ func _process(delta: float) -> void:
 		is_running = true
 	
 		
-		
-		
-
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
 		

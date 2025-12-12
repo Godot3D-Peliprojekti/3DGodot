@@ -25,8 +25,8 @@
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="22_rmeu3"]
 [ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/ChestMaterials/dresser_texture.png" id="27_gvm4b"]
 [ext_resource type="PackedScene" uid="uid://blxq10pfc12sp" path="res://Scenes/key_1.tscn" id="28_iwonc"]
-[ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/drawer_open.mp3" id="29_dbw8i"]
-[ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/drawer_close.mp3" id="30_bohrk"]
+[ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/Drawer/drawer_open.mp3" id="29_dbw8i"]
+[ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/Drawer/drawer_close.mp3" id="30_bohrk"]
 [ext_resource type="PackedScene" uid="uid://c788lud8fksb5" path="res://Scenes/chest.tscn" id="31_iwonc"]
 [ext_resource type="Texture2D" uid="uid://mptftfu0mb1p" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Bookcase.png" id="32_ctf0g"]
 [ext_resource type="PackedScene" uid="uid://y3t5e348mj3y" path="res://Scenes/enemy_2.tscn" id="32_dbw8i"]
@@ -5417,10 +5417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.5593458, 1.95187, -93.163025)
+bones/0/position = Vector3(-0.22437204, 1.4518716, -93.01833)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.97379, 0.5707774, -140.50356)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.638824, 0.070779085, -140.35887)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
