@@ -99,6 +99,7 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_gun_reload: AudioStreamPlayer3D = $AudioStreamPlayer_gun_reload
 @onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
 @onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
+@onready var audio_stream_player_flashlight: AudioStreamPlayer3D = $AudioStreamPlayer_flashlight
 
 
 
@@ -284,11 +285,13 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("flashlight"):
 		# Ensimmäinen painallus: sulje prompt ja sytytä taskulamppu
-		if show_flashlight_prompt:
-			show_flashlight_prompt = false
-			flashlight_prompt_label.visible = false
-		# Muuten vaihdetaan taskulamppu normaalisti
-		show_flashlight = !show_flashlight
+		if not audio_stream_player_flashlight.playing:
+			audio_stream_player_flashlight.play()
+			if show_flashlight_prompt:
+				show_flashlight_prompt = false
+				flashlight_prompt_label.visible = false
+			# Muuten vaihdetaan taskulamppu normaalisti
+			show_flashlight = !show_flashlight
 
 	# SpotLight näkyvyys: näkyy vain jos show_flashlight ja ei kyykky
 	flashlight.visible = show_flashlight

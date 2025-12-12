@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=23 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://bkl1o4qdiwhwt" path="res://Audio/swing.mp3" id="11_gymyn"]
 [ext_resource type="AudioStream" uid="uid://c2xy1c14jp157" path="res://Audio/reload.mp3" id="11_pu2lt"]
 [ext_resource type="AudioStream" uid="uid://bj8ynw4i6no22" path="res://Audio/shot.mp3" id="12_ukyrk"]
+[ext_resource type="AudioStream" uid="uid://x8sua16vh2g3" path="res://Audio/flashlight-102291.mp3" id="15_h4iuc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3smsa"]
 font_size = 64
@@ -275,10 +276,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.1933123, 2.1243346, -92.996826)
+bones/0/position = Vector3(-0.5208953, 1.8598753, -93.123825)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.607765, 0.743242, -140.33736)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.93535, 0.47878265, -140.46436)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)
@@ -313,5 +314,8 @@ stream = ExtResource("12_ukyrk")
 [node name="AudioStreamPlayer_swing" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("11_gymyn")
 volume_db = -20.0
+
+[node name="AudioStreamPlayer_flashlight" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("15_h4iuc")
 
 [editable path="Head/Character"]
