@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3truvp815sip"]
+[gd_scene load_steps=10 format=3 uid="uid://b3truvp815sip"]
 
 [ext_resource type="PackedScene" uid="uid://o3mod6cu4tft" path="res://Scenes/door_model.tscn" id="1_20voy"]
-[ext_resource type="Script" uid="uid://c3lmquj7e2ko4" path="res://Scripts/ExitDoor.gd" id="2_h0k4f"]
+[ext_resource type="Script" uid="uid://c3lmquj7e2ko4" path="res://ExitDoor.gd" id="2_h0k4f"]
 [ext_resource type="PackedScene" uid="uid://c88arb2t8ca75" path="res://Scenes/first_floor.tscn" id="3_1co6j"]
+[ext_resource type="AudioStream" uid="uid://bjuq72rl5kafl" path="res://Audio/Door/door_locked.mp3" id="4_n3kii"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_h0k4f"]
 
@@ -39,6 +40,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.789, 0.1, 0.003)
 [node name="StaticBody3D" parent="DoorModel/Door/DoorHandleBack" index="0"]
 script = null
 
+[node name="Label" parent="DoorModel" index="4"]
+visible = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -11.5
+offset_right = 233.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -2.1855695e-09, 0.2, 0, -0.05, -8.742278e-09, 0.7608426, 1.80652, -0.072296016)
 mesh = SubResource("CylinderMesh_h0k4f")
@@ -52,5 +68,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_n3kii")
 transform = Transform3D(0.16500002, 0, 0, 0, -7.21238e-09, 2.2, 0, -0.16500002, -9.616505e-08, 0.01047945, -0.026988745, -0.07659149)
 mesh = SubResource("CapsuleMesh_lt0mu")
 surface_material_override/0 = SubResource("StandardMaterial3D_exdwq")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_n3kii")
 
 [editable path="DoorModel"]

@@ -7,6 +7,8 @@ class_name ExitAndWinDoor
 @onready var door_locked_prompt: Label = $"../../../Player/CanvasLayer/Control/DoorLocked_prompt"
 @onready var exit_and_win_prompt: Label = $"../../../Player/CanvasLayer/Control/ExitAndWin_prompt"
 
+@onready var locked_audio: AudioStreamPlayer3D = $"../../AudioStreamPlayer3D"
+
 const MESSAGE_TIME := 2.0
 
 var locked_label: Label = null
@@ -35,6 +37,9 @@ func _ready():
 
 func interact(player):
 	if not player.has_key_2:
+		if not locked_audio.playing:
+			locked_audio.play()
+			
 		if locked_label:
 			locked_label.text = locked_message
 			locked_label.visible = true

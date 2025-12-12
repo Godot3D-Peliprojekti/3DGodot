@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://da28m3pw0pbt8"]
+[gd_scene load_steps=4 format=3 uid="uid://3q04qrbhcor3"]
 
 [ext_resource type="PackedScene" uid="uid://c88arb2t8ca75" path="res://Scenes/first_floor.tscn" id="1_41nh6"]
 [ext_resource type="PackedScene" uid="uid://b2onjh2x82hfe" path="res://Scenes/door_lock.tscn" id="2_is1pt"]
@@ -15,10 +15,10 @@ navigation_mesh = SubResource("NavigationMesh_q22gc")
 [node name="First_Floor" parent="NavigationRegion3D" instance=ExtResource("1_41nh6")]
 
 [node name="Skeleton3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.8478527, 2.3778377, -93.19826)
+bones/0/position = Vector3(-1.3838929, 3.4796977, -93.29527)
 
 [node name="BoneAttachment3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.2623, 0.9967451, -140.53879)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.79834, 2.0986052, -140.6358)
 
 [node name="DoorLock2" parent="NavigationRegion3D/First_Floor" index="174"]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 1.852, 0.105, 16.231956)

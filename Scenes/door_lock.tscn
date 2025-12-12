@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=4 uid="uid://b2onjh2x82hfe"]
+[gd_scene load_steps=21 format=4 uid="uid://b2onjh2x82hfe"]
 
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="1_daxc6"]
 [ext_resource type="Script" uid="uid://cbf28uwoadakp" path="res://Scripts/dummydoor.gd" id="2_mfbhx"]
+[ext_resource type="AudioStream" uid="uid://bjuq72rl5kafl" path="res://Audio/Door/door_locked.mp3" id="3_5hp6r"]
 
 [sub_resource type="StandardMaterial3D" id="3"]
 vertex_color_use_as_albedo = true
@@ -152,3 +153,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_d84s1")
 transform = Transform3D(0.16500002, 0, 0, 0, -7.21238e-09, 2.2, 0, -0.16500002, -9.616505e-08, 0.01047945, -0.026988745, -0.07659149)
 mesh = SubResource("CapsuleMesh_3qko2")
 surface_material_override/0 = SubResource("StandardMaterial3D_4uf8l")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_5hp6r")

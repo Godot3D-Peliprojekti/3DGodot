@@ -4,11 +4,13 @@ class_name ExitDoor
 @export var target_scene: PackedScene
 @export var required_key := 1
 @export var locked_message := "Door is locked"
+@onready var locked_audio: AudioStreamPlayer3D = $"../../../AudioStreamPlayer3D"
+@onready var hud_label: Label = $"../../Label"
 
 const MESSAGE_TIME := 1.5
 var message_timer := 0.0
 var show_message := false
-var hud_label: Label = null
+#var hud_label: Label = null
 
 func _ready():
 
@@ -17,7 +19,11 @@ func _ready():
 		hud_label.text = ""
 
 func interact(player):
+	
 	if not player.has_key_1:
+		if not locked_audio.playing:
+			locked_audio.play()
+			
 		print("ExitDoor locked – no key")
 		if hud_label:
 			hud_label.text = locked_message

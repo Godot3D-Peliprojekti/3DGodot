@@ -5417,10 +5417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.0172637, 2.5953658, -93.11673)
+bones/0/position = Vector3(-0.5593458, 1.95187, -93.163025)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.43172, 1.2142732, -140.45726)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.97379, 0.5707774, -140.50356)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -6688,6 +6688,9 @@ surface_material_override/0 = null
 
 [node name="Winning_door" parent="." instance=ExtResource("45_ctf0g")]
 transform = Transform3D(-2.7101061e-08, 0, 0.62, 0, 0.62, 0, -0.62, 0, -2.7101061e-08, 16.931, 0.105, 4.485)
+
+[node name="DoorFrame" parent="Winning_door" index="0"]
+surface_material_override/0 = null
 
 [node name="Door" parent="Winning_door" index="1"]
 surface_material_override/0 = null

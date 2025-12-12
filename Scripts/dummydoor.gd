@@ -3,6 +3,7 @@ class_name DummyDoor
 
 @export var locked_message := "You can't go back!"
 @onready var dummy_door_prompt: Label = $"../../../../Player/CanvasLayer/Control/DummyDoor_prompt"
+@onready var locked_audio: AudioStreamPlayer3D = $"../../../AudioStreamPlayer3D"
 
 
 const MESSAGE_TIME := 1.5
@@ -18,6 +19,9 @@ func _ready():
 		hud_label.text = ""
 
 func interact(_player):
+	if not locked_audio.playing:
+		locked_audio.play()
+		
 	if hud_label:
 		hud_label.text = locked_message
 		hud_label.visible = true
