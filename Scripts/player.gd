@@ -100,6 +100,8 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
 @onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
 @onready var audio_stream_player_flashlight: AudioStreamPlayer3D = $AudioStreamPlayer_flashlight
+@onready var audio_stream_player_knife: AudioStreamPlayer3D = $AudioStreamPlayer_knife
+
 
 # Player
 @export_category("Player")
@@ -381,6 +383,7 @@ func _process(delta: float) -> void:
 		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 			should_perform_attack = true
+			play_knife_swing()
 
 	weapon_gun_muzzle_flash.visible = false;
 	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
@@ -574,3 +577,7 @@ func play_gunshot() -> void:
 func play_swing() -> void:
 	if not audio_stream_player_swing.playing:
 		audio_stream_player_swing.play()
+		
+func play_knife_swing() -> void:
+	if not audio_stream_player_knife.playing:
+		audio_stream_player_knife.play()
