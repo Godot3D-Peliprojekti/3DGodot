@@ -1,0 +1,46 @@
+extends Interactable
+class_name ExitDoor
+
+@export var target_scene: PackedScene
+@export var required_key := 1
+@export var locked_message := "Door is locked"
+@onready var locked_audio: AudioStreamPlayer3D = $"../../../AudioStreamPlayer3D"
+@onready var hud_label: Label = $"../../Label"
+
+const MESSAGE_TIME := 1.5
+var message_timer := 0.0
+var show_message := false
+#var hud_label: Label = null
+
+func _ready():
+
+	if hud_label:
+		hud_label.visible = false
+		hud_label.text = ""
+
+func interact(player):
+	
+	if not player.has_key_1:
+		if not locked_audio.playing:
+			locked_audio.play()
+			
+		print("ExitDoor locked – no key")
+		if hud_label:
+			hud_label.text = locked_message
+			hud_label.visible = true
+			show_message = true
+			message_timer = MESSAGE_TIME
+		return
+
+	print("ExitDoor open – change scene")
+	await get_tree().create_timer(0.3).timeout
+	get_tree().change_scene_to_packed(target_scene)
+	print(target_scene)
+
+func _process(delta):
+	if show_message:
+		message_timer -= delta
+		if message_timer <= 0.0:
+			if hud_label:
+				hud_label.visible = false
+			show_message = false

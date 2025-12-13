@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="1_4x7hj"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="1_cuut6"]
-[ext_resource type="AudioStream" uid="uid://bqwmvux1tu1q" path="res://Audio/door_open.mp3" id="3_s12oq"]
-[ext_resource type="AudioStream" uid="uid://rvxpc16jcrng" path="res://Audio/door_close.mp3" id="4_76awr"]
+[ext_resource type="AudioStream" uid="uid://bqwmvux1tu1q" path="res://Audio/Door/door_open.mp3" id="3_s12oq"]
+[ext_resource type="AudioStream" uid="uid://rvxpc16jcrng" path="res://Audio/Door/door_close.mp3" id="4_76awr"]
 
 [sub_resource type="StandardMaterial3D" id="3"]
 vertex_color_use_as_albedo = true
@@ -281,7 +281,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00194, 0.16165376, 0.035502
 shape = SubResource("9")
 
 [node name="DoorHandleFront" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0665395)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.789, 0.286, 0.067)
 mesh = SubResource("6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorHandleFront"]
@@ -292,7 +292,7 @@ shape = SubResource("ConcavePolygonShape3D_ctwgr")
 disabled = true
 
 [node name="DoorHandleBack" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78923, -0.24487996, 0.0029519275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.789, 0.286, 0.003)
 mesh = SubResource("8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door/DoorHandleBack"]

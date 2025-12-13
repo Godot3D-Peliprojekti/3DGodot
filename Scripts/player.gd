@@ -99,6 +99,10 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_gun_reload: AudioStreamPlayer3D = $AudioStreamPlayer_gun_reload
 @onready var audio_stream_player_gunshot: AudioStreamPlayer3D = $AudioStreamPlayer_gunshot
 @onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
+@onready var audio_stream_player_flashlight: AudioStreamPlayer3D = $AudioStreamPlayer_flashlight
+@onready var audio_stream_player_knife: AudioStreamPlayer3D = $AudioStreamPlayer_knife
+@onready var audio_stream_player_ammo: AudioStreamPlayer3D = $AudioStreamPlayer_ammo
+
 
 # Player
 @export_category("Player")
@@ -210,6 +214,7 @@ func weapon_pickup(id: String):
 		"pistol_ammo":
 			ammo_reserve += 8
 			update_ammo_label()
+			play_ammo_pick_up()
 			
 	weapon_activate(selected_weapon)
 
@@ -284,20 +289,24 @@ func _process(delta: float) -> void:
 	hud_health_indicator_label.modulate.a = lerp(hud_health_indicator_label.modulate.a, 0.0, 4.0 * delta)
 
 	if Input.is_action_just_pressed("flashlight"):
-		# Ensimmäinen painallus: sulje prompt ja sytytä taskulamppu
-		if show_flashlight_prompt:
-			show_flashlight_prompt = false
-			flashlight_prompt_label.visible = false
-		# Muuten vaihdetaan taskulamppu normaalisti
-		show_flashlight = !show_flashlight
+		# Allow the flashlight to turn on or off only when flashlight click audio is not playing
+		if not audio_stream_player_flashlight.playing:
+			audio_stream_player_flashlight.play()
+			# Close the flashlight prompt if flashlight is on
+			if show_flashlight_prompt:
+				show_flashlight_prompt = false
+				flashlight_prompt_label.visible = false
+			# Otherwise just turn the flashlight on
+			show_flashlight = !show_flashlight
 
-	# SpotLight näkyvyys: näkyy vain jos show_flashlight ja ei kyykky
+	# Flashlight is visible when show_flashlight is true and player is not crouching
 	flashlight.visible = show_flashlight
 
 	if Input.is_action_just_pressed("crouch"):
 		is_crouching = !is_crouching
 
 	is_running = false
+	
 	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
 
@@ -376,6 +385,7 @@ func _process(delta: float) -> void:
 		elif selected_weapon == Weapon.KNIFE and not animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/active"]:
 			animation_tree["parameters/Upper_Weapon_Knife_Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 			should_perform_attack = true
+			play_knife_swing()
 
 	weapon_gun_muzzle_flash.visible = false;
 	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
@@ -569,3 +579,11 @@ func play_gunshot() -> void:
 func play_swing() -> void:
 	if not audio_stream_player_swing.playing:
 		audio_stream_player_swing.play()
+		
+func play_knife_swing() -> void:
+	if not audio_stream_player_knife.playing:
+		audio_stream_player_knife.play()
+		
+func play_ammo_pick_up() -> void:
+	if not audio_stream_player_ammo.playing:
+		audio_stream_player_ammo.play()

@@ -5,8 +5,11 @@ class_name Key
 @export var prompt_message := "Press F to pick up"
 @onready var collision: CollisionShape3D = $CollisionShape3D
 
+@onready var key_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+
 func _ready():
-	set_pickable(false)  # hide initially
+	#set_pickable(false)  # hide initially
+	pass
 
 func set_pickable(value: bool):
 	visible = value
@@ -21,5 +24,8 @@ func interact(body):
 					body.has_key_1 = true
 				2:
 					body.has_key_2 = true
+			key_audio.play()
 			print(body.name, " picked up Key ", key_id, ": ", name)
+			
+			await key_audio.finished
 			queue_free()

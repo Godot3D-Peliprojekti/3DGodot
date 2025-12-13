@@ -16,3 +16,11 @@ func play_gunshot() -> void:
 func play_swing() -> void:
 	if owner and owner.has_method("play_swing"):
 		owner.play_swing()
+
+func play_knife_swing() -> void:
+	if owner and owner.has_method("play_knife_swing"):
+		owner.play_knife_swing()
+		
+func play_ammo_pick_up() -> void:
+	if owner and owner.has_method("play_ammo_pick_up"):
+		owner.play_ammo_pick_up()

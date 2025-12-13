@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/ChestMaterials/dresser_texture.png" id="1_t1abr"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="2_0j27c"]
-[ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/drawer_open.mp3" id="3_kqt5w"]
-[ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/drawer_close.mp3" id="4_kqt5w"]
+[ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/Drawer/drawer_open.mp3" id="3_kqt5w"]
+[ext_resource type="AudioStream" uid="uid://5nl461wmuwfq" path="res://Audio/Drawer/drawer_close.mp3" id="4_kqt5w"]
 [ext_resource type="PackedScene" uid="uid://blxq10pfc12sp" path="res://Scenes/key_1.tscn" id="5_nwdvu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vw638"]
