@@ -101,6 +101,7 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_swing: AudioStreamPlayer3D = $AudioStreamPlayer_swing
 @onready var audio_stream_player_flashlight: AudioStreamPlayer3D = $AudioStreamPlayer_flashlight
 @onready var audio_stream_player_knife: AudioStreamPlayer3D = $AudioStreamPlayer_knife
+@onready var audio_stream_player_ammo: AudioStreamPlayer3D = $AudioStreamPlayer_ammo
 
 
 # Player
@@ -213,6 +214,7 @@ func weapon_pickup(id: String):
 		"pistol_ammo":
 			ammo_reserve += 8
 			update_ammo_label()
+			play_ammo_pick_up()
 			
 	weapon_activate(selected_weapon)
 
@@ -581,3 +583,7 @@ func play_swing() -> void:
 func play_knife_swing() -> void:
 	if not audio_stream_player_knife.playing:
 		audio_stream_player_knife.play()
+		
+func play_ammo_pick_up() -> void:
+	if not audio_stream_player_ammo.playing:
+		audio_stream_player_ammo.play()

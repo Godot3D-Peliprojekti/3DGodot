@@ -29,9 +29,18 @@ func _physics_process(_delta: float) -> void:
 	if is_colliding():
 	#Set a col variable that stores the colliding object
 		var col := get_collider()
-		if col is Interactable or col is Chest or col is Key or col is Weapon:
-			prompt.text = col.prompt_message #+ col.name
+		var obj = col
+		while obj != null and not obj.has_method("interact"):
+			obj = obj.get_parent()
+		if obj != null:
+			if obj.has_method("get_prompt"):
+				prompt.text = obj.get_prompt(get_parent())
+			else:
+				prompt.text = obj.prompt_message
 
 	#If interact_action key [F] is pressed, interact function declared in Interactable.gd is used to interact with the colliding object
 			if Input.is_action_just_pressed("interact_action"):
-				col.interact(owner)
+				var player = get_parent()
+				if player != null:
+					obj.interact(player)
+				

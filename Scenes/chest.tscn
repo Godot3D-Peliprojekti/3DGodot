@@ -1,9 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://c788lud8fksb5"]
+[gd_scene load_steps=19 format=4 uid="uid://c788lud8fksb5"]
 
 [ext_resource type="Script" uid="uid://otgcr7mf25c5" path="res://Scripts/chest.gd" id="1_cjfl1"]
 [ext_resource type="Texture2D" uid="uid://bfe0ca2fgve24" path="res://Assets/ChestMaterials/chest_texture.png" id="1_lyb87"]
 [ext_resource type="AudioStream" uid="uid://dut8nc5nwuvkx" path="res://Audio/Chest/chest_open2.mp3" id="3_bagqn"]
 [ext_resource type="AudioStream" uid="uid://cybbub6qane2x" path="res://Audio/Chest/lid-close-98389.mp3" id="4_pmguq"]
+[ext_resource type="PackedScene" path="res://Scenes/health_kit.tscn" id="5_j6qf6"]
+[ext_resource type="PackedScene" uid="uid://dk0aow3jtevbq" path="res://Scenes/pill_bottle.tscn" id="6_25pds"]
 
 [sub_resource type="Animation" id="Animation_cjfl1"]
 length = 0.001
@@ -219,3 +221,9 @@ max_db = 1.5
 [node name="AudioStreamPlayer_close" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_pmguq")
 volume_db = -20.0
+
+[node name="HealthKit" parent="." instance=ExtResource("5_j6qf6")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, -0.40653852, 0.4938927, 0.7916132)
+
+[node name="PillBottle" parent="." instance=ExtResource("6_25pds")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053171996, 0.9420198, -1.0235231)
