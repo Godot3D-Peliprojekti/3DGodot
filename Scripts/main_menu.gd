@@ -3,6 +3,7 @@ extends Control
 @onready var main_buttons: VBoxContainer = $MainButtons
 @onready var options: Panel = $Options
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var scene = preload("res://Scenes/test.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +18,7 @@ func _process(_delta):
 	pass
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/test.tscn")
+	get_tree().change_scene_to_packed(scene)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#audio_stream_player.stream_paused = true
 
