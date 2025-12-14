@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b58f447ynago0" path="res://Assets/MenuScreen/godot-pic.png" id="2_myy0f"]
 [ext_resource type="Script" uid="uid://c5onlem3dyy5t" path="res://Scripts/volume_slider.gd" id="3_sjs17"]
 [ext_resource type="Script" uid="uid://pd8sm2i7w7ia" path="res://Scripts/fullscreen_control.gd" id="4_u8tnp"]
-[ext_resource type="AudioStream" uid="uid://cmiss1sti2nlr" path="res://Audio/dark-ambient-background-music-shadows-of-the-silent-forest-244008.mp3" id="5_stj27"]
+[ext_resource type="AudioStream" uid="uid://cmiss1sti2nlr" path="res://Audio/Music/dark-ambient-background-music-shadows-of-the-silent-forest-244008.mp3" id="5_stj27"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_48xlc"]
 texture = ExtResource("2_myy0f")
@@ -16,7 +16,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-shadow_size = 10
 shadow_offset = Vector2(1.63, 1.68)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28flt"]
@@ -25,7 +24,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-shadow_size = 10
 shadow_offset = Vector2(1.63, 1.68)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28flt"]
@@ -68,10 +66,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -255.52777
-offset_top = -165.0
-offset_right = 255.52777
-offset_bottom = 165.0
+offset_left = -210.0
+offset_top = -120.0
+offset_right = 210.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
