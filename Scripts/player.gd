@@ -78,6 +78,7 @@ var flashlight_prompt_timer: float = 0.0
 var flashlight_prompt_timeout: float = 2.0
 
 # HUD elements
+@onready var canvas_layer = $CanvasLayer
 @onready var control: Control = $CanvasLayer/Control
 @onready var hud_weapon_bat = $CanvasLayer/Control/Baseball_Bat
 @onready var hud_weapon_knife = $CanvasLayer/Control/Knife
@@ -102,7 +103,6 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_flashlight: AudioStreamPlayer3D = $AudioStreamPlayer_flashlight
 @onready var audio_stream_player_knife: AudioStreamPlayer3D = $AudioStreamPlayer_knife
 @onready var audio_stream_player_ammo: AudioStreamPlayer3D = $AudioStreamPlayer_ammo
-
 
 # Player
 @export_category("Player")
@@ -195,14 +195,14 @@ func weapon_activate(weapon: int) -> void:
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
 			hud_ammo_current.visible = true
 			hud_ammo_reserve.visible = true
-			
+
 func weapon_hud_hide() -> void:
-	hud_weapon_bat.visible = false 
+	hud_weapon_bat.visible = false
 	hud_weapon_knife.visible = false
 	hud_weapon_gun.visible = false
 	hud_ammo_current.visible = false
 	hud_ammo_reserve.visible = false
-	
+
 func weapon_pickup(id: String):
 	match id:
 		"bat":
@@ -215,7 +215,7 @@ func weapon_pickup(id: String):
 			ammo_reserve += 8
 			update_ammo_label()
 			play_ammo_pick_up()
-			
+
 	weapon_activate(selected_weapon)
 
 func update_ammo_label() -> void:
@@ -235,7 +235,7 @@ func _ready() -> void:
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
 	assert(bone_index != -1)
-	
+
 	weapon_hud_hide()
 	weapon_deactivate_all()
 	update_ammo_label()
@@ -270,8 +270,10 @@ func _toggle_pause() -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		control.visible = true
 
-
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("toggle_gui"):
+		canvas_layer.visible = !canvas_layer.visible
+
 	# Hide flashlight prompt automatically after timeout
 	if show_flashlight_prompt:
 		flashlight_prompt_timer += delta
@@ -306,13 +308,12 @@ func _process(delta: float) -> void:
 		is_crouching = !is_crouching
 
 	is_running = false
-	
+
 	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
-		
 
 		var selected = Weapon.NONE
 		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT and hud_weapon_bat.visible:
@@ -579,11 +580,11 @@ func play_gunshot() -> void:
 func play_swing() -> void:
 	if not audio_stream_player_swing.playing:
 		audio_stream_player_swing.play()
-		
+
 func play_knife_swing() -> void:
 	if not audio_stream_player_knife.playing:
 		audio_stream_player_knife.play()
-		
+
 func play_ammo_pick_up() -> void:
 	if not audio_stream_player_ammo.playing:
 		audio_stream_player_ammo.play()
