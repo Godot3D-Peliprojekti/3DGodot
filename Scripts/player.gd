@@ -266,10 +266,6 @@ func _unhandled_input(event) -> void:
 	if PlayerData.health == 0:
 		return
 
-	if event.is_action_pressed("ui_cancel"):
-		_toggle_pause()
-		return
-
 	if get_tree().paused:
 		return
 
@@ -278,19 +274,16 @@ func _unhandled_input(event) -> void:
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(camera_pitch_min), deg_to_rad(camera_pitch_max))
 
-# Toggle pause menu
-func _toggle_pause() -> void:
+func _process(delta: float) -> void:
 	if pause_menu._visible():
 		control.visible = true
-		pause_menu._hide()
+		if audio_stream_player.playing:
+			audio_stream_player.stop()
 	else:
+		control.visible = false
 		if not audio_stream_player.playing:
 			audio_stream_player.play()
 
-		control.visible = false
-		pause_menu._show_pause()
-
-func _process(delta: float) -> void:
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
 
