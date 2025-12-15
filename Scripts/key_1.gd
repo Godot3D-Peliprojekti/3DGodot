@@ -2,7 +2,7 @@ extends StaticBody3D
 class_name Key
 
 @export var key_id: int = 1  # 1 = first key, 2 = second key
-@export var prompt_message := "Press F to pick up"
+@export var prompt_message := "[F] Pick up"
 @onready var collision: CollisionShape3D = $CollisionShape3D
 
 @onready var key_audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
@@ -26,6 +26,6 @@ func interact(body):
 					body.has_key_2 = true
 			key_audio.play()
 			print(body.name, " picked up Key ", key_id, ": ", name)
-			
+
 			await key_audio.finished
 			queue_free()

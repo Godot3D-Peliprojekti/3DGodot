@@ -2,7 +2,7 @@ extends StaticBody3D
 class_name PillBottle
 
 @export var pill_heal := 20
-@export var prompt_message := "Press F to pick up"
+@export var prompt_message := "[F] Pick up"
 @onready var collision: CollisionShape3D = $CollisionShape3D
 @onready var mesh: MeshInstance3D = $Pill_Bottle2
 
@@ -23,10 +23,10 @@ func interact(player):
 		player.health = player.health_max
 
 	print(player.name, " picked up Pills +", pill_heal)
-	
+
 	if player.has_method("update_health_label"):
 		player.update_health_label()
-	
+
 	queue_free()
 
 func get_prompt(player):
