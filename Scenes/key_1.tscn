@@ -9,6 +9,7 @@ size = Vector3(3.0387878, 1, 1.6861267)
 
 [node name="Key1" type="StaticBody3D"]
 script = ExtResource("1_fyiil")
+prompt_message = "[F] pick up"
 
 [node name="Key" parent="." instance=ExtResource("1_x61cc")]
 

@@ -9,7 +9,6 @@ size = Vector3(4.6453094, 1.2313232, 1.8868103)
 [node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_g63aq")
 weapon_id = "pistol_ammo"
-prompt_message = "Press F to pick up"
 
 [node name="Ammo" parent="." instance=ExtResource("1_ayjuv")]
 transform = Transform3D(-0.7059581, 0.70825356, -3.0958745e-08, 0, -4.371139e-08, -1, -0.70825356, -0.7059581, 3.085841e-08, 1.3907804, 0, 0)

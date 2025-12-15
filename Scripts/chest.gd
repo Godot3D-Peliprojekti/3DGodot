@@ -48,7 +48,7 @@ func interact(_body) -> void:
 		if animation_player.has_animation(close_animation_name):
 			animation_player.play(close_animation_name)
 		is_open = false
-		prompt_message = "Press F to open"
+		prompt_message = "[F] open"
 		
 		if chosen_item and chosen_item.has_method("set_pickable"):
 			chosen_item.set_pickable(false)
@@ -58,7 +58,7 @@ func interact(_body) -> void:
 		if animation_player.has_animation(open_animation_name):
 			animation_player.play(open_animation_name)
 		is_open = true
-		prompt_message = "Press F to close"
+		prompt_message = "[F] open"
 
 		# Now the item can be picked up
 		if chosen_item and chosen_item.has_method("set_pickable"):
