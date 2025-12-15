@@ -26,6 +26,12 @@ func _process(delta: float) -> void:
 
 	filter.material.set_shader_parameter("value", filter_value)
 
+	if Input.is_action_just_pressed("ui_cancel"):
+		if _visible():
+			_hide()
+		else:
+			_show_pause()
+
 func _visible() -> bool:
 	return main_buttons.visible or death_buttons.visible or win_buttons.visible or options.visible
 

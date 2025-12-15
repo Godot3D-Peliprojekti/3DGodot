@@ -142,6 +142,8 @@ var vignette_target: float
 
 func hit(damage: int) -> void:
 	vignette_target = 0.8
+	vignette.modulate.r = 1.0
+	vignette.modulate.g = 0.0
 
 	# health = max(health - damage, health_min)
 	PlayerData.health = max(PlayerData.health - damage, health_min)
@@ -155,6 +157,23 @@ func hit(damage: int) -> void:
 
 	if PlayerData.health == 0:
 		PlayerData.should_partially_initialize = true
+
+func heal(add: int) -> void:
+	if PlayerData.health == health_max:
+		return
+
+	vignette_target = 0.8
+	vignette.modulate.r = 0.0
+	vignette.modulate.g = 1.0
+
+	PlayerData.health = min(PlayerData.health + add, health_max)
+	update_health_label()
+
+	hud_health_indicator_label.text = "+" + str(add)
+	hud_health_indicator_label.position.y = 33.0
+	hud_health_indicator_label.modulate.a = 1.0
+
+	print("heal")
 
 func stop_reloading(success: bool) -> void:
 	if success:
@@ -235,8 +254,6 @@ func _ready() -> void:
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
 	assert(bone_index != -1)
 
-	print(PlayerData.has_knife)
-
 	if PlayerData.should_initialize or PlayerData.should_partially_initialize:
 		PlayerData.health = health_max
 		PlayerData.ammo_current = 0
@@ -266,10 +283,6 @@ func _unhandled_input(event) -> void:
 	if PlayerData.health == 0:
 		return
 
-	if event.is_action_pressed("ui_cancel"):
-		_toggle_pause()
-		return
-
 	if get_tree().paused:
 		return
 
@@ -278,19 +291,18 @@ func _unhandled_input(event) -> void:
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(camera_pitch_min), deg_to_rad(camera_pitch_max))
 
-# Toggle pause menu
-func _toggle_pause() -> void:
+func _process(delta: float) -> void:
 	if pause_menu._visible():
-		control.visible = true
-		pause_menu._hide()
-	else:
+		control.visible = false
+		animation_tree.active = false
 		if not audio_stream_player.playing:
 			audio_stream_player.play()
+	else:
+		control.visible = true
+		animation_tree.active = true
+		if audio_stream_player.playing:
+			audio_stream_player.stop()
 
-		control.visible = false
-		pause_menu._show_pause()
-
-func _process(delta: float) -> void:
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
 
@@ -480,12 +492,9 @@ func _process(delta: float) -> void:
 
 		# Debug for health
 		if Input.is_action_pressed("debug_health_add"):
-			if PlayerData.health < health_max:
-				PlayerData.health += 1
-				update_health_label()
+			heal(1)
 		elif Input.is_action_just_pressed("debug_health_add_2"):
-			PlayerData.health = min(health_max, PlayerData.health + 20)
-			update_health_label()
+			heal(20)
 		elif Input.is_action_pressed("debug_health_sub"):
 			hit(1)
 		elif Input.is_action_just_pressed("debug_health_sub_2"):
