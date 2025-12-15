@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-@export var prompt_message := "Press F to interact"
+@export var prompt_message := "[F] Open"
 @export var animation_name := "drawer1_open"   # voi vaihtaa per laatikko
 
 @onready var anim: AnimationPlayer = $"../AnimationPlayer"

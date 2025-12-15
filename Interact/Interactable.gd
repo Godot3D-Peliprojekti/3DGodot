@@ -1,8 +1,11 @@
 extends StaticBody3D
 class_name Interactable
 
-@export var key: Key 
-@export var prompt_message := "[F] open"
+const MESSAGE_OPEN = "[F] Open"
+const MESSAGE_CLOSE = "[F] Close"
+
+@export var key: Key
+@export var prompt_message := MESSAGE_OPEN
 @export var animation_player: AnimationPlayer
 @export var open_animation_name := ""
 @export var close_animation_name := ""
@@ -13,10 +16,10 @@ func interact(_body):
 	if is_open:
 		animation_player.play(close_animation_name)
 		is_open = false
-		prompt_message = "[F] open"
+		prompt_message = MESSAGE_OPEN
 	else:
 		animation_player.play(open_animation_name)
 		is_open = true
-		prompt_message = "[F] close" 
+		prompt_message = MESSAGE_CLOSE
 		if key:
 			key.set_pickable(true)
