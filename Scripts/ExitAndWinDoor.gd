@@ -3,7 +3,7 @@ class_name ExitAndWinDoor
 
 @export var required_key := 2
 
-@onready var door_locked_prompt: Label = $"../../../Player/CanvasLayer/Control/DoorLocked_prompt"
+@onready var door_locked_prompt: Label
 @onready var pause_menu = $"../../../Player/CanvasLayer/Pause_menu"
 @onready var locked_audio: AudioStreamPlayer3D = $"../../AudioStreamPlayer3D"
 
@@ -13,18 +13,18 @@ var message_timer := 0.0
 var show_message := false
 
 func _ready():
-	if door_locked_prompt:
-		door_locked_prompt.visible = false
+	door_locked_prompt = get_node("/root/Node3D/NavigationRegion3D/First_Floor/Player/CanvasLayer/Control/DoorLocked_prompt")
+	assert(door_locked_prompt)
+	door_locked_prompt.visible = false
 
 func interact(player):
 	if not player.has_key_2:
 		if not locked_audio.playing:
 			locked_audio.play()
 
-		if door_locked_prompt:
-			door_locked_prompt.visible = true
-			show_message = true
-			message_timer = MESSAGE_TIME
+		door_locked_prompt.visible = true
+		show_message = true
+		message_timer = MESSAGE_TIME
 		return
 
 	show_win_screen()
@@ -39,6 +39,5 @@ func _process(delta):
 	if show_message:
 		message_timer -= delta
 		if message_timer <= 0.0:
-			if door_locked_prompt:
-				door_locked_prompt.visible = false
+			door_locked_prompt.visible = false
 			show_message = false

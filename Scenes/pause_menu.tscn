@@ -202,21 +202,6 @@ text = "YOU WIN!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button_play_again" type="Button" parent="Win_Buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
-theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_constants/h_separation = 4
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
-text = "Play again"
-
 [node name="Button_exit" type="Button" parent="Win_Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -360,7 +345,6 @@ volume_db = -25.0
 [connection signal="pressed" from="Main_Buttons/Button_exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Death_Buttons/Button_try_again" to="." method="_on_try_again_pressed"]
 [connection signal="pressed" from="Death_Buttons/Button_exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Win_Buttons/Button_play_again" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="Win_Buttons/Button_exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Options/Label/Button_options_back" to="." method="_on_options_back_pressed"]
 [connection signal="toggled" from="Options/Fullscreen_control" to="Options/Fullscreen_control" method="_on_toggled"]

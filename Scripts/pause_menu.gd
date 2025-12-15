@@ -6,7 +6,6 @@ extends Control
 @onready var options: Panel = $Options
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var hud_control: Control = $"../Control"
-@onready var scene = preload("res://Scenes/test.tscn")
 
 @onready var filter = $Greyscale_Filter
 var filter_value: float = 0.0
@@ -16,11 +15,10 @@ func _ready() -> void:
 	death_buttons.visible = false
 	win_buttons.visible = false
 	options.visible = false
+	visible = true
 
 	#if not audio_stream_player.playing:
 		#audio_stream_player.play()
-
-	visible = true
 
 func _process(delta: float) -> void:
 	if _visible():
@@ -36,7 +34,6 @@ func _hide() -> void:
 	death_buttons.visible = false
 	win_buttons.visible = false
 	options.visible = false
-	# visible = false
 
 	filter_value = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -44,21 +41,18 @@ func _hide() -> void:
 
 func _show_pause() -> void:
 	main_buttons.visible = true
-	# visible = true
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 
 func _show_death() -> void:
 	death_buttons.visible = true
-	# visible = true
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
 
 func _show_win() -> void:
 	win_buttons.visible = true
-	# visible = true
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
@@ -71,10 +65,6 @@ func _on_continue_pressed() -> void:
 func _on_try_again_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-
-func _on_play_again_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_packed(scene)
 
 func _on_options_pressed() -> void:
 	main_buttons.visible = false
