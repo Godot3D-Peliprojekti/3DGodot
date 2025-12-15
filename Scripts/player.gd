@@ -144,12 +144,14 @@ var vignette_target: float
 
 # Pause menu
 @onready var pause_menu: Control = $CanvasLayer/Pause_menu
+@onready var filter = $CanvasLayer/Greyscale_Filter
+var filter_value: float = 0.0
 
 func hit(damage: int) -> void:
+	vignette_target = 0.8
+
 	health = max(health - damage, health_min)
 	update_health_label()
-
-	vignette_target = 0.8
 
 	hud_health_indicator_label.text = "-" + str(damage)
 	hud_health_indicator_label.position.y = 33.0
@@ -231,6 +233,7 @@ func _ready() -> void:
 	pause_menu.visible = false
 
 	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	filter.material.set_shader_parameter("value", 0.0)
 
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
@@ -243,6 +246,9 @@ func _ready() -> void:
 	_setup_gunshot_reverb()
 
 func _unhandled_input(event) -> void:
+	if health == 0:
+		return
+
 	if event.is_action_pressed("ui_cancel"):
 		_toggle_pause()
 		return
@@ -257,20 +263,33 @@ func _unhandled_input(event) -> void:
 
 # Toggle pause menu
 func _toggle_pause() -> void:
-	var tree = get_tree()
-	tree.paused = not tree.paused
-	pause_menu.visible = tree.paused
-
-	if tree.paused:
+	if pause_menu.visible:
+		control.visible = true
+		pause_menu._hide()
+	else:
 		if not audio_stream_player.playing:
 			audio_stream_player.play()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 		control.visible = false
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		control.visible = true
+		pause_menu._show_pause()
 
 func _process(delta: float) -> void:
+	if get_tree().paused:
+		return
+
+	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
+	vignette.modulate.a = vignette_target
+
+	if health == 0:
+		filter_value = lerp(filter_value, 1.0, 4.0 * delta)
+		filter.material.set_shader_parameter("value", filter_value)
+
+		if filter_value > 0.99 and not pause_menu.visible:
+			control.visible = false
+			pause_menu._show_death()
+
+		return
+
 	if Input.is_action_just_pressed("toggle_gui"):
 		canvas_layer.visible = !canvas_layer.visible
 
@@ -280,12 +299,6 @@ func _process(delta: float) -> void:
 		if flashlight_prompt_timer >= flashlight_prompt_timeout:
 			show_flashlight_prompt = false
 			flashlight_prompt_label.visible = false
-
-	if get_tree().paused:
-		return
-
-	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
-	vignette.modulate.a = vignette_target
 
 	hud_health_indicator_label.position.y = lerp(hud_health_indicator_label.position.y, 73.0, 2.0 * delta)
 	hud_health_indicator_label.modulate.a = lerp(hud_health_indicator_label.modulate.a, 0.0, 4.0 * delta)
@@ -328,7 +341,7 @@ func _process(delta: float) -> void:
 		if is_reloading:
 			stop_reloading(false)
 
-	#Add debug key for testing
+	# Add debug key for testing
 	if Input.is_action_just_pressed("debug_key"):
 		has_key_1 = true
 		has_key_2 = true
@@ -456,15 +469,11 @@ func _process(delta: float) -> void:
 			health = min(health_max, health + 20)
 			update_health_label()
 		elif Input.is_action_pressed("debug_health_sub"):
-				if health > health_min:
-					health -= 1
-					update_health_label()
+			hit(1)
 		elif Input.is_action_just_pressed("debug_health_sub_2"):
-			health = max(health_min, health - 20)
-			update_health_label()
+			hit(20)
 
 func _physics_process(delta: float) -> void:
-
 	# Stop all physics if game is paused
 	if get_tree().paused:
 		return

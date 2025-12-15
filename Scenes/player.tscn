@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://rvyhsjqw1iee"]
+[gd_scene load_steps=27 format=3 uid="uid://rvyhsjqw1iee"]
 
 [ext_resource type="Script" uid="uid://b2s3n6cq41yuo" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://br6r1ixxkcvvy" path="res://Interact/interact_ray.tscn" id="2_6t5aa"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ddbbpom3rdryt" path="res://Assets/HUD/gun.png" id="5_f1ek2"]
 [ext_resource type="Texture2D" uid="uid://c4k1uxo6t48hy" path="res://Assets/HUD/vignette.png" id="6_8erm5"]
 [ext_resource type="PackedScene" uid="uid://dhajfn4djep5a" path="res://Scenes/pause_menu.tscn" id="7_7dp3o"]
+[ext_resource type="Shader" uid="uid://barnk7ekrcaln" path="res://Shaders/greyscale.gdshader" id="8_igrcy"]
 [ext_resource type="PackedScene" uid="uid://ddyidyxnkh54k" path="res://Scenes/character.tscn" id="9_f1ek2"]
 [ext_resource type="AudioStream" uid="uid://dynohfl0vqei6" path="res://Audio/Footsteps/woodsound.mp3" id="9_gymyn"]
 [ext_resource type="AudioStream" uid="uid://rtjkf6e7pvy4" path="res://Audio/Footsteps/wood2.mp3" id="10_tx1dd"]
@@ -35,6 +36,10 @@ font_size = 32
 outline_size = 9
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fs7ks"]
+shader = ExtResource("8_igrcy")
+shader_parameter/value = 0.0
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tx1dd"]
 radius = 0.3095703
 height = 1.8033166
@@ -47,7 +52,7 @@ stream_0 = ExtResource("9_gymyn")
 stream_1 = ExtResource("10_tx1dd")
 
 [node name="Player" type="CharacterBody3D"]
-process_mode = 3
+process_mode = 1
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_v0iea")
@@ -260,6 +265,15 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_8erm5")
 
+[node name="Greyscale_Filter" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_fs7ks")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
 [node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("7_7dp3o")]
 
 [node name="InteractRay" parent="." instance=ExtResource("2_6t5aa")]
@@ -278,10 +292,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.3493574, 2.5551157, -93.057274)
+bones/0/position = Vector3(-1.4020385, 3.5012498, -93.29838)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.76381, 1.1740232, -140.39781)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.81649, 2.1201572, -140.63892)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.111353e-08, -1.6994308e-07, 5.318192e-09, 0.96435916, 0.26459685, 1.7476466e-07, -0.26459685, 0.96435916, 0, 0.020413518, -0.07933968)

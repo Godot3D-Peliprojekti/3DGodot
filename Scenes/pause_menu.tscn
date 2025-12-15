@@ -1,14 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhajfn4djep5a"]
+[gd_scene load_steps=11 format=3 uid="uid://dhajfn4djep5a"]
 
 [ext_resource type="Script" uid="uid://ccn4mmok11dfv" path="res://Scripts/pause_menu.gd" id="1_vmyb1"]
-[ext_resource type="Texture2D" uid="uid://b58f447ynago0" path="res://Assets/MenuScreen/godot-pic.png" id="2_myy0f"]
 [ext_resource type="Script" uid="uid://c5onlem3dyy5t" path="res://Scripts/volume_slider.gd" id="3_sjs17"]
 [ext_resource type="Script" uid="uid://pd8sm2i7w7ia" path="res://Scripts/fullscreen_control.gd" id="4_u8tnp"]
 [ext_resource type="AudioStream" uid="uid://cmiss1sti2nlr" path="res://Audio/Music/dark-ambient-background-music-shadows-of-the-silent-forest-244008.mp3" id="5_stj27"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_48xlc"]
-texture = ExtResource("2_myy0f")
-modulate_color = Color(0.38170323, 0.38170326, 0.38170305, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erv1k"]
 draw_center = false
@@ -27,6 +22,9 @@ corner_radius_bottom_left = 16
 shadow_offset = Vector2(1.63, 1.68)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28flt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vmyb1"]
+bg_color = Color(0.6155507, 0.6155507, 0.6155507, 0.3)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_48xlc"]
 grow_end = -5.0
@@ -47,19 +45,8 @@ grow_vertical = 2
 scale = Vector2(0.98815084, 1)
 script = ExtResource("1_vmyb1")
 
-[node name="Panel" type="Panel" parent="."]
-process_mode = 2
+[node name="Main_Buttons" type="VBoxContainer" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 30.107178
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_48xlc")
-
-[node name="MainButtons" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="Button_continue" type="Button" parent="MainButtons"]
+[node name="Button_continue" type="Button" parent="Main_Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
@@ -89,7 +76,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
 text = "Continue"
 
-[node name="Button_options" type="Button" parent="MainButtons"]
+[node name="Button_options" type="Button" parent="Main_Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
@@ -103,7 +90,61 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
 text = "Options"
 
-[node name="Button_exit" type="Button" parent="MainButtons"]
+[node name="Button_exit" type="Button" parent="Main_Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
+theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_pressed_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+text = "Exit game"
+
+[node name="Death_Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -599.3456
+offset_top = -120.0
+offset_right = 599.3456
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Dead_Label" type="Label" parent="Death_Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxFlat_vmyb1")
+text = "DEAD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_try_again" type="Button" parent="Death_Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
+theme_override_colors/font_focus_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/h_separation = 4
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+text = "Try again"
+
+[node name="Button_exit" type="Button" parent="Death_Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.21590135, 0.21590191, 0.21590155, 1)
@@ -241,8 +282,10 @@ text = "Volume"
 stream = ExtResource("5_stj27")
 volume_db = -25.0
 
-[connection signal="pressed" from="MainButtons/Button_continue" to="." method="_on_button_continue_pressed"]
-[connection signal="pressed" from="MainButtons/Button_options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="MainButtons/Button_exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Options/Label/Button_options_back" to="." method="_on_back_options_pressed"]
+[connection signal="pressed" from="Main_Buttons/Button_continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Main_Buttons/Button_options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Main_Buttons/Button_exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Death_Buttons/Button_try_again" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Death_Buttons/Button_exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Options/Label/Button_options_back" to="." method="_on_options_back_pressed"]
 [connection signal="toggled" from="Options/Fullscreen_control" to="Options/Fullscreen_control" method="_on_toggled"]
