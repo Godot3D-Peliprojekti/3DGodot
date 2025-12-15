@@ -9,4 +9,3 @@ func interact(player):
 		player.weapon_pickup(weapon_id)
 
 	queue_free()
-

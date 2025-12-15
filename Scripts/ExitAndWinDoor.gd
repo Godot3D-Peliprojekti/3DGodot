@@ -17,8 +17,8 @@ func _ready():
 	assert(door_locked_prompt)
 	door_locked_prompt.visible = false
 
-func interact(player):
-	if not player.has_key_2:
+func interact(_player):
+	if not PlayerData.has_key_2:
 		if not locked_audio.playing:
 			locked_audio.play()
 

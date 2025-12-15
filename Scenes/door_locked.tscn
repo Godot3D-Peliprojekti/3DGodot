@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b3truvp815sip"]
 
 [ext_resource type="PackedScene" uid="uid://o3mod6cu4tft" path="res://Scenes/door_model.tscn" id="1_20voy"]
-[ext_resource type="Script" uid="uid://c3lmquj7e2ko4" path="res://ExitDoor.gd" id="2_h0k4f"]
+[ext_resource type="Script" uid="uid://c3lmquj7e2ko4" path="res://Scripts/ExitDoor.gd" id="2_h0k4f"]
 [ext_resource type="PackedScene" uid="uid://c88arb2t8ca75" path="res://Scenes/first_floor.tscn" id="3_1co6j"]
 [ext_resource type="AudioStream" uid="uid://bjuq72rl5kafl" path="res://Audio/Door/door_locked.mp3" id="4_n3kii"]
 

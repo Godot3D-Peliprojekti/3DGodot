@@ -21,9 +21,9 @@ func interact(body):
 		if body is Player:
 			match key_id:
 				1:
-					body.has_key_1 = true
+					PlayerData.has_key_1 = true
 				2:
-					body.has_key_2 = true
+					PlayerData.has_key_2 = true
 			key_audio.play()
 			print(body.name, " picked up Key ", key_id, ": ", name)
 

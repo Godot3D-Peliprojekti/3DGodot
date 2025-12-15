@@ -38,9 +38,6 @@ var weapon_gun_slide_offset: float = 0.0
 @export_category("Animations")
 @export var animation_blend_easing: float = 10.0
 
-var has_key_1: bool = false
-var has_key_2: bool = false
-
 var lower_idle_blend: float = 0.0
 var lower_walk_x_blend: float = 0.0
 var lower_walk_z_blend: float = 0.0
@@ -109,12 +106,13 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var head = $Head
 @export var default_speed: float = 3.0
 var speed: float
+var input_vector: Vector2
 @export var run_multiplier: float = 1.67
 @export var crouch_multiplier: float = 0.33
 @export var health_max: int = 100
 @export var health_min: int = 0
 @export var weapon_magazine_size: int = 8
-var input_vector: Vector2
+@export var ammo_default: int = 5
 
 # Crouching
 @onready var collider = $CollisionShape3D
@@ -129,9 +127,6 @@ var is_running: bool = false
 var is_crouching: bool = false
 var is_reloading: bool = false
 
-var ammo_current: int = 0
-var ammo_reserve: int = 5
-var health: int = 0
 var selected_weapon: int = Weapon.NONE
 var should_perform_attack: bool = false
 var delay_before_attack: float = 0.0
@@ -148,7 +143,8 @@ var vignette_target: float
 func hit(damage: int) -> void:
 	vignette_target = 0.8
 
-	health = max(health - damage, health_min)
+	# health = max(health - damage, health_min)
+	PlayerData.health = max(PlayerData.health - damage, health_min)
 	update_health_label()
 
 	hud_health_indicator_label.text = "-" + str(damage)
@@ -157,11 +153,14 @@ func hit(damage: int) -> void:
 
 	camera.rotation.z = 0.1
 
+	if PlayerData.health == 0:
+		PlayerData.should_partially_initialize = true
+
 func stop_reloading(success: bool) -> void:
 	if success:
-		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
-		ammo_reserve -= ammo
-		ammo_current += ammo
+		var diff = min(weapon_magazine_size - PlayerData.ammo_current, PlayerData.ammo_reserve)
+		PlayerData.ammo_reserve -= diff
+		PlayerData.ammo_current += diff
 		update_ammo_label()
 	else:
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
@@ -182,15 +181,14 @@ func weapon_activate(weapon: int) -> void:
 	should_perform_attack = false
 	delay_before_attack = 0.0
 
+	hud_ammo_current.visible = false
+	hud_ammo_reserve.visible = false
+
 	match weapon:
 		Weapon.BAT:
 			hud_weapon_bat.modulate = hud_color_selected
-			hud_ammo_current.visible = false
-			hud_ammo_reserve.visible = false
 		Weapon.KNIFE:
 			hud_weapon_knife.modulate = hud_color_selected
-			hud_ammo_current.visible = false
-			hud_ammo_reserve.visible = false
 		Weapon.GUN:
 			hud_weapon_gun.modulate = hud_color_selected
 			hud_ammo_current.modulate = hud_color_selected
@@ -209,40 +207,63 @@ func weapon_pickup(id: String):
 	match id:
 		"bat":
 			hud_weapon_bat.visible = true
+			PlayerData.has_bat = true
 		"knife":
 			hud_weapon_knife.visible = true
+			PlayerData.has_knife = true
 		"gun":
 			hud_weapon_gun.visible = true
+			PlayerData.has_gun = true
 		"pistol_ammo":
-			ammo_reserve += 8
+			PlayerData.ammo_reserve += 8
 			update_ammo_label()
 			play_ammo_pick_up()
 
 	weapon_activate(selected_weapon)
 
 func update_ammo_label() -> void:
-	hud_ammo_current.text = str(ammo_current)
-	hud_ammo_reserve.text = "/ " + str(ammo_reserve)
+	hud_ammo_current.text = str(PlayerData.ammo_current)
+	hud_ammo_reserve.text = "/ " + str(PlayerData.ammo_reserve)
 
 func update_health_label() -> void:
-	hud_health_label.text = str(health)
+	hud_health_label.text = str(PlayerData.health)
 
 func _ready() -> void:
 	flashlight_prompt_timer = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
 	assert(bone_index != -1)
 
+	print(PlayerData.has_knife)
+
+	if PlayerData.should_initialize or PlayerData.should_partially_initialize:
+		PlayerData.health = health_max
+		PlayerData.ammo_current = 0
+		PlayerData.ammo_reserve = ammo_default
+
+	if PlayerData.should_initialize or (PlayerData.should_partially_initialize and not PlayerData.is_on_first_floor):
+		PlayerData.has_key_1 = false
+		PlayerData.has_key_2 = false
+		PlayerData.has_bat = false
+		PlayerData.has_knife = false
+		PlayerData.has_gun = false
+
 	weapon_hud_hide()
+	hud_weapon_bat.visible = PlayerData.has_bat
+	hud_weapon_knife.visible = PlayerData.has_knife
+	hud_weapon_gun.visible = PlayerData.has_gun
+
 	weapon_deactivate_all()
 	update_ammo_label()
 	update_health_label()
 	_setup_gunshot_reverb()
 
+	PlayerData.should_initialize = false
+	PlayerData.should_partially_initialize = false
+
 func _unhandled_input(event) -> void:
-	if health == 0:
+	if PlayerData.health == 0:
 		return
 
 	if event.is_action_pressed("ui_cancel"):
@@ -273,7 +294,7 @@ func _process(delta: float) -> void:
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
 
-	if health == 0:
+	if PlayerData.health == 0:
 		pause_menu.filter_value = lerp(pause_menu.filter_value, 1.0, 8.0 * delta)
 
 		if pause_menu.filter_value > 0.999 and not pause_menu._visible():
@@ -337,13 +358,13 @@ func _process(delta: float) -> void:
 
 	# Add debug key for testing
 	if Input.is_action_just_pressed("debug_key"):
-		has_key_1 = true
-		has_key_2 = true
+		PlayerData.has_key_1 = true
+		PlayerData.has_key_2 = true
 		print("Keys given")
 
 	# Update health bar scale and color
-	hud_health_bar.value = lerp(hud_health_bar.value, float(health), 10.0 * delta)
-	var s = float(health) / health_max
+	hud_health_bar.value = lerp(hud_health_bar.value, float(PlayerData.health), 10.0 * delta)
+	var s = float(PlayerData.health) / health_max
 	hud_health_bar.modulate.r = -s + 1
 	hud_health_bar.modulate.g = s
 
@@ -396,20 +417,21 @@ func _process(delta: float) -> void:
 			play_knife_swing()
 
 	weapon_gun_muzzle_flash.visible = false;
-	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
+	if Input.is_action_just_pressed("attack") and selected_weapon == Weapon.GUN and PlayerData.ammo_current > 0 and not is_reloading:
 		upper_weapon_gun_attack_add = 1.0
 		weapon_gun_slide_offset = -4
 		weapon_gun_muzzle_flash.visible = true;
 
 		play_gunshot()
-		ammo_current -= 1
+		# ammo_current -= 1
+		PlayerData.ammo_current -= 1
 		update_ammo_label()
 		should_perform_attack = true
 
 	if is_reloading and not animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/active"]:
 		stop_reloading(true)
 
-	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and ammo_current < weapon_magazine_size and ammo_reserve > 0:
+	if selected_weapon == Weapon.GUN and Input.is_action_just_pressed("reload") and not is_reloading and PlayerData.ammo_current < weapon_magazine_size and PlayerData.ammo_reserve > 0:
 		play_gun_reload()
 		is_reloading = true
 		animation_tree["parameters/Upper_Weapon_Gun_Reload_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -429,7 +451,7 @@ func _process(delta: float) -> void:
 	weapon_knife.visible = upper_weapon_knife_idle_blend > 0.5
 	weapon_gun.visible = upper_weapon_gun_idle_aim_blend > 0.5 || upper_weapon_gun_idle_aim_blend > -0.5
 
-	if ammo_current > 0:
+	if PlayerData.ammo_current > 0:
 		weapon_gun_slide_offset = lerp(weapon_gun_slide_offset, -1.5, animation_blend_easing * delta)
 	else:
 		weapon_gun_slide_offset = -3
@@ -453,16 +475,16 @@ func _process(delta: float) -> void:
 	if 1:
 		# Debug for ammo
 		if Input.is_action_pressed("debug_ammo_add"):
-			ammo_reserve += 1
+			PlayerData.ammo_reserve += 1
 			update_ammo_label()
 
 		# Debug for health
 		if Input.is_action_pressed("debug_health_add"):
-			if health < health_max:
-				health += 1
+			if PlayerData.health < health_max:
+				PlayerData.health += 1
 				update_health_label()
 		elif Input.is_action_just_pressed("debug_health_add_2"):
-			health = min(health_max, health + 20)
+			PlayerData.health = min(health_max, PlayerData.health + 20)
 			update_health_label()
 		elif Input.is_action_pressed("debug_health_sub"):
 			hit(1)
@@ -521,7 +543,7 @@ func _physics_process(delta: float) -> void:
 
 			match raycast.get_collider().collision_layer:
 				1: # Wall
-					if selected_weapon == Weapon.GUN and ammo_current > 0 and not is_reloading:
+					if selected_weapon == Weapon.GUN and PlayerData.ammo_current > 0 and not is_reloading:
 						var decal = bullet_hole_decal_scene.instantiate()
 						raycast.get_collider().add_child(decal)
 						decal.global_transform.origin = raycast.get_collision_point()
@@ -531,7 +553,7 @@ func _physics_process(delta: float) -> void:
 				4: # Enemy
 					if (raycast.get_collider().global_position - global_position).length() < weapon_distance_max[selected_weapon]:
 						if selected_weapon == Weapon.GUN:
-							if ammo_current > 0 and not is_reloading:
+							if PlayerData.ammo_current > 0 and not is_reloading:
 								raycast.get_collider().hit(weapon_damage[selected_weapon])
 						else:
 							raycast.get_collider().hit(weapon_damage[selected_weapon])
