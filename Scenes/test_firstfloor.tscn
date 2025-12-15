@@ -14,13 +14,33 @@ navigation_mesh = SubResource("NavigationMesh_q22gc")
 
 [node name="First_Floor" parent="NavigationRegion3D" instance=ExtResource("1_41nh6")]
 
+[node name="Player" parent="NavigationRegion3D/First_Floor" index="91"]
+process_mode = 1
+
+[node name="DummyDoor_prompt" parent="NavigationRegion3D/First_Floor/Player/CanvasLayer/Control" index="11"]
+offset_top = 78.0
+offset_bottom = 108.0
+
+[node name="Vignette" parent="NavigationRegion3D/First_Floor/Player/CanvasLayer/Control" index="12"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+scale = Vector2(1, 1)
+
 [node name="Skeleton3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.95881486, 1.8167683, -92.99279)
+bones/0/position = Vector3(-1.2125065, 1.8993291, -92.94873)
 
 [node name="BoneAttachment3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.37326, 0.43567562, -140.33333)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.62695, 0.51823664, -140.28926)
 
-[node name="DoorLock2" parent="NavigationRegion3D/First_Floor" index="174"]
+[node name="Curtains3" parent="NavigationRegion3D/First_Floor" index="133"]
+surface_material_override/0 = null
+
+[node name="Ceiling light" parent="NavigationRegion3D/First_Floor" index="139"]
+surface_material_override/1 = null
+
+[node name="DoorLock2" parent="NavigationRegion3D/First_Floor" index="177"]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 1.852, 0.105, 16.231956)
 
 [node name="DoorLock" parent="NavigationRegion3D/First_Floor" instance=ExtResource("2_is1pt")]

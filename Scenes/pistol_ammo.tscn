@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_g63aq"]
 size = Vector3(4.6453094, 1.2313232, 1.8868103)
 
-[node name="StaticBody3D" type="StaticBody3D"]
+[node name="Ammo" type="StaticBody3D"]
 script = ExtResource("1_g63aq")
 weapon_id = "pistol_ammo"
 prompt_message = "[F] Pick up"
