@@ -15,12 +15,12 @@ func set_pickable(value: bool):
 	collision.disabled = !value
 
 func interact(player):
-	if player.health >= player.health_max:
+	if PlayerData.health >= player.health_max:
 		return 
 
-	player.health += pill_heal
-	if player.health > player.health_max:
-		player.health = player.health_max
+	PlayerData.health += pill_heal
+	if PlayerData.health > player.health_max:
+		PlayerData.health = player.health_max
 
 	print(player.name, " picked up Pills +", pill_heal)
 
@@ -30,6 +30,6 @@ func interact(player):
 	queue_free()
 
 func get_prompt(player):
-	if player.health >= player.health_max:
+	if PlayerData.health >= player.health_max:
 		return "Health full"
 	return prompt_message
