@@ -267,8 +267,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -102.00001
+offset_top = -42.000015
+offset_right = 435.99988
+offset_bottom = 257.49994
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_8erm5")
 
 [node name="Pause_menu" parent="CanvasLayer" instance=ExtResource("7_7dp3o")]
@@ -289,10 +294,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.48905835, 1.8807336, -93.1522)
+bones/0/position = Vector3(-1.1853193, 2.9336157, -93.245895)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.90351, 0.49964094, -140.49274)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.59977, 1.5525231, -140.58643)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.111353e-08, -1.6994308e-07, 5.318192e-09, 0.96435916, 0.26459685, 1.7476466e-07, -0.26459685, 0.96435916, 0, 0.020413518, -0.07933968)

@@ -159,6 +159,9 @@ func hit(damage: int) -> void:
 		PlayerData.should_partially_initialize = true
 
 func heal(add: int) -> void:
+	if PlayerData.health == health_max:
+		return
+
 	vignette_target = 0.8
 	vignette.modulate.r = 0.0
 	vignette.modulate.g = 1.0
