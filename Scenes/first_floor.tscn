@@ -1,4 +1,4 @@
-[gd_scene load_steps=359 format=4 uid="uid://c88arb2t8ca75"]
+[gd_scene load_steps=360 format=4 uid="uid://c88arb2t8ca75"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm85rwd2lpc7k" path="res://Assets/FloorMaterials/meshlib1stfloorfinal.tres" id="1_fqnud"]
 [ext_resource type="Script" uid="uid://b66mi5yxu7giq" path="res://Scripts/game_manager_2.gd" id="1_iwonc"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://rvyhsjqw1iee" path="res://Scenes/player.tscn" id="20_pchnt"]
 [ext_resource type="Texture2D" uid="uid://46tfxqojb3ps" path="res://Assets/FloorMaterials/Lattia 1/wood_floor_diff_2k.png" id="21_pccs8"]
 [ext_resource type="Script" uid="uid://bigawnctwc7s0" path="res://Interact/Interactable.gd" id="22_rmeu3"]
+[ext_resource type="PackedScene" uid="uid://bn1fgwt6evh8a" path="res://Scenes/pistol_ammo.tscn" id="26_xx7av"]
 [ext_resource type="Texture2D" uid="uid://ct3vpmssswtid" path="res://Assets/ChestMaterials/dresser_texture.png" id="27_gvm4b"]
 [ext_resource type="PackedScene" uid="uid://blxq10pfc12sp" path="res://Scenes/key_1.tscn" id="28_iwonc"]
 [ext_resource type="AudioStream" uid="uid://c26tng2d48ro7" path="res://Audio/Drawer/drawer_open.mp3" id="29_dbw8i"]
@@ -4791,8 +4792,8 @@ environment = SubResource("Environment_ik1c7")
 
 [node name="GameManager2" type="Node3D" parent="." node_paths=PackedStringArray("drawers", "keys")]
 script = ExtResource("1_iwonc")
-drawers = [NodePath("../Dresser/drawer1"), NodePath("../Dresser2/drawer1"), NodePath("../Dresser4/drawer1"), NodePath("../Dresser5/drawer1"), NodePath("../Dresser3/drawer1")]
-keys = [NodePath("../Dresser/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser2/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser4/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser5/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser3/drawer1/drawer1_mesh/Key1")]
+drawers = [NodePath("../Dresser4/drawer1"), NodePath("../Dresser5/drawer1")]
+keys = [NodePath("../Dresser4/drawer1/drawer1_mesh/Key1"), NodePath("../Dresser5/drawer1/drawer1_mesh/Key1")]
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(200, 0, 0, 0, 0.1, 0, 0, 0, 200, -34.525806, 0.023284912, -32.44792)
@@ -5417,10 +5418,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.120195, 2.6834774, -93.224915)
+bones/0/position = Vector3(-1.2134387, 1.8942648, -92.94741)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.534645, 1.3023849, -140.56544)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.62789, 0.51317215, -140.28795)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -5569,7 +5570,7 @@ shape = SubResource("ConcavePolygonShape3D_kqt5w")
 
 [node name="drawer1" type="StaticBody3D" parent="Dresser" node_paths=PackedStringArray("key", "animation_player")]
 script = ExtResource("22_rmeu3")
-key = NodePath("drawer1_mesh/Key1")
+key = NodePath("")
 animation_player = NodePath("../AnimationPlayer")
 open_animation_name = "drawer_1_open"
 close_animation_name = "drawer_1_close"
@@ -5579,8 +5580,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
 mesh = SubResource("ArrayMesh_vv5ju")
 skeleton = NodePath("")
 
-[node name="Key1" parent="Dresser/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
-transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
+[node name="Ammo" parent="Dresser/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
+transform = Transform3D(-0.125, 0, 1.8874475e-08, 0, 0.125, 0, -1.8874475e-08, 0, -0.125, 3.621, -0.597, -0.927)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
@@ -5649,18 +5650,18 @@ shape = SubResource("ConcavePolygonShape3D_kqt5w")
 
 [node name="drawer1" type="StaticBody3D" parent="Dresser2" node_paths=PackedStringArray("key", "animation_player")]
 script = ExtResource("22_rmeu3")
-key = NodePath("drawer1_mesh/Key1")
+key = NodePath("")
 animation_player = NodePath("../AnimationPlayer")
 open_animation_name = "drawer_1_open"
 close_animation_name = "drawer_1_close"
+
+[node name="Ammo" parent="Dresser2/drawer1" instance=ExtResource("26_xx7av")]
+transform = Transform3D(0.125, 0, -2.1855692e-08, 0, 0.125, 0, 2.1855692e-08, 0, 0.125, 44.248, 2.294, -15.44)
 
 [node name="drawer1_mesh" type="MeshInstance3D" parent="Dresser2/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
 mesh = SubResource("ArrayMesh_vv5ju")
 skeleton = NodePath("")
-
-[node name="Key1" parent="Dresser2/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
-transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser2/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
@@ -5742,6 +5743,9 @@ skeleton = NodePath("")
 [node name="Key1" parent="Dresser4/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
 transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
 
+[node name="Ammo2" parent="Dresser4/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
+transform = Transform3D(-0.12500001, 0, 1.8874477e-08, 0, 0.12500001, 0, -1.8874477e-08, 0, -0.12500001, 3.368002, -0.8410001, -1.2776794)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser4/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
 shape = SubResource("ConcavePolygonShape3D_nwdvu")
@@ -5822,6 +5826,12 @@ skeleton = NodePath("")
 [node name="Key1" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
 transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
 
+[node name="Ammo" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
+transform = Transform3D(-0.125, 0, 1.8874475e-08, 0, 0.125, 0, -1.8874475e-08, 0, -0.125, 3.368, -0.841, -0.692)
+
+[node name="Ammo3" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
+transform = Transform3D(-0.125, 0, 1.8874475e-08, 0, 0.125, 0, -1.8874475e-08, 0, -0.125, 3.368, -0.841, -1.087)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser5/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
 shape = SubResource("ConcavePolygonShape3D_nwdvu")
@@ -5889,7 +5899,7 @@ shape = SubResource("ConcavePolygonShape3D_kqt5w")
 
 [node name="drawer1" type="StaticBody3D" parent="Dresser3" node_paths=PackedStringArray("key", "animation_player")]
 script = ExtResource("22_rmeu3")
-key = NodePath("drawer1_mesh/Key1")
+key = NodePath("")
 animation_player = NodePath("../AnimationPlayer")
 open_animation_name = "drawer_1_open"
 close_animation_name = "drawer_1_close"
@@ -5898,9 +5908,6 @@ close_animation_name = "drawer_1_close"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
 mesh = SubResource("ArrayMesh_vv5ju")
 skeleton = NodePath("")
-
-[node name="Key1" parent="Dresser3/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
-transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser3/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)

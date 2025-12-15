@@ -70,7 +70,7 @@ func _on_continue_pressed() -> void:
 
 func _on_try_again_pressed() -> void:
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://Scenes/test.tscn")
 
 func _on_options_pressed() -> void:
 	main_buttons.visible = false
