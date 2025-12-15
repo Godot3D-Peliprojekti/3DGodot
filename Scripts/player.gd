@@ -155,6 +155,8 @@ func hit(damage: int) -> void:
 	hud_health_indicator_label.position.y = 33.0
 	hud_health_indicator_label.modulate.a = 1.0
 
+	camera.rotation.z = 0.1
+
 func stop_reloading(success: bool) -> void:
 	if success:
 		var ammo = min(weapon_magazine_size - ammo_current, ammo_reserve)
@@ -441,6 +443,8 @@ func _process(delta: float) -> void:
 	camera.position.x *= camera_bobbing_multiplier
 	camera.position.y *= camera_bobbing_multiplier
 	camera.position += camera_offset
+
+	camera.rotation.z = lerp(camera.rotation.z, 0.0, 8.0 * delta)
 
 	# Block the camera from clipping the walls
 	collider.global_position.x = camera.global_position.x
