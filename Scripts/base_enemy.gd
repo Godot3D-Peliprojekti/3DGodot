@@ -28,7 +28,6 @@ var animation_speed: float = animation_speed_default
 @onready var audio_brute: AudioStreamPlayer3D = $enemy_2_setup/AudioStreamPlayer3D
 @onready var audio_death_brute: AudioStreamPlayer3D = $enemy_2_setup/AudioStreamPlayer3D2
 
-
 var death_blend: float
 var walk_blend: float
 
@@ -41,14 +40,14 @@ var time_player_in_view: float = 0.0	# The time of player in enemy's view
 func play_audio() -> void:
 	if is_dead:
 		return
-		
+
 	if enemy_type == EnemyType.ZOMBIE:
 		if not audio_zombie.playing:
 			audio_zombie.play()
 	else:
 		if not audio_brute.playing:
 			audio_brute.play()
-			
+
 func stop_audio() -> void:
 	if enemy_type == EnemyType.ZOMBIE:
 		if  audio_zombie.playing:
@@ -60,18 +59,16 @@ func stop_audio() -> void:
 func play_death_audio() -> void:
 	if death_sound_played:
 		return
-		
+
 	death_sound_played = true
 	stop_audio()
-	
+
 	if enemy_type == EnemyType.ZOMBIE:
 		if not audio_zombie.playing:
 			audio_zombie.play()
 	else:
 		if not audio_death_brute.playing:
 			audio_death_brute.play()
-			
-
 
 func hit(damage: int) -> void:
 	health = max(health - damage, 0)
@@ -80,7 +77,7 @@ func hit(damage: int) -> void:
 		is_dead = true
 		play_death_audio()
 		return
-		
+
 	else:
 		animation_tree["parameters/Attack_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
 		animation_tree["parameters/Hit_OneShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -104,17 +101,15 @@ func _process(delta: float) -> void:
 
 	death_blend = lerp(death_blend, float(is_dead), animation_blend_easing * delta)
 	animation_tree["parameters/Death_Blend/blend_amount"] = death_blend
-	
 
 func _physics_process(delta: float) -> void:
-	
 	if is_dead:
 		if animation_tree["parameters/Death_Blend/blend_amount"] > 0.9999:
 			health_bar.visible = false
 		if collision_shape:
 			collision_shape.queue_free()
 		return
-		
+
 	play_audio()
 
 	if animation_speed == animation_speed_hit:

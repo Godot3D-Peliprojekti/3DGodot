@@ -78,6 +78,7 @@ var flashlight_prompt_timer: float = 0.0
 var flashlight_prompt_timeout: float = 2.0
 
 # HUD elements
+@onready var canvas_layer = $CanvasLayer
 @onready var control: Control = $CanvasLayer/Control
 @onready var hud_weapon_bat = $CanvasLayer/Control/Baseball_Bat
 @onready var hud_weapon_knife = $CanvasLayer/Control/Knife
@@ -102,7 +103,6 @@ var flashlight_prompt_timeout: float = 2.0
 @onready var audio_stream_player_flashlight: AudioStreamPlayer3D = $AudioStreamPlayer_flashlight
 @onready var audio_stream_player_knife: AudioStreamPlayer3D = $AudioStreamPlayer_knife
 @onready var audio_stream_player_ammo: AudioStreamPlayer3D = $AudioStreamPlayer_ammo
-
 
 # Player
 @export_category("Player")
@@ -146,14 +146,16 @@ var vignette_target: float
 @onready var pause_menu: Control = $CanvasLayer/Pause_menu
 
 func hit(damage: int) -> void:
+	vignette_target = 0.8
+
 	health = max(health - damage, health_min)
 	update_health_label()
-
-	vignette_target = 0.8
 
 	hud_health_indicator_label.text = "-" + str(damage)
 	hud_health_indicator_label.position.y = 33.0
 	hud_health_indicator_label.modulate.a = 1.0
+
+	camera.rotation.z = 0.1
 
 func stop_reloading(success: bool) -> void:
 	if success:
@@ -195,14 +197,14 @@ func weapon_activate(weapon: int) -> void:
 			hud_ammo_reserve.modulate = hud_color_selected_secondary
 			hud_ammo_current.visible = true
 			hud_ammo_reserve.visible = true
-			
+
 func weapon_hud_hide() -> void:
-	hud_weapon_bat.visible = false 
+	hud_weapon_bat.visible = false
 	hud_weapon_knife.visible = false
 	hud_weapon_gun.visible = false
 	hud_ammo_current.visible = false
 	hud_ammo_reserve.visible = false
-	
+
 func weapon_pickup(id: String):
 	match id:
 		"bat":
@@ -215,7 +217,7 @@ func weapon_pickup(id: String):
 			ammo_reserve += 8
 			update_ammo_label()
 			play_ammo_pick_up()
-			
+
 	weapon_activate(selected_weapon)
 
 func update_ammo_label() -> void:
@@ -228,14 +230,11 @@ func update_health_label() -> void:
 func _ready() -> void:
 	flashlight_prompt_timer = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pause_menu.visible = false
-
-	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
 	assert(bone_index != -1)
-	
+
 	weapon_hud_hide()
 	weapon_deactivate_all()
 	update_ammo_label()
@@ -243,6 +242,9 @@ func _ready() -> void:
 	_setup_gunshot_reverb()
 
 func _unhandled_input(event) -> void:
+	if health == 0:
+		return
+
 	if event.is_action_pressed("ui_cancel"):
 		_toggle_pause()
 		return
@@ -257,33 +259,40 @@ func _unhandled_input(event) -> void:
 
 # Toggle pause menu
 func _toggle_pause() -> void:
-	var tree = get_tree()
-	tree.paused = not tree.paused
-	pause_menu.visible = tree.paused
-
-	if tree.paused:
+	if pause_menu._visible():
+		control.visible = true
+		pause_menu._hide()
+	else:
 		if not audio_stream_player.playing:
 			audio_stream_player.play()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		control.visible = false
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		control.visible = true
 
+		control.visible = false
+		pause_menu._show_pause()
 
 func _process(delta: float) -> void:
+	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
+	vignette.modulate.a = vignette_target
+
+	if health == 0:
+		pause_menu.filter_value = lerp(pause_menu.filter_value, 1.0, 8.0 * delta)
+
+		if pause_menu.filter_value > 0.999 and not pause_menu._visible():
+			control.visible = false
+			pause_menu._show_death()
+		return
+
+	if get_tree().paused:
+		return
+
+	if Input.is_action_just_pressed("toggle_gui"):
+		canvas_layer.visible = !canvas_layer.visible
+
 	# Hide flashlight prompt automatically after timeout
 	if show_flashlight_prompt:
 		flashlight_prompt_timer += delta
 		if flashlight_prompt_timer >= flashlight_prompt_timeout:
 			show_flashlight_prompt = false
 			flashlight_prompt_label.visible = false
-
-	if get_tree().paused:
-		return
-
-	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
-	vignette.modulate.a = vignette_target
 
 	hud_health_indicator_label.position.y = lerp(hud_health_indicator_label.position.y, 73.0, 2.0 * delta)
 	hud_health_indicator_label.modulate.a = lerp(hud_health_indicator_label.modulate.a, 0.0, 4.0 * delta)
@@ -306,13 +315,12 @@ func _process(delta: float) -> void:
 		is_crouching = !is_crouching
 
 	is_running = false
-	
+
 	if Input.is_action_pressed("sprint") and not Input.is_action_pressed("back") and not is_crouching:
 		is_running = true
 
 	if Input.is_action_just_pressed("weapon_bat") or Input.is_action_just_pressed("weapon_knife") or Input.is_action_just_pressed("weapon_gun"):
 		weapon_deactivate_all()
-		
 
 		var selected = Weapon.NONE
 		if Input.is_action_just_pressed("weapon_bat") and selected_weapon != Weapon.BAT and hud_weapon_bat.visible:
@@ -327,7 +335,7 @@ func _process(delta: float) -> void:
 		if is_reloading:
 			stop_reloading(false)
 
-	#Add debug key for testing
+	# Add debug key for testing
 	if Input.is_action_just_pressed("debug_key"):
 		has_key_1 = true
 		has_key_2 = true
@@ -436,6 +444,8 @@ func _process(delta: float) -> void:
 	camera.position.y *= camera_bobbing_multiplier
 	camera.position += camera_offset
 
+	camera.rotation.z = lerp(camera.rotation.z, 0.0, 8.0 * delta)
+
 	# Block the camera from clipping the walls
 	collider.global_position.x = camera.global_position.x
 	collider.global_position.z = camera.global_position.z
@@ -455,15 +465,11 @@ func _process(delta: float) -> void:
 			health = min(health_max, health + 20)
 			update_health_label()
 		elif Input.is_action_pressed("debug_health_sub"):
-				if health > health_min:
-					health -= 1
-					update_health_label()
+			hit(1)
 		elif Input.is_action_just_pressed("debug_health_sub_2"):
-			health = max(health_min, health - 20)
-			update_health_label()
+			hit(20)
 
 func _physics_process(delta: float) -> void:
-
 	# Stop all physics if game is paused
 	if get_tree().paused:
 		return
@@ -579,11 +585,11 @@ func play_gunshot() -> void:
 func play_swing() -> void:
 	if not audio_stream_player_swing.playing:
 		audio_stream_player_swing.play()
-		
+
 func play_knife_swing() -> void:
 	if not audio_stream_player_knife.playing:
 		audio_stream_player_knife.play()
-		
+
 func play_ammo_pick_up() -> void:
 	if not audio_stream_player_ammo.playing:
 		audio_stream_player_ammo.play()

@@ -47,7 +47,7 @@ stream_0 = ExtResource("9_gymyn")
 stream_1 = ExtResource("10_tx1dd")
 
 [node name="Player" type="CharacterBody3D"]
-process_mode = 3
+process_mode = 1
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_v0iea")
@@ -208,18 +208,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -158.0
-offset_top = -74.0
-offset_right = 158.0
-offset_bottom = -51.0
+offset_left = -150.0
+offset_top = 120.0
+offset_right = 150.0
+offset_bottom = 152.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 16
 text = "Press E to toggle flashlight"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DoorLocked_prompt" type="Label" parent="CanvasLayer/Control"]
+visible = false
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 1
 anchors_preset = 8
@@ -227,28 +229,36 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -50.0
-offset_right = 100.0
-offset_bottom = -18.0
+offset_left = -102.0
+offset_top = 120.0
+offset_right = 98.0
+offset_bottom = 152.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 6
+text = "Door locked"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DummyDoor_prompt" type="Label" parent="CanvasLayer/Control"]
+visible = false
 custom_minimum_size = Vector2(200, 30)
-layout_mode = 0
-offset_left = 473.0
-offset_top = 350.0
-offset_right = 673.0
-offset_bottom = 380.0
-
-[node name="ExitAndWin_prompt" type="Label" parent="CanvasLayer/Control"]
-custom_minimum_size = Vector2(300, 30)
-layout_mode = 0
-offset_left = 423.0
-offset_top = 281.0
-offset_right = 723.0
-offset_bottom = 311.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = 159.0
+offset_right = 98.0
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 6
+text = "You can't go back!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Vignette" type="TextureRect" parent="CanvasLayer/Control"]
 modulate = Color(1, 0, 0, 0)
@@ -278,13 +288,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.32310182, 1.7427356, -93.08989)
+bones/0/position = Vector3(-0.9382333, 2.4560528, -93.20866)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.73755, 0.36164308, -140.43042)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.352684, 1.0749602, -140.5492)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 4.1113555e-08, -1.6994306e-07, 1.0755186e-07, 0.6216811, 0.7832705, 1.378534e-07, -0.7832705, 0.6216811, 0, 0.020413518, 0.139094)
+transform = Transform3D(1, 4.111353e-08, -1.6994308e-07, 5.318192e-09, 0.96435916, 0.26459685, 1.7476466e-07, -0.26459685, 0.96435916, 0, 0.020413518, -0.07933968)
 rotation_order = 5
 current = true
 

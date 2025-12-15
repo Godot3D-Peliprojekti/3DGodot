@@ -312,10 +312,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27651, 0)
 stream = ExtResource("3_s12oq")
 volume_db = -25.0
 
-[node name="Label" type="Label" parent="."]
-visible = false
-text = "Press 'LeftMouseButton' to open and close door"
-
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_76awr")
 volume_db = -25.0
