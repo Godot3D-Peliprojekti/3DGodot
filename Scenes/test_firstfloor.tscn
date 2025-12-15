@@ -15,16 +15,13 @@ navigation_mesh = SubResource("NavigationMesh_q22gc")
 [node name="First_Floor" parent="NavigationRegion3D" instance=ExtResource("1_41nh6")]
 
 [node name="Skeleton3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.3838929, 3.4796977, -93.29527)
+bones/0/position = Vector3(-0.95881486, 1.8167683, -92.99279)
 
 [node name="BoneAttachment3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.79834, 2.0986052, -140.6358)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.37326, 0.43567562, -140.33333)
 
 [node name="DoorLock2" parent="NavigationRegion3D/First_Floor" index="174"]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 1.852, 0.105, 16.231956)
-
-[node name="DoorFrame" parent="NavigationRegion3D/First_Floor/Winning_door" index="0"]
-surface_material_override/0 = null
 
 [node name="DoorLock" parent="NavigationRegion3D/First_Floor" instance=ExtResource("2_is1pt")]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 1.899, 0.105, 14.043)

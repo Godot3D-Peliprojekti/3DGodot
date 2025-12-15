@@ -37,6 +37,8 @@ var death_sound_played: bool = false
 
 var time_player_in_view: float = 0.0	# The time of player in enemy's view
 
+var has_aggro: bool = false
+
 func play_audio() -> void:
 	if is_dead:
 		return
@@ -75,6 +77,7 @@ func hit(damage: int) -> void:
 
 	if health <= 0 and not is_dead:
 		is_dead = true
+		has_aggro = false
 		play_death_audio()
 		return
 
@@ -127,14 +130,15 @@ func _physics_process(delta: float) -> void:
 		var distance_to_player := (player.global_transform.origin - global_transform.origin).length()
 
 		# Check if there is a player AND distance_to_player is smaller than view_distance
-		if player and distance_to_player < view_distance:
+		if not has_aggro and player and distance_to_player < view_distance:
 			time_player_in_view += delta	# Add every frame to the time variable
+			has_aggro = true
 		# Else keep the time at zero
 		else:
 			time_player_in_view = 0.0
 
-		# Check if there is a player node nearby AND the time is higher or equal to reaction_time
-		if player and distance_to_player < view_distance and time_player_in_view >= reaction_time:
+		# Check if there is a player node nearby AND the enemy's has_aggro is true
+		if player and has_aggro:
 			navigation_agent_3d.target_position = player.global_transform.origin
 			var next_point: Vector3 = navigation_agent_3d.get_next_path_position()
 
