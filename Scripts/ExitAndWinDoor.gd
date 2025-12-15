@@ -2,47 +2,27 @@ extends Interactable
 class_name ExitAndWinDoor
 
 @export var required_key := 2
-@export var locked_message := "Door is locked"
 
 @onready var door_locked_prompt: Label = $"../../../Player/CanvasLayer/Control/DoorLocked_prompt"
-@onready var exit_and_win_prompt: Label = $"../../../Player/CanvasLayer/Control/ExitAndWin_prompt"
-
+@onready var pause_menu = $"../../../Player/CanvasLayer/Pause_menu"
 @onready var locked_audio: AudioStreamPlayer3D = $"../../AudioStreamPlayer3D"
 
 const MESSAGE_TIME := 2.0
-
-var locked_label: Label = null
-var win_label: Label = null
-var won := false
 
 var message_timer := 0.0
 var show_message := false
 
 func _ready():
-	var scene_root = get_tree().current_scene
-
-	locked_label = door_locked_prompt
-	if locked_label:
-		locked_label.visible = false
-		locked_label.text = ""
-
-	win_label = exit_and_win_prompt
-	if win_label:
-		win_label.visible = false
-		win_label.text = ""
-	
-		win_label.process_mode = Node.PROCESS_MODE_ALWAYS
-		process_mode = Node.PROCESS_MODE_ALWAYS
-		set_process(true)
+	if door_locked_prompt:
+		door_locked_prompt.visible = false
 
 func interact(player):
 	if not player.has_key_2:
 		if not locked_audio.playing:
 			locked_audio.play()
-			
-		if locked_label:
-			locked_label.text = locked_message
-			locked_label.visible = true
+
+		if door_locked_prompt:
+			door_locked_prompt.visible = true
 			show_message = true
 			message_timer = MESSAGE_TIME
 		return
@@ -50,25 +30,15 @@ func interact(player):
 	show_win_screen()
 
 func show_win_screen():
-	if won:
+	if pause_menu._visible():
 		return
-	won = true
 
-	if win_label:
-		win_label.visible = true
-		win_label.text = "Voitit pelin!\nPaina ESC sulkeaksesi pelin."
-
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	get_tree().paused = true
+	pause_menu._show_win()
 
 func _process(delta):
 	if show_message:
 		message_timer -= delta
 		if message_timer <= 0.0:
-			if locked_label:
-				locked_label.visible = false
-				locked_label.text = ""
+			if door_locked_prompt:
+				door_locked_prompt.visible = false
 			show_message = false
-
-	if won and Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()

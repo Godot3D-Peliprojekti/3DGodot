@@ -144,8 +144,6 @@ var vignette_target: float
 
 # Pause menu
 @onready var pause_menu: Control = $CanvasLayer/Pause_menu
-@onready var filter = $CanvasLayer/Greyscale_Filter
-var filter_value: float = 0.0
 
 func hit(damage: int) -> void:
 	vignette_target = 0.8
@@ -230,10 +228,6 @@ func update_health_label() -> void:
 func _ready() -> void:
 	flashlight_prompt_timer = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pause_menu.visible = false
-
-	pause_menu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	filter.material.set_shader_parameter("value", 0.0)
 
 	health = health_max
 	bone_index = skeleton.find_bone("mixamorig9_HeadTop_End")
@@ -263,7 +257,7 @@ func _unhandled_input(event) -> void:
 
 # Toggle pause menu
 func _toggle_pause() -> void:
-	if pause_menu.visible:
+	if pause_menu._visible():
 		control.visible = true
 		pause_menu._hide()
 	else:
@@ -274,20 +268,18 @@ func _toggle_pause() -> void:
 		pause_menu._show_pause()
 
 func _process(delta: float) -> void:
-	if get_tree().paused:
-		return
-
 	vignette_target = lerp(vignette_target, 0.0, 4.0 * delta)
 	vignette.modulate.a = vignette_target
 
 	if health == 0:
-		filter_value = lerp(filter_value, 1.0, 4.0 * delta)
-		filter.material.set_shader_parameter("value", filter_value)
+		pause_menu.filter_value = lerp(pause_menu.filter_value, 1.0, 8.0 * delta)
 
-		if filter_value > 0.99 and not pause_menu.visible:
+		if pause_menu.filter_value > 0.999 and not pause_menu._visible():
 			control.visible = false
 			pause_menu._show_death()
+		return
 
+	if get_tree().paused:
 		return
 
 	if Input.is_action_just_pressed("toggle_gui"):
