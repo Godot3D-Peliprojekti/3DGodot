@@ -5417,10 +5417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-0.18916304, 1.454245, -93.02854)
+bones/0/position = Vector3(-1.120195, 2.6834774, -93.224915)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -69.603615, 0.07315254, -140.36908)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.534645, 1.3023849, -140.56544)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -5955,7 +5955,7 @@ transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1
 player = NodePath("../Player")
 
 [node name="Chest" parent="." instance=ExtResource("31_iwonc")]
-transform = Transform3D(-0.23419568, 0, -0.26010072, 0, 0.35, 0, 0.26010072, 0, -0.23419568, -1.132, 0.12, -9.976)
+transform = Transform3D(-0.23419568, 0, -0.26010072, 0, 0.35, 0, 0.26010072, 0, -0.23419568, -1.157, 0.12, -9.826)
 
 [node name="Chest4" parent="." instance=ExtResource("31_iwonc")]
 transform = Transform3D(-0.21788011, 0, 0.27391288, 0, 0.35, 0, -0.27391288, 0, -0.21788011, -0.262, 0.12, -19.495)
@@ -5967,10 +5967,10 @@ transform = Transform3D(-0.18805487, 0, -0.295187, 0, 0.35, 0, 0.295187, 0, -0.1
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -18.211, 0.12, -28.221)
 
 [node name="Chest3" parent="." instance=ExtResource("31_iwonc")]
-transform = Transform3D(0.20075175, 0, 0.28670323, 0, 0.35, 0, -0.28670323, 0, 0.20075175, 15.056, 0.12, -8.195)
+transform = Transform3D(0.20075175, 0, 0.28670323, 0, 0.35, 0, -0.28670323, 0, 0.20075175, 15.056, 0.12, -8.445)
 
 [node name="Chest2" parent="." instance=ExtResource("31_iwonc")]
-transform = Transform3D(-1.5298985e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5298985e-08, -4.894, 0.12, 6.739)
+transform = Transform3D(-1.5298985e-08, 0, -0.35, 0, 0.35, 0, 0.35, 0, -1.5298985e-08, -4.984, 0.12, 7.049)
 
 [node name="Window A2" type="MeshInstance3D" parent="."]
 transform = Transform3D(30, 0, 0, 0, -1.3113416e-06, 30, 0, -30, -1.3113416e-06, 8.423, 1.8, 10.855)
