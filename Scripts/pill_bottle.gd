@@ -16,16 +16,12 @@ func set_pickable(value: bool):
 
 func interact(player):
 	if PlayerData.health >= player.health_max:
-		return 
-
-	PlayerData.health += pill_heal
-	if PlayerData.health > player.health_max:
-		PlayerData.health = player.health_max
+		return
 
 	print(player.name, " picked up Pills +", pill_heal)
 
-	if player.has_method("update_health_label"):
-		player.update_health_label()
+	if player.has_method("heal"):
+		player.heal(pill_heal)
 
 	queue_free()
 

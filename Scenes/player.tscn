@@ -47,7 +47,7 @@ stream_0 = ExtResource("9_gymyn")
 stream_1 = ExtResource("10_tx1dd")
 
 [node name="Player" type="CharacterBody3D"]
-process_mode = 1
+process_mode = 3
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_v0iea")

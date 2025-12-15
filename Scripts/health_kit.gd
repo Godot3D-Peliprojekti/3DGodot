@@ -18,14 +18,10 @@ func interact(player):
 	if PlayerData.health >= player.health_max:
 		return # ei voi poimia jos HP täynnä
 
-	PlayerData.health += firstaid_heal
-	if PlayerData.health > player.health_max:
-		PlayerData.health = player.health_max
-
 	print(player.name, " picked up Health +", firstaid_heal)
 
-	if player.has_method("update_health_label"):
-		player.update_health_label()
+	if player.has_method("heal"):
+		player.heal(firstaid_heal)
 
 	queue_free()
 
