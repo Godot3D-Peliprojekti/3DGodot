@@ -16,8 +16,8 @@ func _ready():
 	assert(door_locked_prompt)
 	door_locked_prompt.visible = false
 
-func interact(player):
-	if not player.has_key_1:
+func interact(_player):
+	if not PlayerData.has_key_1:
 		if not locked_audio.playing:
 			locked_audio.play()
 
@@ -31,6 +31,8 @@ func interact(player):
 	await get_tree().create_timer(0.3).timeout
 	get_tree().change_scene_to_packed(target_scene)
 	print(target_scene)
+
+	PlayerData.is_on_first_floor = true
 
 func _process(delta):
 	if show_message:
