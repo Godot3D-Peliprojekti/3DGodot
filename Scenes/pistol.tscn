@@ -15,5 +15,5 @@ prompt_message = "[F] Pick up"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4299127, 0, -0.6647079)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5781734, 1.7900314, 1.4717712)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.5781734, 1.7900314, 1.4717712)
 shape = SubResource("BoxShape3D_v21tj")

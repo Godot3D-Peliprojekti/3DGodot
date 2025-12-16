@@ -53,5 +53,5 @@ mesh = SubResource("ArrayMesh_tk2ya")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.08512306, 0.060907245, 0.00022000074)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.08512306, 0.060907245, 0.00022000074)
 shape = SubResource("ConcavePolygonShape3D_8cfkj")

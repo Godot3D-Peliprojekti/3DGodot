@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bfe0ca2fgve24" path="res://Assets/ChestMaterials/chest_texture.png" id="1_lyb87"]
 [ext_resource type="AudioStream" uid="uid://dut8nc5nwuvkx" path="res://Audio/Chest/chest_open2.mp3" id="3_bagqn"]
 [ext_resource type="AudioStream" uid="uid://cybbub6qane2x" path="res://Audio/Chest/lid-close-98389.mp3" id="4_pmguq"]
-[ext_resource type="PackedScene" path="res://Scenes/health_kit.tscn" id="5_j6qf6"]
+[ext_resource type="PackedScene" uid="uid://8oqe1ksqradj" path="res://Scenes/health_kit.tscn" id="5_j6qf6"]
 [ext_resource type="PackedScene" uid="uid://dk0aow3jtevbq" path="res://Scenes/pill_bottle.tscn" id="6_25pds"]
 
 [sub_resource type="Animation" id="Animation_cjfl1"]

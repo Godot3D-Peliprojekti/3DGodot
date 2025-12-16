@@ -1,4 +1,4 @@
-[gd_scene load_steps=360 format=4 uid="uid://c88arb2t8ca75"]
+[gd_scene load_steps=361 format=4 uid="uid://c88arb2t8ca75"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm85rwd2lpc7k" path="res://Assets/FloorMaterials/meshlib1stfloorfinal.tres" id="1_fqnud"]
 [ext_resource type="Script" uid="uid://b66mi5yxu7giq" path="res://Scripts/game_manager_2.gd" id="1_iwonc"]
@@ -46,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://sdkx2l48g2na" path="res://Scenes/winning_door.tscn" id="45_ctf0g"]
 [ext_resource type="Texture2D" uid="uid://duhsorkkve3h3" path="res://Assets/Decoration/Objects_Interior(Village)_Demo/Textures/Plates.png" id="45_ge5gi"]
 [ext_resource type="PackedScene" uid="uid://b2onjh2x82hfe" path="res://Scenes/door_lock.tscn" id="46_xx7av"]
+[ext_resource type="PackedScene" uid="uid://dvxraa0yn1qci" path="res://Scenes/enemy_1.tscn" id="47_ik1c7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ctf0g"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -5406,7 +5407,7 @@ size = Vector3(4, 0.1, 3)
 material = SubResource("StandardMaterial3D_ol0o0")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.303, 0.053, -29.853)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2779183, 0.053000476, -29.855623)
 use_collision = true
 size = Vector3(32, 0.1, 28)
 material = SubResource("StandardMaterial3D_pchnt")
@@ -5418,10 +5419,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9450278, 0.2595091, 12.7883
 metadata/_edit_use_anchors_ = true
 
 [node name="Skeleton3D" parent="Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.2134387, 1.8942648, -92.94741)
+bones/0/position = Vector3(-0.86727846, 1.9860787, -93.04835)
 
 [node name="BoneAttachment3D" parent="Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.62789, 0.51317215, -140.28795)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.28173, 0.6049862, -140.38889)
 
 [node name="DoorModel" parent="." instance=ExtResource("6_33l0l")]
 transform = Transform3D(-0.605, 0, -5.289078e-08, 0, 0.605, 0, 5.289078e-08, 0, -0.605, 10.18767, 0.1, 6)
@@ -5568,9 +5569,8 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16, 1.1, 0)
 shape = SubResource("ConcavePolygonShape3D_kqt5w")
 
-[node name="drawer1" type="StaticBody3D" parent="Dresser" node_paths=PackedStringArray("key", "animation_player")]
+[node name="drawer1" type="StaticBody3D" parent="Dresser" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("22_rmeu3")
-key = NodePath("")
 animation_player = NodePath("../AnimationPlayer")
 open_animation_name = "drawer_1_open"
 close_animation_name = "drawer_1_close"
@@ -5648,15 +5648,11 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16, 1.1, 0)
 shape = SubResource("ConcavePolygonShape3D_kqt5w")
 
-[node name="drawer1" type="StaticBody3D" parent="Dresser2" node_paths=PackedStringArray("key", "animation_player")]
+[node name="drawer1" type="StaticBody3D" parent="Dresser2" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("22_rmeu3")
-key = NodePath("")
 animation_player = NodePath("../AnimationPlayer")
 open_animation_name = "drawer_1_open"
 close_animation_name = "drawer_1_close"
-
-[node name="Ammo" parent="Dresser2/drawer1" instance=ExtResource("26_xx7av")]
-transform = Transform3D(0.125, 0, -2.1855692e-08, 0, 0.125, 0, 2.1855692e-08, 0, 0.125, 44.248, 2.294, -15.44)
 
 [node name="drawer1_mesh" type="MeshInstance3D" parent="Dresser2/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
@@ -5826,9 +5822,6 @@ skeleton = NodePath("")
 [node name="Key1" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("28_iwonc")]
 transform = Transform3D(0.74999994, 1.2990382, -5.678276e-08, 0, -6.556708e-08, -1.5, -1.2990382, 0.74999994, -3.278354e-08, 3.8402255, -0.8342233, 0)
 
-[node name="Ammo" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
-transform = Transform3D(-0.125, 0, 1.8874475e-08, 0, 0.125, 0, -1.8874475e-08, 0, -0.125, 3.368, -0.841, -0.692)
-
 [node name="Ammo3" parent="Dresser5/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
 transform = Transform3D(-0.125, 0, 1.8874475e-08, 0, 0.125, 0, -1.8874475e-08, 0, -0.125, 3.368, -0.841, -1.087)
 
@@ -5897,9 +5890,8 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16, 1.1, 0)
 shape = SubResource("ConcavePolygonShape3D_kqt5w")
 
-[node name="drawer1" type="StaticBody3D" parent="Dresser3" node_paths=PackedStringArray("key", "animation_player")]
+[node name="drawer1" type="StaticBody3D" parent="Dresser3" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("22_rmeu3")
-key = NodePath("")
 animation_player = NodePath("../AnimationPlayer")
 open_animation_name = "drawer_1_open"
 close_animation_name = "drawer_1_close"
@@ -5908,6 +5900,9 @@ close_animation_name = "drawer_1_close"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5592628, 3.1, 0)
 mesh = SubResource("ArrayMesh_vv5ju")
 skeleton = NodePath("")
+
+[node name="Ammo" parent="Dresser3/drawer1/drawer1_mesh" instance=ExtResource("26_xx7av")]
+transform = Transform3D(1.4906056e-09, 0, 0.12500003, 0, 0.12500003, 0, -0.12500003, 0, 1.4906056e-09, 3.2656116, -0.806, -1.0356903)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dresser3/drawer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.448596, 3.1, 0)
@@ -5949,12 +5944,32 @@ max_db = 2.0
 transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -9.304617, 1.032595, -24.866156)
 player = NodePath("../Player")
 
+[node name="Enemy_10" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -9.305, 1.033, -21.776)
+player = NodePath("../Player")
+
+[node name="Enemy_8" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -9.695, 1.033, -27.021)
+player = NodePath("../Player")
+
+[node name="Enemy_9" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+transform = Transform3D(-0.05849576, 0, -0.08110639, 0, 0.1, 0, 0.08110639, 0, -0.05849576, -3.455, 1.033, -28.246)
+player = NodePath("../Player")
+
 [node name="Enemy_3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
-transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -5.045, 1.033, -30.156)
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -3.93, 1.033, -30.951)
+player = NodePath("../Player")
+
+[node name="Enemy_6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -7.98, 1.033, -32.116)
+player = NodePath("../Player")
+
+[node name="Enemy_7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
+transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -7.98, 1.033, -34.081)
 player = NodePath("../Player")
 
 [node name="Enemy_5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
-transform = Transform3D(-0.1, 0, -8.742278e-09, 0, 0.1, 0, 8.742278e-09, 0, -0.1, -9.735, 1.033, -30.931)
+transform = Transform3D(-0.05591929, 0, 0.082903765, 0, 0.1, 0, -0.082903765, 0, -0.05591929, -9.735, 1.033, -30.931)
 player = NodePath("../Player")
 
 [node name="Enemy_4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("32_dbw8i")]
@@ -6713,6 +6728,34 @@ surface_material_override/0 = null
 
 [node name="Door" parent="Winning_door" index="1"]
 surface_material_override/0 = null
+
+[node name="Enemy_Zombie" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(1.9, 0, 0, 0, 1.9, 0, 0, 0, 1.9, 16.022, 1.111, 4.425)
+player = NodePath("../Player")
+
+[node name="Enemy_Zombie6" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(0.89492244, 0, 1.676041, 0, 1.9, 0, -1.676041, 0, 0.89492244, 4.222, 1.111, -26.61)
+player = NodePath("../Player")
+
+[node name="Enemy_Zombie7" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(0.89492244, 0, 1.676041, 0, 1.9, 0, -1.676041, 0, 0.89492244, 4.222, 1.111, -28.65)
+player = NodePath("../Player")
+
+[node name="Enemy_Zombie3" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(0.89492244, 0, 1.676041, 0, 1.9, 0, -1.676041, 0, 0.89492244, 20.587, 1.111, -1.46)
+player = NodePath("../Player")
+
+[node name="Enemy_Zombie2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(1.6617775, 0, 0.9211382, 0, 1.9, 0, -0.9211382, 0, 1.6617775, 14.382, 1.111, 5.115)
+player = NodePath("../Player")
+
+[node name="Enemy_Zombie4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(1.7191714, 0, -0.80898064, 0, 1.9, 0, 0.80898064, 0, 1.7191714, -9.963, 1.111, 8.53)
+player = NodePath("../Player")
+
+[node name="Enemy_Zombie5" parent="." node_paths=PackedStringArray("player") instance=ExtResource("47_ik1c7")]
+transform = Transform3D(0.9842513, 0, 1.625192, 0, 1.9, 0, -1.625192, 0, 0.9842513, -3.023, 1.111, -1.775)
+player = NodePath("../Player")
 
 [editable path="Player"]
 [editable path="Player/Head/Character"]
