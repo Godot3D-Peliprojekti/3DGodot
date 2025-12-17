@@ -29,10 +29,10 @@ offset_bottom = 0.0
 scale = Vector2(1, 1)
 
 [node name="Skeleton3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.2125065, 1.8993291, -92.94873)
+bones/0/position = Vector3(-0.69927734, 2.2135055, -93.166794)
 
 [node name="BoneAttachment3D" parent="NavigationRegion3D/First_Floor/Player/Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.62695, 0.51823664, -140.28926)
+transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.11372, 0.83241296, -140.50732)
 
 [node name="Curtains3" parent="NavigationRegion3D/First_Floor" index="133"]
 surface_material_override/0 = null

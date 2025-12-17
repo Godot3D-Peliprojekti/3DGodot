@@ -9,7 +9,7 @@ const GRAVITY: float = 9.8
 @export var speed: float = 0.8
 
 @export var stop_distance: float = 1.5 	# Distance to player when it stops and bites
-@export var view_distance: float = 5.0	# The distance that the enemy sees and reacts
+@export var view_distance: float = 7.0	# The distance that the enemy sees and reacts
 @export var reaction_time: float = 0.4	# The reaction time of the enemy
 @export var health_bar: Node3D # Health_Bar_3D
 
@@ -132,7 +132,8 @@ func _physics_process(delta: float) -> void:
 		# Check if there is a player AND distance_to_player is smaller than view_distance
 		if not has_aggro and player and distance_to_player < view_distance:
 			time_player_in_view += delta	# Add every frame to the time variable
-			has_aggro = true
+			if time_player_in_view >= reaction_time:
+				has_aggro = true
 		# Else keep the time at zero
 		else:
 			time_player_in_view = 0.0

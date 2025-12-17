@@ -294,10 +294,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1.6, 0.22848535)
 
 [node name="Skeleton3D" parent="Head/Character/Armature" index="0"]
-bones/0/position = Vector3(-1.1853193, 2.9336157, -93.245895)
+bones/0/position = Vector3(-0.592204, 2.0426087, -93.155106)
 
 [node name="BoneAttachment3D" parent="Head/Character/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.0854137, -0.9938433, 0.07043147, 0.9912841, 0.077644534, -0.106491975, 0.10036667, 0.0789126, 0.9918177, -70.59977, 1.5525231, -140.58643)
+transform = Transform3D(0.03011766, -0.1856629, 0.9821582, 0.24317779, 0.95442677, 0.17296381, -0.9695152, 0.23362786, 0.07389104, -21.010117, 48.954445, -145.2515)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 4.111353e-08, -1.6994308e-07, 5.318192e-09, 0.96435916, 0.26459685, 1.7476466e-07, -0.26459685, 0.96435916, 0, 0.020413518, -0.07933968)

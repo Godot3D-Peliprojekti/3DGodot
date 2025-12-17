@@ -22,6 +22,7 @@ PlayerData="*res://Scripts/player_data.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [file_customization]
